@@ -33,4 +33,8 @@ public abstract class Persona {
     // TODO: add a regex for verify the Email
     return mail;
   }
+
+  public boolean equals(Persona persona) {
+    return id.equals(persona.id);
+  }
 }

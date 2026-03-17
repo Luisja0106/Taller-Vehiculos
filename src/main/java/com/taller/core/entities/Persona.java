@@ -1,7 +1,9 @@
 package com.taller.core.entities;
 
+import java.util.regex.Pattern;
+
 public abstract class Persona {
-  protected String id;
+  protected final String id;
   private String nombre;
   private String telefono;
   private String email;
@@ -10,7 +12,7 @@ public abstract class Persona {
     this.id = id;
     this.nombre = nombre;
     this.telefono = telefono;
-    this.email = verifyEmail(email);
+    this.email = email;
   }
 
   public String getNombre() {
@@ -29,12 +31,34 @@ public abstract class Persona {
     return email;
   }
 
-  private String verifyEmail(String mail) {
-    // TODO: add a regex for verify the Email
-    return mail;
+  public void changeEmail(String mail) {
+    if (!isValidEmail(mail))
+      return;
+
+    this.email = mail;
+  }
+
+  public void changePhone(String number) {
+    if (!isValidPhone(number))
+      return;
+
+    this.telefono = number;
   }
 
   public boolean equals(Persona persona) {
     return id.equals(persona.id);
   }
+
+  private boolean isValidEmail(String mail) {
+    String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
+    Pattern pattern = Pattern.compile(emailRegex);
+    return pattern.matcher(mail).matches();
+  }
+
+  private boolean isValidPhone(String number) {
+    String phoneRegex = "^[+]?\\d{7,15}$";
+    Pattern pattern = Pattern.compile(phoneRegex);
+    return pattern.matcher(number).matches();
+  }
+
 }

@@ -36,8 +36,8 @@ public class Vehiculo {
   public void setDueño(Cliente nuevoDueño) {
     if (nuevoDueño == null)
       return;
-    if (!nuevoDueño.equals(this.dueño)) {
-      // TODO: logica de remover dueño
+    if (nuevoDueño.equals(this.dueño)) {
+      return;
     }
 
     this.dueño = nuevoDueño;
@@ -58,6 +58,10 @@ public class Vehiculo {
 
   public void setAnio(int anio) {
     this.anio = anio;
+  }
+
+  public boolean equals(Vehiculo vehiculo) {
+    return this.placa.equals(vehiculo.placa);
   }
 
 }

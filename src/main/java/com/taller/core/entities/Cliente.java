@@ -11,10 +11,14 @@ public class Cliente extends Persona {
   }
 
   public void addVehiculo(Vehiculo vehiculo) {
-    if (vehiculo != null) {
-      // TODO: add security verifications
-      vehiculos.add(vehiculo);
+    if (vehiculo == null)
+      return;
+    for (Vehiculo v : vehiculos) {
+      if (v.equals(vehiculo))
+        return;
     }
+    vehiculos.add(vehiculo);
+
   }
 
   public ArrayList<Vehiculo> getVehiculos() {

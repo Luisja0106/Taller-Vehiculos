@@ -5,7 +5,10 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import com.taller.core.enums.EstadoDelServicio;
+import com.taller.core.error.VerificationError;
+import com.taller.core.interfaces.IErrorApp;
 import com.taller.core.interfaces.IServicio;
+import com.taller.core.utils.Result;
 
 public class OrdenDeServicio {
   private final String ID;
@@ -16,13 +19,27 @@ public class OrdenDeServicio {
   private LocalDateTime fechaSalida;
   private EstadoDelServicio estado;
 
-  public OrdenDeServicio(String id, Vehiculo vehiculo, Empleado empleadoACargo) {
+  private OrdenDeServicio(String id, Vehiculo vehiculo, Empleado empleadoACargo) {
     ID = id;
     this.vehiculo = vehiculo;
     this.empleadoACargo = empleadoACargo;
     this.fechaEntrada = LocalDateTime.now();
     servicios = new ArrayList<>();
     this.estado = EstadoDelServicio.PENDIENTE;
+  }
+
+  public Result<OrdenDeServicio, IErrorApp> crear(String id, Vehiculo vehiculo, Empleado empleado) {
+    if (id == null || id.isBlank()) {
+      return Result.error(new VerificationError("Error el id no puede ser vacio"));
+    }
+    if (vehiculo == null) {
+      return Result.error(new VerificationError("Error el vehiculo es invalido"));
+    }
+    if (empleado == null) {
+      return Result.error(new VerificationError("Error el empleado a cargo no puede ser nulo"));
+    }
+
+    return Result.success(new OrdenDeServicio(id, vehiculo, empleado));
   }
 
   public String getID() {

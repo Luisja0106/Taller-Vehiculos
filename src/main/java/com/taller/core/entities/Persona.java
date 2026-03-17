@@ -8,7 +8,7 @@ public abstract class Persona {
   private String telefono;
   private String email;
 
-  public Persona(String id, String nombre, String telefono, String email) {
+  protected Persona(String id, String nombre, String telefono, String email) {
     this.id = id;
     this.nombre = nombre;
     this.telefono = telefono;

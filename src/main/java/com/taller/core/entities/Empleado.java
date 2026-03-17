@@ -2,8 +2,7 @@ package com.taller.core.entities;
 
 import com.taller.core.enums.Rol;
 import com.taller.core.enums.TipoDeContrato;
-import com.taller.core.error.ContratoVerificationError;
-import com.taller.core.error.RolVerificationError;
+import com.taller.core.error.VerificationError;
 import com.taller.core.interfaces.IErrorApp;
 import com.taller.core.utils.Result;
 
@@ -44,9 +43,9 @@ public class Empleado extends Persona {
     if (!phoneRes.isSuccess)
       return Result.error(phoneRes.getError());
     if (rol == null)
-      return Result.error(new RolVerificationError());
+      return Result.error(new VerificationError("Error Rol invalido"));
     if (contrato == null)
-      return Result.error(new ContratoVerificationError());
+      return Result.error(new VerificationError("Error Contrato Invalido"));
 
     return Result.success(new Empleado(id, nombre, telefono, email, rol, contrato));
   }

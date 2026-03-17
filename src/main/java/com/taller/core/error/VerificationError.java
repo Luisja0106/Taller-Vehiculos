@@ -2,22 +2,22 @@ package com.taller.core.error;
 
 import com.taller.core.interfaces.IErrorApp;
 
-public class EmailVerifcationError implements IErrorApp {
+public class VerificationError implements IErrorApp {
 
-  private String mail;
+  private String message;
 
-  public EmailVerifcationError(String mail) {
-    this.mail = mail;
+  public VerificationError(String message) {
+    this.message = message;
   }
 
   @Override
   public String getMessage() {
-    return "El formatto de " + mail + "No es valido";
+    return message;
   }
 
   @Override
   public void handle() {
-    // TODO: create event for error creation email
+    // TODO: create event for the error of verification
     throw new UnsupportedOperationException("Unimplemented method 'handle'");
   }
 

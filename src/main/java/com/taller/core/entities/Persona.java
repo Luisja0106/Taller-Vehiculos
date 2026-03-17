@@ -2,8 +2,7 @@ package com.taller.core.entities;
 
 import java.util.regex.Pattern;
 
-import com.taller.core.error.EmailVerifcationError;
-import com.taller.core.error.PhoneVerificationError;
+import com.taller.core.error.VerificationError;
 import com.taller.core.interfaces.IErrorApp;
 import com.taller.core.utils.Result;
 
@@ -58,7 +57,7 @@ public abstract class Persona {
     String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
     Pattern pattern = Pattern.compile(emailRegex);
     if (!pattern.matcher(mail).matches()) {
-      return Result.error(new EmailVerifcationError(mail));
+      return Result.error(new VerificationError("Error Email invalido"));
     }
     return Result.success(null);
   }
@@ -67,7 +66,7 @@ public abstract class Persona {
     String phoneRegex = "^[+]?\\d{7,15}$";
     Pattern pattern = Pattern.compile(phoneRegex);
     if (!pattern.matcher(number).matches()) {
-      return Result.error(new PhoneVerificationError(number));
+      return Result.error(new VerificationError("Error telefono invalido"));
     }
     return Result.success(null);
   }

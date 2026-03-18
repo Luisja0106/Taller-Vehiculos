@@ -85,8 +85,20 @@ public class Vehiculo {
     this.anio = anio;
   }
 
-  public boolean equals(Vehiculo vehiculo) {
-    return this.placa.equals(vehiculo.placa);
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj) {
+      return true;
+    }
+    if (!(obj instanceof Vehiculo))
+      return false;
+    Vehiculo otro = (Vehiculo) obj;
+    return this.placa.equals(otro.placa);
+  }
+
+  @Override
+  public int hashCode() {
+    return this.placa.hashCode();
   }
 
 }

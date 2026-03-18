@@ -16,11 +16,12 @@ public class Cliente extends Persona {
   public void addVehiculo(Vehiculo vehiculo) {
     if (vehiculo == null)
       return;
-    for (Vehiculo v : vehiculos) {
-      if (v.equals(vehiculo))
-        return;
+    if (!vehiculos.contains(vehiculo)) {
+      return;
     }
     vehiculos.add(vehiculo);
+    if (!this.equals(vehiculo.getDueño()))
+      vehiculo.setDueño(this);
   }
 
   public ArrayList<Vehiculo> getVehiculos() {

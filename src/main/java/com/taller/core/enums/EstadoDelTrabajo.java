@@ -1,11 +1,11 @@
 package com.taller.core.enums;
 
-public enum EstadoDelServicio {
+public enum EstadoDelTrabajo {
   PENDIENTE("Pendiente"), EN_PROCESO("En Proceso"), FINALIZADO("Finalizado");
 
   private final String name;
 
-  EstadoDelServicio(String name) {
+  EstadoDelTrabajo(String name) {
     this.name = name;
   }
 

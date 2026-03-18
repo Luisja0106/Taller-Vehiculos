@@ -2,6 +2,10 @@ package com.taller.core.entities;
 
 import java.util.regex.Pattern;
 
+import com.taller.core.error.VerificationError;
+import com.taller.core.interfaces.IErrorApp;
+import com.taller.core.utils.Result;
+
 public abstract class Persona {
   protected final String id;
   private String nombre;
@@ -32,14 +36,14 @@ public abstract class Persona {
   }
 
   public void changeEmail(String mail) {
-    if (!isValidEmail(mail))
+    if (!isValidEmail(mail).isSuccess)
       return;
 
     this.email = mail;
   }
 
   public void changePhone(String number) {
-    if (!isValidPhone(number))
+    if (!isValidPhone(number).isSuccess)
       return;
 
     this.telefono = number;
@@ -49,16 +53,22 @@ public abstract class Persona {
     return id.equals(persona.id);
   }
 
-  private boolean isValidEmail(String mail) {
+  protected static Result<Void, IErrorApp> isValidEmail(String mail) {
     String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
     Pattern pattern = Pattern.compile(emailRegex);
-    return pattern.matcher(mail).matches();
+    if (!pattern.matcher(mail).matches()) {
+      return Result.error(new VerificationError("Error Email invalido"));
+    }
+    return Result.success(null);
   }
 
-  private boolean isValidPhone(String number) {
+  protected static Result<Void, IErrorApp> isValidPhone(String number) {
     String phoneRegex = "^[+]?\\d{7,15}$";
     Pattern pattern = Pattern.compile(phoneRegex);
-    return pattern.matcher(number).matches();
+    if (!pattern.matcher(number).matches()) {
+      return Result.error(new VerificationError("Error telefono invalido"));
+    }
+    return Result.success(null);
   }
 
 }

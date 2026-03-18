@@ -1,6 +1,9 @@
 package com.taller.core.entities;
 
 import com.taller.core.enums.Marca;
+import com.taller.core.error.VerificationError;
+import com.taller.core.interfaces.IErrorApp;
+import com.taller.core.utils.Result;
 
 public class Vehiculo {
   private final String placa;
@@ -9,12 +12,34 @@ public class Vehiculo {
   private Marca marca;
   private int anio;
 
-  public Vehiculo(String placa, Cliente dueño, String modelo, Marca marca, int anio) {
+  private Vehiculo(String placa, Cliente dueño, String modelo, Marca marca, int anio) {
     this.placa = placa;
     this.dueño = dueño;
     this.modelo = modelo;
     this.marca = marca;
     this.anio = anio;
+  }
+
+  public static Result<Vehiculo, IErrorApp> crear(String placa, Cliente dueño, String modelo, Marca marca, int anio) {
+    if (placa == null || placa.isBlank()) {
+      return Result.error(new VerificationError("La placa no puede estar vacia"));
+    }
+    if (dueño == null) {
+      return Result.error(new VerificationError("El usuario es invalido"));
+    }
+    if (marca == null) {
+      return Result.error(new VerificationError("La marca es invalida"));
+    }
+    if (modelo == null || modelo.isBlank()) {
+      return Result.error(new VerificationError("El modelo no puede estar vacio"));
+    }
+    if (anio <= 0) {
+      return Result.error(new VerificationError("El año es invalido"));
+    }
+
+    String placaFormat = placa.toUpperCase().trim().replaceAll("\\s", "");
+
+    return Result.success(new Vehiculo(placaFormat, dueño, modelo, marca, anio));
   }
 
   public String getPlaca() {

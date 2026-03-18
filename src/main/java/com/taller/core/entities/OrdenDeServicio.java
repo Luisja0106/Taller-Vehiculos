@@ -28,7 +28,7 @@ public class OrdenDeServicio {
     this.estado = EstadoDelServicio.PENDIENTE;
   }
 
-  public Result<OrdenDeServicio, IErrorApp> crear(String id, Vehiculo vehiculo, Empleado empleado) {
+  public static Result<OrdenDeServicio, IErrorApp> crear(String id, Vehiculo vehiculo, Empleado empleado) {
     if (id == null || id.isBlank()) {
       return Result.error(new VerificationError("Error el id no puede ser vacio"));
     }

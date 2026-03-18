@@ -10,7 +10,7 @@ import com.taller.core.interfaces.IErrorApp;
 import com.taller.core.interfaces.IServicio;
 import com.taller.core.utils.Result;
 
-public class OrdenDeServicio {
+public class OrdenDeTrabajo {
   private final String ID;
   private final Vehiculo vehiculo;
   private Empleado empleadoACargo; // NOTE: posibilidad de hacerlo una list para agregar mas empleados
@@ -19,7 +19,7 @@ public class OrdenDeServicio {
   private LocalDateTime fechaSalida;
   private EstadoDelServicio estado;
 
-  private OrdenDeServicio(String id, Vehiculo vehiculo, Empleado empleadoACargo) {
+  private OrdenDeTrabajo(String id, Vehiculo vehiculo, Empleado empleadoACargo) {
     ID = id;
     this.vehiculo = vehiculo;
     this.empleadoACargo = empleadoACargo;
@@ -28,7 +28,7 @@ public class OrdenDeServicio {
     this.estado = EstadoDelServicio.PENDIENTE;
   }
 
-  public static Result<OrdenDeServicio, IErrorApp> crear(String id, Vehiculo vehiculo, Empleado empleado) {
+  public static Result<OrdenDeTrabajo, IErrorApp> crear(String id, Vehiculo vehiculo, Empleado empleado) {
     if (id == null || id.isBlank()) {
       return Result.error(new VerificationError("Error el id no puede ser vacio"));
     }
@@ -39,7 +39,7 @@ public class OrdenDeServicio {
       return Result.error(new VerificationError("Error el empleado a cargo no puede ser nulo"));
     }
 
-    return Result.success(new OrdenDeServicio(id, vehiculo, empleado));
+    return Result.success(new OrdenDeTrabajo(id, vehiculo, empleado));
   }
 
   public String getID() {

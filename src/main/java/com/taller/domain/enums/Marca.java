@@ -1,4 +1,4 @@
-package com.taller.core.enums;
+package com.taller.domain.enums;
 
 public enum Marca {
   CHEVROLET("Chevrolet"), MAZDA("Mazda"), TOYOTA("Toyota"), RENAULT("Renault"), KIA("Kia");

@@ -1,9 +1,9 @@
-package com.taller.core.entities;
+package com.taller.domain.entities;
 
 import java.util.ArrayList;
 
-import com.taller.core.interfaces.IErrorApp;
-import com.taller.core.utils.Result;
+import com.taller.domain.interfaces.IErrorApp;
+import com.taller.domain.utils.Result;
 
 public class Cliente extends Persona {
   private final ArrayList<Vehiculo> vehiculos;

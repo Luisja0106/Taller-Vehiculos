@@ -1,14 +1,14 @@
-package com.taller.core.entities;
+package com.taller.domain.entities;
 
 import java.util.List;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-import com.taller.core.enums.EstadoDelTrabajo;
-import com.taller.core.error.VerificationError;
-import com.taller.core.interfaces.IErrorApp;
-import com.taller.core.interfaces.IServicio;
-import com.taller.core.utils.Result;
+import com.taller.domain.enums.EstadoDelTrabajo;
+import com.taller.domain.errors.VerificationError;
+import com.taller.domain.interfaces.IErrorApp;
+import com.taller.domain.interfaces.IServicio;
+import com.taller.domain.utils.Result;
 
 public class OrdenDeTrabajo {
   private final String ID;

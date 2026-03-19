@@ -1,4 +1,4 @@
-package com.taller.core.utils;
+package com.taller.domain.utils;
 
 public class Result<T, E> {
   public final boolean isSuccess;

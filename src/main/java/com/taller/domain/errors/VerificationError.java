@@ -1,6 +1,6 @@
-package com.taller.core.error;
+package com.taller.domain.errors;
 
-import com.taller.core.interfaces.IErrorApp;
+import com.taller.domain.interfaces.IErrorApp;
 
 public class VerificationError implements IErrorApp {
 

@@ -1,9 +1,9 @@
-package com.taller.core.entities;
+package com.taller.domain.entities;
 
-import com.taller.core.enums.Marca;
-import com.taller.core.error.VerificationError;
-import com.taller.core.interfaces.IErrorApp;
-import com.taller.core.utils.Result;
+import com.taller.domain.enums.Marca;
+import com.taller.domain.errors.VerificationError;
+import com.taller.domain.interfaces.IErrorApp;
+import com.taller.domain.utils.Result;
 
 public class Vehiculo {
   private final String placa;

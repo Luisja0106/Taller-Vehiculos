@@ -1,10 +1,10 @@
-package com.taller.core.entities;
+package com.taller.domain.entities;
 
 import java.util.regex.Pattern;
 
-import com.taller.core.error.VerificationError;
-import com.taller.core.interfaces.IErrorApp;
-import com.taller.core.utils.Result;
+import com.taller.domain.errors.VerificationError;
+import com.taller.domain.interfaces.IErrorApp;
+import com.taller.domain.utils.Result;
 
 public abstract class Persona {
   protected final String id;

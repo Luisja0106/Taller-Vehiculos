@@ -1,4 +1,4 @@
-package com.taller.core.interfaces;
+package com.taller.domain.interfaces;
 
 public interface IServicio {
 

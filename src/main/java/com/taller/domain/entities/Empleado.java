@@ -1,10 +1,10 @@
-package com.taller.core.entities;
+package com.taller.domain.entities;
 
-import com.taller.core.enums.Rol;
-import com.taller.core.enums.TipoDeContrato;
-import com.taller.core.error.VerificationError;
-import com.taller.core.interfaces.IErrorApp;
-import com.taller.core.utils.Result;
+import com.taller.domain.enums.Rol;
+import com.taller.domain.enums.TipoDeContrato;
+import com.taller.domain.errors.VerificationError;
+import com.taller.domain.interfaces.IErrorApp;
+import com.taller.domain.utils.Result;
 
 public class Empleado extends Persona {
 

@@ -1,4 +1,4 @@
-package com.taller.main;
+package com.taller.external;
 
 public class App {
 

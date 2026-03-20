@@ -1,18 +1,15 @@
 package com.taller.domain.entities;
 
-import java.util.regex.Pattern;
-
-import com.taller.domain.errors.VerificationError;
-import com.taller.domain.interfaces.IErrorApp;
-import com.taller.domain.utils.Result;
+import com.taller.domain.valueobjects.Email;
+import com.taller.domain.valueobjects.Telefono;
 
 public abstract class Persona {
   protected final String id;
   private String nombre;
-  private String telefono;
-  private String email;
+  private Telefono telefono;
+  private Email email;
 
-  protected Persona(String id, String nombre, String telefono, String email) {
+  protected Persona(String id, String nombre, Telefono telefono, Email email) {
     this.id = id;
     this.nombre = nombre;
     this.telefono = telefono;
@@ -27,48 +24,24 @@ public abstract class Persona {
     return id;
   }
 
-  public String getTelefono() {
+  public Telefono getTelefono() {
     return telefono;
   }
 
-  public String getEmail() {
+  public Email getEmail() {
     return email;
   }
 
-  public void changeEmail(String mail) {
-    if (!isValidEmail(mail).isSuccess)
-      return;
-
+  public void changeEmail(Email mail) {
     this.email = mail;
   }
 
-  public void changePhone(String number) {
-    if (!isValidPhone(number).isSuccess)
-      return;
-
+  public void changePhone(Telefono number) {
     this.telefono = number;
   }
 
   public boolean equals(Persona persona) {
     return id.equals(persona.id);
-  }
-
-  protected static Result<Void, IErrorApp> isValidEmail(String mail) {
-    String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
-    Pattern pattern = Pattern.compile(emailRegex);
-    if (!pattern.matcher(mail).matches()) {
-      return Result.error(new VerificationError("Error Email invalido"));
-    }
-    return Result.success(null);
-  }
-
-  protected static Result<Void, IErrorApp> isValidPhone(String number) {
-    String phoneRegex = "^[+]?\\d{7,15}$";
-    Pattern pattern = Pattern.compile(phoneRegex);
-    if (!pattern.matcher(number).matches()) {
-      return Result.error(new VerificationError("Error telefono invalido"));
-    }
-    return Result.success(null);
   }
 
 }

@@ -16,7 +16,8 @@ public class OrdenDeTrabajo {
   private Empleado empleadoACargo; // NOTE: posibilidad de hacerlo una list para agregar mas empleados
   private final List<IServicio> servicios;
   private final LocalDateTime fechaEntrada;
-  private LocalDateTime fechaSalida;
+  private LocalDateTime fechaDeFinalizacion;
+  private LocalDateTime fechaDePago;
   private EstadoDelTrabajo estado;
 
   private OrdenDeTrabajo(String id, Vehiculo vehiculo, Empleado empleadoACargo) {
@@ -62,28 +63,47 @@ public class OrdenDeTrabajo {
     return fechaEntrada;
   }
 
-  public LocalDateTime getFechaSalida() {
-    return fechaSalida;
+  public LocalDateTime getFechaDeFinalizacion() {
+    return fechaDeFinalizacion;
   }
 
-  public String getEstado() {
-    return estado.toString();
+  public LocalDateTime getFechaDePago() {
+    return fechaDePago;
+  }
+
+  public EstadoDelTrabajo getEstado() {
+    return estado;
   }
 
   public Result<Void, IErrorApp> addServicio(IServicio servicio) {
     if (servicio == null) {
       return Result.error(new VerificationError("El servicio no puede ser nulo"));
     }
-    if (this.estado == EstadoDelTrabajo.FINALIZADO) {
+    if ((this.estado == EstadoDelTrabajo.FINALIZADO) || (this.estado == EstadoDelTrabajo.EN_ESPERA_DE_PAGO)) {
       return Result.error(new VerificationError("No se pueden añadir servicios a un Trabajo terminado"));
     }
     servicios.add(servicio);
     return Result.success(null);
   }
 
-  // metodo para la maquina de estados
-  private void Terminado() {
-    fechaSalida = LocalDateTime.now();
+  // avanzar estado
+  public Result<Void, IErrorApp> avanzarEstado() {
+    return switch (this.estado) {
+      case PENDIENTE -> {
+        this.estado = EstadoDelTrabajo.EN_PROCESO;
+        yield Result.success(null);
+      }
+      case EN_PROCESO -> {
+        this.estado = EstadoDelTrabajo.EN_ESPERA_DE_PAGO;
+        this.fechaDeFinalizacion = LocalDateTime.now();
+        yield Result.success(null);
+      }
+      case EN_ESPERA_DE_PAGO -> {
+        this.estado = EstadoDelTrabajo.FINALIZADO;
+        this.fechaDePago = LocalDateTime.now();
+        yield Result.success(null);
+      }
+      case FINALIZADO -> Result.error(new VerificationError("La orden ya esta finalizada"));
+    };
   }
-
 }

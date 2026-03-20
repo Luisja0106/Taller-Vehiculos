@@ -4,11 +4,13 @@ import java.util.ArrayList;
 
 import com.taller.domain.interfaces.IErrorApp;
 import com.taller.domain.utils.Result;
+import com.taller.domain.valueobjects.Email;
+import com.taller.domain.valueobjects.Telefono;
 
 public class Cliente extends Persona {
   private final ArrayList<Vehiculo> vehiculos;
 
-  private Cliente(String id, String nombre, String telefono, String email) {
+  private Cliente(String id, String nombre, Telefono telefono, Email email) {
     super(id, nombre, telefono, email);
     vehiculos = new ArrayList<Vehiculo>();
   }
@@ -29,15 +31,15 @@ public class Cliente extends Persona {
   }
 
   public static Result<Cliente, IErrorApp> crear(String id, String nombre, String telefono, String email) {
-    var emailRes = isValidEmail(email);
-    if (!emailRes.isSuccess)
-      return Result.error(emailRes.getError());
+    var emailVO = Email.crear(email);
+    if (!emailVO.isSuccess)
+      return Result.error(emailVO.getError());
 
-    var phoneRes = isValidPhone(telefono);
-    if (!phoneRes.isSuccess)
-      return Result.error(phoneRes.getError());
+    var phoneVO = Telefono.crear(telefono);
+    if (!phoneVO.isSuccess)
+      return Result.error(phoneVO.getError());
 
-    return Result.success(new Cliente(id, nombre, telefono, email));
+    return Result.success(new Cliente(id, nombre, phoneVO.getValue(), emailVO.getValue()));
   }
 
 }

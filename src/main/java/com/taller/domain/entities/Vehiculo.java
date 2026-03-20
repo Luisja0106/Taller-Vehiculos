@@ -4,15 +4,16 @@ import com.taller.domain.enums.Marca;
 import com.taller.domain.errors.VerificationError;
 import com.taller.domain.interfaces.IErrorApp;
 import com.taller.domain.utils.Result;
+import com.taller.domain.valueobjects.Placa;
 
 public class Vehiculo {
-  private final String placa;
+  private final Placa placa;
   private Cliente dueño;
   private String modelo;
   private Marca marca;
   private int anio;
 
-  private Vehiculo(String placa, Cliente dueño, String modelo, Marca marca, int anio) {
+  private Vehiculo(Placa placa, Cliente dueño, String modelo, Marca marca, int anio) {
     this.placa = placa;
     this.dueño = dueño;
     this.modelo = modelo;
@@ -21,8 +22,10 @@ public class Vehiculo {
   }
 
   public static Result<Vehiculo, IErrorApp> crear(String placa, Cliente dueño, String modelo, Marca marca, int anio) {
-    if (placa == null || placa.isBlank()) {
-      return Result.error(new VerificationError("La placa no puede estar vacia"));
+    var placaVO = Placa.crear(placa);
+
+    if (placaVO.isSuccess) {
+      return Result.error(placaVO.getError());
     }
     if (dueño == null) {
       return Result.error(new VerificationError("El usuario es invalido"));
@@ -36,13 +39,10 @@ public class Vehiculo {
     if (anio <= 0) {
       return Result.error(new VerificationError("El año es invalido"));
     }
-
-    String placaFormat = placa.toUpperCase().trim().replaceAll("\\s", "");
-
-    return Result.success(new Vehiculo(placaFormat, dueño, modelo, marca, anio));
+    return Result.success(new Vehiculo(placaVO.getValue(), dueño, modelo, marca, anio));
   }
 
-  public String getPlaca() {
+  public Placa getPlaca() {
     return this.placa;
   }
 

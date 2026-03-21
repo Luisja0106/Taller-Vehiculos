@@ -3,12 +3,25 @@ package com.taller.domain.entities;
 import com.taller.domain.valueobjects.Email;
 import com.taller.domain.valueobjects.Telefono;
 
+/**
+ * clase abstracta que define los parametros basicos que toda persona debe
+ * tener.
+ * 
+ * @param id       identificador unico de la persona (unico segun el hijo)
+ * @param nombre   nombre de la persona
+ * @param telefono telefono del persona
+ * @param email    email de la persona
+ */
 public abstract class Persona {
   protected final String id;
   private String nombre;
   private Telefono telefono;
   private Email email;
 
+  /**
+   * constructor protegido debido a que luego se crean los objetos por medio de
+   * una factory
+   */
   protected Persona(String id, String nombre, Telefono telefono, Email email) {
     this.id = id;
     this.nombre = nombre;

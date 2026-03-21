@@ -7,6 +7,20 @@ import com.taller.domain.utils.Result;
 import com.taller.domain.valueobjects.Email;
 import com.taller.domain.valueobjects.Telefono;
 
+/**
+ * Representa un cliente del taller.
+ *
+ * un cliente es una persona que debe contener la informacion basica de
+ * cualquier persona y lo mas
+ * importante uno o varios vehiculo
+ *
+ * se crea unicamente a traves del factory method
+ * {@link #crear}
+ *
+ * @see Persona
+ * @see Vehiculo
+ */
+
 public class Cliente extends Persona {
   private final ArrayList<Vehiculo> vehiculos;
 
@@ -30,6 +44,26 @@ public class Cliente extends Persona {
     return new ArrayList<Vehiculo>(this.vehiculos);
   }
 
+  /**
+   * Crea un empleado despues de validar que todos sus parametros sean validos en
+   * el contexto del taller.
+   *
+   * valida que email tenga el formato correcto,
+   * igual que el telefono retorna un Cliente o un error si alguna validacion
+   * falla
+   *
+   * @param id       id unico del cliente, ej: CLI001
+   * @param nombre   nombre del Cliente
+   * @param telefono telefono del cliente
+   * @param email    email del cliente
+   *
+   * @return Result con el Cliente creado si todo es valido, si no retorna un
+   *         error y el motivo del mismo
+   *
+   * @see Result
+   * @see IErrorApp
+   *
+   */
   public static Result<Cliente, IErrorApp> crear(String id, String nombre, String telefono, String email) {
     var emailVO = Email.crear(email);
     if (!emailVO.isSuccess)

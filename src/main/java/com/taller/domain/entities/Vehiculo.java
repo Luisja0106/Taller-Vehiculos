@@ -6,6 +6,22 @@ import com.taller.domain.interfaces.IErrorApp;
 import com.taller.domain.utils.Result;
 import com.taller.domain.valueobjects.Placa;
 
+/**
+ * Representa un vehículo registrado en el taller.
+ *
+ * Un vehículo se identifica únicamente por su placa, que actúa como
+ * identificador natural de negocio. Siempre pertenece a un {@link Cliente}
+ * y no puede existir sin uno.
+ *
+ * <p>
+ * Solo puede crearse a través del factory method {@link #crear}, que
+ * garantiza que ninguna instancia de esta clase contiene datos inválidos.
+ * </p>
+ *
+ * @see Cliente
+ * @see Placa
+ * @see Marca
+ */
 public class Vehiculo {
   private final Placa placa;
   private Cliente dueño;
@@ -21,10 +37,28 @@ public class Vehiculo {
     this.anio = anio;
   }
 
+  /**
+   * Crea un vehículo validando todos sus datos antes de construirlo.
+   *
+   * <p>
+   * Valida que la placa tenga formato correcto, que el dueño no sea nulo,
+   * que la marca sea válida, que el modelo no esté vacío y que el año sea
+   * positivo. Si alguna validación falla retorna un error descriptivo
+   * sin crear el objeto.
+   * </p>
+   *
+   * @param placa  placa del vehículo en formato colombiano, ej: "ABC123"
+   * @param dueño  cliente propietario del vehículo, no puede ser nulo
+   * @param modelo modelo del vehículo, ej: "Corolla", no puede estar vacío
+   * @param marca  marca del vehículo, debe ser un valor válido de {@link Marca}
+   * @param anio   año de fabricación, debe ser mayor a cero
+   * @return {@link Result} con el vehículo creado si todo es válido,
+   *         o {@link Result} con el error específico si algo falla
+   */
   public static Result<Vehiculo, IErrorApp> crear(String placa, Cliente dueño, String modelo, Marca marca, int anio) {
     var placaVO = Placa.crear(placa);
 
-    if (placaVO.isSuccess) {
+    if (!placaVO.isSuccess) {
       return Result.error(placaVO.getError());
     }
     if (dueño == null) {
@@ -58,6 +92,17 @@ public class Vehiculo {
     return marca.toString();
   }
 
+  /**
+   * Reasigna el vehículo a un nuevo dueño y sincroniza la relación
+   * agregando este vehículo a la lista del nuevo cliente.
+   *
+   * <p>
+   * Si el nuevo dueño es nulo o es el mismo que el actual,
+   * la operación no tiene efecto.
+   * </p>
+   *
+   * @param nuevoDueño el nuevo cliente propietario, ignorado si es nulo
+   */
   public void setDueño(Cliente nuevoDueño) {
     if (nuevoDueño == null)
       return;

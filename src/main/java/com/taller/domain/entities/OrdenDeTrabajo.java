@@ -1,6 +1,7 @@
 package com.taller.domain.entities;
 
 import java.util.List;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -30,6 +31,7 @@ public class OrdenDeTrabajo {
   private final LocalDateTime fechaEntrada;
   private LocalDateTime fechaDeFinalizacion;
   private LocalDateTime fechaDePago;
+  private BigDecimal valorVenta;
   private EstadoDelTrabajo estado;
 
   private OrdenDeTrabajo(String id, Vehiculo vehiculo, Empleado empleadoACargo) {
@@ -68,6 +70,22 @@ public class OrdenDeTrabajo {
     }
 
     return Result.success(new OrdenDeTrabajo(id, vehiculo, empleado));
+  }
+
+  public Result<Void, IErrorApp> registrarPago(BigDecimal pago) {
+    if (this.estado != EstadoDelTrabajo.EN_ESPERA_DE_PAGO)
+      return Result.error(new VerificationError("Error el estado no admite pago"));
+    if (pago == null)
+      return Result.error(new VerificationError("Error el valor de venta no puede ser nulo"));
+    if (pago.compareTo(BigDecimal.ZERO) <= 0)
+      return Result.error(new VerificationError("Error el valor de venta no puede ser negativo"));
+
+    valorVenta = pago;
+    return Result.success(null);
+  }
+
+  public BigDecimal getValorVenta() {
+    return valorVenta;
   }
 
   public String getID() {

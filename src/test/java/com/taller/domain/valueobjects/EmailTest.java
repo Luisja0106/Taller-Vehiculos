@@ -44,13 +44,11 @@ class EmailTest {
     }
 
     @Test
-    @DisplayName("debería eliminar espacios del email")
+    @DisplayName("debería no permitir espacios del email")
     void deberiaEliminarEspacios() {
-      Result<Email, IErrorApp> result = Email.crear("juan@gmail.com");
+      Result<Email, IErrorApp> result = Email.crear(" juan@gmail.com");
 
-        
-        assertTrue(result.isSuccess);
-      assertEquals("juan@gmail.com", result.getValue().toString());
+      assertFalse(result.isSuccess);
     }
 
     @Test

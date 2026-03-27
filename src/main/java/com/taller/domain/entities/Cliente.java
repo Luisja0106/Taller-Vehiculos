@@ -2,6 +2,7 @@ package com.taller.domain.entities;
 
 import java.util.ArrayList;
 
+import com.taller.domain.errors.VerificationError;
 import com.taller.domain.interfaces.IErrorApp;
 import com.taller.domain.utils.Result;
 import com.taller.domain.valueobjects.Email;
@@ -32,12 +33,21 @@ public class Cliente extends Persona {
   public void addVehiculo(Vehiculo vehiculo) {
     if (vehiculo == null)
       return;
-    if (!vehiculos.contains(vehiculo)) {
+    if (vehiculos.contains(vehiculo)) {
       return;
     }
     vehiculos.add(vehiculo);
     if (!this.equals(vehiculo.getDueño()))
-      vehiculo.setDueño(this);
+      vehiculo.cambiarDueño(this);
+  }
+
+  public void removeVehiculo(Vehiculo vehiculo) {
+    if (vehiculo == null || !vehiculos.contains(vehiculo))
+      return;
+    vehiculos.remove(vehiculo);
+
+    if (vehiculo.getDueño() != null && vehiculo.getDueño().equals(this))
+      vehiculo.removeDueño(this);
   }
 
   public ArrayList<Vehiculo> getVehiculos() {

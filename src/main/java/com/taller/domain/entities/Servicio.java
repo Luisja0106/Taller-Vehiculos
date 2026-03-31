@@ -49,8 +49,8 @@ public class Servicio implements IServicio {
 
   @Override
   public Result<BigDecimal, IErrorApp> calcularCosto() {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'calcularCosto'");
+    // TODO: add a more complex validations
+    return Result.success(this.precio);
   }
 
   @Override

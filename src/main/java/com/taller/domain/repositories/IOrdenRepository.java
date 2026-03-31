@@ -21,7 +21,7 @@ import com.taller.domain.utils.Result;
  * @see OrdenDeTrabajo
  * @see EstadoDelTrabajo
  */
-public interface OrdenRepository {
+public interface IOrdenRepository {
   /**
    * Persiste una orden de trabajo nueva en el almacenamiento.
    *

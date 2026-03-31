@@ -19,7 +19,7 @@ import com.taller.domain.utils.Result;
  *
  * @see Empleado
  */
-public interface EmpleadoRepository {
+public interface IEmpleadoRepository {
   /**
    * Persiste un empleado nuevo en el almacenamiento.
    *

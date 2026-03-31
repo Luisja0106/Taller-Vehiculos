@@ -8,11 +8,11 @@ import com.taller.domain.utils.Result;
 import com.taller.domain.valueobjects.Email;
 import com.taller.usecases.dto.CrearClienteInput;
 
-public class CrearClienteUseCase {
+public class RegistrarCliente {
 
   private final IClienteRepository clienteRepository;
 
-  public CrearClienteUseCase(IClienteRepository clienteRepository) {
+  public RegistrarCliente(IClienteRepository clienteRepository) {
     this.clienteRepository = clienteRepository;
   }
 

@@ -6,7 +6,6 @@ import java.util.Optional;
 import com.taller.domain.entities.Cliente;
 import com.taller.domain.interfaces.IErrorApp;
 import com.taller.domain.utils.Result;
-import com.taller.domain.valueobjects.Email;
 
 /**
  * Contrato de persistencia para la entidad {@link Cliente}.

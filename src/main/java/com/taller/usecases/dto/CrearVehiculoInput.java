@@ -1,6 +1,6 @@
 package com.taller.usecases.dto;
 
-public record crearVehiculoInput(String placa,
+public record CrearVehiculoInput(String placa,
     String idCliente,
     String modelo,
     String marca,

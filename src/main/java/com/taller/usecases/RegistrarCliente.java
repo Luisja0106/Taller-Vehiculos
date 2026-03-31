@@ -5,7 +5,6 @@ import com.taller.domain.errors.ActionError;
 import com.taller.domain.interfaces.IErrorApp;
 import com.taller.domain.repositories.IClienteRepository;
 import com.taller.domain.utils.Result;
-import com.taller.domain.valueobjects.Email;
 import com.taller.usecases.dto.CrearClienteInput;
 
 public class RegistrarCliente {
@@ -16,18 +15,15 @@ public class RegistrarCliente {
     this.clienteRepository = clienteRepository;
   }
 
-  public Result<Cliente, IErrorApp> execute(CrearClienteInput input) {
-    if (clienteRepository.buscarPorId(input.id()).isPresent()) {
-      return Result.error(new ActionError("El cliente ya esta registrado"));
+  public Result<Cliente, IErrorApp> ejecutar(CrearClienteInput input) {
+    if (input == null) {
+      return Result.error(new ActionError("Los datos no pueden ser nulos"));
     }
-    var email = Email.crear(input.email());
-    if (!email.isSuccess) {
-      return Result.error(email.getError());
-    }
-    if (clienteRepository.buscarPorEmail(email.getValue()).isPresent()) {
+    String id = setId();
+    if (clienteRepository.buscarPorEmail(input.email()).isPresent()) {
       return Result.error(new ActionError("El email ya esta registrado"));
     }
-    var clientResult = Cliente.crear(input.id(), input.nombre(), input.telefono(),
+    var clientResult = Cliente.crear(id, input.nombre(), input.telefono(),
         input.email());
 
     if (!clientResult.isSuccess) {
@@ -37,5 +33,9 @@ public class RegistrarCliente {
 
     clienteRepository.guardar(nuevoCliente);
     return Result.success(nuevoCliente);
+  }
+
+  private String setId() {
+    return String.format("CLI%03d", clienteRepository.siguienteNumeroId());
   }
 }

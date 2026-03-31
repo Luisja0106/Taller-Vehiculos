@@ -48,6 +48,20 @@ public interface IEmpleadoRepository {
   Optional<Empleado> buscarPorId(String id);
 
   /**
+   * Busca un cliente por su email.
+   *
+   * <p>
+   * Se usa principalmente para verificar duplicados antes
+   * de registrar un Empleado nuevo.
+   * </p>
+   *
+   * @param email email del empleado a buscar
+   * @return {@link Optional} con el empleado si existe,
+   *         {@link Optional#empty()} si no se encuentra
+   */
+  Optional<Empleado> buscarPorEmail(String Email);
+
+  /**
    * Retorna todos los empleados registrados.
    *
    * @return lista con todos los empleados, lista vacía si no hay ninguno,

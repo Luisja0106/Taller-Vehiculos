@@ -60,7 +60,7 @@ public interface IClienteRepository {
    * @return {@link Optional} con el cliente si existe,
    *         {@link Optional#empty()} si no se encuentra
    */
-  Optional<Cliente> buscarPorEmail(Email Email);
+  Optional<Cliente> buscarPorEmail(String Email);
 
   /**
    * Elimina un cliente por su identificador único.

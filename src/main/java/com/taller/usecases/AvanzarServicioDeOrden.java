@@ -6,7 +6,7 @@ import com.taller.domain.errors.VerificationError;
 import com.taller.domain.interfaces.IErrorApp;
 import com.taller.domain.repositories.IOrdenRepository;
 import com.taller.domain.utils.Result;
-import com.taller.usecases.dto.AvanzarEstadoDeOrdenInput;
+import com.taller.usecases.dto.AvanzarEstadoDeOrdenCMD;
 
 public class AvanzarServicioDeOrden {
 
@@ -16,7 +16,7 @@ public class AvanzarServicioDeOrden {
     this.ordenRepository = ordenRepository;
   }
 
-  public Result<OrdenDeTrabajo, IErrorApp> ejecutar(AvanzarEstadoDeOrdenInput input) {
+  public Result<OrdenDeTrabajo, IErrorApp> ejecutar(AvanzarEstadoDeOrdenCMD input) {
     if (input == null) {
       return Result.error(new ActionError("Error los datos no pueden ser nulos"));
     }

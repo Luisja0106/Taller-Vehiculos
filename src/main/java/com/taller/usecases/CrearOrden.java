@@ -12,7 +12,7 @@ import com.taller.domain.repositories.IOrdenRepository;
 import com.taller.domain.repositories.IVehiculoRepository;
 import com.taller.domain.utils.Result;
 import com.taller.domain.valueobjects.Placa;
-import com.taller.usecases.dto.CrearOrdenInput;
+import com.taller.usecases.dto.CrearOrdenCMD;
 
 public class CrearOrden {
   private final IOrdenRepository ordenRepository;
@@ -26,7 +26,7 @@ public class CrearOrden {
     this.empleadoRepository = empleadoRepository;
   }
 
-  public Result<OrdenDeTrabajo, IErrorApp> ejecutar(CrearOrdenInput input) {
+  public Result<OrdenDeTrabajo, IErrorApp> ejecutar(CrearOrdenCMD input) {
     if (input == null) {
       return Result.error(new ActionError("Error los datos no pueden ser nulos"));
     }

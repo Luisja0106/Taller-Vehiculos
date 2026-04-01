@@ -1,5 +1,5 @@
 package com.taller.usecases.dto;
 
-public record AvanzarEstadoDeOrdenInput(
+public record AvanzarEstadoDeOrdenCMD(
     String ordenId) {
 }

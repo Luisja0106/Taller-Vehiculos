@@ -7,7 +7,7 @@ import com.taller.domain.interfaces.IErrorApp;
 import com.taller.domain.repositories.IOrdenRepository;
 import com.taller.domain.repositories.IServicioRepository;
 import com.taller.domain.utils.Result;
-import com.taller.usecases.dto.AgregarServicioInput;
+import com.taller.usecases.dto.AgregarServicioCMD;
 
 public class AgregarServicio {
   private final IOrdenRepository ordenRepository;
@@ -18,7 +18,7 @@ public class AgregarServicio {
     this.ordenRepository = ordenRepository;
   }
 
-  public Result<OrdenDeTrabajo, IErrorApp> ejecutar(AgregarServicioInput input) {
+  public Result<OrdenDeTrabajo, IErrorApp> ejecutar(AgregarServicioCMD input) {
     if (input == null) {
       return Result.error(new ActionError("Error los datos no pueden ser nulos"));
     }

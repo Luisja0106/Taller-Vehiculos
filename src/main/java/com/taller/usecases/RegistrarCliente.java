@@ -5,7 +5,7 @@ import com.taller.domain.errors.ActionError;
 import com.taller.domain.interfaces.IErrorApp;
 import com.taller.domain.repositories.IClienteRepository;
 import com.taller.domain.utils.Result;
-import com.taller.usecases.dto.CrearClienteInput;
+import com.taller.usecases.dto.CrearClienteCMD;
 
 public class RegistrarCliente {
 
@@ -15,7 +15,7 @@ public class RegistrarCliente {
     this.clienteRepository = clienteRepository;
   }
 
-  public Result<Cliente, IErrorApp> ejecutar(CrearClienteInput input) {
+  public Result<Cliente, IErrorApp> ejecutar(CrearClienteCMD input) {
     if (input == null) {
       return Result.error(new ActionError("Los datos no pueden ser nulos"));
     }

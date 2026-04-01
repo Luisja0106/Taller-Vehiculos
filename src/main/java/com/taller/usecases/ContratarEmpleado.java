@@ -8,7 +8,7 @@ import com.taller.domain.errors.VerificationError;
 import com.taller.domain.interfaces.IErrorApp;
 import com.taller.domain.repositories.IEmpleadoRepository;
 import com.taller.domain.utils.Result;
-import com.taller.usecases.dto.CrearEmpleadoInput;
+import com.taller.usecases.dto.CrearEmpleadoCMD;
 
 public class ContratarEmpleado {
 
@@ -18,7 +18,7 @@ public class ContratarEmpleado {
     this.empleadoRepository = empleadoRepository;
   }
 
-  public Result<Empleado, IErrorApp> ejecutar(CrearEmpleadoInput input) {
+  public Result<Empleado, IErrorApp> ejecutar(CrearEmpleadoCMD input) {
     if (input == null)
       return Result.error(new ActionError("Los datos no pueden ser nulos"));
 

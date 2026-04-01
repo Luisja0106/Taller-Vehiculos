@@ -9,7 +9,7 @@ import com.taller.domain.repositories.IClienteRepository;
 import com.taller.domain.repositories.IVehiculoRepository;
 import com.taller.domain.utils.Result;
 import com.taller.domain.valueobjects.Placa;
-import com.taller.usecases.dto.CrearVehiculoInput;
+import com.taller.usecases.dto.CrearVehiculoCMD;
 
 public class RegistrarVehiculo {
 
@@ -21,7 +21,7 @@ public class RegistrarVehiculo {
     this.clienteRepository = clienteRepository;
   }
 
-  public Result<Vehiculo, IErrorApp> ejecutar(CrearVehiculoInput input) {
+  public Result<Vehiculo, IErrorApp> ejecutar(CrearVehiculoCMD input) {
     if (input == null) {
       return Result.error(new ActionError("Los datos no pueden ser nulos"));
     }

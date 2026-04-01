@@ -1,6 +1,6 @@
 package com.taller.usecases.dto;
 
-public record CrearEmpleadoInput(
+public record CrearEmpleadoCMD(
     String nombre,
     String telefono,
     String email,

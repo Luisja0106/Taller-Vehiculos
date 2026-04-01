@@ -1,6 +1,6 @@
 package com.taller.usecases.dto;
 
-public record CrearOrdenInput(
+public record CrearOrdenCMD(
     String vehiculoPlaca,
     String empleadoACargoId) {
 }

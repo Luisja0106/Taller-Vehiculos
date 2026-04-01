@@ -8,7 +8,7 @@ import com.taller.domain.errors.VerificationError;
 import com.taller.domain.interfaces.IErrorApp;
 import com.taller.domain.repositories.IServicioRepository;
 import com.taller.domain.utils.Result;
-import com.taller.usecases.dto.CrearServicioInput;
+import com.taller.usecases.dto.CrearServicioCMD;
 
 public class CrearServicio {
   private final IServicioRepository servicioRepository;
@@ -17,7 +17,7 @@ public class CrearServicio {
     this.servicioRepository = servicioRepository;
   }
 
-  public Result<Servicio, IErrorApp> ejecutar(CrearServicioInput input) {
+  public Result<Servicio, IErrorApp> ejecutar(CrearServicioCMD input) {
     if (input == null) {
       return Result.error(new ActionError("Error los datos no pueden ser nulos"));
     }

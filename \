@@ -74,13 +74,8 @@ public class OrdenDeTrabajo {
 
   public Result<Void, IErrorApp> cambiarEmpleadoACargo(Empleado nuevoEmpleado) {
     if (nuevoEmpleado == null) {
-      return Result.error(new VerificationError("Error el empleado no puede ser nulo"));
+      return Result.error(new VerificationError("Error el empleado no puede ser null"));
     }
-    if (nuevoEmpleado.equals(this.empleadoACargo)) {
-      return Result.error(new VerificationError("Error el empleado seleccionado ya es el encargado del trabajo"));
-    }
-    empleadoACargo = nuevoEmpleado;
-    return Result.success(null);
   }
 
   public Result<Void, IErrorApp> registrarPago(BigDecimal pago) {

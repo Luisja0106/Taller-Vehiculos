@@ -43,7 +43,7 @@ public class ActualizarCliente {
   }
 
   private Result<Void, IErrorApp> actualizarEmail(Cliente cliente, String emailRaw) {
-    if (emailRaw == null || emailRaw.isEmpty())
+    if (emailRaw == null || emailRaw.isBlank())
       return Result.success(null);
 
     var email = Email.crear(emailRaw);
@@ -56,7 +56,7 @@ public class ActualizarCliente {
   }
 
   private Result<Void, IErrorApp> actualizarTelefono(Cliente cliente, String telefonoRaw) {
-    if (telefonoRaw == null || telefonoRaw.isEmpty())
+    if (telefonoRaw == null || telefonoRaw.isBlank())
       return Result.success(null);
 
     var telefono = Telefono.crear(telefonoRaw);

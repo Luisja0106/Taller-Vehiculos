@@ -18,7 +18,7 @@ public class ListarVehiculos {
   }
 
   public Result<List<Vehiculo>, IErrorApp> ejecutar(ListarVehiculosCMD input) {
-    if (input == null || input.clienteId() == null || input.clienteId().isEmpty()) {
+    if (input == null || input.clienteId() == null || input.clienteId().isBlank()) {
       return listarTodos();
     }
     return listarPorCliente(input.clienteId());
@@ -35,7 +35,7 @@ public class ListarVehiculos {
   }
 
   private Result<List<Vehiculo>, IErrorApp> listarPorCliente(String clienteRaw) {
-    if (clienteRaw == null || clienteRaw.isEmpty()) {
+    if (clienteRaw == null || clienteRaw.isBlank()) {
       return Result.error(new ActionError("Error para buscar por cliente, el cliente no puede ser nulo"));
     }
     List<Vehiculo> list = vehiculoRepository.listarPorCliente(clienteRaw);

@@ -27,7 +27,7 @@ public class BuscarPorCodigo {
   }
 
   public Result<ResultadoBusqueda, IErrorApp> ejecutar(String codigo) {
-    if (codigo == null || codigo.isEmpty())
+    if (codigo == null || codigo.isBlank())
       return Result.error(new VerificationError("El codigo no puede estar vacio"));
 
     var tipoDeCodigo = TipoDeEntidad.buscarPorPrefijo(codigo);

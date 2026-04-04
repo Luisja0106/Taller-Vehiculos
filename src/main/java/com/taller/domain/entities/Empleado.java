@@ -65,6 +65,8 @@ public class Empleado extends Persona {
    */
   public static Result<Empleado, IErrorApp> crear(String id, String nombre, String telefono, String email, Rol rol,
       TipoDeContrato contrato) {
+    if (nombre == null || nombre.isBlank())
+      return Result.error(new VerificationError("Error nombre invalido"));
     var emailVO = Email.crear(email);
     if (!emailVO.isSuccess)
       return Result.error(emailVO.getError());

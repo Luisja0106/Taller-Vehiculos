@@ -7,6 +7,7 @@ import com.taller.domain.entities.OrdenDeTrabajo;
 import com.taller.domain.enums.EstadoDelTrabajo;
 import com.taller.domain.interfaces.IErrorApp;
 import com.taller.domain.utils.Result;
+import com.taller.usecases.output.EntidadConteo;
 
 /**
  * Contrato de persistencia para la entidad {@link OrdenDeTrabajo}.
@@ -81,5 +82,11 @@ public interface IOrdenRepository {
    *
    * @return número entero único y creciente
    */
+  List<EntidadConteo> serviciosMasPedidos();
+
+  List<EntidadConteo> mecanicoConMasServicio();
+
+  List<EntidadConteo> vehiculosPorServicio();
+
   int siguienteNumeroParaId();
 }

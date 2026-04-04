@@ -39,6 +39,7 @@ public class Servicio implements IServicio {
     return nombre;
   }
 
+  @Override
   public String getId() {
     return id;
   }

@@ -7,6 +7,7 @@ import com.taller.domain.entities.OrdenDeTrabajo;
 import com.taller.domain.enums.EstadoDelTrabajo;
 import com.taller.domain.interfaces.IErrorApp;
 import com.taller.domain.utils.Result;
+import com.taller.usecases.output.EntidadConteo;
 
 /**
  * Contrato de persistencia para la entidad {@link OrdenDeTrabajo}.
@@ -21,7 +22,7 @@ import com.taller.domain.utils.Result;
  * @see OrdenDeTrabajo
  * @see EstadoDelTrabajo
  */
-public interface OrdenRepository {
+public interface IOrdenRepository {
   /**
    * Persiste una orden de trabajo nueva en el almacenamiento.
    *
@@ -62,39 +63,7 @@ public interface OrdenRepository {
    */
   List<OrdenDeTrabajo> listarTodos();
 
-  /**
-   * Retorna todas las órdenes que se encuentran en un estado específico.
-   *
-   * <p>
-   * Útil para ver las órdenes pendientes, en proceso o
-   * en espera de pago en la UI.
-   * </p>
-   *
-   * @param estado estado por el cual filtrar
-   * @return lista de órdenes en ese estado, lista vacía si no hay ninguna
-   * @see EstadoDelTrabajo
-   */
-  List<OrdenDeTrabajo> listarPorEstados(EstadoDelTrabajo estado);
-
-  /**
-   * Retorna el historial de órdenes asociadas a un vehículo específico.
-   *
-   * @param placa placa del vehículo en formato colombiano, ej: "ABC123"
-   * @return lista de órdenes del vehículo, lista vacía si no hay ninguna
-   */
-  List<OrdenDeTrabajo> listarPorVehiculo(String placa);
-
-  /**
-   * Retorna todas las órdenes asignadas a un empleado específico.
-   *
-   * <p>
-   * Útil para ver la carga de trabajo actual de un mecánico.
-   * </p>
-   *
-   * @param empleadoId identificador del empleado, ej: "EMP001"
-   * @return lista de órdenes del empleado, lista vacía si no hay ninguna
-   */
-  List<OrdenDeTrabajo> listarPorEmpleado(String empleadoId);
+  List<OrdenDeTrabajo> listarConFiltros(EstadoDelTrabajo estado, String empleadoId, String placaVehiculo);
 
   /**
    * Elimina una orden de trabajo por su identificador único.
@@ -113,5 +82,11 @@ public interface OrdenRepository {
    *
    * @return número entero único y creciente
    */
+  List<EntidadConteo> serviciosMasPedidos();
+
+  List<EntidadConteo> mecanicoConMasServicio();
+
+  List<EntidadConteo> vehiculosPorServicio();
+
   int siguienteNumeroParaId();
 }

@@ -46,7 +46,7 @@ public final class Placa {
     String placaRegex = "^[A-Z]{3}[0-9]{3}$";
     if (!valorRaw.toUpperCase().trim().matches(placaRegex))
       return Result.error(new VerificationError("Formato de placa invalido, debe ser ABC123"));
-    String placaFormat = valorRaw.toUpperCase().trim().replaceAll("\\s", "");
+    String placaFormat = valorRaw.toUpperCase().trim();
     return Result.success(new Placa(placaFormat));
   }
 

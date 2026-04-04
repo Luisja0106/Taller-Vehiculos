@@ -19,7 +19,7 @@ import com.taller.domain.utils.Result;
  *
  * @see Empleado
  */
-public interface EmpleadoRepository {
+public interface IEmpleadoRepository {
   /**
    * Persiste un empleado nuevo en el almacenamiento.
    *
@@ -46,6 +46,20 @@ public interface EmpleadoRepository {
    *         {@link Optional#empty()} si no se encuentra
    */
   Optional<Empleado> buscarPorId(String id);
+
+  /**
+   * Busca un cliente por su email.
+   *
+   * <p>
+   * Se usa principalmente para verificar duplicados antes
+   * de registrar un Empleado nuevo.
+   * </p>
+   *
+   * @param email email del empleado a buscar
+   * @return {@link Optional} con el empleado si existe,
+   *         {@link Optional#empty()} si no se encuentra
+   */
+  Optional<Empleado> buscarPorEmail(String Email);
 
   /**
    * Retorna todos los empleados registrados.

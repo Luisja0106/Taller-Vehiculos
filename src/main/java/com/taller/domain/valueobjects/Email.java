@@ -49,7 +49,7 @@ public final class Email {
     if (!pattern.matcher(valorRaw).matches()) {
       return Result.error(new VerificationError("Error Email invalido"));
     }
-    return Result.success(new Email(valorRaw.toLowerCase().trim().replaceAll("\\s", "")));
+    return Result.success(new Email(valorRaw.toLowerCase().trim()));
   }
 
   @Override

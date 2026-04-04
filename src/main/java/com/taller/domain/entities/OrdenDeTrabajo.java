@@ -1,6 +1,7 @@
 package com.taller.domain.entities;
 
 import java.util.List;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -25,11 +26,12 @@ import com.taller.domain.utils.Result;
 public class OrdenDeTrabajo {
   private final String ID;
   private final Vehiculo vehiculo;
-  private Empleado empleadoACargo; // NOTE: posibilidad de hacerlo una list para agregar mas empleados
+  private Empleado empleadoACargo;
   private final List<IServicio> servicios;
   private final LocalDateTime fechaEntrada;
   private LocalDateTime fechaDeFinalizacion;
   private LocalDateTime fechaDePago;
+  private BigDecimal valorVenta;
   private EstadoDelTrabajo estado;
 
   private OrdenDeTrabajo(String id, Vehiculo vehiculo, Empleado empleadoACargo) {
@@ -68,6 +70,33 @@ public class OrdenDeTrabajo {
     }
 
     return Result.success(new OrdenDeTrabajo(id, vehiculo, empleado));
+  }
+
+  public Result<Void, IErrorApp> cambiarEmpleadoACargo(Empleado nuevoEmpleado) {
+    if (nuevoEmpleado == null) {
+      return Result.error(new VerificationError("Error el empleado no puede ser nulo"));
+    }
+    if (nuevoEmpleado.equals(this.empleadoACargo)) {
+      return Result.error(new VerificationError("Error el empleado seleccionado ya es el encargado del trabajo"));
+    }
+    empleadoACargo = nuevoEmpleado;
+    return Result.success(null);
+  }
+
+  public Result<Void, IErrorApp> registrarPago(BigDecimal pago) {
+    if (this.estado != EstadoDelTrabajo.EN_ESPERA_DE_PAGO)
+      return Result.error(new VerificationError("Error el estado no admite pago"));
+    if (pago == null)
+      return Result.error(new VerificationError("Error el valor de venta no puede ser nulo"));
+    if (pago.compareTo(BigDecimal.ZERO) <= 0)
+      return Result.error(new VerificationError("Error el valor de venta no puede ser negativo"));
+
+    valorVenta = pago;
+    return Result.success(null);
+  }
+
+  public BigDecimal getValorVenta() {
+    return valorVenta;
   }
 
   public String getID() {
@@ -145,6 +174,8 @@ public class OrdenDeTrabajo {
         yield Result.success(null);
       }
       case EN_ESPERA_DE_PAGO -> {
+        if (valorVenta == null)
+          yield Result.error(new VerificationError("No se puede pasar a finalizado sin definir el pago"));
         this.estado = EstadoDelTrabajo.FINALIZADO;
         this.fechaDePago = LocalDateTime.now();
         yield Result.success(null);

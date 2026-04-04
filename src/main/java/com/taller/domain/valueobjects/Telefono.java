@@ -51,7 +51,7 @@ public final class Telefono {
     if (!pattern.matcher(valorRaw).matches()) {
       return Result.error(new VerificationError("Error Telefono invalido"));
     }
-    return Result.success(new Telefono(valorRaw.trim().replaceAll("\\s", "")));
+    return Result.success(new Telefono(valorRaw.trim()));
   }
 
   public String getValue() {

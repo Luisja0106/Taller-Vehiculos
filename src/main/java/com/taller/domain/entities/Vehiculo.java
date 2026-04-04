@@ -103,15 +103,24 @@ public class Vehiculo {
    *
    * @param nuevoDueño el nuevo cliente propietario, ignorado si es nulo
    */
-  public void setDueño(Cliente nuevoDueño) {
-    if (nuevoDueño == null)
+  public void cambiarDueño(Cliente nuevoDueño) {
+    if (nuevoDueño == null || nuevoDueño.equals(this.dueño))
       return;
-    if (nuevoDueño.equals(this.dueño)) {
-      return;
+    if (this.dueño != null) {
+      this.dueño.removeVehiculo(this);
     }
-
     this.dueño = nuevoDueño;
     nuevoDueño.addVehiculo(this);
+  }
+
+  public void removeDueño(Cliente antiguoDueño) {
+    if (this.dueño != antiguoDueño || antiguoDueño == null)
+      return;
+
+    if (!this.dueño.equals(antiguoDueño))
+      return;
+
+    dueño = null;
   }
 
   public void setModelo(String modelo) {
@@ -127,6 +136,8 @@ public class Vehiculo {
   }
 
   public void setAnio(int anio) {
+    if (anio <= 0)
+      return;
     this.anio = anio;
   }
 

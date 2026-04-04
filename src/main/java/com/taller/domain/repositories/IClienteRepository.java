@@ -19,7 +19,7 @@ import com.taller.domain.utils.Result;
  *
  * @see Cliente
  */
-public interface ClienteRepository {
+public interface IClienteRepository {
   /**
    * Persiste un cliente nuevo en el almacenamiento.
    *
@@ -36,7 +36,7 @@ public interface ClienteRepository {
    * @return {@link Result} con el cliente actualizado si la operación
    *         fue exitosa, o error si el cliente no existe o falla la persistencia
    */
-  Result<Cliente, IErrorApp> actualizar(Cliente empleado);
+  Result<Cliente, IErrorApp> actualizar(Cliente cliente);
 
   /**
    * Busca un cliente por su identificador único.

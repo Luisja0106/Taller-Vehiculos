@@ -22,7 +22,7 @@ import com.taller.domain.valueobjects.Placa;
  * @see Vehiculo
  * @see Placa
  */
-public interface VehiculoRepository {
+public interface IVehiculoRepository {
 
   /**
    * Persiste un vehículo nuevo en el almacenamiento.

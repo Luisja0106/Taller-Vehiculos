@@ -12,7 +12,7 @@ public enum Marca {
     if (nombre == null || nombre.isEmpty())
       return Optional.empty();
     return Arrays.stream(Marca.values())
-        .filter(m -> m.name().equalsIgnoreCase(nombre.trim()))
+        .filter(m -> m.name().equalsIgnoreCase(nombre.trim()) || m.name.equalsIgnoreCase(nombre.trim()))
         .findFirst();
   }
 

@@ -52,12 +52,12 @@ public class CrearServicio {
     }
     String limpio = precioRaw.trim().replace(" ", "");
 
+    if (limpio.contains(".") && limpio.contains(",")) {
+      limpio = limpio.replace(".", "").replace(",", ".");
+    } else if (limpio.contains(",") && !limpio.contains(",")) {
+      limpio = limpio.replace(",", ".");
+    }
     try {
-      if (limpio.contains(".") && limpio.contains(",")) {
-        limpio = limpio.replace(".", "").replace(",", ".");
-      } else if (limpio.contains(",") && !limpio.contains(",")) {
-        limpio = limpio.replace(",", ".");
-      }
       var precio = new BigDecimal(limpio);
 
       if (precio.compareTo(BigDecimal.ZERO) < 0) {

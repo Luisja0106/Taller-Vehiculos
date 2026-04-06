@@ -42,7 +42,7 @@ class CrearServicioTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = { "150000", "15.000", "15,000" })
+    @ValueSource(strings = { "150000", "15.000", "15,000", "15 000", "15.000,0" })
     @DisplayName("El valor debe poder recibir multiples tipo de datos en String")
     void valorNumerico_seCreaCorrectamente(String valor) {
 

@@ -38,6 +38,9 @@ public class CrearOrden {
     if (vehiculo.isEmpty()) {
       return Result.error(new VerificationError("Error vehiculo no encontrado"));
     }
+    if (input.empleadoACargoId() == null) {
+      return Result.error(new VerificationError("Error el ID del Empleado a cargo no puede ser nulo"));
+    }
     var empleadoACargo = empleadoRepository.buscarPorId(input.empleadoACargoId().trim());
     if (empleadoACargo.isEmpty())
       return Result.error(new VerificationError("Error Empleado a cargo no encontrado"));

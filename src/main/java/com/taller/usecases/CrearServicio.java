@@ -47,12 +47,27 @@ public class CrearServicio {
   }
 
   private Result<BigDecimal, IErrorApp> setPrecio(String precioRaw) {
-    BigDecimal precio;
+    if (precioRaw == null || precioRaw.isBlank()) {
+      return Result.error(new VerificationError("Error el precio no puede estar vacio"));
+    }
+    String limpio = precioRaw.trim().replace(" ", "");
+
+    if (limpio.contains(".") && limpio.contains(",")) {
+      limpio = limpio.replace(".", "").replace(",", ".");
+    } else if (limpio.contains(",") && !limpio.contains(",")) {
+      limpio = limpio.replace(",", ".");
+    }
     try {
-      precio = new BigDecimal(precioRaw.trim());
+      var precio = new BigDecimal(limpio);
+
+      if (precio.compareTo(BigDecimal.ZERO) < 0) {
+        return Result.error(new VerificationError("Error el precio no puede ser negatio"));
+      }
       return Result.success(precio);
+
     } catch (NumberFormatException e) {
       return Result.error(new VerificationError("Error el precio tiene un formato invalido"));
     }
   }
+
 }

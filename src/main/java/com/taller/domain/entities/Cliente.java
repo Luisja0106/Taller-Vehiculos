@@ -2,6 +2,7 @@ package com.taller.domain.entities;
 
 import java.util.ArrayList;
 
+import com.taller.domain.errors.VerificationError;
 import com.taller.domain.interfaces.IErrorApp;
 import com.taller.domain.utils.Result;
 import com.taller.domain.valueobjects.Email;
@@ -74,6 +75,9 @@ public class Cliente extends Persona {
    *
    */
   public static Result<Cliente, IErrorApp> crear(String id, String nombre, String telefono, String email) {
+    if (nombre == null || nombre.isBlank()) {
+      return Result.error(new VerificationError("Error el nombre es invalido"));
+    }
     var emailVO = Email.crear(email);
     if (!emailVO.isSuccess)
       return Result.error(emailVO.getError());

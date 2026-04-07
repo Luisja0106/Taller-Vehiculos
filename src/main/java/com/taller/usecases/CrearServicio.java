@@ -51,13 +51,12 @@ public class CrearServicio {
       return Result.error(new VerificationError("Error el precio no puede estar vacio"));
     }
     String limpio = precioRaw.trim().replace(" ", "");
-
+    if (limpio.contains(".") && limpio.contains(",")) {
+      limpio = limpio.replace(".", "").replace(",", ".");
+    } else if (limpio.contains(",") && !limpio.contains(".")) {
+      limpio = limpio.replace(",", ".");
+    }
     try {
-      if (limpio.contains(".") && limpio.contains(",")) {
-        limpio = limpio.replace(".", "").replace(",", ".");
-      } else if (limpio.contains(",") && !limpio.contains(",")) {
-        limpio = limpio.replace(",", ".");
-      }
       var precio = new BigDecimal(limpio);
 
       if (precio.compareTo(BigDecimal.ZERO) < 0) {

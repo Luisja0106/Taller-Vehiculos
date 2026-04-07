@@ -74,6 +74,9 @@ public class Cliente extends Persona {
    *
    */
   public static Result<Cliente, IErrorApp> crear(String id, String nombre, String telefono, String email) {
+    if (nombre == null || nombre.isBlank()) {
+      return Result.error(new VerificationError("Error el nombre es invalido"));
+    }
     var emailVO = Email.crear(email);
     if (!emailVO.isSuccess)
       return Result.error(emailVO.getError());

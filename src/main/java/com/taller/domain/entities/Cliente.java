@@ -2,7 +2,6 @@ package com.taller.domain.entities;
 
 import java.util.ArrayList;
 
-import com.taller.domain.errors.VerificationError;
 import com.taller.domain.interfaces.IErrorApp;
 import com.taller.domain.utils.Result;
 import com.taller.domain.valueobjects.Email;

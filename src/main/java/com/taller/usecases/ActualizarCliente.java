@@ -38,6 +38,11 @@ public class ActualizarCliente {
       return Result.error(telefono.getError());
     }
 
+    var nombre = actualizarNombre(cliente, input.nombre());
+    if (!nombre.isSuccess) {
+      return Result.error(nombre.getError());
+    }
+
     clienteRepository.actualizar(cliente);
     return Result.success(cliente);
   }
@@ -65,6 +70,16 @@ public class ActualizarCliente {
       return Result.error(telefono.getError());
     }
     cliente.changePhone(telefono.getValue());
+    return Result.success(null);
+  }
+
+  private Result<Void, IErrorApp> actualizarNombre(Cliente cliente, String nombre) {
+    if (nombre == null || nombre.isBlank()) {
+      return Result.success(null);
+    }
+
+    cliente.changeNombre(nombre);
+
     return Result.success(null);
   }
 

@@ -53,6 +53,13 @@ public abstract class Persona {
     this.telefono = number;
   }
 
+  public void changeNombre(String nombre) {
+    if (nombre == null || nombre.isBlank()) {
+      return;
+    }
+    this.nombre = nombre;
+  }
+
   public boolean equals(Persona persona) {
     return id.equals(persona.id);
   }

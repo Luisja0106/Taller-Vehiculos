@@ -145,6 +145,46 @@ class ActualizarClienteTest {
       assertFalse(resultado.isSuccess);
     }
 
+    @Test
+    @DisplayName("Si el email es repetido, retorna error")
+    void emailRepetido_RetornaError() {
+
+      var cmd = new CrearClienteCMD("cliente2", "3208142119", "correo2@correo.com");
+      var crearClienteUseCase = new RegistrarCliente(repo);
+      crearClienteUseCase.ejecutar(cmd);
+
+      var input = new ActualizarClienteCMD("CLI001", null, null, "correo2@correo.com");
+
+      var resultado = useCase.ejecutar(input);
+
+      assertAll(
+          () -> assertFalse(resultado.isSuccess),
+          () -> assertEquals("Error el Email ingresado ya se encuentra registrado", resultado.getError().getMessage()));
+
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = { "correo", "correo@", "@dominio", ".com" })
+    @DisplayName("Si el email es invalido, retonra error")
+    void emailInvalido_RetornaError(String email) {
+      var input = new ActualizarClienteCMD("CLI001", null, null, email);
+
+      var resultado = useCase.ejecutar(input);
+
+      assertFalse(resultado.isSuccess);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = { "telefono", "123", "000000000000000000000" })
+    @DisplayName("Si el telefono es invalido, retonra error")
+    void telefonoInvalido_RetornaError(String telefono) {
+      var input = new ActualizarClienteCMD("CLI001", null, telefono, null);
+
+      var resultado = useCase.ejecutar(input);
+
+      assertFalse(resultado.isSuccess);
+    }
+
   }
 
 }

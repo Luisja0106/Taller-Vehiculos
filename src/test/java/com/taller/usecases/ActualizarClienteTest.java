@@ -13,6 +13,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class ActualizarClienteTest {
   ClienteRepositoryFake repo;
@@ -46,6 +49,63 @@ class ActualizarClienteTest {
           () -> assertEquals(input.email(), resultdado.getValue().getEmail().toString()),
           () -> assertEquals(input.telefono(), resultdado.getValue().getTelefono().toString()));
     }
+
+    @ParameterizedTest
+    @NullSource
+    @ValueSource(strings = { "", " " })
+    @DisplayName("Si solo se actualiza el nombre, el resto permance igual")
+    void soloNombre_SoloActualizaElNombre(String variable) {
+
+      var input = new ActualizarClienteCMD("CLI001", "Luis2", variable, variable);
+
+      var resultdado = useCase.ejecutar(input);
+
+      assertAll(
+          () -> assertTrue(resultdado.isSuccess),
+          () -> assertEquals("Luis2", resultdado.getValue().getNombre()),
+          () -> assertEquals("3208142119", resultdado.getValue().getTelefono().getValue()),
+          () -> assertEquals("correo@correo.com", resultdado.getValue().getEmail().toString()));
+    }
+
+    @ParameterizedTest
+    @NullSource
+    @ValueSource(strings = { "", " " })
+    @DisplayName("Si solo se actualiza el email, el resto permance igual")
+    void soloEmail_SoloActualizaElEmail(String variable) {
+
+      var input = new ActualizarClienteCMD("CLI001", variable, variable, "correo@correo2.com");
+
+      var resultdado = useCase.ejecutar(input);
+
+      assertAll(
+          () -> assertTrue(resultdado.isSuccess),
+          () -> assertEquals("Luis", resultdado.getValue().getNombre()),
+          () -> assertEquals("3208142119", resultdado.getValue().getTelefono().getValue()),
+          () -> assertEquals("correo@correo2.com", resultdado.getValue().getEmail().toString()));
+    }
+
+    @ParameterizedTest
+    @NullSource
+    @ValueSource(strings = { "", " " })
+    @DisplayName("Si solo se actualiza el telefono, el resto permance igual")
+    void soloTelefono_SoloActualizaElTelefono(String variable) {
+
+      var input = new ActualizarClienteCMD("CLI001", variable, "3208242119", variable);
+
+      var resultdado = useCase.ejecutar(input);
+
+      assertAll(
+          () -> assertTrue(resultdado.isSuccess),
+          () -> assertEquals("Luis", resultdado.getValue().getNombre()),
+          () -> assertEquals("3208242119", resultdado.getValue().getTelefono().getValue()),
+          () -> assertEquals("correo@correo.com", resultdado.getValue().getEmail().toString()));
+    }
+
+  }
+
+  @Nested
+  @DisplayName("Creacion erronea")
+  class CreacionErronea {
 
   }
 

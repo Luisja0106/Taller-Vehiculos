@@ -57,7 +57,8 @@ public class ActualizarCliente {
       return Result.error(email.getError());
     }
 
-    if (clienteRepository.buscarPorEmail(email.getValue().toString()).isPresent()) {
+    var existe = clienteRepository.buscarPorEmail(email.getValue().toString());
+    if (existe.isPresent() && !existe.get().getId().equals(cliente.getId())) {
       return Result.error(new VerificationError("Error el Email ingresado ya se encuentra registrado"));
     }
     cliente.changeEmail(email.getValue());

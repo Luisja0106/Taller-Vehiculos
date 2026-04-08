@@ -2,6 +2,7 @@ package com.taller.usecases;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.taller.domain.entities.Cliente;
@@ -101,11 +102,48 @@ class ActualizarClienteTest {
           () -> assertEquals("correo@correo.com", resultdado.getValue().getEmail().toString()));
     }
 
+    @Test
+    @DisplayName("Una vez cambiado, el repositorio debe guardar los cambios")
+    void cambiosEnElRepositorio() {
+      var input = new ActualizarClienteCMD("CLI001", "Alexis", "3102790845", "correo2@correo.com");
+
+      var resultado = useCase.ejecutar(input);
+
+      var cliente = repo.buscarPorId("CLI001").get();
+      assertAll(
+          () -> assertTrue(resultado.isSuccess),
+          () -> assertEquals("Alexis", cliente.getNombre()),
+          () -> assertEquals("3102790845", cliente.getTelefono().getValue()),
+          () -> assertEquals("correo2@correo.com", cliente.getEmail().toString()));
+    }
+
   }
 
   @Nested
   @DisplayName("Creacion erronea")
   class CreacionErronea {
+
+    @Test
+    @DisplayName("Si el input es nulo, retorna error")
+    void inputNul_RetornaError() {
+      var resultado = useCase.ejecutar(null);
+
+      assertAll(
+          () -> assertFalse(resultado.isSuccess),
+          () -> assertEquals("Error los datos a actualizar no pueden ser nulos", resultado.getError().getMessage()));
+    }
+
+    @ParameterizedTest
+    @NullSource
+    @ValueSource(strings = { "", " ", "clienteInvalido", "CLI002" })
+    @DisplayName("si el cliente no existe o es invalido, retorna error")
+    void clienteInvalido_RetornaError(String clienteId) {
+      var input = new ActualizarClienteCMD(clienteId, "Luis2", null, null);
+
+      var resultado = useCase.ejecutar(input);
+
+      assertFalse(resultado.isSuccess);
+    }
 
   }
 

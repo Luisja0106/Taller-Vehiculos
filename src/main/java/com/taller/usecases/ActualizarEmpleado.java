@@ -50,6 +50,10 @@ public class ActualizarEmpleado {
     if (!email.isSuccess) {
       return Result.error(email.getError());
     }
+    var existe = empleadoRepository.buscarPorEmail(email.getValue().toString());
+    if (existe.isPresent() && !existe.get().getId().equals(empleado.getId())) {
+      return Result.error(new VerificationError("Error el Email ingresado ya se encuentra registrado"));
+    }
     empleado.changeEmail(email.getValue());
     return Result.success(null);
   }

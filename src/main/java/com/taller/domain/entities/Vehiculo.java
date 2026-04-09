@@ -113,16 +113,6 @@ public class Vehiculo {
     nuevoDueño.addVehiculo(this);
   }
 
-  public void removeDueño(Cliente antiguoDueño) {
-    if (this.dueño != antiguoDueño || antiguoDueño == null)
-      return;
-
-    if (!this.dueño.equals(antiguoDueño))
-      return;
-
-    dueño = null;
-  }
-
   public void setModelo(String modelo) {
     this.modelo = modelo;
   }

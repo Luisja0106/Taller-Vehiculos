@@ -160,7 +160,7 @@ class ActualizarEmpleadoTest {
           () -> assertTrue(resultado.isSuccess),
           () -> assertEquals("Luis2", empleado.getNombre()),
           () -> assertEquals("3215673423", empleado.getTelefono().getValue()),
-          () -> assertEquals("correo2@correo.com", empleado.getEmail()),
+          () -> assertEquals("correo2@correo.com", empleado.getEmail().toString()),
           () -> assertEquals("Administrador".toUpperCase(), empleado.getRol().toString()),
           () -> assertEquals("Parcial".toUpperCase(), empleado.getContrato().toString()));
     }

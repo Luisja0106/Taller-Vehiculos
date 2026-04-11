@@ -63,7 +63,7 @@ public class ActualizarVehiculo {
   }
 
   private Result<Void, IErrorApp> cambiarModelo(Vehiculo vehiculo, String modelo) {
-    if (modelo == null || modelo.isEmpty()) {
+    if (modelo == null || modelo.isBlank()) {
       return Result.success(null);
     }
     vehiculo.setModelo(modelo);

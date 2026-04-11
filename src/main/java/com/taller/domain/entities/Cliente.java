@@ -45,9 +45,6 @@ public class Cliente extends Persona {
     if (vehiculo == null || !vehiculos.contains(vehiculo))
       return;
     vehiculos.remove(vehiculo);
-
-    if (vehiculo.getDueño() != null && vehiculo.getDueño().equals(this))
-      vehiculo.removeDueño(this);
   }
 
   public ArrayList<Vehiculo> getVehiculos() {

@@ -93,6 +93,10 @@ public class ActualizarVehiculo {
     try {
       int anioInt = Integer.parseInt(anio);
 
+      if (anioInt <= 0) {
+        return Result.error(new VerificationError("Error el año no puede ser menor que 0"));
+      }
+
       vehiculo.setAnio(anioInt);
       return Result.success(null);
     } catch (NumberFormatException e) {

@@ -58,7 +58,7 @@ public final class Placa {
   public boolean equals(Object obj) {
     if (!(obj instanceof Placa))
       return false;
-    return this.valor.equals(((Placa) obj).valor);
+    return this.valor.equalsIgnoreCase(((Placa) obj).valor);
   }
 
   @Override

@@ -139,7 +139,7 @@ class ActualizarVehiculosTest {
 
       assertAll(
           () -> assertFalse(resultado.isSuccess),
-          () -> assertEquals("Error los datos a cambiar no puden ser nulos", resultado.getError()));
+          () -> assertEquals("Error los datos a cambiar no puden ser nulos", resultado.getError().getMessage()));
     }
 
     @ParameterizedTest
@@ -161,6 +161,32 @@ class ActualizarVehiculosTest {
     void clienteInvalido_RetornaError(String clienteId) {
       var input = new ActualizarVehiculoCMD("CYJ691", clienteId, "modelo2", "Mazda", "2016");
 
+      var resultado = useCase.ejecutar(input);
+
+      assertFalse(resultado.isSuccess);
+
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = { "marcaInvalida", "123" })
+    @DisplayName("Si la marca es invalida, retorna error")
+    void marcaInvalida_RetornaError(String marca) {
+      var input = new ActualizarVehiculoCMD("CYJ691", null, "modelo2", marca, "2016");
+
+      var resultado = useCase.ejecutar(input);
+
+      assertFalse(resultado.isSuccess);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = { "año invalido", "-1", "0", "123asrt" })
+    @DisplayName("Si el año es invalido, retonrna error")
+    void anioInvalido_RetornaError(String anio) {
+      var input = new ActualizarVehiculoCMD("CYJ691", null, "modelo2", "Mazda", anio);
+
+      var resultado = useCase.ejecutar(input);
+
+      assertFalse(resultado.isSuccess);
     }
   }
 

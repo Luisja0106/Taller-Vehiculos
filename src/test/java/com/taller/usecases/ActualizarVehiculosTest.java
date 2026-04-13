@@ -2,6 +2,7 @@ package com.taller.usecases;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.taller.domain.entities.Vehiculo;
@@ -125,6 +126,42 @@ class ActualizarVehiculosTest {
           () -> assertTrue(clienteOriginalNoVehiculos));
     }
 
+  }
+
+  @Nested
+  @DisplayName("Creacion Erronea")
+  class CreacionErronea {
+
+    @Test
+    @DisplayName("Si el input es null, retorna error")
+    void inputNull_ReturnaError() {
+      var resultado = useCase.ejecutar(null);
+
+      assertAll(
+          () -> assertFalse(resultado.isSuccess),
+          () -> assertEquals("Error los datos a cambiar no puden ser nulos", resultado.getError()));
+    }
+
+    @ParameterizedTest
+    @NullSource
+    @ValueSource(strings = { "", " ", "vehiculoInvalido", "arst" })
+    @DisplayName("Si el vehiculo es invalido o no existe, retorna error")
+    void vehiculoInvalido_RetornaError(String vehiculoPlaca) {
+      var input = new ActualizarVehiculoCMD(vehiculoPlaca, null, "modelo2", "Mazda", "2016");
+
+      var resultado = useCase.ejecutar(input);
+
+      assertFalse(resultado.isSuccess);
+
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = { "CLI002", "Cliente invalido", "Cliente no existente" })
+    @DisplayName("Si el cliente no existe o es invalido, retorna error")
+    void clienteInvalido_RetornaError(String clienteId) {
+      var input = new ActualizarVehiculoCMD("CYJ691", clienteId, "modelo2", "Mazda", "2016");
+
+    }
   }
 
 }

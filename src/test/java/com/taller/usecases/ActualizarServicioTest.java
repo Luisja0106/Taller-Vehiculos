@@ -2,6 +2,7 @@ package com.taller.usecases;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.math.BigDecimal;
@@ -98,6 +99,55 @@ class ActualizarServicioTest {
           () -> assertEquals(servicio, servicioInRepo),
           () -> assertEquals(input.nombre(), servicioInRepo.getNombreDelServicio()),
           () -> assertEquals(new BigDecimal(input.precio()), servicioInRepo.getPrecio()));
+    }
+
+    @Nested
+    @DisplayName("Creacion Erronea")
+    class CreacionErronea {
+
+      @Test
+      @DisplayName("Si el input es nulo, retorna un error")
+      void inputNulo_RetornaError() {
+        var resultado = useCase.ejecutar(null);
+
+        assertAll(
+            () -> assertFalse(resultado.isSuccess),
+            () -> assertEquals("Error los datos a actualizar no pueden ser nulos", resultado.getError().getMessage()));
+      }
+
+      @ParameterizedTest
+      @NullSource
+      @ValueSource(strings = { "", " ", "servicioInvalido", "SVR002", "SRV002" })
+      @DisplayName("Si el servicio es invalido, o no existe retorna error")
+      void servicioInvalido_ReturnaError(String serviceId) {
+        var input = new ActualizarServicioCMD(serviceId, "servicio 2", "12");
+
+        var resultado = useCase.ejecutar(input);
+
+        assertFalse(resultado.isSuccess);
+      }
+
+      @ParameterizedTest
+      @ValueSource(strings = { "precio invalido", "-2", "0", "qwfp" })
+      @DisplayName("Si el precio es invalido, retorna error")
+      void precioInvalido_RetornaError(String precio) {
+        var input = new ActualizarServicioCMD("SRV001", "nuevo nombre", precio);
+
+        var resultado = useCase.ejecutar(input);
+
+        assertFalse(resultado.isSuccess);
+      }
+
+      @Test
+      @DisplayName("Si el nombre es repetido, retorna error")
+      void nombreRepetido_RetornaError() {
+
+        var crearServicioCMD = new CrearServicioCMD("Servicio1", "15");
+
+        var crearServicioUseCase = new CrearServicio(repo);
+
+        crearServicioUseCase.ejecutar(crearServicioCMD);
+      }
     }
   }
 }

@@ -117,7 +117,7 @@ class CrearServicioTest {
 
     @ParameterizedTest
     @NullSource
-    @ValueSource(strings = { "", " " })
+    @ValueSource(strings = { "", " ", "SRV002" })
     @DisplayName("Retorna error si el nombre ingresado es invalido")
     void nombreInvalido_RetornaError(String nombre) {
       var input = new CrearServicioCMD(nombre, "14");

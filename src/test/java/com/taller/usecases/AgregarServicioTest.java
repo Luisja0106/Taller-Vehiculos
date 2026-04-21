@@ -1,6 +1,8 @@
 package com.taller.usecases;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.taller.domain.entities.OrdenDeTrabajo;
@@ -11,11 +13,7 @@ import com.taller.usecases.dto.CrearEmpleadoCMD;
 import com.taller.usecases.dto.CrearOrdenCMD;
 import com.taller.usecases.dto.CrearServicioCMD;
 import com.taller.usecases.dto.CrearVehiculoCMD;
-import com.taller.usecases.fakes.ClienteRepositoryFake;
-import com.taller.usecases.fakes.EmpleadoRepositoryFake;
-import com.taller.usecases.fakes.OrdenRepositoryFake;
-import com.taller.usecases.fakes.ServicioRepositoryFake;
-import com.taller.usecases.fakes.VehiculoRepositoryFake;
+import com.taller.usecases.fakes.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -64,12 +62,43 @@ class AgregarServicioTest {
     @Test
     @DisplayName("Si el input es correcto, se agrega el servicio correctamente")
     void inputCorrecto_AgregaServicio() {
-      var input = new AgregarServicioCMD("ORD20260420001", "SRV001");
+      var input = new AgregarServicioCMD(orden.getID(), "SRV001");
       var resultado = useCase.ejecutar(input);
+      var ordenActualizada = ordenRepo.buscarPorId(orden.getID()).get();
 
       assertAll(
           () -> assertTrue(resultado.isSuccess),
+          () -> assertFalse(ordenActualizada.getServicios().isEmpty()),
+          () -> assertEquals(servicio.getId(), ordenActualizada.getServicios().get(0).getId()),
           () -> assertTrue(orden.getServicios().get(0).getId().equals(servicio.getId())));
     }
+
+    @Test
+    @DisplayName("Se pueden agregar varios servicios a una misma orden")
+    void multiplesServicios_SeAgreganCorrectamente() {
+      var crearServicioUseCase = new CrearServicio(servicioRepo);
+      crearServicioUseCase.ejecutar(new CrearServicioCMD("Cambio de Aceite", "250000"));
+
+      useCase.ejecutar(new AgregarServicioCMD(orden.getID(), "SRV001"));
+      useCase.ejecutar(new AgregarServicioCMD(orden.getID(), "SRV002"));
+
+      var ordenActualizada = ordenRepo.buscarPorId(orden.getID()).get();
+      assertEquals(2, ordenActualizada.getServicios().size());
+    }
+  }
+
+  @Nested
+  @DisplayName("Creacion Erronea")
+  class creacionErronea {
+
+    @Test
+    @DisplayName("Si el input es nulo, debe retornar un error")
+    void inputNulo_RetornaError() {
+
+      var resultado = useCase.ejecutar(null);
+
+      assertFalse(resultado.isSuccess);
+    }
+
   }
 }

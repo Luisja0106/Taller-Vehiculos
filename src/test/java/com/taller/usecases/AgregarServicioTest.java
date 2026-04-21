@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.taller.domain.entities.OrdenDeTrabajo;
 import com.taller.domain.entities.Servicio;
+import com.taller.domain.enums.EstadoDelTrabajo;
 import com.taller.usecases.dto.AgregarServicioCMD;
 import com.taller.usecases.dto.CrearClienteCMD;
 import com.taller.usecases.dto.CrearEmpleadoCMD;
@@ -19,6 +20,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class AgregarServicioTest {
   OrdenRepositoryFake ordenRepo;
@@ -97,7 +101,45 @@ class AgregarServicioTest {
 
       var resultado = useCase.ejecutar(null);
 
+      assertAll(
+          () -> assertFalse(resultado.isSuccess),
+          () -> assertEquals("Error los datos no pueden ser nulos", resultado.getError().getMessage()));
+    }
+
+    @ParameterizedTest
+    @NullSource
+    @ValueSource(strings = { "", " ", "ORD002", "asttrstrstrs" })
+    @DisplayName("Si la orden no existe, retorna error")
+    void ordenInexistente_RetornaError(String orden) {
+      var input = new AgregarServicioCMD(orden, "SRV001");
+      var resultado = useCase.ejecutar(input);
+
       assertFalse(resultado.isSuccess);
+    }
+
+    @ParameterizedTest
+    @NullSource
+    @ValueSource(strings = { "", " ", "SRV002", "asttrstrstrs" })
+    @DisplayName("Si el servicio no existe, retorna error")
+    void servicioInexistente_RetornaError(String servicio) {
+      var input = new AgregarServicioCMD(orden.getID(), servicio);
+      var resultado = useCase.ejecutar(input);
+
+      assertFalse(resultado.isSuccess);
+    }
+
+    @Test
+    @DisplayName("Si el estado de orden es invalido retorna error")
+    void estadoInvalido_RetornaError() {
+      orden.avanzarEstado(); // en proceso
+      orden.avanzarEstado(); // en espera de pago
+
+      var input = new AgregarServicioCMD(orden.getID(), servicio.getId());
+      var resultado = useCase.ejecutar(input);
+
+      assertAll(
+          () -> assertEquals(EstadoDelTrabajo.EN_ESPERA_DE_PAGO, orden.getEstado()),
+          () -> assertFalse(resultado.isSuccess));
     }
 
   }

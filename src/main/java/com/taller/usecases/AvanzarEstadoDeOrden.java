@@ -8,11 +8,11 @@ import com.taller.domain.repositories.IOrdenRepository;
 import com.taller.domain.utils.Result;
 import com.taller.usecases.dto.AvanzarEstadoDeOrdenCMD;
 
-public class AvanzarServicioDeOrden {
+public class AvanzarEstadoDeOrden {
 
   private final IOrdenRepository ordenRepository;
 
-  public AvanzarServicioDeOrden(IOrdenRepository ordenRepository) {
+  public AvanzarEstadoDeOrden(IOrdenRepository ordenRepository) {
     this.ordenRepository = ordenRepository;
   }
 

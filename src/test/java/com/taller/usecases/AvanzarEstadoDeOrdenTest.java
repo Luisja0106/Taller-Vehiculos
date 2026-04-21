@@ -2,6 +2,7 @@ package com.taller.usecases;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.math.BigDecimal;
@@ -22,6 +23,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class AvanzarEstadoDeOrdenTest {
   OrdenRepositoryFake ordenRepo;
@@ -101,6 +105,60 @@ class AvanzarEstadoDeOrdenTest {
           () -> assertTrue(resultado.isSuccess),
           () -> assertEquals(orden.getEstado(), ordenRepo.buscarPorId(orden.getID()).get().getEstado()),
           () -> assertEquals(EstadoDelTrabajo.EN_PROCESO, ordenRepo.buscarPorId(orden.getID()).get().getEstado()));
+    }
+  }
+
+  @Nested
+  @DisplayName("Creacion Erronea")
+  class CreacionErronea {
+
+    @Test
+    @DisplayName("Si el input es null, retorna un error")
+    void inputNull_RetornaError() {
+      var resultado = useCase.ejecutar(null);
+
+      assertAll(
+          () -> assertFalse(resultado.isSuccess),
+          () -> assertEquals("Error los datos no pueden ser nulos", resultado.getError().getMessage()));
+    }
+
+    @ParameterizedTest
+    @NullSource
+    @ValueSource(strings = { "", " ", "ORD002", "arst" })
+    @DisplayName("Si la orden no existe o es invalida, retorna error")
+    void ordenInvalida_RetornaError(String orden) {
+      var input = new AvanzarEstadoDeOrdenCMD(orden);
+      var resultado = useCase.ejecutar(input);
+
+      assertFalse(resultado.isSuccess);
+    }
+
+    @Test
+    @DisplayName("si no se ha ingresado el valor de venta, retorna error")
+    void faltaValorVenta_RetornaError() {
+      var input = new AvanzarEstadoDeOrdenCMD(orden.getID());
+      useCase.ejecutar(input); // en proceso
+      useCase.ejecutar(input); // en espera de pago
+      var resultado = useCase.ejecutar(input);
+
+      assertAll(
+          () -> assertFalse(resultado.isSuccess),
+          () -> assertEquals("No se puede pasar a finalizado sin definir el pago", resultado.getError().getMessage()));
+    }
+
+    @Test
+    @DisplayName("Retorna error si ya se ha llegado al estado 'Finalizado' ")
+    void ordenFinalizada_RetornaError() {
+      var input = new AvanzarEstadoDeOrdenCMD(orden.getID());
+      useCase.ejecutar(input); // en proceso
+      useCase.ejecutar(input); // en espera de pago
+      orden.registrarPago(new BigDecimal("120000"));
+      useCase.ejecutar(input); // finalizado
+      var resultado = useCase.ejecutar(input);
+
+      assertAll(
+          () -> assertFalse(resultado.isSuccess),
+          () -> assertEquals("La orden ya esta finalizada", resultado.getError().getMessage()));
     }
   }
 }

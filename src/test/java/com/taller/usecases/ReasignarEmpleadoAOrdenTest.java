@@ -2,6 +2,7 @@ package com.taller.usecases;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.taller.domain.entities.Empleado;
@@ -22,6 +23,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class ReasignarEmpleadoAOrdenTest {
   IEmpleadoRepository empleadoRepository;
@@ -51,8 +55,10 @@ class ReasignarEmpleadoAOrdenTest {
     var crearOrdenUseCase = new CrearOrden(ordenRepository, vehiculoRepository, empleadoRepository);
     orden = crearOrdenUseCase.ejecutar(new CrearOrdenCMD("CYJ691", "EMP001")).getValue();
 
-    nuevoEmpleado = crearEmpleadoUseCase
-        .ejecutar(new CrearEmpleadoCMD("Thomas", "3056442332", "correo@correo.com", "mecanico", "fijo")).getValue();
+    var nuevoEmpleadoResult = crearEmpleadoUseCase
+        .ejecutar(new CrearEmpleadoCMD("Thomas", "3056442332", "correo3@correo.com", "mecanico", "fijo"));
+
+    nuevoEmpleado = nuevoEmpleadoResult.getValue();
   }
 
   @Nested
@@ -74,11 +80,60 @@ class ReasignarEmpleadoAOrdenTest {
     void actualizacionExitosa_SeActualizaEnElRepositorio() {
       var input = new ReasignarEmpleadoAOrdenCMD(orden.getID(), nuevoEmpleado.getId());
       var resultado = useCase.ejecutar(input);
+
       assertAll(
           () -> assertTrue(resultado.isSuccess),
           () -> assertEquals(nuevoEmpleado.getId(), orden.getEmpleadoACargo().getId()),
           () -> assertEquals(nuevoEmpleado.getId(),
-              ordenRepository.buscarPorId(nuevoEmpleado.getId()).get().getEmpleadoACargo().getId()));
+              ordenRepository.buscarPorId(orden.getID()).get().getEmpleadoACargo().getId()));
+    }
+  }
+
+  @Nested
+  @DisplayName("Caso Invalido")
+  class CasoInvalido {
+
+    @Test
+    @DisplayName("Si el input es nulo, retorna error")
+    void inputNul_RetornaError() {
+      var resultado = useCase.ejecutar(null);
+      assertAll(
+          () -> assertFalse(resultado.isSuccess),
+          () -> assertEquals("Error no los datos no pueden ser nulos", resultado.getError().getMessage()));
+    }
+
+    @ParameterizedTest
+    @NullSource
+    @ValueSource(strings = { "", " ", "orden nula", "ORD002" })
+    @DisplayName("Si la orden es invalida o no existe, retorna error")
+    void ordenInvalida_RetornaError(String ordenId) {
+      var input = new ReasignarEmpleadoAOrdenCMD(ordenId, nuevoEmpleado.getId());
+      var resultado = useCase.ejecutar(input);
+
+      assertFalse(resultado.isSuccess);
+    }
+
+    @ParameterizedTest
+    @NullSource
+    @ValueSource(strings = { "", " ", "empleado nulo", "EMP003" })
+    @DisplayName("Si el empleado es invalido o no existe, retorna error")
+    void empleadoInvalido_RetornaError(String empleadoId) {
+      var input = new ReasignarEmpleadoAOrdenCMD(orden.getID(), empleadoId);
+      var resultado = useCase.ejecutar(input);
+
+      assertFalse(resultado.isSuccess);
+    }
+
+    @Test
+    @DisplayName("No se puede reasignar el empleado a cargo de la misma orden")
+    void reasignarMismoEmpleado_RetornaError() {
+      var input = new ReasignarEmpleadoAOrdenCMD(orden.getID(), "EMP001");
+      var resultado = useCase.ejecutar(input);
+
+      assertAll(
+          () -> assertFalse(resultado.isSuccess),
+          () -> assertEquals("Error el empleado seleccionado ya es el encargado del trabajo",
+              resultado.getError().getMessage()));
     }
   }
 }

@@ -1,5 +1,11 @@
 package com.taller.usecases;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.math.BigDecimal;
+
 import com.taller.domain.entities.OrdenDeTrabajo;
 import com.taller.domain.repositories.IOrdenRepository;
 import com.taller.usecases.dto.CrearClienteCMD;
@@ -43,6 +49,9 @@ class RegistrarPagoTest {
 
     var crearOrdenUseCase = new CrearOrden(ordenRepo, vehiculoRepo, empleadoRepo);
     orden = crearOrdenUseCase.ejecutar(new CrearOrdenCMD("CYJ691", "EMP001")).getValue();
+
+    orden.avanzarEstado(); // en proceso
+    orden.avanzarEstado(); // en espera de pago
   }
 
   @Nested
@@ -53,6 +62,23 @@ class RegistrarPagoTest {
     @DisplayName("Si el input es correcto, debe registrar")
     void inputCorrecto_Registra() {
       var input = new RegistrarPagoCMD(orden.getID(), "150000");
+      var resultado = useCase.ejecutar(input);
+
+      assertAll(
+          () -> assertTrue(resultado.isSuccess),
+          () -> assertEquals(new BigDecimal(input.pago()), orden.getValorVenta()));
+    }
+
+    @Test
+    @DisplayName("Si el proceso es correcto, se actualiza en el repositorio")
+    void registroCorrecto_ActualizaRepositorio() {
+      var input = new RegistrarPagoCMD(orden.getID(), "150000");
+      var resultado = useCase.ejecutar(input);
+      assertAll(
+          () -> assertTrue(resultado.isSuccess),
+          () -> assertEquals(new BigDecimal(input.pago()), orden.getValorVenta()),
+          () -> assertEquals(new BigDecimal(input.pago()), ordenRepo.buscarPorId(orden.getID()).get().getValorVenta()));
     }
   }
+
 }

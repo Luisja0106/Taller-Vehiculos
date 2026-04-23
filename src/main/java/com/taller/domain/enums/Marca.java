@@ -9,7 +9,7 @@ public enum Marca {
   private final String name;
 
   public static Optional<Marca> buscarPorNombre(String nombre) {
-    if (nombre == null || nombre.isEmpty())
+    if (nombre == null || nombre.isBlank())
       return Optional.empty();
     return Arrays.stream(Marca.values())
         .filter(m -> m.name().equalsIgnoreCase(nombre.trim()) || m.name.equalsIgnoreCase(nombre.trim()))

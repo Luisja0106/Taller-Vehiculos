@@ -59,7 +59,7 @@ public class CrearServicio {
     try {
       var precio = new BigDecimal(limpio);
 
-      if (precio.compareTo(BigDecimal.ZERO) < 0) {
+      if (precio.compareTo(BigDecimal.ZERO) <= 0) {
         return Result.error(new VerificationError("Error el precio no puede ser negatio"));
       }
       return Result.success(precio);

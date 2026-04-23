@@ -46,7 +46,9 @@ public class RegistrarVehiculo {
       return vehiculoResult;
     }
     Vehiculo nuevoVehiculo = vehiculoResult.getValue();
+    cliente.get().addVehiculo(nuevoVehiculo);
 
+    clienteRepository.actualizar(cliente.get());
     vehiculoRepository.guardar(nuevoVehiculo);
     return Result.success(nuevoVehiculo);
   }

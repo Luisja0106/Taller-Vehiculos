@@ -27,7 +27,7 @@ public interface IClienteRepository {
    * @return {@link Result} con el cliente guardado si la operación
    *         fue exitosa, o error si falla la persistencia
    */
-  Result<Cliente, IErrorApp> guardar(Cliente Cliente);
+  Result<Cliente, IErrorApp> guardar(Cliente cliente);
 
   /**
    * Actualiza los datos de un cliente existente.
@@ -59,7 +59,7 @@ public interface IClienteRepository {
    * @return {@link Optional} con el cliente si existe,
    *         {@link Optional#empty()} si no se encuentra
    */
-  Optional<Cliente> buscarPorEmail(String Email);
+  Optional<Cliente> buscarPorEmail(String email);
 
   /**
    * Elimina un cliente por su identificador único.

@@ -7,7 +7,7 @@ public enum TipoDeContrato {
   FIJO, PARCIAL;
 
   public static Optional<TipoDeContrato> buscarPorNombre(String nombre) {
-    if (nombre == null || nombre.isEmpty())
+    if (nombre == null || nombre.isBlank())
       return Optional.empty();
     return Arrays.stream(TipoDeContrato.values())
         .filter(t -> t.name().equalsIgnoreCase(nombre.trim()))

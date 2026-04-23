@@ -9,7 +9,7 @@ public enum EstadoDelTrabajo {
   private final String name;
 
   public static Optional<EstadoDelTrabajo> buscarPorNombre(String nombre) {
-    if (nombre == null || nombre.isEmpty()) {
+    if (nombre == null || nombre.isBlank()) {
       return Optional.empty();
     }
     return Arrays.stream(EstadoDelTrabajo.values())

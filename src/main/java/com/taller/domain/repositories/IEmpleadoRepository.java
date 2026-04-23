@@ -59,7 +59,7 @@ public interface IEmpleadoRepository {
    * @return {@link Optional} con el empleado si existe,
    *         {@link Optional#empty()} si no se encuentra
    */
-  Optional<Empleado> buscarPorEmail(String Email);
+  Optional<Empleado> buscarPorEmail(String email);
 
   /**
    * Retorna todos los empleados registrados.

@@ -63,7 +63,7 @@ public class ActualizarEmpleado {
   }
 
   private Result<Void, IErrorApp> actualizarEmail(Empleado empleado, String emailRaw) {
-    if (emailRaw == null || emailRaw.isEmpty())
+    if (emailRaw == null || emailRaw.isBlank())
       return Result.success(null);
     var email = Email.crear(emailRaw);
     if (!email.isSuccess) {
@@ -78,7 +78,7 @@ public class ActualizarEmpleado {
   }
 
   private Result<Void, IErrorApp> actualizarTelefono(Empleado empleado, String telefonoRaw) {
-    if (telefonoRaw == null || telefonoRaw.isEmpty())
+    if (telefonoRaw == null || telefonoRaw.isBlank())
       return Result.success(null);
     var telefono = Telefono.crear(telefonoRaw);
     if (!telefono.isSuccess) {
@@ -89,7 +89,7 @@ public class ActualizarEmpleado {
   }
 
   private Result<Void, IErrorApp> actualizarRol(Empleado empleado, String rolRaw) {
-    if (rolRaw == null || rolRaw.isEmpty())
+    if (rolRaw == null || rolRaw.isBlank())
       return Result.success(null);
     var rol = Rol.buscarPorNombre(rolRaw);
     if (rol.isEmpty()) {

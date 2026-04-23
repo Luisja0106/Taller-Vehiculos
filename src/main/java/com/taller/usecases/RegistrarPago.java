@@ -47,9 +47,21 @@ public class RegistrarPago {
   }
 
   private Result<BigDecimal, IErrorApp> setPrecio(String valorRaw) {
+    if (valorRaw == null || valorRaw.isBlank()) {
+      return Result.error(new VerificationError("Error el precio no puede estar vacio"));
+    }
+    String format = valorRaw.trim().replace(" ", "");
+    if (format.contains(".") && format.contains(",")) {
+      format = format.replace(".", "").replace(",", ".");
+    } else if (format.contains(",") && !format.contains(".")) {
+      format = format.replace(",", ".");
+    }
     BigDecimal precio;
     try {
-      precio = new BigDecimal(valorRaw.trim());
+      precio = new BigDecimal(format);
+      if (precio.compareTo(BigDecimal.ZERO) < 0) {
+        return Result.error(new VerificationError("Error el valor no puede ser menor o igual que 0"));
+      }
       return Result.success(precio);
     } catch (NumberFormatException e) {
       return Result.error(new VerificationError("Error el formato del precio es incorrecto"));

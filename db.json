@@ -1,0 +1,16 @@
+{
+  "empleados": [
+    {
+      "id": "EMP001",
+      "nombre": "Carlos Pérez",
+      "email": "carlos@taller.com",
+      "telefono": "3001234567",
+      "rol": "MECANICO",
+      "contrato": "FIJO"
+    }
+  ],
+  "clientes": [],
+  "vehiculos": [],
+  "ordenes": [],
+  "servicios": []
+}

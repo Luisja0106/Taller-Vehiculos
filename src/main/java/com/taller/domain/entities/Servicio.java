@@ -10,8 +10,8 @@ import com.taller.domain.utils.Result;
 public class Servicio implements IServicio {
 
   private final String id;
-  private final String nombre;
-  private final BigDecimal precio;
+  private String nombre;
+  private BigDecimal precio;
 
   private Servicio(String id, String nombre, BigDecimal precio) {
     this.id = id;
@@ -39,8 +39,23 @@ public class Servicio implements IServicio {
     return nombre;
   }
 
+  @Override
   public String getId() {
     return id;
+  }
+
+  public void cambiarPrecio(BigDecimal precio) {
+    if (precio.compareTo(BigDecimal.ZERO) <= 0) {
+      return;
+    }
+    this.precio = precio;
+  }
+
+  public void cambiarNombre(String nuevoNombre) {
+    if (nuevoNombre == null || nuevoNombre.isBlank()) {
+      return;
+    }
+    this.nombre = nuevoNombre;
   }
 
   public BigDecimal getPrecio() {

@@ -1,0 +1,117 @@
+:root {
+  /* Colors */
+  --color-bg: #F3F4F6;
+  --color-white: #FFFFFF;
+  --color-primary: #3B82F6;
+  --color-primary-dark: #2563EB;
+  --color-text: #111827;
+  --color-text-muted: #6B7280;
+  --color-border: #E5E7EB;
+  --color-overlay: rgba(0, 0, 0, 0.5);
+
+  /* Status colors */
+  --color-pendiente: #FCD34D;
+  --color-pendiente-text: #92400E;
+  --color-en-proceso: #FB923C;
+  --color-en-proceso-text: #7C2D12;
+  --color-en-espera: #A78BFA;
+  --color-en-espera-text: #4C1D95;
+  --color-finalizado: #34D399;
+  --color-finalizado-text: #064E3B;
+
+  /* Brand gradients */
+  --brand-toyota: linear-gradient(135deg, #CC0000, #FF4444);
+  --brand-chevrolet: linear-gradient(135deg, #B8860B, #FFD700);
+  --brand-honda: linear-gradient(135deg, #003087, #0066CC);
+  --brand-mazda: linear-gradient(135deg, #8B0000, #CC2200);
+  --brand-ford: linear-gradient(135deg, #00274C, #003F8A);
+  --brand-renault: linear-gradient(135deg, #FFCC00, #FF9900);
+  --brand-default: linear-gradient(135deg, #374151, #6B7280);
+
+  /* Spacing */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+
+  /* Border radius */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+  /* perfect circle/pill */
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-drawer: 4px 0 20px rgba(0, 0, 0, 0.15);
+  --shadow-detail: -4px 0 20px rgba(0, 0, 0, 0.15);
+
+  /* Typography */
+  --font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-size-sm: 12px;
+  --font-size-base: 14px;
+  --font-size-md: 16px;
+  --font-size-lg: 20px;
+  --font-size-xl: 24px;
+
+  /* Transitions */
+  --transition: 0.3s ease;
+
+  /* Z-index layers */
+  --z-drawer: 100;
+  --z-overlay: 99;
+  --z-detail: 100;
+  --z-dialog: 200;
+}
+
+/* Every element counts its padding and border 
+   INSIDE its width, not outside.
+   Without this, a div with width:200px + padding:20px
+   becomes 240px wide. With this it stays 200px */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Removes default margin that browsers add to 
+   body, h1, h2, p, ul etc */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* Removes the bullet points from ul and li */
+ul {
+  list-style: none;
+}
+
+/* Removes the underline and color from links */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Makes images never overflow their container */
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Makes the page fill the full height */
+html,
+body {
+  height: 100%;
+}
+
+
+body {
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  min-height: 100vh;
+}

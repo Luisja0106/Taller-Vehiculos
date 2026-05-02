@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AutoService</title>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/drawer.css">
+  <link rel="stylesheet" href="css/cards.css">
+</head>
+
+<body> <!--persistent objects-->
+  <header> <!-- Top bar-->
+    <div id="open-drawer">
+      AutoService
+    </div>
+    <nav>
+      <a href="#">Dashboard</a>
+      <a href="#">Inventario</a>
+      <a href="#">Reportes</a>
+    </nav>
+    <div>
+      <span>icon</span>
+      <span>UserName</span>
+    </div>
+  </header>
+
+  <aside id="drawer"> <!--left bar-->
+    <div>
+      <span>AutoService</span>
+      <button type="button" id="close-drawer">x</button>
+    </div>
+    <ul> <!-- list-->
+      <li>
+        <a href="#">Mecanicos</a>
+      </li>
+      <li>
+        <a href="#">Vehiculos</a>
+      </li>
+      <li>
+        <a href="#">Clientes</a>
+      </li>
+      <li>
+        <a href="#">Servicios</a>
+      </li>
+    </ul>
+  </aside>
+  <div id="overlay"> <!--dark background in the bar--> </div>
+  <dialog id="detail-panel">
+    <div> <!--detail header-->
+      <span id="detail-order-id"></span>
+      <button id="close-detail">x</button>
+    </div>
+    <div id="detail-brand">
+      <h2 id="detail-vehicle"></h2>
+    </div>
+    <div>
+      <p>Mecánico: <a id="detail-mecanico"></a></p>
+      <p>Cliente: <a id="detail-cliente"></a></p>
+      <p>Vehículo: <a id="detail-vehiculo"></a></p>
+      <p>Estado: <span id="detail-estado"></span></p>
+      <p>Fecha entrada: <span id="detail-fechaEntrada"></span></p>
+      <p>Fecha salida: <span id="detail-fechaSalida"></span></p>
+    </div>
+    <div> <!--servicios division-->
+      <h3>Servicios</h3>
+      <ul id="detail-services"></ul>
+      <button>Agregar servicio</button>
+    </div>
+    <div> <!--action buttons-->
+      <button id="btn-avanzar">Avanzar Estado</button>
+      <button id="btn-pago">Registrar Pago</button>
+    </div>
+
+  </dialog>
+
+  <main id="main-content">
+    <section id="view-dashboard">
+      <section class="hero">
+        <form id="search-form">
+          <input type="search" id="search-input">
+          <button type="submit"></button>
+        </form>
+      </section>
+
+      <section id="filters">
+        <select id="filter-estado">
+          <option value="">Todos</option>
+          <option value="EN_PROCESO">En proceso</option>
+          <option value="PENDIENTE">Pendiente</option>
+          <option value="FINALIZADO">Finalizado</option>
+        </select>
+
+        <select id="filter-mecanico">
+          <option></option>
+        </select>
+      </section>
+      <section id="cards-grid"></section>
+    </section>
+  </main>
+
+  <script src="js/api.js"></script>
+  <script src="js/helpers.js"></script>
+  <script src="js/navbar.js"></script>
+  <script src="js/drawer.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script src="js/app.js"></script>
+</body>
+
+</html>

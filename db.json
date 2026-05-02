@@ -7,10 +7,73 @@
       "telefono": "3001234567",
       "rol": "MECANICO",
       "contrato": "FIJO"
+    },
+    {
+      "id": "EMP002",
+      "nombre": "María García",
+      "email": "maria@taller.com",
+      "telefono": "3009876543",
+      "rol": "MECANICO",
+      "contrato": "TEMPORAL"
     }
   ],
-  "clientes": [],
-  "vehiculos": [],
-  "ordenes": [],
-  "servicios": []
+  "clientes": [
+    {
+      "id": "CLI001",
+      "nombre": "Juan López",
+      "email": "juan@gmail.com",
+      "telefono": "3101234567"
+    }
+  ],
+  "vehiculos": [
+    {
+      "id": "VHC001",
+      "placa": "ABC123",
+      "modelo": "Corolla",
+      "marca": "TOYOTA",
+      "anio": 2020,
+      "clienteId": "CLI001"
+    }
+  ],
+  "ordenes": [
+    {
+      "id": "ORD20260420001",
+      "vehiculoPlaca": "ABC123",
+      "vehiculoModelo": "Corolla",
+      "vehiculoMarca": "TOYOTA",
+      "empleadoId": "EMP001",
+      "empleadoNombre": "Carlos Pérez",
+      "clienteId": "CLI001",
+      "clienteNombre": "Juan López",
+      "estado": "EN_PROCESO",
+      "fechaEntrada": "2026-04-20",
+      "fechaDeFinalizacion": null,
+      "fechaDePago": null,
+      "valorVenta": null,
+      "servicios": [
+        {
+          "id": "SRV001",
+          "nombre": "Cambio de aceite",
+          "precio": 150000
+        }
+      ]
+    }
+  ],
+  "servicios": [
+    {
+      "id": "SRV001",
+      "nombre": "Cambio de aceite",
+      "precio": 150000
+    },
+    {
+      "id": "SRV002",
+      "nombre": "Cambio de filtro",
+      "precio": 80000
+    },
+    {
+      "id": "SRV003",
+      "nombre": "Cambio de bujías",
+      "precio": 120000
+    }
+  ]
 }

@@ -37,43 +37,54 @@
   ],
   "ordenes": [
     {
-      "id": "ORD20260420001",
-      "vehiculoPlaca": "ABC123",
-      "vehiculoModelo": "Corolla",
+      "id": "ORD20260425001",
+      "vehiculoModelo": "Toyota Corolla",
+      "vehiculoAnio": 2020,
       "vehiculoMarca": "TOYOTA",
+      "vehiculoPlaca": "ABC123",
       "empleadoId": "EMP001",
-      "empleadoNombre": "Carlos Pérez",
+      "empleadoNombre": "Juan Pérez",
       "clienteId": "CLI001",
-      "clienteNombre": "Juan López",
+      "clienteNombre": "Carlos Ramírez",
       "estado": "EN_PROCESO",
-      "fechaEntrada": "2026-04-20",
+      "fechaEntrada": "25/04/2026",
       "fechaDeFinalizacion": null,
-      "fechaDePago": null,
-      "valorVenta": null,
       "servicios": [
-        {
-          "id": "SRV001",
-          "nombre": "Cambio de aceite",
-          "precio": 150000
-        }
+        { "id": "SRV001", "nombre": "Cambio de aceite", "precio": 150000 },
+        { "id": "SRV002", "nombre": "Rotación de neumáticos", "precio": 80000 }
       ]
-    }
-  ],
-  "servicios": [
-    {
-      "id": "SRV001",
-      "nombre": "Cambio de aceite",
-      "precio": 150000
     },
     {
-      "id": "SRV002",
-      "nombre": "Cambio de filtro",
-      "precio": 80000
+      "id": "ORD20260424001",
+      "vehiculoModelo": "Honda Civic",
+      "vehiculoAnio": 2019,
+      "vehiculoMarca": "HONDA",
+      "vehiculoPlaca": "XYZ789",
+      "empleadoId": "EMP002",
+      "empleadoNombre": "María García",
+      "clienteId": "CLI002",
+      "clienteNombre": "Ana Torres",
+      "estado": "PENDIENTE",
+      "fechaEntrada": "24/04/2026",
+      "fechaDeFinalizacion": null,
+      "servicios": []
     },
     {
-      "id": "SRV003",
-      "nombre": "Cambio de bujías",
-      "precio": 120000
+      "id": "ORD20260423001",
+      "vehiculoModelo": "Ford F-150",
+      "vehiculoAnio": 2021,
+      "vehiculoMarca": "FORD",
+      "vehiculoPlaca": "DEF456",
+      "empleadoId": "EMP001",
+      "empleadoNombre": "Juan Pérez",
+      "clienteId": "CLI003",
+      "clienteNombre": "Roberto Silva",
+      "estado": "FINALIZADO",
+      "fechaEntrada": "23/04/2026",
+      "fechaDeFinalizacion": "25/04/2026",
+      "servicios": [
+        { "id": "SRV003", "nombre": "Revisión de frenos", "precio": 200000 }
+      ]
     }
   ]
 }

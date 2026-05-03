@@ -50,40 +50,13 @@
     </ul>
   </aside>
   <div id="overlay"> <!--dark background in the bar--> </div>
-  <dialog id="detail-panel">
-    <div> <!--detail header-->
-      <span id="detail-order-id"></span>
-      <button id="close-detail">x</button>
-    </div>
-    <div id="detail-brand">
-      <h2 id="detail-vehicle"></h2>
-    </div>
-    <div>
-      <p>Mecánico: <a id="detail-mecanico"></a></p>
-      <p>Cliente: <a id="detail-cliente"></a></p>
-      <p>Vehículo: <a id="detail-vehiculo"></a></p>
-      <p>Estado: <span id="detail-estado"></span></p>
-      <p>Fecha entrada: <span id="detail-fechaEntrada"></span></p>
-      <p>Fecha salida: <span id="detail-fechaSalida"></span></p>
-    </div>
-    <div> <!--servicios division-->
-      <h3>Servicios</h3>
-      <ul id="detail-services"></ul>
-      <button>Agregar servicio</button>
-    </div>
-    <div> <!--action buttons-->
-      <button id="btn-avanzar">Avanzar Estado</button>
-      <button id="btn-pago">Registrar Pago</button>
-    </div>
-
-  </dialog>
 
   <main id="main-content">
     <section id="view-dashboard">
       <section class="hero">
         <form id="search-form">
-          <input type="search" id="search-input">
-          <button type="submit"></button>
+          <input type="search" id="search-input" , placeholder="buscar por ID, vehiculo, mecanico, etc">
+          <button type="submit">Buscar</button>
         </form>
       </section>
 

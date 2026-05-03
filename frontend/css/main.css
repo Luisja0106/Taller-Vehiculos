@@ -17,17 +17,17 @@
   --color-en-proceso-text: #7C2D12;
   --color-en-espera: #A78BFA;
   --color-en-espera-text: #4C1D95;
-  --color-finalizado: #34D399;
+  --color-finalizado: #9CFFB5;
   --color-finalizado-text: #064E3B;
 
   /* Brand gradients */
-  --brand-toyota: linear-gradient(135deg, #CC0000, #FF4444);
-  --brand-chevrolet: linear-gradient(135deg, #B8860B, #FFD700);
-  --brand-honda: linear-gradient(135deg, #003087, #0066CC);
-  --brand-mazda: linear-gradient(135deg, #8B0000, #CC2200);
-  --brand-ford: linear-gradient(135deg, #00274C, #003F8A);
-  --brand-renault: linear-gradient(135deg, #FFCC00, #FF9900);
-  --brand-default: linear-gradient(135deg, #374151, #6B7280);
+  --brand-toyota: linear-gradient(90deg, #CC0000 20%, #FF4444 100%);
+  --brand-chevrolet: linear-gradient(135deg, #B8860B 0%, #FFD700 100%);
+  --brand-honda: linear-gradient(135deg, #003087 0%, #0066CC 100%);
+  --brand-mazda: linear-gradient(135deg, #8B0000 0%, #CC2200 100%);
+  --brand-ford: linear-gradient(135deg, #00274C 0%, #003F8A 100%);
+  --brand-renault: linear-gradient(135deg, #FFCC00 0%, #FF9900 100%);
+  --brand-default: linear-gradient(135deg, #374151 0%, #6B7280 100%);
 
   /* Spacing */
   --space-xs: 4px;

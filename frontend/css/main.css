@@ -9,7 +9,7 @@
   --color-border: #E5E7EB;
   --color-overlay: rgba(0, 0, 0, 0.5);
   --hero-color: linear-gradient(90deg, #00edff 0%, #10a5f5 50%, #4a6cf7 100%);
-
+  --color-red: #CC0000;
   /* Status colors */
   --color-pendiente: #FCD34D;
   --color-pendiente-text: #92400E;
@@ -58,6 +58,7 @@
   --font-size-md: 16px;
   --font-size-lg: 20px;
   --font-size-xl: 24px;
+  --font-size-2xl: 32px;
 
   /* Transitions */
   --transition: 0.3s ease;

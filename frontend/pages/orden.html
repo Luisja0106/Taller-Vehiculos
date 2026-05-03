@@ -9,6 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/main.css">
   <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="../css/detail.css">
   <link rel="stylesheet" href="../css/drawer.css">
 </head>
 
@@ -54,36 +55,38 @@
     <section id="view-dashboard">
       <section id="order-header">
         <section id="id-bar">
-          <span id="id-string">WO-001</span>
+          <span>WO-001</span>
           <button type="submit">X</button>
         </section>
         <section id="hero">
-          <div id="gradient">
-            <span>Toyota Corolla 2020</span>
-          </div>
+          <span>Toyota Corolla 2020</span>
         </section>
       </section>
-      <section id="information">
-        <div id="title-information">Informacion del trabajo</div>
-        <div class="info-row"><span class="info-label">Dueño del vehiculo</span><span class="info-result">Carlos
-            Ramirez</span></div>
-        <div class="info-row"><span class="info-label">Mecanico asignado</span><span class="info-result">Juan
-            Perez</span></div>
-        <div class="info-row"><span class="info-label">Estado</span><span class="info-result info-estado">En
-            progreso</span></div>
-        <div class="info-row"><span class="info-label">Fecha de inicio </span><span
-            class="info-result">25/04/2026</span></div>
-      </section>
-      <section id="servicios">
-        <div id="title-servicios">Servicios Aplicados</div>
-        <div class="servicios-box"><span class="servicio-name">Cambio de aceite</span><button
-            type="input">Remover</button></div>
-      </section>
-      <section id="actions">
-        <div id="button-grid"><button class="button-action" type="input">Cambiar Estado</button><button
-            class="button-action" type="input">Cambiar Mecanico</button><button class="button-action"
-            type="input">Registrar pago</button><button class="button-action" type="input">Añadir Servicio</button>
-        </div>
+      <section id="slides">
+        <section id="information" class="slide">
+          <div class="title-slide">Informacion del trabajo</div>
+          <div class="info-row"><span class="info-label">Dueño del vehiculo</span><span class="info-result">Carlos
+              Ramirez</span></div>
+          <div class="info-row"><span class="info-label">Mecanico asignado</span><span class="info-result">Juan
+              Perez</span></div>
+          <div class="info-row"><span class="info-label">Estado</span><span
+              class="info-estado info-estado-EN_PROGRESO">En
+              progreso</span></div>
+          <div class="info-row"><span class="info-label">Fecha de inicio </span><span
+              class="info-result">25/04/2026</span></div>
+        </section>
+        <section id="servicios" class="slide">
+          <div class="title-slide">Servicios Aplicados</div>
+          <div class="servicios-box"><span class="servicio-name">Cambio de aceite</span><button
+              type="button">Remover</button></div>
+        </section>
+        <section id="actions" class="slide">
+          <div class="title-slide">Acciones</div>
+          <div id="button-grid"><button class="button-action" type="button">Cambiar Estado</button><button
+              class="button-action" type="button">Cambiar Mecanico</button><button class="button-action"
+              type="button">Registrar pago</button><button class="button-action" type="button">Añadir Servicio</button>
+          </div>
+        </section>
       </section>
     </section>
   </main>

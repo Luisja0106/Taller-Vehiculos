@@ -8,6 +8,7 @@
   --color-text-muted: #6B7280;
   --color-border: #E5E7EB;
   --color-overlay: rgba(0, 0, 0, 0.5);
+  --hero-color: linear-gradient(90deg, #00edff 0%, #10a5f5 50%, #4a6cf7 100%);
 
   /* Status colors */
   --color-pendiente: #FCD34D;
@@ -35,6 +36,7 @@
   --space-lg: 24px;
   --space-xl: 32px;
   --space-2xl: 48px;
+  --space-3xl: 60px;
 
   /* Border radius */
   --radius-sm: 6px;

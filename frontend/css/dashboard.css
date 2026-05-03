@@ -1,0 +1,126 @@
+.hero {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 180px;
+  width: 100%;
+  background: var(--hero-color);
+}
+
+#search-form {
+  display: flex;
+  width: 80%;
+  max-width: 800px;
+  background: var(--color-white);
+  padding: var(--space-sm);
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-drawer);
+}
+
+#search-form button {
+  background: var(--color-primary);
+  color: var(--color-white);
+  border-color: transparent;
+  padding: 0 var(--space-lg);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  font-weight: 700;
+  transition: var(--transition);
+}
+
+#search-form button:hover {
+  color: var(--color-primary-dark);
+  background: var(--color-white);
+  border-color: var(--color-primary-dark);
+}
+
+#search-input {
+  flex-grow: 1;
+  border: none;
+  padding: var(--space-sm) var(--space-lg);
+  font-size: var(--font-size-md);
+  outline: none;
+  background: transparent;
+}
+
+#filters {
+  margin: var(--space-lg);
+  background: var(--color-white);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  overflow: hidden;
+}
+
+#filters-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-md) var(--space-lg);
+  cursor: pointer;
+  font-weight: 500;
+  user-select: none;
+}
+
+#filters-header:hover {
+  background: var(--color-bg);
+}
+
+#filters-body {
+  display: none;
+  padding: var(--space-lg);
+  border-top: 1px solid var(--color-border);
+  gap: var(--space-lg);
+  grid-template-columns: repeat(3, 1fr);
+}
+
+#filters-body.open {
+  display: grid;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.filter-group label {
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: var(--color-text-muted);
+}
+
+.filter-group select {
+  padding: var(--space-sm) var(--space-md);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-base);
+  font-family: var(--font-family);
+  background: var(--color-white);
+  cursor: pointer;
+  outline: none;
+}
+
+.filter-group select:focus {
+  border-color: var(--color-primary);
+}
+
+.filters-arrow {
+  transition: var(--transition);
+  font-size: var(--font-size-sm);
+}
+
+.filters-arrow.rotated {
+  transform: rotate(180deg);
+}
+
+
+#cards-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+
+  padding: var(--space-lg);
+  gap: var(--space-xl);
+  align-items: center;
+}

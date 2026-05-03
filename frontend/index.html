@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/navbar.css">
   <link rel="stylesheet" href="css/drawer.css">
+  <link rel="stylesheet" href="css/dashboard.css">
   <link rel="stylesheet" href="css/cards.css">
 </head>
 
@@ -59,20 +60,106 @@
           <button type="submit">Buscar</button>
         </form>
       </section>
-
       <section id="filters">
-        <select id="filter-estado">
-          <option value="">Todos</option>
-          <option value="EN_PROCESO">En proceso</option>
-          <option value="PENDIENTE">Pendiente</option>
-          <option value="FINALIZADO">Finalizado</option>
-        </select>
+        <div id="filters-header">
+          <span>⚙ Filtros</span>
+          <span id="filters-arrow">▼</span>
+        </div>
+        <div id="filters-body">
+          <div class="filter-group">
+            <label for="filter-estado">Estado</label>
+            <select id="filter-estado">
+              <option value="">Todos</option>
+              <option value="EN_PROCESO">En proceso</option>
+              <option value="PENDIENTE">Pendiente</option>
+              <option value="En_ESPERA_DE_PAGO">En espera de pago</option>
+              <option value="FINALIZADO">Finalizado</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label for="filter-mecanico">Mecánico</label>
+            <select id="filter-mecanico">
+              <option value="">Todos</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label for="filter-vehiculo">Vehiculo</label>
+            <select id="filter-vehiculo">
+              <option value="">Todos</option>
+            </select>
 
-        <select id="filter-mecanico">
-          <option></option>
-        </select>
+
+          </div>
+        </div>
+
       </section>
-      <section id="cards-grid"></section>
+      <section id="cards-grid">
+        <!--mock for the css-->
+        <!--TODO: remove the mock-->
+        <article class="card">
+          <div class="card-header">
+            <span class="order-id">ORD20260425001</span>
+          </div>
+          <div class="card-body">
+            <h3>Toyota Corolla 2020</h3>
+            <div class="card-row">
+              <span class="card-label">Mecánico:</span>
+              <span class="card-value">Juan Pérez</span>
+            </div>
+            <div class="card-row">
+              <span class="card-label">Estado:</span>
+              <span class="badge badge-EN_PROCESO">En proceso</span>
+            </div>
+            <div class="card-row">
+              <span class="card-label">Fecha de inicio:</span>
+              <span class="card-value">25/04/2026</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-header">
+            <span class="order-id">ORD20260424001</span>
+          </div>
+          <div class="card-body">
+            <h3>Honda Civic 2019</h3>
+            <div class="card-row">
+              <span class="card-label">Mecánico:</span>
+              <span class="card-value">María García</span>
+            </div>
+            <div class="card-row">
+              <span class="card-label">Estado:</span>
+              <span class="badge badge-PENDIENTE">Pendiente</span>
+            </div>
+            <div class="card-row">
+              <span class="card-label">Fecha de inicio:</span>
+              <span class="card-value">24/04/2026</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-header">
+            <span class="order-id">ORD20260423001</span>
+          </div>
+          <div class="card-body">
+            <h3>Ford F-150 2021</h3>
+            <div class="card-row">
+              <span class="card-label">Mecánico:</span>
+              <span class="card-value">Carlos López</span>
+            </div>
+            <div class="card-row">
+              <span class="card-label">Estado:</span>
+              <span class="badge badge-FINALIZADO">Completado</span>
+            </div>
+            <div class="card-row">
+              <span class="card-label">Fecha de inicio:</span>
+              <span class="card-value">23/04/2026</span>
+            </div>
+          </div>
+        </article>
+        <!--TODO: remove the mock until here-->
+      </section>
     </section>
   </main>
 

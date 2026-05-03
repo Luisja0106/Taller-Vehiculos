@@ -3,7 +3,7 @@ header {
   top: 0;
   left: 0;
   width: 100%;
-  z-index: var(--z-drawer);
+  z-index: var(--z-navbar);
 
   height: 64px;
   padding: 0 var(--space-lg);

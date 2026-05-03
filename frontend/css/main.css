@@ -61,6 +61,7 @@
   --transition: 0.3s ease;
 
   /* Z-index layers */
+  --z-navbar: 98;
   --z-drawer: 100;
   --z-overlay: 99;
   --z-detail: 100;
@@ -93,6 +94,14 @@ ul {
 a {
   text-decoration: none;
   color: inherit;
+  -webkit-text-decoration: none;
+}
+
+a:hover,
+a:focus,
+a:visited,
+a:active {
+  text-decoration: none;
 }
 
 /* Makes images never overflow their container */

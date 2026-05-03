@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AutoService</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="../css/drawer.css">
+</head>
+
+
+<body>
+  <header> <!-- Top bar-->
+    <div id="open-drawer">
+      AutoService
+    </div>
+    <nav>
+      <a href="#">Dashboard</a>
+      <a href="#">Inventario</a>
+      <a href="#">Reportes</a>
+    </nav>
+    <div>
+      <span>icon</span>
+      <span>UserName</span>
+    </div>
+  </header>
+  <aside id="drawer"> <!--left bar-->
+    <div>
+      <span>AutoService</span>
+      <button type="button" id="close-drawer">x</button>
+    </div>
+    <ul> <!-- list-->
+      <li>
+        <a href="#">Mecanicos</a>
+      </li>
+      <li>
+        <a href="#">Vehiculos</a>
+      </li>
+      <li>
+        <a href="#">Clientes</a>
+      </li>
+      <li>
+        <a href="#">Servicios</a>
+      </li>
+    </ul>
+  </aside>
+  <div id="overlay"> <!--dark background in the bar--> </div>
+
+  <main id="main-content">
+    <section id="view-dashboard">
+      <section id="order-header">
+        <section id="id-bar">
+          <span id="id-string">WO-001</span>
+          <button type="submit">X</button>
+        </section>
+        <section id="hero">
+          <div id="gradient">
+            <span>Toyota Corolla 2020</span>
+          </div>
+        </section>
+      </section>
+      <section id="information">
+        <div id="title-information">Informacion del trabajo</div>
+        <div class="info-row"><span class="info-label">Dueño del vehiculo</span><span class="info-result">Carlos
+            Ramirez</span></div>
+        <div class="info-row"><span class="info-label">Mecanico asignado</span><span class="info-result">Juan
+            Perez</span></div>
+        <div class="info-row"><span class="info-label">Estado</span><span class="info-result info-estado">En
+            progreso</span></div>
+        <div class="info-row"><span class="info-label">Fecha de inicio </span><span
+            class="info-result">25/04/2026</span></div>
+      </section>
+      <section id="servicios">
+        <div id="title-servicios">Servicios Aplicados</div>
+        <div class="servicios-box"><span class="servicio-name">Cambio de aceite</span><button
+            type="input">Remover</button></div>
+      </section>
+      <section id="actions">
+        <div id="button-grid"><button class="button-action" type="input">Cambiar Estado</button><button
+            class="button-action" type="input">Cambiar Mecanico</button><button class="button-action"
+            type="input">Registrar pago</button><button class="button-action" type="input">Añadir Servicio</button>
+        </div>
+      </section>
+    </section>
+  </main>
+</body>

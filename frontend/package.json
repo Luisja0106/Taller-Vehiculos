@@ -1,0 +1,6 @@
+{
+  "name": "autoservice-fronted",
+  "scripts": {
+    "dev": "browser-sync start --server --files '**/*.html, **/*.css, **/*.js'"
+  }
+}

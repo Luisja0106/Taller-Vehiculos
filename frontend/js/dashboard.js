@@ -1,4 +1,7 @@
 const grid = document.getElementById("cards-grid"); //grid in the index html
+const filterBody = document.getElementById("filters-body");
+const filterArrow = document.getElementById("filters-arrow");
+const filterBtn = document.getElementById("filters-header");
 
 function renderCard(orden) {
 	return `
@@ -34,9 +37,15 @@ function renderCards(ordenes) {
 	grid.innerHTML = ordenes.map(renderCard).join("");
 }
 
+function toggleFilters() {
+	filterBody.classList.toggle("open");
+	filterArrow.classList.toggle("rotated");
+}
+
 async function initDashboard() {
 	const ordenes = await getOrdenes();
 	renderCards(ordenes);
 }
 
 document.addEventListener("DOMContentLoaded", initDashboard);
+filterBtn.addEventListener("click", toggleFilters);

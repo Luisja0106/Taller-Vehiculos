@@ -2,7 +2,7 @@ const dashboardBtn = document.getElementById("goto-dashboard");
 const inventarioBtn = document.getElementById("goto-inventario");
 const reportesBtn = document.getElementById("goto-reportes");
 
-function assignLinks() {
+function assignNavbarLinks() {
 	const isRoot = !window.location.pathname.includes("/pages/");
 
 	const prefix = isRoot ? "./pages/" : "./";
@@ -13,4 +13,4 @@ function assignLinks() {
 	reportesBtn.href = `${prefix}reportes.html`;
 }
 
-document.addEventListener("DOMContentLoaded", assignLinks);
+document.addEventListener("DOMContentLoaded", assignNavbarLinks);

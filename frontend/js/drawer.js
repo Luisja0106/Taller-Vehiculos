@@ -12,7 +12,7 @@ function closeDrawner() {
 	overlay.classList.remove("visible");
 }
 
-function assignLinks() {
+function assignDrawerLinks() {
 	const mecanicosBtn = document.getElementById("goto-mecanicos");
 	const vehiculosBtn = document.getElementById("goto-vehiculos");
 	const clientesBtn = document.getElementById("goto-clientes");
@@ -31,4 +31,4 @@ function assignLinks() {
 openBtn.addEventListener("click", openDrawner); //without () because using them means that call the funcition instantly
 closeBtn.addEventListener("click", closeDrawner);
 overlay.addEventListener("click", closeDrawner);
-document.addEventListener("DOMContentLoaded", assignLinks);
+document.addEventListener("DOMContentLoaded", assignDrawerLinks);

@@ -1,174 +1,189 @@
 body {
-  display: flex;
-  flex-direction: column;
-  background: var(--color-bg);
+	display: flex;
+	flex-direction: column;
+	background: var(--color-bg);
 }
 
 #main-content {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
+	display: flex;
+	flex-direction: column;
+	flex: 1;
 }
 
 #view-dashboard {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
+	display: flex;
+	flex-direction: column;
+	flex: 1;
 }
 
 #order-header {
-  width: 100%;
+	width: 100%;
 }
 
 #id-bar {
-  display: flex;
-  padding: var(--space-md) var(--space-xl);
-  gap: var(--space-xl);
-  background: var(--hero-color);
-  border: none;
+	display: flex;
+	padding: var(--space-md) var(--space-xl);
+	gap: var(--space-xl);
+	background: var(--hero-color);
+	border: none;
 
-  align-items: center;
-  justify-content: space-between;
+	align-items: center;
+	justify-content: space-between;
 }
 
-#id-bar>span,
-#id-bar>button {
-  font-family: var(--font-family);
-  font-size: var(--font-size-lg);
-  font-weight: 700;
-  color: var(--color-white);
-  background: none;
-  border: none;
+#id-bar > span,
+#id-bar > button {
+	font-family: var(--font-family);
+	font-size: var(--font-size-lg);
+	font-weight: 700;
+	color: var(--color-white);
+	background: none;
+	border: none;
 }
 
-#id-bar>button {
-  cursor: pointer;
+#id-bar > button {
+	cursor: pointer;
 }
 
 #hero {
-  display: flex;
-  width: 100%;
-  height: 30vh;
-  padding: var(--space-xl);
+	display: flex;
+	width: 100%;
+	height: 30vh;
+	padding: var(--space-xl);
 
-  border: none;
-  background: var(--brand-toyota);
-  box-shadow: var(--shadow-detail);
+	border: none;
+	box-shadow: var(--shadow-detail);
 
-  align-items: flex-end;
-  justify-content: flex-start;
+	align-items: flex-end;
+	justify-content: flex-start;
 }
 
-#hero>span {
-  font-family: var(--font-family);
-  font-size: var(--font-size-2xl);
-  color: var(--color-white);
-  font-weight: 700;
+#hero > span {
+	font-family: var(--font-family);
+	font-size: var(--font-size-2xl);
+	color: var(--color-white);
+	font-weight: 700;
 }
 
 #slides {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--space-lg);
-  padding: var(--space-xl);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: var(--space-lg);
+	padding: var(--space-xl);
 }
 
 .slide {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  max-width: 800px;
-  padding: var(--space-lg);
-  gap: var(--space-lg);
-  justify-content: space-between;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	max-width: 800px;
+	padding: var(--space-lg);
+	gap: var(--space-lg);
+	justify-content: space-between;
 
-  background: var(--color-white);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-detail);
+	background: var(--color-white);
+	border-radius: var(--radius-md);
+	box-shadow: var(--shadow-detail);
 }
 
 .title-slide {
-  font-family: var(--font-family);
-  font-size: var(--font-size-lg);
-  font-weight: 700;
+	font-family: var(--font-family);
+	font-size: var(--font-size-lg);
+	font-weight: 700;
 }
 
 .info-row,
 .servicios-box {
-  display: flex;
-  justify-content: space-between;
-  padding: var(--space-md) 0;
+	display: flex;
+	justify-content: space-between;
+	padding: var(--space-md) 0;
 }
 
 .info-row {
-  border-bottom: 1px solid var(--color-border);
+	border-bottom: 1px solid var(--color-border);
 }
 
 .info-label {
-  font-family: var(--font-family);
-  font-size: var(--font-size-md);
-  color: var(--color-text-muted);
+	font-family: var(--font-family);
+	font-size: var(--font-size-md);
+	color: var(--color-text-muted);
 }
 
 .info-result {
-  font-family: var(--font-family);
-  font-size: var(--font-size-md);
-  color: var(--color-text);
-  font-weight: 700;
+	font-family: var(--font-family);
+	font-size: var(--font-size-md);
+	color: var(--color-text);
+	font-weight: 700;
 }
 
+#servicios-lista {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-sm);
+}
 .info-estado {
-  font-family: var(--font-family);
-  font-size: var(--font-size-md);
-  font-weight: 500;
-  border-radius: var(--radius-full);
-  padding: var(--space-xs) var(--space-sm);
+	font-family: var(--font-family);
+	font-size: var(--font-size-md);
+	font-weight: 500;
+	border-radius: var(--radius-full);
+	padding: var(--space-xs) var(--space-sm);
 }
 
-.info-estado-EN_PROGRESO {
-  color: var(--color-en-proceso-text);
-  background: var(--color-en-proceso);
+.badge-PENDIENTE {
+	color: var(--color-pendiente-text);
+	background: var(--color-pendiente);
 }
-
+.badge-EN_PROCESO {
+	color: var(--color-en-proceso-text);
+	background: var(--color-en-proceso);
+}
+.badge-EN_ESPERA {
+	color: var(--color-en-espera-text);
+	background: var(--color-en-espera);
+}
+.badge-FINALIZADO {
+	color: var(--color-finalizado-text);
+	background: var(--color-finalizado);
+}
 .servicios-box {
-  background: var(--color-bg);
-  padding: var(--space-md);
-  border-radius: var(--radius-md);
+	background: var(--color-bg);
+	padding: var(--space-md);
+	border-radius: var(--radius-md);
 }
 
 .servicio-name {
-  font-family: var(--font-family);
-  font-size: var(--font-size-md);
+	font-family: var(--font-family);
+	font-size: var(--font-size-md);
 }
 
-.servicios-box>button {
-  border: none;
-  background: none;
-  font-family: var(--font-family);
-  font-size: var(--font-size-md);
-  color: var(--color-red);
-  cursor: pointer;
+.servicios-box > button {
+	border: none;
+	background: none;
+	font-family: var(--font-family);
+	font-size: var(--font-size-md);
+	color: var(--color-red);
+	cursor: pointer;
 }
 
 #button-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--space-md);
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: var(--space-md);
 }
 
 .button-action {
-  cursor: pointer;
-  padding: var(--space-md);
-  border-radius: var(--radius-md);
-  font-family: var(--font-family);
-  font-size: var(--font-size-md);
+	cursor: pointer;
+	padding: var(--space-md);
+	border-radius: var(--radius-md);
+	font-family: var(--font-family);
+	font-size: var(--font-size-md);
 
-  background: var(--color-bg);
-  border: 1px solid var(--color-border);
+	background: var(--color-bg);
+	border: 1px solid var(--color-border);
 }
 
 .button-action:hover {
-  background: var(--color-border);
-  cursor: pointer;
+	background: var(--color-border);
+	cursor: pointer;
 }

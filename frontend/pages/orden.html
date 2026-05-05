@@ -55,30 +55,36 @@
     <section id="view-dashboard">
       <section id="order-header">
         <section id="id-bar">
-          <span>WO-001</span>
+          <span id="orden-id"></span>
           <button type="submit">X</button>
         </section>
         <section id="hero">
-          <span>Toyota Corolla 2020</span>
+          <span id="orden-vehiculo"></span>
         </section>
       </section>
       <section id="slides">
         <section id="information" class="slide">
           <div class="title-slide">Informacion del trabajo</div>
-          <div class="info-row"><span class="info-label">Dueño del vehiculo</span><span class="info-result">Carlos
-              Ramirez</span></div>
-          <div class="info-row"><span class="info-label">Mecanico asignado</span><span class="info-result">Juan
-              Perez</span></div>
-          <div class="info-row"><span class="info-label">Estado</span><span
-              class="info-estado info-estado-EN_PROGRESO">En
-              progreso</span></div>
-          <div class="info-row"><span class="info-label">Fecha de inicio </span><span
-              class="info-result">25/04/2026</span></div>
+          <div class="info-row">
+            <span class="info-label">Dueño del vehiculo</span>
+            <a class="info-result" id="orden-cliente" href="#"></a>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Mecanico asignado</span>
+            <a class="info-result" id="orden-mecanico" href="#"></a>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Estado</span>
+            <span class="info-estado" id="orden-estado"></span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Fecha de inicio </span>
+            <span class="info-result" id="orden-fecha"></span>
+          </div>
         </section>
         <section id="servicios" class="slide">
           <div class="title-slide">Servicios Aplicados</div>
-          <div class="servicios-box"><span class="servicio-name">Cambio de aceite</span><button
-              type="button">Remover</button></div>
+          <div id="servicios-lista"></div>
         </section>
         <section id="actions" class="slide">
           <div class="title-slide">Acciones</div>
@@ -90,4 +96,13 @@
       </section>
     </section>
   </main>
+
+  <script src="../js/api.js"></script>
+  <script src="../js/helpers.js"></script>
+  <script src="../js/navbar.js"></script>
+  <script src="../js/drawer.js"></script>
+  <script src="../js/pages/orden.js"></script>
+  <script src="../js/app.js"></script>
+
 </body>
+</html>

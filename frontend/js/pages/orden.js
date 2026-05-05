@@ -1,64 +1,90 @@
-async function initOrden() {
-	const params = new URLSearchParams(window.location.search);
-	const ordenId = params.get("id"); //the url is orden.html?id=... so will get the id part
+async function initializeOrderView() {
+	const orderId = new URLSearchParams(window.location.search).get("id");
 
-	if (!ordenId) {
-		//no id in the URL return to the dashboard
-		window.location.href = "../index.html";
+	if (!orderId) {
+		redirectToDashboard();
 		return;
 	}
 
-	const orden = await getOrden(ordenId);
+	const orderData = await getOrden(orderId);
 
-	if (!orden) {
-		window.location.href = "../index.html";
+	if (!orderData) {
+		redirectToDashboard();
 		return;
 	}
 
-	document.title = `Orden ${orden.id} - AutoService`;
-
-	document.getElementById("orden-id").textContent = orden.id;
-
-	document.getElementById("orden-vehiculo").textContent =
-		`${orden.vehiculoModelo} ${orden.vehiculoAnio}`;
-
-	const brandColor = getBrandColor(orden.vehiculoMarca);
-	document.getElementById("hero").style.background = brandColor;
-
-	const mecanicoElement = document.getElementById("orden-mecanico");
-	mecanicoElement.textContent = orden.empleadoNombre;
-	mecanicoElement.href = `mecanico.html?id=${orden.empleadoId}`;
-
-	const clienteElement = document.getElementById("orden-cliente");
-	clienteElement.textContent = orden.clienteNombre;
-	clienteElement.href = `cliente.html?id=${orden.clienteId}`;
-
-	document.getElementById("orden-estado").textContent = getEstadoText(
-		orden.estado,
-	);
-	document.getElementById("orden-estado").className =
-		`info-estado ${getBadgeClass(orden.estado)}`;
-
-	document.getElementById("orden-fecha").textContent = orden.fechaEntrada;
-	renderServicios(orden.servicios);
+	updatePageMetadata(orderData.id);
+	renderOrderHeader(orderData);
+	renderOrderDetails(orderData);
+	renderServicesList(orderData.servicios);
 }
 
-function renderServicios(servicios) {
+function redirectToDashboard() {
+	window.location.href = "../index.html";
+}
+
+function updatePageMetadata(id) {
+	document.title = `Orden ${id} - AutoService`;
+}
+
+function renderOrderHeader(order) {
+	const heroSection = document.getElementById("hero");
+	const idDisplay = document.getElementById("orden-id");
+
+	idDisplay.textContent = order.id;
+	heroSection.style.background = getBrandColor(order.vehiculoMarca);
+}
+
+function renderOrderDetails(order) {
+	// Información del Vehículo
+	document.getElementById("orden-vehiculo").textContent =
+		`${order.vehiculoModelo} ${order.vehiculoAnio}`;
+
+	// Enlaces de Entidades (Mecánico y Cliente)
+	setupLink(
+		"orden-mecanico",
+		order.empleadoNombre,
+		`mecanico.html?id=${order.empleadoId}`,
+	);
+	setupLink(
+		"orden-cliente",
+		order.clienteNombre,
+		`cliente.html?id=${order.clienteId}`,
+	);
+
+	// Estado y Fecha
+	const statusElement = document.getElementById("orden-estado");
+	statusElement.textContent = getEstadoText(order.estado);
+	statusElement.className = `info-estado ${getBadgeClass(order.estado)}`;
+
+	document.getElementById("orden-fecha").textContent = order.fechaEntrada;
+}
+
+function setupLink(elementId, text, href) {
+	const el = document.getElementById(elementId);
+	el.textContent = text;
+	el.href = href;
+}
+
+function renderServicesList(services) {
 	const container = document.getElementById("servicios-lista");
 
-	if (!servicios || servicios.length === 0) {
-		container.innerHTML += "<p>No hay servicios aplicados </p>";
+	if (!services || services.length === 0) {
+		container.innerHTML =
+			"<p id='servicios-fallback'>No hay servicios aplicados</p>";
 		return;
 	}
 
-	servicios.forEach((servicio) => {
-		container.innerHTML += `
-    <div class="servicios-box">
-      <span class="servicio-name">${servicio.nombre}</span>
-      <button type="button">Remover</button>
-    </div>
-    `;
+	container.innerHTML = "";
+
+	services.forEach((service) => {
+		const serviceHtml = `
+            <div class="servicios-box">
+              <span class="servicio-name">${service.nombre}</span>
+              <button type="button" onclick="handleRemoveService('${service.id}')">Remover</button>
+            </div>`;
+		container.insertAdjacentHTML("beforeend", serviceHtml);
 	});
 }
 
-document.addEventListener("DOMContentLoaded", initOrden);
+document.addEventListener("DOMContentLoaded", initializeOrderView);

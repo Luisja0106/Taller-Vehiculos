@@ -1,34 +1,35 @@
+/* ==========================================================================
+   1. LAYOUT PRINCIPAL (Contenedores base)
+   ========================================================================== */
 body {
 	display: flex;
 	flex-direction: column;
 	background: var(--color-bg);
+	min-height: 100vh; /* Asegura que cubra toda la pantalla */
 }
 
-#main-content {
-	display: flex;
-	flex-direction: column;
-	flex: 1;
-}
-
+#main-content,
 #view-dashboard {
 	display: flex;
 	flex-direction: column;
 	flex: 1;
 }
 
+/* ==========================================================================
+   2. HEADER & HERO (Identidad visual de la Orden)
+   ========================================================================== */
 #order-header {
 	width: 100%;
 }
 
 #id-bar {
 	display: flex;
+	align-items: center;
+	justify-content: space-between;
 	padding: var(--space-md) var(--space-xl);
 	gap: var(--space-xl);
 	background: var(--hero-color);
 	border: none;
-
-	align-items: center;
-	justify-content: space-between;
 }
 
 #id-bar > span,
@@ -47,24 +48,24 @@ body {
 
 #hero {
 	display: flex;
+	align-items: flex-end;
+	justify-content: flex-start;
 	width: 100%;
 	height: 30vh;
 	padding: var(--space-xl);
-
-	border: none;
 	box-shadow: var(--shadow-detail);
-
-	align-items: flex-end;
-	justify-content: flex-start;
 }
 
 #hero > span {
 	font-family: var(--font-family);
 	font-size: var(--font-size-2xl);
-	color: var(--color-white);
 	font-weight: 700;
+	color: var(--color-white);
 }
 
+/* ==========================================================================
+   3. SLIDES & TARJETAS (Estructura de información)
+   ========================================================================== */
 #slides {
 	display: flex;
 	flex-direction: column;
@@ -76,12 +77,11 @@ body {
 .slide {
 	display: flex;
 	flex-direction: column;
+	justify-content: space-between;
 	width: 100%;
 	max-width: 800px;
 	padding: var(--space-lg);
 	gap: var(--space-lg);
-	justify-content: space-between;
-
 	background: var(--color-white);
 	border-radius: var(--radius-md);
 	box-shadow: var(--shadow-detail);
@@ -93,14 +93,11 @@ body {
 	font-weight: 700;
 }
 
-.info-row,
-.servicios-box {
+/* Filas de información técnica */
+.info-row {
 	display: flex;
 	justify-content: space-between;
 	padding: var(--space-md) 0;
-}
-
-.info-row {
 	border-bottom: 1px solid var(--color-border);
 }
 
@@ -113,15 +110,13 @@ body {
 .info-result {
 	font-family: var(--font-family);
 	font-size: var(--font-size-md);
-	color: var(--color-text);
 	font-weight: 700;
+	color: var(--color-text);
 }
 
-#servicios-lista {
-	display: flex;
-	flex-direction: column;
-	gap: var(--space-sm);
-}
+/* ==========================================================================
+   4. SISTEMA DE BADGES (Estados de la Orden)
+   ========================================================================== */
 .info-estado {
 	font-family: var(--font-family);
 	font-size: var(--font-size-md);
@@ -146,9 +141,22 @@ body {
 	color: var(--color-finalizado-text);
 	background: var(--color-finalizado);
 }
+
+/* ==========================================================================
+   5. SECCIÓN DE SERVICIOS (Lista dinámica)
+   ========================================================================== */
+#servicios-lista {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-sm);
+}
+
 .servicios-box {
-	background: var(--color-bg);
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 	padding: var(--space-md);
+	background: var(--color-bg);
 	border-radius: var(--radius-md);
 }
 
@@ -166,6 +174,17 @@ body {
 	cursor: pointer;
 }
 
+#servicios-fallback {
+	align-self: center;
+	font-family: var(--font-family);
+	font-size: var(--font-size-lg);
+	font-weight: 500;
+	color: var(--color-text-muted);
+}
+
+/* ==========================================================================
+   6. ACCIONES (Botones de control)
+   ========================================================================== */
 #button-grid {
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
@@ -173,17 +192,16 @@ body {
 }
 
 .button-action {
-	cursor: pointer;
 	padding: var(--space-md);
-	border-radius: var(--radius-md);
 	font-family: var(--font-family);
 	font-size: var(--font-size-md);
-
 	background: var(--color-bg);
 	border: 1px solid var(--color-border);
+	border-radius: var(--radius-md);
+	cursor: pointer;
+	transition: background 0.2s ease; /* Mejora la experiencia de usuario */
 }
 
 .button-action:hover {
 	background: var(--color-border);
-	cursor: pointer;
 }

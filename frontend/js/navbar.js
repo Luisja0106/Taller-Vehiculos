@@ -4,9 +4,18 @@ const reportesBtn = document.getElementById("goto-reportes");
 
 function assignNavbarLinks() {
 	const isRoot = !window.location.pathname.includes("/pages/");
+	const isIndividualPage =
+		window.location.pathname.includes("/individual-pages/");
 
-	const prefix = isRoot ? "./pages/" : "./";
-	const rootPrefix = isRoot ? "./" : "../";
+	var prefix;
+	var rootPrefix;
+	if (isIndividualPage) {
+		prefix = "../";
+		rootPrefix = "../../";
+	} else {
+		prefix = isRoot ? "./pages/" : "./";
+		rootPrefix = isRoot ? "./" : "../";
+	}
 
 	dashboardBtn.href = `${rootPrefix}index.html`;
 	inventarioBtn.href = `${prefix}inventario.html`;

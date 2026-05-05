@@ -5,7 +5,7 @@ const filterBtn = document.getElementById("filters-header");
 
 function renderCard(orden) {
 	return `
-        <article class="card" onclick="window.location.href='pages/orden.html?id=${orden.id}'">
+        <article class="card" onclick="window.location.href='pages/individual-pages/orden.html?id=${orden.id}'">
           <div class="card-header" style="background: ${getBrandColor(orden.vehiculoMarca)}">
             <span class="order-id">${orden.id}</span>
           </div>

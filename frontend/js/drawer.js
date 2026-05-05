@@ -19,12 +19,20 @@ function assignDrawerLinks() {
 	const serviciosBtn = document.getElementById("goto-servicios");
 
 	const isRoot = !window.location.pathname.includes("/pages/");
+	const isIndividualPage =
+		window.location.pathname.includes("/individual-pages/");
 
-	const prefix = isRoot ? "./pages/" : "./";
+	var prefix;
 
-	mecanicosBtn.href = `${prefix}mecanico.html`;
-	vehiculosBtn.href = `${prefix}vehiculo.html`;
-	clientesBtn.href = `${prefix}cliente.html`;
+	if (isIndividualPage) {
+		prefix = "../";
+	} else {
+		prefix = isRoot ? "./pages/" : "./";
+	}
+
+	mecanicosBtn.href = `${prefix}mecanicos.html`;
+	vehiculosBtn.href = `${prefix}vehiculos.html`;
+	clientesBtn.href = `${prefix}clientes.html`;
 	serviciosBtn.href = `${prefix}servicios.html`;
 }
 

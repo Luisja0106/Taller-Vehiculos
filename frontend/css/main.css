@@ -1,74 +1,74 @@
 :root {
-  /* Colors */
-  --color-bg: #F3F4F6;
-  --color-white: #FFFFFF;
-  --color-primary: #3B82F6;
-  --color-primary-dark: #2563EB;
-  --color-text: #111827;
-  --color-text-muted: #6B7280;
-  --color-border: #E5E7EB;
-  --color-overlay: rgba(0, 0, 0, 0.5);
-  --hero-color: linear-gradient(90deg, #00edff 0%, #10a5f5 50%, #4a6cf7 100%);
-  --color-red: #CC0000;
-  /* Status colors */
-  --color-pendiente: #FCD34D;
-  --color-pendiente-text: #92400E;
-  --color-en-proceso: #FB923C;
-  --color-en-proceso-text: #7C2D12;
-  --color-en-espera: #A78BFA;
-  --color-en-espera-text: #4C1D95;
-  --color-finalizado: #9CFFB5;
-  --color-finalizado-text: #064E3B;
+	/* Colors */
+	--color-bg: #f3f4f6;
+	--color-white: #ffffff;
+	--color-primary: #3b82f6;
+	--color-primary-dark: #2563eb;
+	--color-text: #111827;
+	--color-text-muted: #6b7280;
+	--color-border: #e5e7eb;
+	--color-overlay: rgba(0, 0, 0, 0.5);
+	--hero-color: linear-gradient(90deg, #00edff 0%, #10a5f5 50%, #4a6cf7 100%);
+	--color-red: #cc0000;
+	/* Status colors */
+	--color-pendiente: #e5e7eb;
+	--color-pendiente-text: #374151;
+	--color-en-proceso: #ffedd5;
+	--color-en-proceso-text: #9a3412;
+	--color-en-espera: #dbeafe;
+	--color-en-espera-text: #1e40af;
+	--color-finalizado: #dcfce7;
+	--color-finalizado-text: #166534;
 
-  /* Brand gradients */
-  --brand-toyota: linear-gradient(90deg, #CC0000 20%, #FF4444 100%);
-  --brand-chevrolet: linear-gradient(135deg, #B8860B 0%, #FFD700 100%);
-  --brand-honda: linear-gradient(135deg, #003087 0%, #0066CC 100%);
-  --brand-mazda: linear-gradient(135deg, #8B0000 0%, #CC2200 100%);
-  --brand-ford: linear-gradient(135deg, #00274C 0%, #003F8A 100%);
-  --brand-renault: linear-gradient(135deg, #FFCC00 0%, #FF9900 100%);
-  --brand-default: linear-gradient(135deg, #374151 0%, #6B7280 100%);
+	/* Brand gradients */
+	--brand-toyota: linear-gradient(90deg, #cc0000 20%, #ff4444 100%);
+	--brand-chevrolet: linear-gradient(135deg, #b8860b 0%, #ffd700 100%);
+	--brand-honda: linear-gradient(135deg, #003087 0%, #0066cc 100%);
+	--brand-mazda: linear-gradient(135deg, #8b0000 0%, #cc2200 100%);
+	--brand-ford: linear-gradient(135deg, #00274c 0%, #003f8a 100%);
+	--brand-renault: linear-gradient(135deg, #ffcc00 0%, #ff9900 100%);
+	--brand-default: linear-gradient(135deg, #374151 0%, #6b7280 100%);
 
-  /* Spacing */
-  --space-xs: 4px;
-  --space-sm: 8px;
-  --space-md: 16px;
-  --space-lg: 24px;
-  --space-xl: 32px;
-  --space-2xl: 48px;
-  --space-3xl: 60px;
+	/* Spacing */
+	--space-xs: 4px;
+	--space-sm: 8px;
+	--space-md: 16px;
+	--space-lg: 24px;
+	--space-xl: 32px;
+	--space-2xl: 48px;
+	--space-3xl: 60px;
 
-  /* Border radius */
-  --radius-sm: 6px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  --radius-full: 9999px;
-  /* perfect circle/pill */
+	/* Border radius */
+	--radius-sm: 6px;
+	--radius-md: 12px;
+	--radius-lg: 16px;
+	--radius-full: 9999px;
+	/* perfect circle/pill */
 
-  /* Shadows */
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
-  --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.08);
-  --shadow-drawer: 4px 0 20px rgba(0, 0, 0, 0.15);
-  --shadow-detail: -4px 0 20px rgba(0, 0, 0, 0.15);
+	/* Shadows */
+	--shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+	--shadow-card: 0 2px 8px rgba(0, 0, 0, 0.08);
+	--shadow-drawer: 4px 0 20px rgba(0, 0, 0, 0.15);
+	--shadow-detail: -4px 0 20px rgba(0, 0, 0, 0.15);
 
-  /* Typography */
-  --font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-size-sm: 12px;
-  --font-size-base: 14px;
-  --font-size-md: 16px;
-  --font-size-lg: 20px;
-  --font-size-xl: 24px;
-  --font-size-2xl: 32px;
+	/* Typography */
+	--font-family: "Inter", system-ui, -apple-system, sans-serif;
+	--font-size-sm: 12px;
+	--font-size-base: 14px;
+	--font-size-md: 16px;
+	--font-size-lg: 20px;
+	--font-size-xl: 24px;
+	--font-size-2xl: 32px;
 
-  /* Transitions */
-  --transition: 0.3s ease;
+	/* Transitions */
+	--transition: 0.3s ease;
 
-  /* Z-index layers */
-  --z-navbar: 98;
-  --z-drawer: 100;
-  --z-overlay: 99;
-  --z-detail: 100;
-  --z-dialog: 200;
+	/* Z-index layers */
+	--z-navbar: 98;
+	--z-drawer: 100;
+	--z-overlay: 99;
+	--z-detail: 100;
+	--z-dialog: 200;
 }
 
 /* Every element counts its padding and border 
@@ -78,52 +78,51 @@
 *,
 *::before,
 *::after {
-  box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 /* Removes default margin that browsers add to 
    body, h1, h2, p, ul etc */
 * {
-  margin: 0;
-  padding: 0;
+	margin: 0;
+	padding: 0;
 }
 
 /* Removes the bullet points from ul and li */
 ul {
-  list-style: none;
+	list-style: none;
 }
 
 /* Removes the underline and color from links */
 a {
-  text-decoration: none;
-  color: inherit;
-  -webkit-text-decoration: none;
+	text-decoration: none;
+	color: inherit;
+	-webkit-text-decoration: none;
 }
 
 a:hover,
 a:focus,
 a:visited,
 a:active {
-  text-decoration: none;
+	text-decoration: none;
 }
 
 /* Makes images never overflow their container */
 img {
-  max-width: 100%;
-  display: block;
+	max-width: 100%;
+	display: block;
 }
 
 /* Makes the page fill the full height */
 html,
 body {
-  height: 100%;
+	height: 100%;
 }
 
-
 body {
-  font-family: var(--font-family);
-  font-size: var(--font-size-base);
-  color: var(--color-text);
-  background-color: var(--color-bg);
-  min-height: 100vh;
+	font-family: var(--font-family);
+	font-size: var(--font-size-base);
+	color: var(--color-text);
+	background-color: var(--color-bg);
+	min-height: 100vh;
 }

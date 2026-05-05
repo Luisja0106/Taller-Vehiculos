@@ -13,7 +13,7 @@ function closeDrawner() {
 }
 
 function assignDrawerLinks() {
-	const mecanicosBtn = document.getElementById("goto-mecanicos");
+	const empleadosBtn = document.getElementById("goto-empleados");
 	const vehiculosBtn = document.getElementById("goto-vehiculos");
 	const clientesBtn = document.getElementById("goto-clientes");
 	const serviciosBtn = document.getElementById("goto-servicios");
@@ -30,7 +30,7 @@ function assignDrawerLinks() {
 		prefix = isRoot ? "./pages/" : "./";
 	}
 
-	mecanicosBtn.href = `${prefix}mecanicos.html`;
+	empleadosBtn.href = `${prefix}empleados.html`;
 	vehiculosBtn.href = `${prefix}vehiculos.html`;
 	clientesBtn.href = `${prefix}clientes.html`;
 	serviciosBtn.href = `${prefix}servicios.html`;

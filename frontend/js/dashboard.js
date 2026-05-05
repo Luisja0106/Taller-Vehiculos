@@ -3,7 +3,7 @@ const filterBody = document.getElementById("filters-body");
 const filterArrow = document.getElementById("filters-arrow");
 const filterBtn = document.getElementById("filters-header");
 
-function renderCard(orden) {
+function renderOrderCard(orden) {
 	return `
         <article class="card" onclick="window.location.href='pages/individual-pages/orden.html?id=${orden.id}'">
           <div class="card-header" style="background: ${getBrandColor(orden.vehiculoMarca)}">
@@ -34,7 +34,7 @@ function renderCards(ordenes) {
 		return;
 	}
 
-	grid.innerHTML = ordenes.map(renderCard).join("");
+	grid.innerHTML = ordenes.map(renderOrderCard).join("");
 }
 
 function toggleFilters() {

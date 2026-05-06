@@ -48,6 +48,16 @@ function getRoleText(roleRaw) {
 	return role[roleRaw] || roleRaw;
 }
 
+function getContratoText(contratoRaw) {
+	const contrato = {
+		FIJO: "Fijo",
+		PARCIAL: "Parcial",
+		TEMPORAL: "Temporal",
+	};
+
+	return contrato[contratoRaw] || contratoRaw;
+}
+
 function getMarcaText(marcaRaw) {
 	const marca = {
 		TOYOTA: "Toyota",

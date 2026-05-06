@@ -22,18 +22,37 @@ body {
 	width: 100%;
 }
 
-#id-bar {
+.id-bar {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	padding: var(--space-md) var(--space-xl);
 	gap: var(--space-xl);
-	background: var(--hero-dashboard-color);
 	border: none;
 }
 
-#id-bar > span,
-#id-bar > button {
+#empleado-id-bar {
+	background: var(--hero-empleados-color);
+}
+
+#orden-id-bar {
+	background: var(--hero-dashboard-color);
+}
+
+#servicios-id-bar {
+	background: var(--hero-servicios-color);
+}
+
+#clientes-id-bar {
+	background: var(--hero-clientes-color);
+}
+
+#vehiculos-id-bar {
+	background: var(--hero-vehiculos-color);
+}
+
+.id-bar > span,
+.id-bar > button {
 	font-family: var(--font-family);
 	font-size: var(--font-size-lg);
 	font-weight: 700;
@@ -42,7 +61,7 @@ body {
 	border: none;
 }
 
-#id-bar > button {
+.id-bar > button {
 	cursor: pointer;
 }
 
@@ -145,7 +164,8 @@ body {
 /* ==========================================================================
    5. SECCIÓN DE SERVICIOS (Lista dinámica)
    ========================================================================== */
-#servicios-lista {
+#servicios-lista,
+#ordenes-activas {
 	display: flex;
 	flex-direction: column;
 	gap: var(--space-sm);

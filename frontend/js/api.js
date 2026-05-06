@@ -49,3 +49,7 @@ async function getServicios() {
 async function getServicio(id) {
 	return fetchData(`${API_URL}/servicios/${id}`);
 }
+
+async function getOrdenesByEmpleado(empleadoId) {
+	return fetchData(`${API_URL}/ordenesSegunEmpleado/${empleadoId}`);
+}

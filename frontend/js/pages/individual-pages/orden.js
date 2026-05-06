@@ -14,8 +14,8 @@ async function initializeOrderView() {
 	}
 
 	updatePageMetadata(orderData.id);
-	renderOrderHeader(orderData);
-	renderOrderDetails(orderData);
+	renderEmpleadoHeader(orderData);
+	renderEmpleadoDetails(orderData);
 	renderServicesList(orderData.servicios);
 }
 
@@ -27,7 +27,7 @@ function updatePageMetadata(id) {
 	document.title = `Orden ${id} - AutoService`;
 }
 
-function renderOrderHeader(order) {
+function renderEmpleadoHeader(order) {
 	const heroSection = document.getElementById("hero");
 	const idDisplay = document.getElementById("orden-id");
 
@@ -35,7 +35,7 @@ function renderOrderHeader(order) {
 	heroSection.style.background = getBrandColor(order.vehiculoMarca);
 }
 
-function renderOrderDetails(order) {
+function renderEmpleadoDetails(order) {
 	// Información del Vehículo
 	document.getElementById("orden-vehiculo").textContent =
 		`${order.vehiculoModelo} ${order.vehiculoAnio}`;
@@ -44,7 +44,7 @@ function renderOrderDetails(order) {
 	setupLink(
 		"orden-mecanico",
 		order.empleadoNombre,
-		`mecanico.html?id=${order.empleadoId}`,
+		`empleado.html?id=${order.empleadoId}`,
 	);
 	setupLink(
 		"orden-cliente",

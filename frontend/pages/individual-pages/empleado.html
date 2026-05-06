@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AutoService</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/main.css">
+  <link rel="stylesheet" href="../../css/navbar.css">
+  <link rel="stylesheet" href="../../css/detail.css">
+  <link rel="stylesheet" href="../../css/drawer.css">
+</head>
+
+
+<body>
+  <header> <!-- Top bar-->
+    <div id="open-drawer">
+      AutoService
+    </div>
+    <nav>
+      <a id="goto-dashboard" href="#">Dashboard</a>
+      <a id="goto-inventario" href="#">Inventario</a>
+      <a id="goto-reportes" href="#">Reportes</a>
+    </nav>
+    <div>
+      <span>icon</span>
+      <span>UserName</span>
+    </div>
+  </header>
+  <aside id="drawer"> <!--left bar-->
+    <div>
+      <span>AutoService</span>
+      <button type="button" id="close-drawer">x</button>
+    </div>
+    <ul> <!-- list-->
+      <li>
+        <a id="goto-empleados" href="#">Empleados</a>
+      </li>
+      <li>
+        <a id="goto-vehiculos" href="#">Vehiculos</a>
+      </li>
+      <li>
+        <a id="goto-clientes" href="#">Clientes</a>
+      </li>
+      <li>
+        <a id="goto-servicios" href="#">Servicios</a>
+      </li>
+    </ul>
+  </aside>
+  <div id="overlay"> <!--dark background in the bar--> </div>
+
+  <main id="main-content">
+    <section id="view-dashboard">
+      <section id="order-header">
+        <section class="id-bar" id="empleado-id-bar">
+          <span  id="empleado-id"></span>
+          <button type="submit">X</button>
+        </section>
+        <section id="hero">
+          <span id="nombre-empleado-header"></span>
+        </section>
+      </section>
+      <section id="slides">
+        <section id="information" class="slide">
+          <div class="title-slide">Informacion del Empleado</div>
+          <div class="info-row">
+            <span class="info-label">Nombre del Empleado</span>
+            <span class="info-result" id="nombre-empleado"></span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Rol</span>
+            <span class="info-estado" id="rol-empleado"></span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Tipo de Contrato </span>
+            <span class="info-result" id="contrato-empleado"></span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Email del empleado</span>
+            <span class="info-result" id="email-empleado"></span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Telefono del Empleado</span>
+            <span class="info-result" id="telefono-empleado"></span>
+          </div>
+        </section>
+        <section id="servicios" class="slide">
+          <div class="title-slide">Ordenes Activas</div>
+          <div id="ordenes-activas"></div>
+        </section>
+        <section id="actions" class="slide">
+          <div class="title-slide">Acciones</div>
+          <div id="button-grid">
+            <button class="button-action" type="button">Actualizar Informacion</button>
+            <button class="button-action" type="button">Ver Servicios Pasados</button>
+          </div>
+        </section>
+      </section>
+    </section>
+  </main>
+
+  <script src="../../js/api.js"></script>
+  <script src="../../js/helpers.js"></script>
+  <script src="../../js/navbar.js"></script>
+  <script src="../../js/drawer.js"></script>
+  <script src="../../js/pages/individual-pages/empleado.js"></script>
+  <script src="../../js/app.js"></script>
+
+</body>
+</html>

@@ -2,8 +2,6 @@ function getBrandColor(marca) {
 	if (!marca) return "var(--brand-default)";
 	return `var(--brand-${marca.toLowerCase()})`;
 }
-//TODO:
-//add color badge segun el rol de empleado, add hero color in the css para cada pestaña, y formatear el rol para que salga en minuscula
 
 function getRoleColor(rol) {
 	if (!rol) return "var(--rol-brand-default)";

@@ -62,8 +62,8 @@
 	border-color: transparent;
 }
 
-#button-cliente-buscar {
-	background: var(--button-cliente-color);
+#button-clientes-buscar {
+	background: var(--button-clientes-color);
 	color: var(--color-white);
 	border-color: transparent;
 }

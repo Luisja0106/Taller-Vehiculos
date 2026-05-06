@@ -9,7 +9,7 @@
 	--color-border: #e5e7eb;
 	--color-overlay: rgba(0, 0, 0, 0.5);
 	--color-red: #cc0000;
-
+	--color-client: #2dd4bf;
 	/* hero colors */
 	--hero-dashboard-color: linear-gradient(
 		90deg,

@@ -47,3 +47,15 @@ function getRoleText(roleRaw) {
 
 	return role[roleRaw] || roleRaw;
 }
+
+function getMarcaText(marcaRaw) {
+	const marca = {
+		TOYOTA: "Toyota",
+		CHEVROLET: "Chevrolet",
+		MAZDA: "Mazda",
+		RENAULT: "Renault",
+		KIA: "Kia",
+	};
+
+	return marca[marcaRaw] || marcaRaw;
+}

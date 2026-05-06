@@ -23,7 +23,7 @@ function renderClienteCard(cliente) {
 
 function renderClientesCards(clientes) {
 	if (!clientes || clientes.length === 0) {
-		grid.innerHTML = "<p>No hay clientes</p>";
+		grid.innerHTML = "<p id='cards-fallback'>No hay clientes</p>";
 		return;
 	}
 

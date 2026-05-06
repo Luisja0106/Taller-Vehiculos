@@ -94,5 +94,9 @@
         { "id": "SRV003", "nombre": "Revisión de frenos", "precio": 200000 }
       ]
     }
+  ],
+  "servicios": [
+    { "id": "SRV001", "nombre": "Cambio de aceite", "precio": 150000 },
+    { "id": "SRV002", "nombre": "Rotación de neumáticos", "precio": 80000 }
   ]
 }

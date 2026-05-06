@@ -27,7 +27,7 @@ function renderEmpleadoCard(empleado) {
 
 function renderEmpleadosCards(empleados) {
 	if (!empleados || empleados.length === 0) {
-		grid.innerHTML = "<p>No hay empleados</p>";
+		grid.innerHTML = "<p id='cards-fallback'>No hay empleados</p>";
 		return;
 	}
 

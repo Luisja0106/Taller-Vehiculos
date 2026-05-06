@@ -62,6 +62,14 @@
 	border-color: transparent;
 }
 
+#cards-fallback {
+	font-family: var(--font-family);
+	font-size: var(--font-size-2xl);
+	color: var(--color-text-muted);
+	font-weight: 700;
+	align-self: center;
+}
+
 #button-clientes-buscar {
 	background: var(--button-clientes-color);
 	color: var(--color-white);
@@ -81,27 +89,27 @@
 }
 
 #button-empleados-buscar:hover {
-	color: var(--color-empleados-dark);
+	color: var(--button-empleados-color-dark);
 	background: var(--color-white);
-	border-color: var(--color-empleados-dark);
+	border-color: var(--button-empleados-color-dark);
 }
 
 #button-servicios-buscar:hover {
-	color: var(--color-servicios-dark);
+	color: var(--button-servicios-color-dark);
 	background: var(--color-white);
-	border-color: var(--color-servicios-dark);
+	border-color: var(--button-servicios-color-dark);
 }
 
 #button-clientes-buscar:hover {
-	color: var(--color-clientes-dark);
+	color: var(--button-clientes-color-dark);
 	background: var(--color-white);
-	border-color: var(--color-clientes-dark);
+	border-color: var(--button-clientes-color-dark);
 }
 
 #button-vehiculos-buscar:hover {
-	color: var(--color-vehiculos-dark);
+	color: var(--button-vehiculos-color-dark);
 	background: var(--color-white);
-	border-color: var(--color-vehiculos-dark);
+	border-color: var(--button-vehiculos-color-dark);
 }
 
 #search-input {

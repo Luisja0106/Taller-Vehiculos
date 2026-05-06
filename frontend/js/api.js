@@ -46,3 +46,6 @@ async function getVehiculo(id) {
 async function getServicios() {
 	return fetchData(`${API_URL}/servicios`);
 }
+async function getServicio(id) {
+	return fetchData(`${API_URL}/servicios/${id}`);
+}

@@ -27,7 +27,7 @@ function renderVehiculoCard(vehiculo) {
 
 function renderVehiculosCards(vehiculos) {
 	if (!vehiculos || vehiculos.length === 0) {
-		grid.innerHTML = "<p>No hay vehiculos</p>";
+		grid.innerHTML = "<p id='cards-fallback'>No hay vehiculos</p>";
 		return;
 	}
 

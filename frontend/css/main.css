@@ -17,19 +17,39 @@
 		#10a5f5 50%,
 		#4a6cf7 100%
 	);
-	--hero-empleados-color: linear-gradient(135deg, #fb7185 0%, #e11d48 100%);
+	--hero-empleados-color: linear-gradient(
+		90deg,
+		#fda4af 0%,
+		#fb7185 50%,
+		#e11d48 100%
+	);
 	--button-empleados-color: #e11d48;
 	--button-empleados-color-dark: #e11d48;
 
-	--hero-servicios-color: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
+	--hero-servicios-color: linear-gradient(
+		90deg,
+		#fcd34d 0%,
+		#fbbf24 50%,
+		#d97706 100%
+	);
 	--button-servicios-color: #d97706;
 	--button-servicios-color-dark: #b45309;
 
-	--hero-clientes-color: linear-gradient(135deg, #2dd4bf 0%, #0d9488 100%);
+	--hero-clientes-color: linear-gradient(
+		90deg,
+		#5eead4 0%,
+		#2dd4bf 50%,
+		#0d9488 100%
+	);
 	--button-clientes-color: #0f766e;
 	--button-clientes-color-dark: #0d9488;
 
-	--hero-vehiculos-color: linear-gradient(135deg, #818cf8 0%, #4f46e5 100%);
+	--hero-vehiculos-color: linear-gradient(
+		90deg,
+		#a5b4fc 0%,
+		#818cf8 50%,
+		#4f46e5 100%
+	);
 	--button-vehiculos-color: #4f46e5;
 	--button-vehiculos-color-dark: #4338ca;
 

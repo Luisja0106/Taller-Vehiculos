@@ -28,7 +28,7 @@ body {
 	justify-content: space-between;
 	padding: var(--space-md) var(--space-xl);
 	gap: var(--space-xl);
-	background: var(--hero-color);
+	background: var(--hero-dashboard-color);
 	border: none;
 }
 

@@ -15,6 +15,14 @@
       "telefono": "3009876543",
       "rol": "MECANICO",
       "contrato": "TEMPORAL"
+    },
+    {
+      "id": "EMP003",
+      "nombre": "Julian juil",
+      "email": "juli@taller.com",
+      "telefono": "3009476543",
+      "rol": "ADMINISTRADOR",
+      "contrato": "TEMPORAL"
     }
   ],
   "clientes": [

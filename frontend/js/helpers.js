@@ -5,6 +5,11 @@ function getBrandColor(marca) {
 //TODO:
 //add color badge segun el rol de empleado, add hero color in the css para cada pestaña, y formatear el rol para que salga en minuscula
 
+function getRoleColor(rol) {
+	if (!rol) return "var(--rol-brand-default)";
+	return `var(--rol-${rol.toLowerCase()})`;
+}
+
 function getBadgeClass(estado) {
 	const badges = {
 		PENDIENTE: "badge badge-PENDIENTE",
@@ -34,4 +39,13 @@ function getEstadoText(estadoRaw) {
 	};
 
 	return estados[estadoRaw] || estadoRaw;
+}
+
+function getRoleText(roleRaw) {
+	const role = {
+		MECANICO: "Mecanico",
+		ADMINISTRADOR: "Administrador",
+	};
+
+	return role[roleRaw] || roleRaw;
 }

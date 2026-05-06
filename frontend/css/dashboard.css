@@ -5,7 +5,25 @@
 
 	height: 180px;
 	width: 100%;
-	background: var(--hero-color);
+}
+
+#dashboard-hero {
+	background: var(--hero-dashboard-color);
+}
+
+#empleados-hero {
+	background: var(--hero-empleados-color);
+}
+
+#vehiculos-hero {
+	background: var(--hero-vehiculos-color);
+}
+
+#clientes-hero {
+	background: var(--hero-clientes-color);
+}
+#servicios-hero {
+	background: var(--hero-servicios-color);
 }
 
 #search-form {
@@ -19,9 +37,6 @@
 }
 
 #search-form button {
-	background: var(--color-primary);
-	color: var(--color-white);
-	border-color: transparent;
 	padding: 0 var(--space-lg);
 	border-radius: var(--radius-full);
 	cursor: pointer;
@@ -29,10 +44,64 @@
 	transition: var(--transition);
 }
 
-#search-form button:hover {
+#button-dashboard-buscar {
+	background: var(--color-primary);
+	color: var(--color-white);
+	border-color: transparent;
+}
+
+#button-empleados-buscar {
+	background: var(--button-empleados-color);
+	color: var(--color-white);
+	border-color: transparent;
+}
+
+#button-servicios-buscar {
+	background: var(--button-servicios-color);
+	color: var(--color-white);
+	border-color: transparent;
+}
+
+#button-cliente-buscar {
+	background: var(--button-cliente-color);
+	color: var(--color-white);
+	border-color: transparent;
+}
+
+#button-vehiculos-buscar {
+	background: var(--button-vehiculos-color);
+	color: var(--color-white);
+	border-color: transparent;
+}
+
+#button-dashboard-buscar:hover {
 	color: var(--color-primary-dark);
 	background: var(--color-white);
 	border-color: var(--color-primary-dark);
+}
+
+#button-empleados-buscar:hover {
+	color: var(--color-empleados-dark);
+	background: var(--color-white);
+	border-color: var(--color-empleados-dark);
+}
+
+#button-servicios-buscar:hover {
+	color: var(--color-servicios-dark);
+	background: var(--color-white);
+	border-color: var(--color-servicios-dark);
+}
+
+#button-clientes-buscar:hover {
+	color: var(--color-clientes-dark);
+	background: var(--color-white);
+	border-color: var(--color-clientes-dark);
+}
+
+#button-vehiculos-buscar:hover {
+	color: var(--color-vehiculos-dark);
+	background: var(--color-white);
+	border-color: var(--color-vehiculos-dark);
 }
 
 #search-input {

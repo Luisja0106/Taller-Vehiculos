@@ -3,14 +3,14 @@ const grid = document.getElementById("cards-grid"); //grid in the index html
 function renderEmpleadoCard(empleado) {
 	return `
         <article class="card" onclick="window.location.href='pages/individual-pages/empleado.html?id=${empleado.id}'">
-          <div class="card-header" style="background: ${getBrandColor(empleado.rol)}">
+          <div class="card-header" style="background: ${getRoleColor(empleado.rol)}">
             <span class="order-id">${empleado.id}</span>
           </div>
           <div class="card-body">
             <h3>${empleado.nombre}</h3>
             <div class="card-row">
               <span class="card-label">Rol:</span>
-              <span class="card-value">${empleado.rol}</span>
+              <span class="card-value">${getRoleText(empleado.rol)}</span>
             </div>
             <div class="card-row">
               <span class="card-label">Email:</span>

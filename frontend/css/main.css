@@ -8,8 +8,31 @@
 	--color-text-muted: #6b7280;
 	--color-border: #e5e7eb;
 	--color-overlay: rgba(0, 0, 0, 0.5);
-	--hero-color: linear-gradient(90deg, #00edff 0%, #10a5f5 50%, #4a6cf7 100%);
 	--color-red: #cc0000;
+
+	/* hero colors */
+	--hero-dashboard-color: linear-gradient(
+		90deg,
+		#00edff 0%,
+		#10a5f5 50%,
+		#4a6cf7 100%
+	);
+	--hero-empleados-color: linear-gradient(135deg, #fb7185 0%, #e11d48 100%);
+	--button-empleados-color: #e11d48;
+	--button-empleados-color-dark: #e11d48;
+
+	--hero-servicios-color: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
+	--button-servicios-color: #d97706;
+	--button-servicios-color-dark: #b45309;
+
+	--hero-clientes-color: linear-gradient(135deg, #2dd4bf 0%, #0d9488 100%);
+	--button-clientes-color: #0f766e;
+	--button-clientes-color-dark: #0d9488;
+
+	--hero-vehiculos-color: linear-gradient(135deg, #818cf8 0%, #4f46e5 100%);
+	--button-vehiculos-color: #4f46e5;
+	--button-vehiculos-color-dark: #4338ca;
+
 	/* Status colors */
 	--color-pendiente: #e5e7eb;
 	--color-pendiente-text: #374151;
@@ -29,6 +52,9 @@
 	--brand-renault: linear-gradient(135deg, #ffcc00 0%, #ff9900 100%);
 	--brand-default: linear-gradient(135deg, #374151 0%, #6b7280 100%);
 
+	/* Rol gradients*/
+	--rol-mecanico: linear-gradient(135deg, #f97316 0%, #c2410c 100%);
+	--rol-administrador: linear-gradient(135deg, #475569 0%, #1e293b 100%);
 	/* Spacing */
 	--space-xs: 4px;
 	--space-sm: 8px;

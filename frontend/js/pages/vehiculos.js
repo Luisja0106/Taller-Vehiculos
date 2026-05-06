@@ -2,7 +2,7 @@ const grid = document.getElementById("cards-grid"); //grid in the index html
 
 function renderVehiculoCard(vehiculo) {
 	return `
-        <article class="card" onclick="window.location.href='./individual-pages/empleado.html?id=${vehiculo.id}'">
+        <article class="card" onclick="window.location.href='./individual-pages/vehiculo.html?id=${vehiculo.id}'">
           <div class="card-header" style="background: ${getBrandColor(vehiculo.marca)}">
             <span class="order-id">${vehiculo.id}</span>
           </div>

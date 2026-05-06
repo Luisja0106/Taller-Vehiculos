@@ -16,7 +16,7 @@ async function initializeOrderView() {
 
 	updatePageMetadata(empleadoData.id);
 	renderEmpleadoHeader(empleadoData);
-	renderEmpleadoDetails(empleadoData);
+	renderVehiculoDetails(empleadoData);
 	renderOrdenesList(empleadoOrdenes.ordenes);
 }
 
@@ -36,7 +36,7 @@ function renderEmpleadoHeader(empleado) {
 	heroSection.style.background = getRoleColor(empleado.rol);
 }
 
-function renderEmpleadoDetails(empleado) {
+function renderVehiculoDetails(empleado) {
 	// Información del Empledo
 	document.getElementById("nombre-empleado-header").textContent =
 		`${empleado.nombre}`;
@@ -73,9 +73,9 @@ function renderOrdenesList(ordenes) {
 		//TODO: poner bonito esto =>
 		const ordenHtml = `
             <div class="servicios-box">
-              <a class="servicio-name" href="orden.html?id=${orden.id}">ID: ${orden.id}</a>
-              <a class="servicio-name" href="orden.html?id=${orden.id}">Vehiculo: ${orden.vehiculo}</a>
-              <span class="servicio-name" href="orden.html?id=${orden.id}">Estado: ${getEstadoText(orden.estado)}</span>
+              <a class="servicio-name order-id" href="orden.html?id=${orden.id}">${orden.id}</a>
+              <a class="servicio-name order-vehiculo" href="orden.html?id=${orden.id}">${orden.vehiculo}</a>
+              <span class="servicio-name order-estado badge-${orden.estado} info-estado" href="orden.html?id=${orden.id}">${getEstadoText(orden.estado)}</span>
             </div>`;
 		container.insertAdjacentHTML("beforeend", ordenHtml);
 	});

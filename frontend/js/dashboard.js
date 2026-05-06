@@ -30,7 +30,7 @@ function renderOrderCard(orden) {
 
 function renderCards(ordenes) {
 	if (!ordenes || ordenes.length === 0) {
-		grid.innerHTML = "<p>No hay órdenes</p>";
+		grid.innerHTML = "<p id='cards-fallback'>No hay órdenes</p>";
 		return;
 	}
 

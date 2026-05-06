@@ -144,6 +144,16 @@ body {
 	padding: var(--space-xs) var(--space-sm);
 }
 
+.order-id {
+	font-weight: 700;
+	color: var(--color-primary);
+}
+
+.order-vehiculo {
+	font-weight: 500;
+	color: var(--color-text-muted);
+}
+
 .badge-PENDIENTE {
 	color: var(--color-pendiente-text);
 	background: var(--color-pendiente);

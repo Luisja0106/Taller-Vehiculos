@@ -7,6 +7,7 @@ async function initializeOrderView() {
 	}
 
 	const vehiculoData = await getVehiculo(vehiculoId);
+	const dueñoData = await getCliente(vehiculoData.clienteId);
 	const vehiculoOrdenes = await getOrdenesByVehiculo(vehiculoData.placa);
 
 	if (!vehiculoData) {
@@ -16,7 +17,7 @@ async function initializeOrderView() {
 
 	updatePageMetadata(vehiculoData.id);
 	renderVehiculoHeader(vehiculoData);
-	renderVehiculoDetails(vehiculoData);
+	renderVehiculoDetails(vehiculoData, dueñoData);
 	renderOrdenesList(vehiculoOrdenes);
 }
 
@@ -36,18 +37,18 @@ function renderVehiculoHeader(vehiculo) {
 	heroSection.style.background = getBrandColor(vehiculo.marca);
 }
 
-function renderVehiculoDetails(vehiculo) {
+function renderVehiculoDetails(vehiculo, cliente) {
 	// Información del vehiculo
 	document.getElementById("modelo-vehiculo-header").textContent =
-		`${vehiculo.marca} ${vehiculo.modelo} ${vehiculo.anio}`;
+		`${getMarcaText(vehiculo.marca)} ${vehiculo.modelo} ${vehiculo.anio}`;
 
 	// Nombre del vehiculo
 	document.getElementById("modelo-vehiculo").textContent =
-		`${vehiculo.marca} ${vehiculo.modelo}`;
+		`${getMarcaText(vehiculo.marca)} ${vehiculo.modelo}`;
 	//Placa del vehiculo
 	document.getElementById("placa-vehiculo").textContent = vehiculo.placa;
 	//vehiculo dueño
-	document.getElementById("dueño-vehiculo").textContent = vehiculo.clienteId;
+	document.getElementById("dueño-vehiculo").textContent = cliente.nombre;
 
 	//año vehiculo
 	document.getElementById("anio-vehiculo").textContent = vehiculo.anio;

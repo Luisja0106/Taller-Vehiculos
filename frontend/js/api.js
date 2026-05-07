@@ -51,5 +51,5 @@ async function getServicio(id) {
 }
 
 async function getOrdenesByEmpleado(empleadoId) {
-	return fetchData(`${API_URL}/ordenesSegunEmpleado/${empleadoId}`);
+	return fetchData(`${API_URL}/ordenes?empleadoId=${empleadoId}`);
 }

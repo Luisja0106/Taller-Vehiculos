@@ -98,32 +98,5 @@
   "servicios": [
     { "id": "SRV001", "nombre": "Cambio de aceite", "precio": 150000 },
     { "id": "SRV002", "nombre": "Rotación de neumáticos", "precio": 80000 }
-  ],
-  "ordenesSegunEmpleado": [
-    {
-      "id": "EMP001",
-      "ordenes": [
-        {
-          "id": "ORD20260425002",
-          "vehiculo": "Toyota Corolla",
-          "estado": "EN_PROCESO"
-        },
-        {
-          "id": "ORD20260423001",
-          "vehiculo": "Ford F-150",
-          "estado": "FINALIZADO"
-        }
-      ]
-    },
-    {
-      "id": "EMP002",
-      "ordenes": [
-        {
-          "id": "ORD20260424001",
-          "vehiculo": "Honda Civic",
-          "estado": "PENDIENTE"
-        }
-      ]
-    }
   ]
 }

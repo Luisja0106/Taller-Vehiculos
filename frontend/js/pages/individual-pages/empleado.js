@@ -17,7 +17,7 @@ async function initializeOrderView() {
 	updatePageMetadata(empleadoData.id);
 	renderEmpleadoHeader(empleadoData);
 	renderVehiculoDetails(empleadoData);
-	renderOrdenesList(empleadoOrdenes.ordenes);
+	renderOrdenesList(empleadoOrdenes);
 }
 
 function redirectToDashboard() {
@@ -70,11 +70,10 @@ function renderOrdenesList(ordenes) {
 	container.innerHTML = "";
 
 	ordenes.forEach((orden) => {
-		//TODO: poner bonito esto =>
 		const ordenHtml = `
             <div class="servicios-box">
               <a class="servicio-name order-id" href="orden.html?id=${orden.id}">${orden.id}</a>
-              <a class="servicio-name order-vehiculo" href="orden.html?id=${orden.id}">${orden.vehiculo}</a>
+              <a class="servicio-name order-vehiculo" href="orden.html?id=${orden.id}">${orden.vehiculoModelo}</a>
               <span class="servicio-name order-estado badge-${orden.estado} info-estado" href="orden.html?id=${orden.id}">${getEstadoText(orden.estado)}</span>
             </div>`;
 		container.insertAdjacentHTML("beforeend", ordenHtml);

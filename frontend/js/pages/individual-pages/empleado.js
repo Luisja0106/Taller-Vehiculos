@@ -58,7 +58,7 @@ function renderVehiculoDetails(empleado) {
 	document.getElementById("telefono-empleado").textContent = empleado.telefono;
 }
 
-function renderOrdenesList(ordenes) {
+async function renderOrdenesList(ordenes) {
 	const container = document.getElementById("ordenes-activas");
 
 	if (!ordenes || ordenes.length === 0) {
@@ -69,11 +69,17 @@ function renderOrdenesList(ordenes) {
 
 	container.innerHTML = "";
 
-	ordenes.forEach((orden) => {
+	const ordenesConVehiculo = await Promise.all(
+		ordenes.map(async (orden) => {
+			const vehiculo = await getVehiculoByPlaca(orden.vehiculoPlaca);
+			return { ...orden, vehiculoId: vehiculo.id };
+		}),
+	);
+	ordenesConVehiculo.forEach((orden) => {
 		const ordenHtml = `
             <div class="servicios-box">
               <a class="servicio-name order-id" href="orden.html?id=${orden.id}">${orden.id}</a>
-              <a class="servicio-name order-vehiculo" href="orden.html?id=${orden.id}">${orden.vehiculoModelo}</a>
+              <a class="servicio-name order-vehiculo" id="orden-vehiculo" href="vehiculo.html?id=${orden.vehiculoId}">${orden.vehiculoModelo}</a>
               <span class="servicio-name order-estado badge-${orden.estado} info-estado" href="orden.html?id=${orden.id}">${getEstadoText(orden.estado)}</span>
             </div>`;
 		container.insertAdjacentHTML("beforeend", ordenHtml);

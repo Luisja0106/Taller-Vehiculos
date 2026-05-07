@@ -149,7 +149,8 @@ body {
 	color: var(--color-primary);
 }
 
-.order-vehiculo {
+.order-vehiculo,
+.order-empleado {
 	font-weight: 500;
 	color: var(--color-text-muted);
 }

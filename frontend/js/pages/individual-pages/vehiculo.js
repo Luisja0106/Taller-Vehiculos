@@ -7,7 +7,7 @@ async function initializeOrderView() {
 	}
 
 	const vehiculoData = await getVehiculo(vehiculoId);
-	// const vehiculoOrdenes = await getOrdenesByEmpleado(vehiculoId);
+	const vehiculoOrdenes = await getOrdenesByVehiculo(vehiculoData.placa);
 
 	if (!vehiculoData) {
 		redirectToDashboard();
@@ -17,7 +17,7 @@ async function initializeOrderView() {
 	updatePageMetadata(vehiculoData.id);
 	renderVehiculoHeader(vehiculoData);
 	renderVehiculoDetails(vehiculoData);
-	// renderOrdenesList(vehiculoOrdenes.ordenes);
+	renderOrdenesList(vehiculoOrdenes);
 }
 
 function redirectToDashboard() {
@@ -72,9 +72,9 @@ function renderOrdenesList(ordenes) {
 		//TODO: poner bonito esto =>
 		const ordenHtml = `
             <div class="servicios-box">
-              <a class="servicio-name" href="orden.html?id=${orden.id}"> ${orden.id}</a>
-              <a class="servicio-name" href="orden.html?id=${orden.id}"> ${orden.vehiculo}</a>
-              <span class="servicio-name" href="orden.html?id=${orden.id}">${getEstadoText(orden.estado)}</span>
+              <a class="servicio-name order-id" href="orden.html?id=${orden.id}"> ${orden.id}</a>
+              <a class="servicio-name order-empleado" href="empleado.html?id=${orden.empleadoId}"> ${orden.empleadoNombre}</a>
+              <span class="servicio-name order-estado badge-${orden.estado}" href="orden.html?id=${orden.id}">${getEstadoText(orden.estado)}</span>
             </div>`;
 		container.insertAdjacentHTML("beforeend", ordenHtml);
 	});

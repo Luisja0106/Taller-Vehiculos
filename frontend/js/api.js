@@ -53,3 +53,17 @@ async function getServicio(id) {
 async function getOrdenesByEmpleado(empleadoId) {
 	return fetchData(`${API_URL}/ordenes?empleadoId=${empleadoId}`);
 }
+
+async function getOrdenesByVehiculo(vehiculoPlaca) {
+	return fetchData(`${API_URL}/ordenes?vehiculoPlaca=${vehiculoPlaca}`);
+}
+
+async function getVehiculoByPlaca(vehiculoPlaca) {
+	const vehicles = await fetchData(
+		`${API_URL}/vehiculos?placa=${vehiculoPlaca}`,
+	);
+
+	if (!vehicles || vehicles.length === 0) return null;
+
+	return vehicles[0];
+}

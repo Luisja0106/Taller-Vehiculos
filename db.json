@@ -41,6 +41,30 @@
       "marca": "TOYOTA",
       "anio": 2020,
       "clienteId": "CLI001"
+    },
+    {
+      "id": "VHC002",
+      "placa": "XYZ789",
+      "modelo": "Civic",
+      "marca": "HONDA",
+      "anio": 2019,
+      "clienteId": "CLI002"
+    },
+    {
+      "id": "VHC003",
+      "placa": "DEF456",
+      "modelo": "F-150",
+      "marca": "FORD",
+      "anio": 2021,
+      "clienteId": "CLI003"
+    },
+    {
+      "id": "VHC004",
+      "placa": "CYJ691",
+      "modelo": "Clio",
+      "marca": "RENAULT",
+      "anio": 2008,
+      "clienteId": "CLI003"
     }
   ],
   "ordenes": [

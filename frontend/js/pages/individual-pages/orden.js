@@ -7,6 +7,7 @@ async function initializeOrderView() {
 	}
 
 	const orderData = await getOrden(orderId);
+	const vehiculoData = await getVehiculoByPlaca(orderData.vehiculoPlaca);
 
 	if (!orderData) {
 		redirectToDashboard();
@@ -15,7 +16,7 @@ async function initializeOrderView() {
 
 	updatePageMetadata(orderData.id);
 	renderEmpleadoHeader(orderData);
-	renderEmpleadoDetails(orderData);
+	renderEmpleadoDetails(orderData, vehiculoData);
 	renderServicesList(orderData.servicios);
 }
 
@@ -35,7 +36,7 @@ function renderEmpleadoHeader(order) {
 	heroSection.style.background = getBrandColor(order.vehiculoMarca);
 }
 
-function renderEmpleadoDetails(order) {
+function renderEmpleadoDetails(order, vehiculo) {
 	// Información del Vehículo
 	document.getElementById("orden-vehiculo").textContent =
 		`${order.vehiculoModelo} ${order.vehiculoAnio}`;
@@ -50,6 +51,11 @@ function renderEmpleadoDetails(order) {
 		"orden-cliente",
 		order.clienteNombre,
 		`cliente.html?id=${order.clienteId}`,
+	);
+	setupLink(
+		"orden-vehiculo-link",
+		order.vehiculoModelo,
+		`vehiculo.html?id=${vehiculo.id}`,
 	);
 
 	// Estado y Fecha

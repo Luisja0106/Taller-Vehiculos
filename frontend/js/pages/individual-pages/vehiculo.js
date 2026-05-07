@@ -49,6 +49,8 @@ function renderVehiculoDetails(vehiculo, cliente) {
 	document.getElementById("placa-vehiculo").textContent = vehiculo.placa;
 	//vehiculo dueño
 	document.getElementById("dueño-vehiculo").textContent = cliente.nombre;
+	document.getElementById("dueño-vehiculo").href =
+		`cliente.html?id=${vehiculo.clienteId}`;
 
 	//año vehiculo
 	document.getElementById("anio-vehiculo").textContent = vehiculo.anio;

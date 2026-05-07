@@ -86,7 +86,7 @@ function renderServicesList(services) {
 	services.forEach((service) => {
 		const serviceHtml = `
             <div class="servicios-box">
-              <span class="servicio-name">${service.nombre}</span>
+              <a class="servicio-name" href="servicio.html?id=${service.id}">${service.nombre}</a>
               <button type="button" onclick="handleRemoveService('${service.id}')">Remover</button>
             </div>`;
 		container.insertAdjacentHTML("beforeend", serviceHtml);

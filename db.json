@@ -18,7 +18,7 @@
     },
     {
       "id": "EMP003",
-      "nombre": "Julian juil",
+      "nombre": "Julian Juil",
       "email": "juli@taller.com",
       "telefono": "3009476543",
       "rol": "ADMINISTRADOR",
@@ -31,6 +31,18 @@
       "nombre": "Juan López",
       "email": "juan@gmail.com",
       "telefono": "3101234567"
+    },
+    {
+      "id": "CLI002",
+      "nombre": "Ana Torres",
+      "email": "ana.torres@email.com",
+      "telefono": "3124455667"
+    },
+    {
+      "id": "CLI003",
+      "nombre": "Roberto Silva",
+      "email": "roberto.silva@email.com",
+      "telefono": "3158899001"
     }
   ],
   "vehiculos": [
@@ -75,9 +87,9 @@
       "vehiculoMarca": "TOYOTA",
       "vehiculoPlaca": "ABC123",
       "empleadoId": "EMP001",
-      "empleadoNombre": "Luis Perez",
+      "empleadoNombre": "Carlos Pérez",
       "clienteId": "CLI001",
-      "clienteNombre": "Carlos Ramírez",
+      "clienteNombre": "Juan López",
       "estado": "EN_PROCESO",
       "fechaEntrada": "25/04/2026",
       "fechaDeFinalizacion": null,
@@ -108,7 +120,7 @@
       "vehiculoMarca": "FORD",
       "vehiculoPlaca": "DEF456",
       "empleadoId": "EMP001",
-      "empleadoNombre": "Juan Pérez",
+      "empleadoNombre": "Carlos Pérez",
       "clienteId": "CLI003",
       "clienteNombre": "Roberto Silva",
       "estado": "FINALIZADO",
@@ -121,6 +133,7 @@
   ],
   "servicios": [
     { "id": "SRV001", "nombre": "Cambio de aceite", "precio": 150000 },
-    { "id": "SRV002", "nombre": "Rotación de neumáticos", "precio": 80000 }
+    { "id": "SRV002", "nombre": "Rotación de neumáticos", "precio": 80000 },
+    { "id": "SRV003", "nombre": "Revisión de frenos", "precio": 200000 }
   ]
 }

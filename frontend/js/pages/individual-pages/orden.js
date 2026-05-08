@@ -15,8 +15,8 @@ async function initializeOrderView() {
 	}
 
 	updatePageMetadata(orderData.id);
-	renderEmpleadoHeader(orderData);
-	renderEmpleadoDetails(orderData, vehiculoData);
+	renderOrdenHeader(orderData);
+	renderOrdenDetails(orderData, vehiculoData);
 	renderServicesList(orderData.servicios);
 }
 
@@ -28,7 +28,7 @@ function updatePageMetadata(id) {
 	document.title = `Orden ${id} - AutoService`;
 }
 
-function renderEmpleadoHeader(order) {
+function renderOrdenHeader(order) {
 	const heroSection = document.getElementById("hero");
 	const idDisplay = document.getElementById("orden-id");
 
@@ -36,7 +36,7 @@ function renderEmpleadoHeader(order) {
 	heroSection.style.background = getBrandColor(order.vehiculoMarca);
 }
 
-function renderEmpleadoDetails(order, vehiculo) {
+function renderOrdenDetails(order, vehiculo) {
 	// Información del Vehículo
 	document.getElementById("orden-vehiculo").textContent =
 		`${order.vehiculoModelo} ${order.vehiculoAnio}`;

@@ -144,11 +144,14 @@ body {
 	padding: var(--space-xs) var(--space-sm);
 }
 
+.vehiculo-modelo,
 .order-id {
 	font-weight: 700;
 	color: var(--color-primary);
 }
 
+.vehiculo-id,
+.vehiculo-placa,
 .order-vehiculo,
 .order-empleado {
 	font-weight: 500;
@@ -175,6 +178,7 @@ body {
 /* ==========================================================================
    5. SECCIÓN DE SERVICIOS (Lista dinámica)
    ========================================================================== */
+#vehiculos-posee,
 #servicios-lista,
 #ordenes-activas {
 	display: flex;

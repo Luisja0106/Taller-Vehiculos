@@ -67,3 +67,7 @@ async function getVehiculoByPlaca(vehiculoPlaca) {
 
 	return vehicles[0];
 }
+
+async function getVehiculosDeUnCliente(clienteId) {
+	return fetchData(`${API_URL}/vehiculos?clienteId=${clienteId}`);
+}

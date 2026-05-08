@@ -99,6 +99,21 @@
       ]
     },
     {
+      "id": "ORD20260425003",
+      "vehiculoModelo": "Toyota Corolla",
+      "vehiculoAnio": 2020,
+      "vehiculoMarca": "TOYOTA",
+      "vehiculoPlaca": "ABC123",
+      "empleadoId": "EMP002",
+      "empleadoNombre": "María García",
+      "clienteId": "CLI001",
+      "clienteNombre": "Juan López",
+      "estado": "EN_PROCESO",
+      "fechaEntrada": "25/04/2026",
+      "fechaDeFinalizacion": null,
+      "servicios": []
+    },
+    {
       "id": "ORD20260424001",
       "vehiculoModelo": "Honda Civic",
       "vehiculoAnio": 2019,

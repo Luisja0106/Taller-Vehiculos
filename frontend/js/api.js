@@ -95,3 +95,15 @@ async function fetchByPrefix(prefix, codigo) {
 			return null;
 	}
 }
+
+async function getMecanicos() {
+	return fetchData(`${API_URL}/empleados?rol=MECANICO`);
+}
+
+async function getOrdenesWithFilters(estado, empleadoId, vehiculoPlaca) {
+	let url = `${API_URL}/ordenes?`;
+	if (estado) url += `estado=${estado}&`;
+	if (empleadoId) url += `empleadoId=${empleadoId}&`;
+	if (vehiculoPlaca) url += `vehiculoPlaca=${vehiculoPlaca}&`;
+	return fetchData(url);
+}

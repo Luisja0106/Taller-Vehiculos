@@ -71,3 +71,10 @@ async function getVehiculoByPlaca(vehiculoPlaca) {
 async function getVehiculosDeUnCliente(clienteId) {
 	return fetchData(`${API_URL}/vehiculos?clienteId=${clienteId}`);
 }
+async function getOrdenesByServicio(servicioId) {
+	const ordenes = await getOrdenes();
+	if (!ordenes) return [];
+	return ordenes.filter((orden) =>
+		orden.servicios.some((s) => s.id === servicioId),
+	);
+}

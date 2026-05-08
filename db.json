@@ -126,7 +126,9 @@
       "estado": "PENDIENTE",
       "fechaEntrada": "24/04/2026",
       "fechaDeFinalizacion": null,
-      "servicios": []
+      "servicios": [
+        { "id": "SRV001", "nombre": "Cambio de aceite", "precio": 150000 }
+      ]
     },
     {
       "id": "ORD20260423001",

@@ -15,9 +15,9 @@ async function initializeOrderView() {
 	}
 
 	updatePageMetadata(clienteData.id);
-	renderClienteHeader(clienteData);
-	renderClienteDetails(clienteData);
-	renderVehiculosQuePosee(vehiculosDueno);
+	renderServicioHeader(clienteData);
+	renderServicioDetails(clienteData);
+	renderOrdenesQueUsa(vehiculosDueno);
 }
 
 function redirectToDashboard() {
@@ -28,7 +28,7 @@ function updatePageMetadata(id) {
 	document.title = `Cliente ${id} - AutoService`;
 }
 
-function renderClienteHeader(cliente) {
+function renderServicioHeader(cliente) {
 	const heroSection = document.getElementById("hero");
 	const idDisplay = document.getElementById("cliente-id");
 
@@ -36,7 +36,7 @@ function renderClienteHeader(cliente) {
 	heroSection.style.background = "var(--color-complementary-client)";
 }
 
-function renderClienteDetails(cliente) {
+function renderServicioDetails(cliente) {
 	// Información del Cliente
 	document.getElementById("nombre-cliente-header").textContent =
 		`${cliente.nombre}`;
@@ -49,7 +49,7 @@ function renderClienteDetails(cliente) {
 	document.getElementById("telefono-cliente").textContent = cliente.telefono;
 }
 
-async function renderVehiculosQuePosee(vehiculos) {
+async function renderOrdenesQueUsa(vehiculos) {
 	const container = document.getElementById("vehiculos-posee");
 
 	if (!vehiculos || vehiculos.length === 0) {
@@ -63,7 +63,6 @@ async function renderVehiculosQuePosee(vehiculos) {
 		const ordenHtml = `
             <div class="servicios-box">
               <a class="servicio-name vehiculo-modelo" href="vehiculo.html?id=${vehiculo.id}">${getMarcaText(vehiculo.marca)} ${vehiculo.modelo} ${vehiculo.anio}</a>
-              <a class="servicio-name vehiculo-placa" id="orden-vehiculo" href="vehiculo.html?id=${vehiculo.id}">${vehiculo.placa}</a>
               <a class="servicio-name vehiculo-id info-estado" href="vehiculo.html?id=${vehiculo.id}">${vehiculo.id}</a>
             </div>`;
 		container.insertAdjacentHTML("beforeend", ordenHtml);

@@ -78,3 +78,20 @@ async function getOrdenesByServicio(servicioId) {
 		orden.servicios.some((s) => s.id === servicioId),
 	);
 }
+
+async function fetchByPrefix(prefix, codigo) {
+	switch (prefix) {
+		case "EMP":
+			return await getEmpleado(codigo);
+		case "CLI":
+			return await getCliente(codigo);
+		case "ORD":
+			return await getOrden(codigo);
+		case "SRV":
+			return await getServicio(codigo);
+		case "VHC":
+			return await getVehiculo(codigo);
+		default:
+			return null;
+	}
+}

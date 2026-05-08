@@ -69,3 +69,15 @@ function getMarcaText(marcaRaw) {
 
 	return marca[marcaRaw] || marcaRaw;
 }
+
+function getPageByIdPrefix(IdPrefix) {
+	const pages = {
+		EMP: "empleado.html",
+		CLI: "cliente.html",
+		VHC: "vehiculo.html",
+		ORD: "orden.html",
+		SRV: "servicio.html",
+	};
+
+	return pages[IdPrefix];
+}

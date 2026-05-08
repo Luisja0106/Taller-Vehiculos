@@ -1,8 +1,10 @@
 .hero {
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 
+	gap: var(--space-md);
 	height: 180px;
 	width: 100%;
 }
@@ -42,6 +44,23 @@
 	cursor: pointer;
 	font-weight: 700;
 	transition: var(--transition);
+}
+
+#search-error {
+	display: none;
+	font-family: var(--font-family);
+	font-size: var(--font-size-md);
+	font-weight: 700;
+	color: var(--color-bg);
+	transition: var(--transition);
+
+	padding: var(--space-xs);
+	border-radius: var(--radius-sm);
+	background: var(--color-red);
+}
+
+#search-error.show {
+	display: block;
 }
 
 #button-dashboard-buscar {

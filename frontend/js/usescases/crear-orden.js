@@ -15,9 +15,11 @@ function openModalOverlay() {
 function cancelarCreation() {
 	const modalVehiculo = document.getElementById("modal-vehiculo");
 	const modalMecanico = document.getElementById("modal-mecanico");
+	const modalError = document.getElementById("modal-error");
 
 	modalMecanico.value = "";
 	modalVehiculo.value = "";
+	modalError.style.display = "none";
 
 	closeModalOverlay();
 }
@@ -44,22 +46,22 @@ async function setUpOverlay() {
 	});
 }
 
-//TODO: add the element modal error in html.
 async function confirmarCreacion() {
 	const vehiculoPlaca = modalVehiculo.value;
 	const empleadoId = modalMecanico.value;
+	const modalError = document.getElementById("modal-error");
 
 	if (!vehiculoPlaca || !empleadoId) {
-		document.getElementById("modal-error").textContent =
-			"Selecciona un vehículo y un mecánico";
+		modalError.textContent = "Selecciona un vehículo y un mecánico";
+		modalError.style.display = "block";
 		return;
 	}
 
 	const nuevaOrden = await crearOrden(vehiculoPlaca, empleadoId);
 
 	if (!nuevaOrden) {
-		document.getElementById("modal-error").textContent =
-			"Error al crear la orden, intenta de nuevo";
+		modalError.textContent = "Error al crear la orden, intenta de nuevo";
+		modalError.style.display = "block";
 		return;
 	}
 

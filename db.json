@@ -162,11 +162,6 @@
           "precio": 200000
         }
       ]
-    },
-    {
-      "vehiculoPlaca": "ABC123",
-      "empleadoId": "EMP001",
-      "id": "xsImnAVYtzI"
     }
   ],
   "servicios": [
@@ -188,3 +183,4 @@
   ],
   "$schema": "./node_modules/json-server/schema.json"
 }
+

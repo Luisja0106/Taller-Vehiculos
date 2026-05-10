@@ -72,7 +72,6 @@ function renderOrdenesList(ordenes) {
 	container.innerHTML = "";
 
 	ordenes.forEach((orden) => {
-		//TODO: poner bonito esto =>
 		const ordenHtml = `
             <div class="servicios-box">
               <a class="servicio-name order-id" href="orden.html?id=${orden.id}"> ${orden.id}</a>

@@ -11,6 +11,24 @@ async function fetchData(url) {
 	}
 }
 
+async function crearOrden(vehiculoPlaca, empleadoId) {
+	try {
+		const response = await fetch(`${API_URL}/ordenes`, {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({
+				vehiculoPlaca: vehiculoPlaca,
+				empleadoId: empleadoId,
+			}),
+		});
+		if (!response.ok)
+			throw new Error(`Error al crear orden: ${response.status}`);
+		return await response.json();
+	} catch (error) {
+		console.error("Error:", error);
+		return null;
+	}
+}
 async function getEmpleados() {
 	return fetchData(`${API_URL}/empleados`);
 }

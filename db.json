@@ -94,8 +94,16 @@
       "fechaEntrada": "25/04/2026",
       "fechaDeFinalizacion": null,
       "servicios": [
-        { "id": "SRV001", "nombre": "Cambio de aceite", "precio": 150000 },
-        { "id": "SRV002", "nombre": "Rotación de neumáticos", "precio": 80000 }
+        {
+          "id": "SRV001",
+          "nombre": "Cambio de aceite",
+          "precio": 150000
+        },
+        {
+          "id": "SRV002",
+          "nombre": "Rotación de neumáticos",
+          "precio": 80000
+        }
       ]
     },
     {
@@ -127,7 +135,11 @@
       "fechaEntrada": "24/04/2026",
       "fechaDeFinalizacion": null,
       "servicios": [
-        { "id": "SRV001", "nombre": "Cambio de aceite", "precio": 150000 }
+        {
+          "id": "SRV001",
+          "nombre": "Cambio de aceite",
+          "precio": 150000
+        }
       ]
     },
     {
@@ -144,13 +156,35 @@
       "fechaEntrada": "23/04/2026",
       "fechaDeFinalizacion": "25/04/2026",
       "servicios": [
-        { "id": "SRV003", "nombre": "Revisión de frenos", "precio": 200000 }
+        {
+          "id": "SRV003",
+          "nombre": "Revisión de frenos",
+          "precio": 200000
+        }
       ]
+    },
+    {
+      "vehiculoPlaca": "ABC123",
+      "empleadoId": "EMP001",
+      "id": "xsImnAVYtzI"
     }
   ],
   "servicios": [
-    { "id": "SRV001", "nombre": "Cambio de aceite", "precio": 150000 },
-    { "id": "SRV002", "nombre": "Rotación de neumáticos", "precio": 80000 },
-    { "id": "SRV003", "nombre": "Revisión de frenos", "precio": 200000 }
-  ]
+    {
+      "id": "SRV001",
+      "nombre": "Cambio de aceite",
+      "precio": 150000
+    },
+    {
+      "id": "SRV002",
+      "nombre": "Rotación de neumáticos",
+      "precio": 80000
+    },
+    {
+      "id": "SRV003",
+      "nombre": "Revisión de frenos",
+      "precio": 200000
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }

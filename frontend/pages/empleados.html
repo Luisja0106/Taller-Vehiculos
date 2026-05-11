@@ -61,6 +61,9 @@
           <button type="submit" id="button-empleados-buscar">Buscar</button>
         </form>
       </section>
+      <div class="creacion-entidad-container" id="nuevo-empleado-container">
+        <button type="button" class="creacion-entidad-button" id="nuevo-empleado-button">Nuevo empleado</button>
+      </div>
       <section id="cards-grid">
       </section>
     </section>
@@ -72,6 +75,53 @@
   <script src="../js/drawer.js"></script>
   <script src="../js/pages/empleados.js"></script>
   <script src="../js/app.js"></script>
+
+
+  <!--floating info for crear new cliente-->
+  <div id="modal-overlay">
+    <div class="modal-crear-entity">
+        <div class="modal-header">
+            <h2>Registrar Nuevo Empleado</h2>
+            <button type="button" id="modal-close">✕</button>
+        </div>
+        <form id="form-contratar-empleado">
+            <div class="form-group">
+                <label for="modal-nombre">Nombre</label>
+                <input type="text" id="modal-nombre" placeholder="Ingrese el Nombre del Empleado">
+            </div>
+            <div class="form-group">
+                <label for="modal-telefono">Telefono</label>
+                <input type="tel" id="modal-telefono" placeholder="Ingrese el Telefono del Empleado">
+            </div>
+            <div class="form-group">
+                <label for="modal-email">Email</label>
+                <input type="email" id="modal-email" placeholder="Ingrese el email del Empleado">
+            </div>
+            <div class="form-group">
+                <label for="modal-rol">Rol</label>
+                <select id="modal-rol">
+                    <option value="">Selecciona un rol</option>
+                    <option value="MECANICO">Mecanico</option>
+                    <option value="ADMINISTRADOR">Adminstrador</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="modal-contrato">Tipo de Contrato</label>
+                <select id="modal-contrato">
+                    <option value="">Selecciona un Tipo de Contrato</option>
+                    <option value="FIJO">Fijo</option>
+                    <option value="PARCIAL">Parcial</option>
+                </select>
+            </div>
+        </form>
+        <p id="modal-error" style='color: red; display: none;'></p>
+        <div class="modal-footer">
+            <button type="button" id="modal-cancel">Cancelar</button>
+            <button type="button" id="modal-confirm">Registrar Empleado</button>
+        </div>
+    </div>
+  </div>
+  <script src="../js/usescases/contratar-empleado.js"></script>
 </body>
 
 </html>

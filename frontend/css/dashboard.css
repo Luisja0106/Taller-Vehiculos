@@ -140,9 +140,13 @@
 }
 
 .creacion-entidad-container {
-	padding: 0 var(--space-lg);
+	padding: var(--space-lg);
 	width: 100vw;
 	display: flex;
+}
+
+#nueva-orden-container {
+	padding: 0 var(--space-lg);
 }
 
 .creacion-entidad-button {
@@ -167,6 +171,16 @@
 	background: var(--color-bg);
 	color: var(--color-primary);
 	border-color: var(--color-primary-dark);
+}
+
+#nuevo-empleado-button {
+	background: var(--hero-empleados-color);
+}
+
+#nuevo-empleado-button:hover {
+	background: var(--color-bg);
+	color: var(--button-empleados-color);
+	border-color: var(--button-empleados-color-dark);
 }
 
 #filters {
@@ -223,7 +237,7 @@
 	display: flex;
 }
 
-#modal-crear-orden {
+.modal-crear-entity {
 	background: var(--color-white);
 	border-radius: var(--radius-lg);
 	box-shadow: var(--shadow-drawer);
@@ -273,7 +287,8 @@
 	color: var(--color-text-muted);
 }
 
-.form-group select {
+.form-group select,
+.form-group input {
 	padding: var(--space-sm) var(--space-md);
 	border: 1px solid var(--color-border);
 	border-radius: var(--radius-sm);

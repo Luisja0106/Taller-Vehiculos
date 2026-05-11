@@ -13,8 +13,6 @@ function openModalOverlay() {
 }
 
 function cancelarCreation() {
-	const modalVehiculo = document.getElementById("modal-vehiculo");
-	const modalMecanico = document.getElementById("modal-mecanico");
 	const modalError = document.getElementById("modal-error");
 
 	modalMecanico.value = "";

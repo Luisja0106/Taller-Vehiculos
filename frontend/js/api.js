@@ -29,6 +29,28 @@ async function crearOrden(vehiculoPlaca, empleadoId) {
 		return null;
 	}
 }
+
+async function registrarEmpleado(nombre, telefono, email, rol, contrato) {
+	try {
+		const response = await fetch(`${API_URL}/empleados`, {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({
+				nombre: nombre,
+				email: email,
+				telefono: telefono,
+				rol: rol,
+				contrato: contrato,
+			}),
+		});
+		if (!response.ok)
+			throw new Error(`Error al crear empleado: ${response.status}`);
+		return await response.json();
+	} catch (error) {
+		console.error("Error:", error);
+		return null;
+	}
+}
 async function getEmpleados() {
 	return fetchData(`${API_URL}/empleados`);
 }

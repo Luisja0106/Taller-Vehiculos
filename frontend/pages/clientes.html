@@ -61,6 +61,9 @@
           <button type="submit" id="button-clientes-buscar">Buscar</button>
         </form>
       </section>
+      <div class="creacion-entidad-container" id="nuevo-cliente-container">
+        <button type="button" class="creacion-entidad-button" id="nuevo-cliente-button">Nuevo cliente</button>
+      </div>
       <section id="cards-grid">
       </section>
     </section>
@@ -72,6 +75,37 @@
   <script src="../js/drawer.js"></script>
   <script src="../js/pages/clientes.js"></script>
   <script src="../js/app.js"></script>
+
+
+  <!--floating info for crear new cliente-->
+  <div id="modal-overlay">
+    <div class="modal-crear-entity">
+        <div class="modal-header">
+            <h2>Registrar Nuevo Cliente</h2>
+            <button type="button" id="modal-close">✕</button>
+        </div>
+        <form id="form-contratar-cliente">
+            <div class="form-group">
+                <label for="modal-nombre">Nombre</label>
+                <input type="text" id="modal-nombre" placeholder="Ingrese el Nombre del Cliente">
+            </div>
+            <div class="form-group">
+                <label for="modal-telefono">Telefono</label>
+                <input type="tel" id="modal-telefono" placeholder="Ingrese el Telefono del Cliente">
+            </div>
+            <div class="form-group">
+                <label for="modal-email">Email</label>
+                <input type="email" id="modal-email" placeholder="Ingrese el email del Cliente">
+            </div>
+        </form>
+        <p id="modal-error" style='color: red; display: none;'></p>
+        <div class="modal-footer">
+            <button type="button" id="modal-cancel">Cancelar</button>
+            <button type="button" id="modal-confirm">Registrar Cliente</button>
+        </div>
+    </div>
+  </div>
+  <script src="../js/usescases/registrar-cliente.js"></script>
 </body>
 
 </html>

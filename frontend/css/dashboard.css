@@ -180,11 +180,20 @@
 #nuevo-vehiculo-button {
 	background: var(--hero-vehiculos-color);
 }
+#nuevo-cliente-button {
+	background: var(--hero-clientes-color);
+}
 
 #nuevo-vehiculo-button:hover {
 	background: var(--color-bg);
 	color: var(--button-vehiculos-color);
 	border-color: var(--button-vehiculos-color-dark);
+}
+
+#nuevo-cliente-button:hover {
+	background: var(--color-bg);
+	color: var(--button-clientes-color);
+	border-color: var(--button-clientes-color-dark);
 }
 
 #nuevo-empleado-button:hover {

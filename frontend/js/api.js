@@ -52,6 +52,26 @@ async function registrarEmpleado(nombre, telefono, email, rol, contrato) {
 	}
 }
 
+async function registrarCliente(nombre, telefono, email) {
+	try {
+		const response = await fetch(`${API_URL}/clientes`, {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({
+				nombre: nombre,
+				email: email,
+				telefono: telefono,
+			}),
+		});
+		if (!response.ok)
+			throw new Error(`Error al crear cliente: ${response.status}`);
+		return await response.json();
+	} catch (error) {
+		console.error("Error:", error);
+		return null;
+	}
+}
+
 async function registrarVehiculo(placa, idPropietario, modelo, marca, anio) {
 	try {
 		const response = await fetch(`${API_URL}/vehiculos`, {

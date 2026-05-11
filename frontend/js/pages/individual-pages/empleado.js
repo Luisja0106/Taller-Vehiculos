@@ -1,3 +1,4 @@
+const btnClose = document.getElementById("close-slide");
 async function initializeOrderView() {
 	const empleadoId = new URLSearchParams(window.location.search).get("id");
 
@@ -34,6 +35,10 @@ function renderEmpleadoHeader(empleado) {
 
 	idDisplay.textContent = empleado.id;
 	heroSection.style.background = getRoleColor(empleado.rol);
+}
+
+function closeSlide() {
+	window.location.href = "../empleados.html";
 }
 
 function renderVehiculoDetails(empleado) {
@@ -87,3 +92,4 @@ async function renderOrdenesList(ordenes) {
 }
 
 document.addEventListener("DOMContentLoaded", initializeOrderView);
+btnClose.addEventListener("click", closeSlide);

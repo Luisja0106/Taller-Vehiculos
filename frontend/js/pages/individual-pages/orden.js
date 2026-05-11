@@ -1,3 +1,5 @@
+const btnClose = document.getElementById("close-slide");
+
 async function initializeOrderView() {
 	const orderId = new URLSearchParams(window.location.search).get("id");
 
@@ -94,3 +96,4 @@ function renderServicesList(services) {
 }
 
 document.addEventListener("DOMContentLoaded", initializeOrderView);
+btnClose.addEventListener("click", redirectToDashboard);

@@ -51,6 +51,29 @@ async function registrarEmpleado(nombre, telefono, email, rol, contrato) {
 		return null;
 	}
 }
+
+async function registrarVehiculo(placa, idPropietario, modelo, marca, anio) {
+	try {
+		const response = await fetch(`${API_URL}/vehiculos`, {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({
+				placa: placa,
+				modelo: modelo,
+				marca: marca,
+				anio: anio,
+				clienteId: idPropietario,
+			}),
+		});
+		if (!response.ok)
+			throw new Error(`Error al crear vehiculo: ${response.status}`);
+		return await response.json();
+	} catch (error) {
+		console.error("Error:", error);
+		return null;
+	}
+}
+
 async function getEmpleados() {
 	return fetchData(`${API_URL}/empleados`);
 }

@@ -177,6 +177,16 @@
 	background: var(--hero-empleados-color);
 }
 
+#nuevo-vehiculo-button {
+	background: var(--hero-vehiculos-color);
+}
+
+#nuevo-vehiculo-button:hover {
+	background: var(--color-bg);
+	color: var(--button-vehiculos-color);
+	border-color: var(--button-vehiculos-color-dark);
+}
+
 #nuevo-empleado-button:hover {
 	background: var(--color-bg);
 	color: var(--button-empleados-color);

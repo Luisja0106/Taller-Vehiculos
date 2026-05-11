@@ -61,6 +61,9 @@
           <button type="submit" id="button-vehiculos-buscar">Buscar</button>
         </form>
       </section>
+      <div class="creacion-entidad-container" id="nuevo-vehiculo-container">
+        <button type="button" class="creacion-entidad-button" id="nuevo-vehiculo-button">Nuevo Vehiculo</button>
+      </div>
       <section id="cards-grid">
       </section>
     </section>
@@ -72,6 +75,54 @@
   <script src="../js/drawer.js"></script>
   <script src="../js/pages/vehiculos.js"></script>
   <script src="../js/app.js"></script>
+
+
+  <!--floating info for crear new vehiculo-->
+  <div id="modal-overlay">
+    <div class="modal-crear-entity">
+        <div class="modal-header">
+            <h2>Registrar Nuevo Vehiculo</h2>
+            <button type="button" id="modal-close">✕</button>
+        </div>
+        <form id="form-contratar-empleado">
+            <div class="form-group">
+                <label for="modal-placa">Placa</label>
+                <input type="text" id="modal-placa" placeholder="Ingrese la Placa del Vehiculo">
+            </div>
+            <div class="form-group">
+                <label for="modal-propietario">Propietario/a</label>
+                <select id="modal-propietario">
+                    <option value="">Selecciona el/la Propietario/a del Vehiculo</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="modal-modelo">Modelo</label>
+                <input type="text" id="modal-modelo" placeholder="Ingrese el Modelo del Vehiculo">
+            </div>
+            <div class="form-group">
+                <label for="modal-marca">Marca</label>
+                <select id="modal-marca">
+                    <option value="">Selecciona una Marca</option>
+                    <option value="CHEVROLET">Chevrolet</option>
+                    <option value="MAZDA">Mazda</option>
+                    <option value="TOYOTA">Toyota</option>
+                    <option value="RENAULT">Renault</option>
+                    <option value="KIA">Kia</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="modal-anio">Año</label>
+                <input type="number" id="modal-anio" min="1900" max="3000" placeholder="Ingrese el Año del Vehiculo">
+            </div>
+        </form>
+        <p id="modal-error" style='color: red; display: none;'></p>
+        <div class="modal-footer">
+            <button type="button" id="modal-cancel">Cancelar</button>
+            <button type="button" id="modal-confirm">Registrar Vehiculo</button>
+        </div>
+    </div>
+  </div>
+  <script src="../js/usescases/registrar-vehiculo.js"></script>
 </body>
 
 </html>

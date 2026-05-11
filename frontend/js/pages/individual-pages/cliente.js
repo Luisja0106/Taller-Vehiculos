@@ -1,3 +1,5 @@
+const btnClose = document.getElementById("close-slide");
+
 async function initializeOrderView() {
 	const clienteId = new URLSearchParams(window.location.search).get("id");
 
@@ -18,6 +20,10 @@ async function initializeOrderView() {
 	renderServicioHeader(clienteData);
 	renderServicioDetails(clienteData);
 	renderOrdenesQueUsa(vehiculosDueno);
+}
+
+function closeSlide() {
+	window.location.href = "../clientes.html";
 }
 
 function redirectToDashboard() {
@@ -70,3 +76,4 @@ async function renderOrdenesQueUsa(vehiculos) {
 }
 
 document.addEventListener("DOMContentLoaded", initializeOrderView);
+btnClose.addEventListener("click", closeSlide);

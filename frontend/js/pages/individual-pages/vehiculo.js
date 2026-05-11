@@ -1,3 +1,5 @@
+const btnClose = document.getElementById("close-slide");
+
 async function initializeOrderView() {
 	const vehiculoId = new URLSearchParams(window.location.search).get("id");
 
@@ -23,6 +25,10 @@ async function initializeOrderView() {
 
 function redirectToDashboard() {
 	window.location.href = "../../index.html";
+}
+
+function closeSlide() {
+	window.location.href = "../vehiculos.html";
 }
 
 function updatePageMetadata(id) {
@@ -83,3 +89,4 @@ function renderOrdenesList(ordenes) {
 }
 
 document.addEventListener("DOMContentLoaded", initializeOrderView);
+btnClose.addEventListener("click", closeSlide);

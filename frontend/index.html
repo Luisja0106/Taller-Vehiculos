@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AutoService</title>
+  <link rel="icon" type="image/webp" href="./assets/logo.webp">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/drawer.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/cards.css">
+</head>
+
+<body> <!--persistent objects-->
+  <header> <!-- Top bar-->
+    <div id="open-drawer">
+      AutoService
+    </div>
+    <nav>
+      <a id="goto-dashboard" href="#">Dashboard</a>
+      <a id="goto-inventario" href="#">Inventario</a>
+      <a id="goto-reportes" href="#">Reportes</a>
+    </nav>
+    <div>
+      <span>icon</span>
+      <span>UserName</span>
+    </div>
+  </header>
+
+  <aside id="drawer"> <!--left bar-->
+    <div>
+      <span>AutoService</span>
+      <button type="button" id="close-drawer">x</button>
+    </div>
+    <ul> <!-- list-->
+      <li>
+        <a id="goto-empleados" href="#">Empleados</a>
+      </li>
+      <li>
+        <a id="goto-vehiculos" href="#">Vehiculos</a>
+      </li>
+      <li>
+        <a id="goto-clientes" href="#">Clientes</a>
+      </li>
+      <li>
+        <a id="goto-servicios" href="#">Servicios</a>
+      </li>
+    </ul>
+  </aside>
+  <div id="overlay"> <!--dark background in the bar--> </div>
+
+  <main id="main-content">
+    <section id="view-dashboard">
+      <section class="hero" id="dashboard-hero">
+        <form id="search-form">
+          <input type="search" id="search-input" , placeholder="buscar por ID, vehiculo, empleado, etc">
+          <button type="submit" id="button-dashboard-buscar">Buscar</button>
+        </form>
+        <p id="search-error">Codigo No encontrado</p>
+      </section>
+      <section id="filters">
+        <div id="filters-header">
+          <span>⚙ Filtros</span>
+          <span id="filters-arrow">▼</span>
+        </div>
+        <div id="filters-body">
+          <div class="filter-group">
+            <label for="filter-estado">Estado</label>
+            <select id="filter-estado">
+              <option value="">Todos</option>
+              <option value="EN_PROCESO">En proceso</option>
+              <option value="PENDIENTE">Pendiente</option>
+              <option value="En_ESPERA_DE_PAGO">En espera de pago</option>
+              <option value="FINALIZADO">Finalizado</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label for="filter-mecanico">Mecánico</label>
+            <select id="filter-mecanico">
+              <option value="">Todos</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label for="filter-vehiculo">Vehiculo</label>
+            <select id="filter-vehiculo">
+              <option value="">Todos</option>
+            </select>
+          </div>
+        </div>
+      </section>
+      <div class="creacion-entidad-container" id="nueva-orden-container">
+        <button type="button" class="creacion-entidad-button" id="nueva-orden-button">Nueva orden</button>
+      </div>
+      <section id="cards-grid"></section>
+    </section>
+  </main>
+
+  <script src="js/api.js"></script>
+  <script src="js/helpers.js"></script>
+  <script src="js/navbar.js"></script>
+  <script src="js/drawer.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script src="js/usescases/search-bar.js"></script>
+  <script src="js/usescases/filters.js"></script>
+  <script src="js/app.js"></script>
+
+  <!--floating info for crear nueva orden-->
+  <div id="modal-overlay">
+    <div class="modal-crear-entity">
+        <div class="modal-header">
+            <h2>Nueva Orden de Trabajo</h2>
+            <button type="button" id="modal-close">✕</button>
+        </div>
+        <form id="form-crear-orden">
+            <div class="form-group">
+                <label for="modal-vehiculo">Vehículo</label>
+                <select id="modal-vehiculo">
+                    <option value="">Selecciona un vehículo</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="modal-mecanico">Mecánico</label>
+                <select id="modal-mecanico">
+                    <option value="">Selecciona un mecánico</option>
+                </select>
+            </div>
+        </form>
+        <p id="modal-error" style='color: red; display: none;'></p>
+        <div class="modal-footer">
+            <button type="button" id="modal-cancel">Cancelar</button>
+            <button type="button" id="modal-confirm">Crear Orden</button>
+        </div>
+    </div>
+  </div>
+  <script src="js/usescases/crear-orden.js"></script>
+</body>
+
+</html>

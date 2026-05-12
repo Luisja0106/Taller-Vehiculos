@@ -30,6 +30,25 @@ async function crearOrden(vehiculoPlaca, empleadoId) {
 	}
 }
 
+async function crearServicio(nombre, precio) {
+	try {
+		const response = await fetch(`${API_URL}/servicios`, {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({
+				nombre: nombre,
+				precio: precio,
+			}),
+		});
+		if (!response.ok)
+			throw new Error(`Error al crear servicio: ${response.status}`);
+		return await response.json();
+	} catch (error) {
+		console.error("Error:", error);
+		return null;
+	}
+}
+
 async function registrarEmpleado(nombre, telefono, email, rol, contrato) {
 	try {
 		const response = await fetch(`${API_URL}/empleados`, {

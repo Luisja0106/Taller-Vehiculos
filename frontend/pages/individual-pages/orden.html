@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AutoService</title>
+  <link rel="icon" type="image/webp" href="../../assets/logo.webp">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/main.css">
+  <link rel="stylesheet" href="../../css/navbar.css">
+  <link rel="stylesheet" href="../../css/detail.css">
+  <link rel="stylesheet" href="../../css/drawer.css">
+</head>
+
+
+<body>
+  <header> <!-- Top bar-->
+    <div id="open-drawer">
+      AutoService
+    </div>
+    <nav>
+      <a id="goto-dashboard" href="#">Dashboard</a>
+      <a id="goto-inventario" href="#">Inventario</a>
+      <a id="goto-reportes" href="#">Reportes</a>
+    </nav>
+    <div>
+      <span>icon</span>
+      <span>UserName</span>
+    </div>
+  </header>
+  <aside id="drawer"> <!--left bar-->
+    <div>
+      <span>AutoService</span>
+      <button type="button" id="close-drawer">x</button>
+    </div>
+    <ul> <!-- list-->
+      <li>
+        <a id="goto-empleados" href="#">Empleados</a>
+      </li>
+      <li>
+        <a id="goto-vehiculos" href="#">Vehiculos</a>
+      </li>
+      <li>
+        <a id="goto-clientes" href="#">Clientes</a>
+      </li>
+      <li>
+        <a id="goto-servicios" href="#">Servicios</a>
+      </li>
+    </ul>
+  </aside>
+  <div id="overlay"> <!--dark background in the bar--> </div>
+
+  <main id="main-content">
+    <section id="view-dashboard">
+      <section id="order-header">
+        <section class="id-bar" id="orden-id-bar">
+          <span id="orden-id"></span>
+          <button id="close-slide" type="button">X</button>
+        </section>
+        <section id="hero">
+          <span id="orden-vehiculo"></span>
+        </section>
+      </section>
+      <section id="slides">
+        <section id="information" class="slide">
+          <div class="title-slide">Informacion del trabajo</div>
+          <div class="info-row">
+            <span class="info-label">Vehiculo</span>
+            <a class="info-result" id="orden-vehiculo-link" href="#"></a>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Dueño del vehiculo</span>
+            <a class="info-result" id="orden-cliente" href="#"></a>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Mecanico asignado</span>
+            <a class="info-result" id="orden-mecanico" href="#"></a>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Estado</span>
+            <span class="info-estado" id="orden-estado"></span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Fecha de inicio </span>
+            <span class="info-result" id="orden-fecha"></span>
+          </div>
+        </section>
+        <section id="servicios" class="slide">
+          <div class="title-slide">Servicios Aplicados</div>
+          <div id="servicios-lista"></div>
+        </section>
+        <section id="actions" class="slide">
+          <div class="title-slide">Acciones</div>
+          <div id="button-grid"><button class="button-action" type="button">Cambiar Estado</button><button
+              class="button-action" type="button">Cambiar Mecanico</button><button class="button-action"
+              type="button">Registrar pago</button><button class="button-action" type="button">Añadir Servicio</button>
+          </div>
+        </section>
+      </section>
+    </section>
+  </main>
+
+  <script src="../../js/api.js"></script>
+  <script src="../../js/helpers.js"></script>
+  <script src="../../js/navbar.js"></script>
+  <script src="../../js/drawer.js"></script>
+  <script src="../../js/pages/individual-pages/orden.js"></script>
+  <script src="../../js/app.js"></script>
+
+</body>
+</html>

@@ -65,6 +65,26 @@ body {
 	cursor: pointer;
 }
 
+.eliminar-entidad-btn {
+	padding: var(--space-md);
+	width: 100%;
+	max-width: 800px;
+	font-family: var(--font-family);
+	font-size: var(--font-size-lg);
+	font-weight: 700;
+	border-radius: var(--radius-md);
+	background-color: #ff2f23;
+	border-color: transparent;
+	color: var(--color-bg);
+	cursor: pointer;
+}
+
+.eliminar-entidad-btn:hover {
+	border-color: #ff2f23;
+	background-color: var(--color-bg);
+	color: #ff2f23;
+}
+
 #hero {
 	display: flex;
 	align-items: flex-end;

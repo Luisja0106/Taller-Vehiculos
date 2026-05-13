@@ -5,6 +5,10 @@ import com.taller.domain.enums.Marca;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -15,8 +19,9 @@ import jakarta.persistence.Table;
 public class VehiculoJpaEntity {
 
   @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id_vehiculo")
-  private String id;
+  private Long id;
 
   @Column(nullable = false, unique = true)
   private String placa;
@@ -28,8 +33,9 @@ public class VehiculoJpaEntity {
   @Column(nullable = false)
   private String modelo;
 
-  @Column(columnDefinition = "varchar(20) not null check (marca in ('CHEVROLET', 'MAZDA', 'TOYOTA', 'RENAULT', 'KIA'))")
-  private String marca;
+  @Enumerated(EnumType.STRING)
+  @Column(nullable = false)
+  private Marca marca;
 
   @Column(columnDefinition = "smallint not null check (anio >= 1886)")
   private int anio;
@@ -38,16 +44,14 @@ public class VehiculoJpaEntity {
   }
 
   public VehiculoJpaEntity(Vehiculo vehiculo) {
-    // this.id = ??
     this.placa = vehiculo.getPlaca().getValue();
     this.cliente = new ClienteJpaEntity(vehiculo.getDueño());
     this.modelo = vehiculo.getModelo();
-    this.marca = vehiculo.getMarca().toString();
+    this.marca = vehiculo.getMarcaEnum();
     this.anio = vehiculo.getAnio();
   }
 
   public Vehiculo toDomain() {
-    Marca marca = Marca.buscarPorNombre(this.marca).get();
     return Vehiculo.crear(placa, cliente.toDomain(), modelo, marca, anio).getValue();
   }
 }

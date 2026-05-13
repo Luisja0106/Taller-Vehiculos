@@ -6,6 +6,8 @@ import com.taller.domain.enums.TipoDeContrato;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
@@ -26,11 +28,13 @@ public class EmpleadoJpaEntity {
   @Column(nullable = false, unique = true)
   private String email;
 
-  @Column(columnDefinition = "varchar(20) not null check (rol in ( 'MECANICO', 'ADMINISTRADOR'))")
-  private String rol;
+  @Enumerated(EnumType.STRING)
+  @Column(nullable = false)
+  private Rol rol;
 
-  @Column(columnDefinition = "varchar(20) not null check (tipo_contrato in ('FIJO','PARCIAL'))")
-  private String tipo_contrato;
+  @Enumerated(EnumType.STRING)
+  @Column(name = "tipo_contrato", nullable = false)
+  private TipoDeContrato contrato;
 
   protected EmpleadoJpaEntity() {
 
@@ -41,13 +45,11 @@ public class EmpleadoJpaEntity {
     this.nombre = empleado.getNombre();
     this.telefono = empleado.getTelefono().getValue();
     this.email = empleado.getEmail().toString();
-    this.rol = empleado.getRol().toString();
-    this.tipo_contrato = empleado.getContrato().toString();
+    this.rol = empleado.getRol();
+    this.contrato = empleado.getContrato();
   }
 
   public Empleado toDomain() {
-    Rol rol = Rol.buscarPorNombre(this.rol).get();
-    TipoDeContrato contrato = TipoDeContrato.buscarPorNombre(this.tipo_contrato).get();
     return Empleado.crear(id, nombre, telefono, email, rol, contrato).getValue();
   }
 }

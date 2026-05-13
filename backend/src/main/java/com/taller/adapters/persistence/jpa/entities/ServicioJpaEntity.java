@@ -21,7 +21,7 @@ public class ServicioJpaEntity {
   private String nombre;
 
   @Column(nullable = false)
-  private String precio; // should be a String for use the BigDecimal constructor, right?
+  private BigDecimal precio;
 
   protected ServicioJpaEntity() {
   }
@@ -29,11 +29,10 @@ public class ServicioJpaEntity {
   public ServicioJpaEntity(Servicio servicio) {
     this.id = servicio.getId();
     this.nombre = servicio.getNombreDelServicio();
-    this.precio = servicio.getPrecio().toString();
+    this.precio = servicio.getPrecio();
   }
 
   public Servicio toDomain() {
-    BigDecimal precio = new BigDecimal(this.precio);
     return Servicio.crear(id, nombre, precio).getValue();
   }
 }

@@ -11,7 +11,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "servicio")
-public class ServiciosJpaEntity {
+public class ServicioJpaEntity {
 
   @Id
   @Column(name = "servicio_id")
@@ -23,10 +23,10 @@ public class ServiciosJpaEntity {
   @Column(nullable = false)
   private String precio; // should be a String for use the BigDecimal constructor, right?
 
-  protected ServiciosJpaEntity() {
+  protected ServicioJpaEntity() {
   }
 
-  public ServiciosJpaEntity(Servicio servicio) {
+  public ServicioJpaEntity(Servicio servicio) {
     this.id = servicio.getId();
     this.nombre = servicio.getNombreDelServicio();
     this.precio = servicio.getPrecio().toString();

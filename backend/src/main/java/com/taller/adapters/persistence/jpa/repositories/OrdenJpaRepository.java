@@ -26,4 +26,6 @@ public interface OrdenJpaRepository extends JpaRepository<OrdenJpaEntity, String
       @Param("estado") EstadoDelTrabajo estado,
       @Param("mecanicoId") String mecanicoId,
       @Param("placa") String placa);
+
+  // TODO: Implement the rest of the querys for the reports
 }

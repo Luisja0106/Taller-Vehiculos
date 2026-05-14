@@ -10,6 +10,9 @@ import com.taller.domain.interfaces.IErrorApp;
 import com.taller.domain.repositories.IServicioRepository;
 import com.taller.domain.utils.Result;
 
+import org.springframework.stereotype.Repository;
+
+@Repository
 public class ServicioRepositoryImpl implements IServicioRepository {
 
   private final ServicioJpaRepository jpaRepository;

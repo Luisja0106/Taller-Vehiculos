@@ -11,6 +11,11 @@ import com.taller.domain.repositories.IVehiculoRepository;
 import com.taller.domain.utils.Result;
 import com.taller.domain.valueobjects.Placa;
 
+import org.springframework.stereotype.Repository;
+
+import jakarta.transaction.Transactional;
+
+@Repository
 public class VehiculoRepositoryImpl implements IVehiculoRepository {
 
   private final VehiculoJpaRepository jpaRepo;
@@ -53,6 +58,7 @@ public class VehiculoRepositoryImpl implements IVehiculoRepository {
         .toList();
   }
 
+  @Transactional
   @Override
   public void eliminar(Placa placa) {
     jpaRepo.deleteByPlaca(placa.getValue());

@@ -16,7 +16,7 @@ public interface OrdenJpaRepository extends JpaRepository<OrdenJpaEntity, String
 
   Optional<OrdenJpaEntity> findByVehiculoPlaca(String placa);
 
-  Optional<OrdenJpaEntity> findByEstadoDelTrabajo(EstadoDelTrabajo estado);
+  Optional<OrdenJpaEntity> findByEstado(EstadoDelTrabajo estado);
 
   @Query("SELECT o FROM OrdenJpaEntity o WHERE " +
       "(:estado IS NULL OR o.estado = :estado) AND " +

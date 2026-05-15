@@ -3,9 +3,11 @@ package com.taller.adapters.web;
 import java.util.Map;
 
 import com.taller.usecases.ActualizarVehiculo;
+import com.taller.usecases.BuscarVehiculoPorPlaca;
 import com.taller.usecases.ListarVehiculos;
 import com.taller.usecases.RegistrarVehiculo;
 import com.taller.usecases.dto.ActualizarVehiculoCMD;
+import com.taller.usecases.dto.BuscarVehiculoPorPlacaCMD;
 import com.taller.usecases.dto.CrearVehiculoCMD;
 import com.taller.usecases.dto.ListarVehiculosCMD;
 
@@ -26,12 +28,14 @@ public class VehiculoController {
   private final RegistrarVehiculo registrarVehiculo;
   private final ActualizarVehiculo actualizarVehiculo;
   private final ListarVehiculos listarVehiculos;
+  private final BuscarVehiculoPorPlaca buscarVehiculoPorPlaca;
 
   public VehiculoController(RegistrarVehiculo registrarVehiculo, ActualizarVehiculo actualizarVehiculo,
-      ListarVehiculos listarVehiculos) {
+      ListarVehiculos listarVehiculos, BuscarVehiculoPorPlaca buscarVehiculoPorPlaca) {
     this.registrarVehiculo = registrarVehiculo;
     this.actualizarVehiculo = actualizarVehiculo;
     this.listarVehiculos = listarVehiculos;
+    this.buscarVehiculoPorPlaca = buscarVehiculoPorPlaca;
   }
 
   @GetMapping
@@ -49,8 +53,15 @@ public class VehiculoController {
 
   @GetMapping("/{placa}")
   public ResponseEntity<?> buscarPorPlaca(@PathVariable String placa) {
-    // TODO: create the buscar vehiculo por placa use case
-    return ResponseEntity.notFound().build();
+    var input = new BuscarVehiculoPorPlacaCMD(placa);
+    var resultado = buscarVehiculoPorPlaca.ejecutar(input);
+
+    if (!resultado.isSuccess) {
+      return ResponseEntity.internalServerError()
+          .body(Map.of("error", resultado.getError().getMessage()));
+    }
+
+    return ResponseEntity.ok(resultado.getValue());
   }
 
   @PostMapping

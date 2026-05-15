@@ -3,9 +3,12 @@ package com.taller.adapters.web;
 import java.util.Map;
 
 import com.taller.usecases.ActualizarEmpleado;
+import com.taller.usecases.BuscarEmpleadoPorId;
 import com.taller.usecases.ContratarEmpleado;
 import com.taller.usecases.ListarEmpleados;
 import com.taller.usecases.dto.ActualizarEmpleadoCMD;
+import com.taller.usecases.dto.BuscarClientePorIdCMD;
+import com.taller.usecases.dto.BuscarEmpleadoPorIdCMD;
 import com.taller.usecases.dto.CrearEmpleadoCMD;
 
 import org.springframework.http.ResponseEntity;
@@ -24,12 +27,14 @@ public class EmpleadoController {
   private final ContratarEmpleado contratarEmpleado;
   private final ActualizarEmpleado actualizarEmpleado;
   private final ListarEmpleados listarEmpleados;
+  private final BuscarEmpleadoPorId buscarEmpleadoPorId;
 
   public EmpleadoController(ContratarEmpleado contratarEmpleado, ActualizarEmpleado actualizarEmpleado,
-      ListarEmpleados listarEmpleados) {
+      ListarEmpleados listarEmpleados, BuscarEmpleadoPorId buscarEmpleadoPorId) {
     this.contratarEmpleado = contratarEmpleado;
     this.actualizarEmpleado = actualizarEmpleado;
     this.listarEmpleados = listarEmpleados;
+    this.buscarEmpleadoPorId = buscarEmpleadoPorId;
   }
 
   @GetMapping
@@ -44,9 +49,14 @@ public class EmpleadoController {
 
   @GetMapping("/{id}")
   public ResponseEntity<?> buscarPorId(@PathVariable String id) {
-    // TODO: create the empleado buscar por id use case and implement here
-    // var empleado =
-    return ResponseEntity.notFound().build();
+    var input = new BuscarEmpleadoPorIdCMD(id);
+    var resultado = buscarEmpleadoPorId.ejecutar(input);
+
+    if (!resultado.isSuccess) {
+      return ResponseEntity.internalServerError()
+          .body(Map.of("error", resultado.getError().getMessage()));
+    }
+    return ResponseEntity.ok(resultado.getValue());
   }
 
   @PostMapping

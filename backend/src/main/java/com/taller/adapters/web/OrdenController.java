@@ -4,12 +4,14 @@ import java.util.Map;
 
 import com.taller.usecases.AgregarServicio;
 import com.taller.usecases.AvanzarEstadoDeOrden;
+import com.taller.usecases.BuscarOrdenPorId;
 import com.taller.usecases.CrearOrden;
 import com.taller.usecases.ListarOrdenes;
 import com.taller.usecases.ReasignarEmpleadoAOrden;
 import com.taller.usecases.RegistrarPago;
 import com.taller.usecases.dto.AgregarServicioCMD;
 import com.taller.usecases.dto.AvanzarEstadoDeOrdenCMD;
+import com.taller.usecases.dto.BuscarOrdenPorIdCMD;
 import com.taller.usecases.dto.CrearOrdenCMD;
 import com.taller.usecases.dto.ListarOrdenesCMD;
 import com.taller.usecases.dto.ReasignarEmpleadoAOrdenCMD;
@@ -35,16 +37,18 @@ public class OrdenController {
   private final AgregarServicio agregarServicio;
   private final ReasignarEmpleadoAOrden reasignarEmpleadoAOrden;
   private final RegistrarPago registrarPago;
+  private final BuscarOrdenPorId buscarOrdenPorId;
 
   public OrdenController(CrearOrden crearOrden, ListarOrdenes listarOrdenes,
       AvanzarEstadoDeOrden avanzarEstadoDeOrden, AgregarServicio agregarServicio,
-      ReasignarEmpleadoAOrden reasignarEmpleadoAOrden, RegistrarPago registrarPago) {
+      ReasignarEmpleadoAOrden reasignarEmpleadoAOrden, RegistrarPago registrarPago, BuscarOrdenPorId buscarOrdenPorId) {
     this.crearOrden = crearOrden;
     this.listarOrdenes = listarOrdenes;
     this.avanzarEstadoDeOrden = avanzarEstadoDeOrden;
     this.agregarServicio = agregarServicio;
     this.reasignarEmpleadoAOrden = reasignarEmpleadoAOrden;
     this.registrarPago = registrarPago;
+    this.buscarOrdenPorId = buscarOrdenPorId;
   }
 
   @GetMapping
@@ -65,8 +69,14 @@ public class OrdenController {
 
   @GetMapping("/{id}")
   public ResponseEntity<?> buscarPorId(@PathVariable String id) {
-    // TODO: create the buscar orden por id use case
-    return ResponseEntity.notFound().build();
+    var input = new BuscarOrdenPorIdCMD(id);
+    var resultado = buscarOrdenPorId.ejecutar(input);
+
+    if (!resultado.isSuccess) {
+      return ResponseEntity.internalServerError()
+          .body(Map.of("error", resultado.getError().getMessage()));
+    }
+    return ResponseEntity.ok(resultado.getValue());
   }
 
   @PostMapping

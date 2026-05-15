@@ -1,39 +1,9 @@
 package com.taller.external.config;
 
-import com.taller.adapters.persistence.jpa.implementations.ClienteRepositoryImpl;
-import com.taller.adapters.persistence.jpa.implementations.EmpleadoRepositoryImpl;
-import com.taller.adapters.persistence.jpa.implementations.OrdenRepositoryImpl;
-import com.taller.adapters.persistence.jpa.implementations.ServicioRepositoryImpl;
-import com.taller.adapters.persistence.jpa.implementations.VehiculoRepositoryImpl;
-import com.taller.adapters.persistence.jpa.repositories.ClienteJpaRepository;
-import com.taller.adapters.persistence.jpa.repositories.EmpleadoJpaRepository;
-import com.taller.adapters.persistence.jpa.repositories.OrdenJpaRepository;
-import com.taller.adapters.persistence.jpa.repositories.ServicioJpaRepository;
-import com.taller.adapters.persistence.jpa.repositories.VehiculoJpaRepository;
-import com.taller.domain.repositories.IClienteRepository;
-import com.taller.domain.repositories.IEmpleadoRepository;
-import com.taller.domain.repositories.IOrdenRepository;
-import com.taller.domain.repositories.IServicioRepository;
-import com.taller.domain.repositories.IVehiculoRepository;
-import com.taller.usecases.ActualizarCliente;
-import com.taller.usecases.ActualizarEmpleado;
-import com.taller.usecases.ActualizarServicio;
-import com.taller.usecases.ActualizarVehiculo;
-import com.taller.usecases.AgregarServicio;
-import com.taller.usecases.AvanzarEstadoDeOrden;
-import com.taller.usecases.BuscarPorCodigo;
-import com.taller.usecases.ContratarEmpleado;
-import com.taller.usecases.CrearOrden;
-import com.taller.usecases.CrearServicio;
-import com.taller.usecases.ListarClientes;
-import com.taller.usecases.ListarEmpleados;
-import com.taller.usecases.ListarOrdenes;
-import com.taller.usecases.ListarServicios;
-import com.taller.usecases.ListarVehiculos;
-import com.taller.usecases.ReasignarEmpleadoAOrden;
-import com.taller.usecases.RegistrarCliente;
-import com.taller.usecases.RegistrarPago;
-import com.taller.usecases.RegistrarVehiculo;
+import com.taller.adapters.persistence.jpa.implementations.*;
+import com.taller.adapters.persistence.jpa.repositories.*;
+import com.taller.domain.repositories.*;
+import com.taller.usecases.*;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -173,6 +143,31 @@ public class AppConfig {
   @Bean
   public ListarOrdenes listarOrdenes(IOrdenRepository repo) {
     return new ListarOrdenes(repo);
+  }
+
+  @Bean
+  public BuscarClientePorId buscarClientePorId(IClienteRepository repo) {
+    return new BuscarClientePorId(repo);
+  }
+
+  @Bean
+  public BuscarEmpleadoPorId buscarEmpleadoPorId(IEmpleadoRepository repo) {
+    return new BuscarEmpleadoPorId(repo);
+  }
+
+  @Bean
+  public BuscarServicioPorId buscarServicioPorId(IServicioRepository repo) {
+    return new BuscarServicioPorId(repo);
+  }
+
+  @Bean
+  public BuscarOrdenPorId buscarOrdenPorId(IOrdenRepository repo) {
+    return new BuscarOrdenPorId(repo);
+  }
+
+  @Bean
+  public BuscarVehiculoPorPlaca buscarVehiculoPorPlaca(IVehiculoRepository repo) {
+    return new BuscarVehiculoPorPlaca(repo);
   }
 
 }

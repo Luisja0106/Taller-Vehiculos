@@ -3,9 +3,11 @@ package com.taller.adapters.web;
 import java.util.Map;
 
 import com.taller.usecases.ActualizarCliente;
+import com.taller.usecases.BuscarClientePorId;
 import com.taller.usecases.ListarClientes;
 import com.taller.usecases.RegistrarCliente;
 import com.taller.usecases.dto.ActualizarClienteCMD;
+import com.taller.usecases.dto.BuscarClientePorIdCMD;
 import com.taller.usecases.dto.CrearClienteCMD;
 
 import org.springframework.http.ResponseEntity;
@@ -24,12 +26,14 @@ public class ClienteController {
   private final RegistrarCliente registrarCliente;
   private final ActualizarCliente actualizarCliente;
   private final ListarClientes listarClientes;
+  private final BuscarClientePorId buscarClientePorId;
 
   public ClienteController(RegistrarCliente registrarCliente, ActualizarCliente actualizarCliente,
-      ListarClientes listarClientes) {
+      ListarClientes listarClientes, BuscarClientePorId buscarClientePorId) {
     this.registrarCliente = registrarCliente;
     this.actualizarCliente = actualizarCliente;
     this.listarClientes = listarClientes;
+    this.buscarClientePorId = buscarClientePorId;
   }
 
   @GetMapping
@@ -46,8 +50,15 @@ public class ClienteController {
 
   @GetMapping("/{id}")
   public ResponseEntity<?> buscarPorId(@PathVariable String id) {
-    // TODO: craeate the buscar cliente por id use case
-    return ResponseEntity.notFound().build();
+    var input = new BuscarClientePorIdCMD(id);
+    var resultado = buscarClientePorId.ejecutar(input);
+
+    if (!resultado.isSuccess) {
+      return ResponseEntity.internalServerError()
+          .body(Map.of("error", resultado.getError().getMessage()));
+    }
+
+    return ResponseEntity.ok(resultado.getValue());
   }
 
   @PostMapping

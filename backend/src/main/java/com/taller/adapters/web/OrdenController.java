@@ -56,6 +56,19 @@ public class OrdenController {
       @RequestParam(required = false) String estado,
       @RequestParam(required = false) String placaVehiculo,
       @RequestParam(required = false) String empleadoId) {
+
+    // FIXME: arreglar esta query
+    if (estado == null && placaVehiculo == null && empleadoId == null) {
+      var resultado = listarOrdenes.ejecutar(null);
+
+      if (!resultado.isSuccess) {
+        return ResponseEntity.internalServerError()
+            .body(Map.of("error", resultado.getError().getMessage()));
+      }
+
+      return ResponseEntity.ok(resultado.getValue());
+
+    }
     var input = new ListarOrdenesCMD(estado, placaVehiculo, empleadoId);
     var resultado = listarOrdenes.ejecutar(input);
 

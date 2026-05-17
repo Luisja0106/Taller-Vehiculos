@@ -31,17 +31,17 @@ public class CrearOrden {
       return Result.error(new ActionError("Error los datos no pueden ser nulos"));
     }
     String id = setId();
-    var placa = Placa.crear(input.vehiculoPlaca());
+    var placa = Placa.crear(input.id_vehiculo());
     if (!placa.isSuccess)
       return Result.error(placa.getError());
     var vehiculo = vehiculoRepository.buscarPorPlaca(placa.getValue());
     if (vehiculo.isEmpty()) {
       return Result.error(new VerificationError("Error vehiculo no encontrado"));
     }
-    if (input.empleadoACargoId() == null) {
+    if (input.id_mecanico() == null) {
       return Result.error(new VerificationError("Error el ID del Empleado a cargo no puede ser nulo"));
     }
-    var empleadoACargo = empleadoRepository.buscarPorId(input.empleadoACargoId().trim());
+    var empleadoACargo = empleadoRepository.buscarPorId(input.id_mecanico().trim());
     if (empleadoACargo.isEmpty())
       return Result.error(new VerificationError("Error Empleado a cargo no encontrado"));
 

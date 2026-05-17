@@ -39,8 +39,9 @@ public class AppConfig {
 
   @Bean
   @Primary
-  public IOrdenRepository ordenRepository(OrdenJpaRepository jpa) {
-    return new OrdenRepositoryImpl(jpa);
+  public IOrdenRepository ordenRepository(OrdenJpaRepository jpaRepo, VehiculoJpaRepository vehiculoJpaRepo,
+      EmpleadoJpaRepository empleadoJpaRepo) {
+    return new OrdenRepositoryImpl(jpaRepo, vehiculoJpaRepo, empleadoJpaRepo);
   }
 
   // NOTE: use cases

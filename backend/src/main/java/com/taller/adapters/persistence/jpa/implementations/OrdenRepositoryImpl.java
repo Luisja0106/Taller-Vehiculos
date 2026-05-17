@@ -5,8 +5,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import com.taller.adapters.persistence.jpa.entities.EmpleadoJpaEntity;
 import com.taller.adapters.persistence.jpa.entities.OrdenJpaEntity;
+import com.taller.adapters.persistence.jpa.entities.VehiculoJpaEntity;
+import com.taller.adapters.persistence.jpa.repositories.EmpleadoJpaRepository;
 import com.taller.adapters.persistence.jpa.repositories.OrdenJpaRepository;
+import com.taller.adapters.persistence.jpa.repositories.VehiculoJpaRepository;
 import com.taller.domain.entities.OrdenDeTrabajo;
 import com.taller.domain.enums.EstadoDelTrabajo;
 import com.taller.domain.interfaces.IErrorApp;
@@ -21,14 +25,27 @@ import org.springframework.stereotype.Repository;
 public class OrdenRepositoryImpl implements IOrdenRepository {
 
   private final OrdenJpaRepository jpaRepo;
+  private final VehiculoJpaRepository vehiculoJpaRepo;
+  private final EmpleadoJpaRepository empleadoJpaRepo;
 
-  public OrdenRepositoryImpl(OrdenJpaRepository jpaRepo) {
+  public OrdenRepositoryImpl(OrdenJpaRepository jpaRepo, VehiculoJpaRepository vehiculoJpaRepo,
+      EmpleadoJpaRepository empleadoJpaRepo) {
     this.jpaRepo = jpaRepo;
+    this.vehiculoJpaRepo = vehiculoJpaRepo;
+    this.empleadoJpaRepo = empleadoJpaRepo;
   }
 
   @Override
   public Result<OrdenDeTrabajo, IErrorApp> guardar(OrdenDeTrabajo orden) {
-    OrdenJpaEntity entity = new OrdenJpaEntity(orden);
+    VehiculoJpaEntity vehiculoEntity = vehiculoJpaRepo
+        .findByPlaca(orden.getVehiculo().getPlaca().toString())
+        .orElseThrow(() -> new IllegalStateException("Vehiculo no encontrado en DB"));
+
+    EmpleadoJpaEntity empleadoEntity = empleadoJpaRepo
+        .findById(orden.getEmpleadoACargo().getId())
+        .orElseThrow(() -> new IllegalStateException("Empleado no encontrado en DB"));
+
+    OrdenJpaEntity entity = new OrdenJpaEntity(orden, vehiculoEntity, empleadoEntity);
     jpaRepo.save(entity);
     return Result.success(orden);
   }

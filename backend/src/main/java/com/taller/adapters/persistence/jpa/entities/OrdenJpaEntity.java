@@ -75,6 +75,20 @@ public class OrdenJpaEntity {
         .collect(Collectors.toList());
   }
 
+  public OrdenJpaEntity(OrdenDeTrabajo orden, VehiculoJpaEntity vehiculo, EmpleadoJpaEntity empleado) {
+    this.id = orden.getID();
+    this.vehiculo = vehiculo;
+    this.mecanico = empleado;
+    this.fechaEntrada = orden.getFechaEntrada();
+    this.fechaSalida = orden.getFechaDeFinalizacion();
+    this.fechaPago = orden.getFechaDePago();
+    this.valorVenta = orden.getValorVenta();
+    this.estado = orden.getEstado();
+    this.servicios = orden.getServicios().stream()
+        .map(s -> new ServicioJpaEntity((Servicio) s))
+        .collect(Collectors.toList());
+  }
+
   public OrdenDeTrabajo toDomain() {
     List<IServicio> servicios = this.servicios.stream()
         .map(ServicioJpaEntity::toDomain)

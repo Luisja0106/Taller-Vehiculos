@@ -15,7 +15,6 @@ import com.taller.adapters.persistence.jpa.repositories.VehiculoJpaRepository;
 import com.taller.domain.entities.OrdenDeTrabajo;
 import com.taller.domain.enums.EstadoDelTrabajo;
 import com.taller.domain.interfaces.IErrorApp;
-import com.taller.domain.interfaces.IServicio;
 import com.taller.domain.repositories.IOrdenRepository;
 import com.taller.domain.utils.Result;
 import com.taller.usecases.output.EntidadConteo;

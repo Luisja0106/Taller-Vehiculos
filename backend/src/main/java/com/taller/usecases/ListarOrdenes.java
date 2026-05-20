@@ -25,7 +25,7 @@ public class ListarOrdenes {
     }
     EstadoDelTrabajo estado = null;
     if (input.estado() != null && !input.estado().isBlank()) {
-      var estadoOPT = EstadoDelTrabajo.buscarPorNombre(input.estado());
+      var estadoOPT = EstadoDelTrabajo.buscarPorNombre(input.estado().trim());
       if (estadoOPT.isEmpty()) {
         return Result.error(new VerificationError("Error estado invalido"));
       }
@@ -34,11 +34,11 @@ public class ListarOrdenes {
     String empleado = null;
     if (input.empleadoId() != null && !input.empleadoId().isBlank()) { // for verify that the empleado wouldn't be a
                                                                        // empty String
-      empleado = input.empleadoId();
+      empleado = input.empleadoId().trim();
     }
     String vehiculo = null;
     if (input.placaVehiculo() != null && !input.placaVehiculo().isBlank()) {
-      vehiculo = input.placaVehiculo();
+      vehiculo = input.placaVehiculo().trim();
     }
     List<OrdenDeTrabajo> list = ordenRepository.listarConFiltros(estado, empleado, vehiculo);
 

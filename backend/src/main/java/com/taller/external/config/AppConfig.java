@@ -171,4 +171,29 @@ public class AppConfig {
     return new BuscarVehiculoPorPlaca(repo);
   }
 
+  @Bean
+  public RemoveCliente removeCliente(IClienteRepository clienteRepo) {
+    return new RemoveCliente(clienteRepo);
+  }
+
+  @Bean
+  public RemoveEmpleado removeEmpleado(IEmpleadoRepository empleadoRepo, IOrdenRepository ordenRepo) {
+    return new RemoveEmpleado(empleadoRepo, ordenRepo);
+  }
+
+  @Bean
+  public RemoveServicio removeServicio(IServicioRepository servicioRepo, IOrdenRepository ordenRepo) {
+    return new RemoveServicio(servicioRepo, ordenRepo);
+  }
+
+  @Bean
+  public RemoveVehiculo removeVehiculo(IVehiculoRepository vehiculoRepo, IOrdenRepository ordenRepo) {
+    return new RemoveVehiculo(vehiculoRepo, ordenRepo);
+  }
+
+  @Bean
+  public RemoveOrden removeOrden(IOrdenRepository ordenRepo) {
+    return new RemoveOrden(ordenRepo);
+  }
+
 }

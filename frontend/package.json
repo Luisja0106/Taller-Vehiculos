@@ -1,0 +1,7 @@
+{
+  "name": "autoservice-fronted",
+  "scripts": {
+    "dev": "browser-sync start --server --files '**/*.html, **/*.css, **/*.js'",
+    "api": "json-server ../db.json --port 3002"
+  }
+}

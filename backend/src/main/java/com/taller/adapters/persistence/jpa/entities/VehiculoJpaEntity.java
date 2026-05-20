@@ -1,5 +1,6 @@
 package com.taller.adapters.persistence.jpa.entities;
 
+import com.taller.domain.entities.Cliente;
 import com.taller.domain.entities.Vehiculo;
 import com.taller.domain.enums.Marca;
 
@@ -53,5 +54,15 @@ public class VehiculoJpaEntity {
 
   public Vehiculo toDomain() {
     return Vehiculo.crear(placa, cliente.toDomain(), modelo, marca, anio).getValue();
+  }
+
+  public Vehiculo toDomain(Cliente duenio) {
+    var resultado = Vehiculo.crear(this.placa, duenio, this.modelo, this.marca, this.anio);
+
+    if (!resultado.isSuccess) {
+      throw new IllegalStateException("Error reconstruyendo el vehiculo" + resultado.getError());
+    }
+
+    return resultado.getValue();
   }
 }

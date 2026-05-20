@@ -25,7 +25,7 @@ public class RemoveCliente {
     }
     Cliente cliente = resultado.get();
 
-    if (!cliente.getVehiculos().isEmpty() || cliente.getVehiculos() != null) {
+    if (!cliente.getVehiculos().isEmpty()) {
       return Result.error(new VerificationError(
           "Error el cliente cuenta con vehiculos, cambie el dueño de los vehiculos o eliminelos y vuelva a intentar"));
     }

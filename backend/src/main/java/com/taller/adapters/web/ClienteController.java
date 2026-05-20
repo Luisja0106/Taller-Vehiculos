@@ -7,11 +7,13 @@ import com.taller.usecases.ActualizarCliente;
 import com.taller.usecases.BuscarClientePorId;
 import com.taller.usecases.ListarClientes;
 import com.taller.usecases.RegistrarCliente;
+import com.taller.usecases.RemoveCliente;
 import com.taller.usecases.dto.ActualizarClienteCMD;
 import com.taller.usecases.dto.BuscarClientePorIdCMD;
 import com.taller.usecases.dto.CrearClienteCMD;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,13 +30,15 @@ public class ClienteController {
   private final ActualizarCliente actualizarCliente;
   private final ListarClientes listarClientes;
   private final BuscarClientePorId buscarClientePorId;
+  private final RemoveCliente removeCliente;
 
   public ClienteController(RegistrarCliente registrarCliente, ActualizarCliente actualizarCliente,
-      ListarClientes listarClientes, BuscarClientePorId buscarClientePorId) {
+      ListarClientes listarClientes, BuscarClientePorId buscarClientePorId, RemoveCliente removeCliente) {
     this.registrarCliente = registrarCliente;
     this.actualizarCliente = actualizarCliente;
     this.listarClientes = listarClientes;
     this.buscarClientePorId = buscarClientePorId;
+    this.removeCliente = removeCliente;
   }
 
   @GetMapping
@@ -86,6 +90,18 @@ public class ClienteController {
           .body(Map.of("error", resultado.getError().getMessage()));
     }
     return ResponseEntity.ok(ClienteDTO.from(resultado.getValue()));
+  }
+
+  @DeleteMapping("/{id}")
+  public ResponseEntity<?> eliminar(@PathVariable String id) {
+    var resultado = removeCliente.ejecutar(id);
+
+    if (!resultado.isSuccess) {
+      return ResponseEntity.badRequest()
+          .body(Map.of("error", resultado.getError().getMessage()));
+    }
+
+    return ResponseEntity.status(204).build();
   }
 
 }

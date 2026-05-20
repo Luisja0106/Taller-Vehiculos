@@ -7,11 +7,13 @@ import com.taller.usecases.ActualizarServicio;
 import com.taller.usecases.BuscarServicioPorId;
 import com.taller.usecases.CrearServicio;
 import com.taller.usecases.ListarServicios;
+import com.taller.usecases.RemoveServicio;
 import com.taller.usecases.dto.ActualizarServicioCMD;
 import com.taller.usecases.dto.BuscarServicioPorIdCMD;
 import com.taller.usecases.dto.CrearServicioCMD;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,13 +30,15 @@ public class ServicioController {
   private final ActualizarServicio actualizarServicio;
   private final ListarServicios listarServicios;
   private final BuscarServicioPorId buscarServicioPorId;
+  private final RemoveServicio removeServicio;
 
   public ServicioController(CrearServicio crearServicio, ActualizarServicio actualizarServicio,
-      ListarServicios listarServicios, BuscarServicioPorId buscarServicioPorId) {
+      ListarServicios listarServicios, BuscarServicioPorId buscarServicioPorId, RemoveServicio removeServicio) {
     this.crearServicio = crearServicio;
     this.actualizarServicio = actualizarServicio;
     this.listarServicios = listarServicios;
     this.buscarServicioPorId = buscarServicioPorId;
+    this.removeServicio = removeServicio;
   }
 
   @GetMapping
@@ -86,6 +90,18 @@ public class ServicioController {
           .body(Map.of("error", resultado.getError().getMessage()));
     }
     return ResponseEntity.ok(ServicioDTO.from(resultado.getValue()));
+  }
+
+  @DeleteMapping("/{id}")
+  public ResponseEntity<?> delete(@PathVariable String id) {
+    var resultado = removeServicio.ejecutar(id);
+
+    if (!resultado.isSuccess) {
+      return ResponseEntity.badRequest()
+          .body(Map.of("error", resultado.getError().getMessage()));
+    }
+    return ResponseEntity.status(204).build();
+
   }
 
 }

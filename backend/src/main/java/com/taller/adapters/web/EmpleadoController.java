@@ -7,11 +7,13 @@ import com.taller.usecases.ActualizarEmpleado;
 import com.taller.usecases.BuscarEmpleadoPorId;
 import com.taller.usecases.ContratarEmpleado;
 import com.taller.usecases.ListarEmpleados;
+import com.taller.usecases.RemoveEmpleado;
 import com.taller.usecases.dto.ActualizarEmpleadoCMD;
 import com.taller.usecases.dto.BuscarEmpleadoPorIdCMD;
 import com.taller.usecases.dto.CrearEmpleadoCMD;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,13 +30,15 @@ public class EmpleadoController {
   private final ActualizarEmpleado actualizarEmpleado;
   private final ListarEmpleados listarEmpleados;
   private final BuscarEmpleadoPorId buscarEmpleadoPorId;
+  private final RemoveEmpleado removeEmpleado;
 
   public EmpleadoController(ContratarEmpleado contratarEmpleado, ActualizarEmpleado actualizarEmpleado,
-      ListarEmpleados listarEmpleados, BuscarEmpleadoPorId buscarEmpleadoPorId) {
+      ListarEmpleados listarEmpleados, BuscarEmpleadoPorId buscarEmpleadoPorId, RemoveEmpleado removeEmpleado) {
     this.contratarEmpleado = contratarEmpleado;
     this.actualizarEmpleado = actualizarEmpleado;
     this.listarEmpleados = listarEmpleados;
     this.buscarEmpleadoPorId = buscarEmpleadoPorId;
+    this.removeEmpleado = removeEmpleado;
   }
 
   @GetMapping
@@ -82,6 +86,18 @@ public class EmpleadoController {
           .body(Map.of("error", resultado.getError().getMessage()));
     }
     return ResponseEntity.ok(EmpleadoDTO.from(resultado.getValue()));
+  }
+
+  @DeleteMapping("/{id}")
+  public ResponseEntity<?> eliminar(@PathVariable String id) {
+    var resultado = removeEmpleado.ejecutar(id);
+    if (!resultado.isSuccess) {
+      return ResponseEntity.badRequest()
+          .body(Map.of("error", resultado.getError().getMessage()));
+    }
+
+    return ResponseEntity.status(204).build();
+
   }
 
 }

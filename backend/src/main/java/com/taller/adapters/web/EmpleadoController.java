@@ -2,12 +2,12 @@ package com.taller.adapters.web;
 
 import java.util.Map;
 
+import com.taller.adapters.web.dto.EmpleadoDTO;
 import com.taller.usecases.ActualizarEmpleado;
 import com.taller.usecases.BuscarEmpleadoPorId;
 import com.taller.usecases.ContratarEmpleado;
 import com.taller.usecases.ListarEmpleados;
 import com.taller.usecases.dto.ActualizarEmpleadoCMD;
-import com.taller.usecases.dto.BuscarClientePorIdCMD;
 import com.taller.usecases.dto.BuscarEmpleadoPorIdCMD;
 import com.taller.usecases.dto.CrearEmpleadoCMD;
 
@@ -44,7 +44,10 @@ public class EmpleadoController {
       return ResponseEntity.internalServerError()
           .body(Map.of("error", resultado.getError().getMessage()));
     }
-    return ResponseEntity.ok(resultado.getValue());
+    var dtos = resultado.getValue().stream()
+        .map(EmpleadoDTO::from)
+        .toList();
+    return ResponseEntity.ok(dtos);
   }
 
   @GetMapping("/{id}")
@@ -56,7 +59,7 @@ public class EmpleadoController {
       return ResponseEntity.internalServerError()
           .body(Map.of("error", resultado.getError().getMessage()));
     }
-    return ResponseEntity.ok(resultado.getValue());
+    return ResponseEntity.ok(EmpleadoDTO.from(resultado.getValue()));
   }
 
   @PostMapping
@@ -67,7 +70,7 @@ public class EmpleadoController {
       return ResponseEntity.badRequest()
           .body(Map.of("error", resultado.getError().getMessage()));
     }
-    return ResponseEntity.status(201).body(resultado.getValue());
+    return ResponseEntity.status(201).body(EmpleadoDTO.from(resultado.getValue()));
   }
 
   @PatchMapping("/{id}")
@@ -81,7 +84,7 @@ public class EmpleadoController {
       return ResponseEntity.badRequest()
           .body(Map.of("error", resultado.getError().getMessage()));
     }
-    return ResponseEntity.ok(resultado.getValue());
+    return ResponseEntity.ok(EmpleadoDTO.from(resultado.getValue()));
   }
 
 }

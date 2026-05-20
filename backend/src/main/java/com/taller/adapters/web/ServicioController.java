@@ -2,6 +2,7 @@ package com.taller.adapters.web;
 
 import java.util.Map;
 
+import com.taller.adapters.web.dto.ServicioDTO;
 import com.taller.usecases.ActualizarServicio;
 import com.taller.usecases.BuscarServicioPorId;
 import com.taller.usecases.CrearServicio;
@@ -45,7 +46,11 @@ public class ServicioController {
           .body(Map.of("error", resultado.getError().getMessage()));
     }
 
-    return ResponseEntity.ok(resultado.getValue());
+    var dtos = resultado.getValue().stream()
+        .map(ServicioDTO::from)
+        .toList();
+
+    return ResponseEntity.ok(dtos);
   }
 
   @GetMapping("/{id}")
@@ -58,7 +63,7 @@ public class ServicioController {
           .body(Map.of("error", resultado.getError().getMessage()));
     }
 
-    return ResponseEntity.ok(resultado.getValue());
+    return ResponseEntity.ok(ServicioDTO.from(resultado.getValue()));
   }
 
   @PostMapping
@@ -69,7 +74,7 @@ public class ServicioController {
       return ResponseEntity.badRequest()
           .body(Map.of("error", resultado.getError().getMessage()));
     }
-    return ResponseEntity.status(201).body(resultado.getValue());
+    return ResponseEntity.status(201).body(ServicioDTO.from(resultado.getValue()));
   }
 
   @PatchMapping("/{id}")
@@ -80,7 +85,7 @@ public class ServicioController {
       return ResponseEntity.badRequest()
           .body(Map.of("error", resultado.getError().getMessage()));
     }
-    return ResponseEntity.ok(resultado.getValue());
+    return ResponseEntity.ok(ServicioDTO.from(resultado.getValue()));
   }
 
 }

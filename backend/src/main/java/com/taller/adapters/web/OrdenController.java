@@ -2,6 +2,7 @@ package com.taller.adapters.web;
 
 import java.util.Map;
 
+import com.taller.adapters.web.dto.OrdenDTO;
 import com.taller.usecases.AgregarServicio;
 import com.taller.usecases.AvanzarEstadoDeOrden;
 import com.taller.usecases.BuscarOrdenPorId;
@@ -65,7 +66,11 @@ public class OrdenController {
           .body(Map.of("error", resultado.getError().getMessage()));
     }
 
-    return ResponseEntity.ok(resultado.getValue());
+    var dtos = resultado.getValue().stream()
+        .map(OrdenDTO::from)
+        .toList();
+
+    return ResponseEntity.ok(dtos);
   }
 
   @GetMapping("/{id}")
@@ -77,7 +82,7 @@ public class OrdenController {
       return ResponseEntity.internalServerError()
           .body(Map.of("error", resultado.getError().getMessage()));
     }
-    return ResponseEntity.ok(resultado.getValue());
+    return ResponseEntity.ok(OrdenDTO.from(resultado.getValue()));
   }
 
   @PostMapping
@@ -88,7 +93,7 @@ public class OrdenController {
       return ResponseEntity.badRequest()
           .body(Map.of("error", resultado.getError().getMessage()));
     }
-    return ResponseEntity.status(201).body(resultado.getValue());
+    return ResponseEntity.status(201).body(OrdenDTO.from(resultado.getValue()));
   }
 
   @PatchMapping("/{id}/avanzar")
@@ -100,7 +105,7 @@ public class OrdenController {
       return ResponseEntity.badRequest()
           .body(Map.of("error", resultado.getError().getMessage()));
     }
-    return ResponseEntity.ok(resultado.getValue());
+    return ResponseEntity.ok(OrdenDTO.from(resultado.getValue()));
   }
 
   @PostMapping("/{id}/servicios")
@@ -112,7 +117,7 @@ public class OrdenController {
       return ResponseEntity.badRequest()
           .body(Map.of("error", resultado.getError().getMessage()));
     }
-    return ResponseEntity.ok(resultado.getValue());
+    return ResponseEntity.ok(OrdenDTO.from(resultado.getValue()));
   }
 
   @PatchMapping("/{id}/empleado")
@@ -124,7 +129,7 @@ public class OrdenController {
       return ResponseEntity.badRequest()
           .body(Map.of("error", resultado.getError().getMessage()));
     }
-    return ResponseEntity.ok(resultado.getValue());
+    return ResponseEntity.ok(OrdenDTO.from(resultado.getValue()));
   }
 
   @PostMapping("/{id}/pago")
@@ -136,7 +141,7 @@ public class OrdenController {
       return ResponseEntity.badRequest()
           .body(Map.of("error", resultado.getError().getMessage()));
     }
-    return ResponseEntity.ok(resultado.getValue());
+    return ResponseEntity.ok(OrdenDTO.from(resultado.getValue()));
   }
 
 }

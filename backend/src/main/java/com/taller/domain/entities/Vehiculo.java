@@ -92,6 +92,10 @@ public class Vehiculo {
     return marca.toString();
   }
 
+  public Marca getMarcaEnum() {
+    return marca;
+  }
+
   /**
    * Reasigna el vehículo a un nuevo dueño y sincroniza la relación
    * agregando este vehículo a la lista del nuevo cliente.

@@ -36,7 +36,7 @@ public class RegistrarVehiculo {
     if (marca.isEmpty()) {
       return Result.error(new VerificationError("Marca invalida"));
     }
-    var cliente = clienteRepository.buscarPorId(input.idCliente());
+    var cliente = clienteRepository.buscarPorId(input.id_cliente());
     if (cliente.isEmpty()) {
       return Result.error(new VerificationError("Cliente no encontrado"));
     }

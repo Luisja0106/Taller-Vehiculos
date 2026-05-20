@@ -43,6 +43,28 @@ public class OrdenDeTrabajo {
     this.estado = EstadoDelTrabajo.PENDIENTE;
   }
 
+  private OrdenDeTrabajo(String iD, Vehiculo vehiculo, Empleado empleadoACargo, LocalDateTime fechaEntrada,
+      LocalDateTime fechaDeFinalizacion, LocalDateTime fechaDePago, BigDecimal valorVenta,
+      EstadoDelTrabajo estado, List<IServicio> servicios) {
+    ID = iD;
+    this.vehiculo = vehiculo;
+    this.empleadoACargo = empleadoACargo;
+    this.servicios = new ArrayList<>(servicios);
+    this.fechaEntrada = fechaEntrada;
+    this.fechaDeFinalizacion = fechaDeFinalizacion;
+    this.fechaDePago = fechaDePago;
+    this.valorVenta = valorVenta;
+    this.estado = estado;
+  }
+
+  public static OrdenDeTrabajo reconstruir(String iD, Vehiculo vehiculo, Empleado empleadoACargo,
+      LocalDateTime fechaEntrada,
+      LocalDateTime fechaDeFinalizacion, LocalDateTime fechaDePago, BigDecimal valorVenta,
+      EstadoDelTrabajo estado, List<IServicio> servicios) {
+    return new OrdenDeTrabajo(iD, vehiculo, empleadoACargo, fechaEntrada, fechaDeFinalizacion, fechaDePago, valorVenta,
+        estado, servicios);
+  }
+
   /**
    * Crea una orden de trabajo validando que todos sus datos sean validos.
    *

@@ -40,3 +40,5 @@ work/
 # --- OS specific ---
 .DS_Store
 Thumbs.db
+/.postman
+/postman/globals

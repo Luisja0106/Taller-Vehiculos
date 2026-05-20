@@ -1,4 +1,4 @@
 package com.taller.usecases.output;
 
-public record EntidadConteo(String id, String nombre, int cantidad) {
+public record EntidadConteo(String id, String nombre, long cantidad) {
 }

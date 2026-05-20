@@ -1,125 +1,117 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
-
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-
-  <!-- ─── PROJECT IDENTITY ──────────────────────────────────────────────── -->
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>4.0.6</version>
+    <relativePath /> <!-- lookup parent from repository -->
+  </parent>
   <groupId>com.taller</groupId>
-  <artifactId>taller-automotriz</artifactId>
-  <version>1.0-SNAPSHOT</version>
-  <packaging>jar</packaging>
-
-  <name>Taller Automotriz</name>
-  <description>Sistema de gestión para taller automotriz - Hexagonal Architecture</description>
-
-  <!-- ─── GLOBAL PROPERTIES ────────────────────────────────────────────── -->
+  <artifactId>taller</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name />
+  <description />
+  <url />
+  <licenses>
+    <license />
+  </licenses>
+  <developers>
+    <developer />
+  </developers>
+  <scm>
+    <connection />
+    <developerConnection />
+    <tag />
+    <url />
+  </scm>
   <properties>
-    <!-- Java version -->
-    <java.version>26</java.version>
-    <maven.compiler.source>${java.version}</maven.compiler.source>
-    <maven.compiler.target>${java.version}</maven.compiler.target>
-
-    <!-- Forces UTF-8 everywhere — prevents weird character bugs -->
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-
-    <!-- Dependency versions — defined here so you only update in one place -->
-    <!-- Example: to upgrade JUnit, just change this line -->
-    <junit.version>5.11.4</junit.version>
-    <maven.surefire.version>3.5.2</maven.surefire.version>
-    <maven.compiler.plugin.version>3.13.0</maven.compiler.plugin.version>
+    <java.version>21</java.version>
   </properties>
-
-  <!-- ─── DEPENDENCIES ─────────────────────────────────────────────────── -->
   <dependencies>
-
-    <!-- JUnit 5 — the testing framework                                    -->
-    <!-- "aggregator" artifact: pulls in junit-jupiter-api (for writing     -->
-    <!-- tests) + junit-jupiter-engine (for running them) in one line       -->
-    <!-- scope=test means this jar is ONLY on the classpath during testing, -->
-    <!-- it will NOT be included in your final production jar               -->
     <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter</artifactId>
-      <version>${junit.version}</version>
-      <scope>test</scope>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-jpa</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-webmvc</artifactId>
     </dependency>
 
-    <!-- ── FUTURE DEPENDENCIES (commented out, uncomment when needed) ──  -->
-
-    <!-- Mockito — mock objects for unit tests                              -->
-    <!-- Useful when testing usecases that depend on repositories           -->
-    <!-- Example: mock ClienteRepository so tests don't need a real DB     -->
-    <!--
     <dependency>
-      <groupId>org.mockito</groupId>
-      <artifactId>mockito-junit-jupiter</artifactId>
-      <version>5.14.2</version>
-      <scope>test</scope>
-    </dependency>
-    -->
-
-    <!-- Hibernate + JPA — when you add your DB adapter layer              -->
-    <!-- This lives in external/config — perfect for hexagonal arch        -->
-    <!--
-    <dependency>
-      <groupId>org.hibernate.orm</groupId>
-      <artifactId>hibernate-core</artifactId>
-      <version>6.6.4.Final</version>
-    </dependency>
-    -->
-
-    <!-- PostgreSQL driver — when you connect to a real database           -->
-    <!--
-    <dependency>
-      <groupId>org.postgresql</groupId>
-      <artifactId>postgresql</artifactId>
-      <version>42.7.4</version>
+      <groupId>org.mariadb.jdbc</groupId>
+      <artifactId>mariadb-java-client</artifactId>
       <scope>runtime</scope>
     </dependency>
-    -->
-
-    <!-- Lombok — removes boilerplate (getters, setters, constructors)     -->
-    <!-- Very useful for your entities and value objects                   -->
-    <!--
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
-      <version>1.18.36</version>
-      <scope>provided</scope>
+      <optional>true</optional>
     </dependency>
-    -->
-
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-jpa-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-webmvc-test</artifactId>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 
-  <!-- ─── BUILD PLUGINS ────────────────────────────────────────────────── -->
   <build>
     <plugins>
-
-      <!-- Compiler plugin — explicit config ensures Java 26 features work -->
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <configuration>
+          <excludes>
+            <exclude>
+              <groupId>org.projectlombok</groupId>
+              <artifactId>lombok</artifactId>
+            </exclude>
+          </excludes>
+        </configuration>
+      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>${maven.compiler.plugin.version}</version>
-        <configuration>
-          <source>${java.version}</source>
-          <target>${java.version}</target>
-          <encoding>UTF-8</encoding>
-        </configuration>
+        <executions>
+          <execution>
+            <id>default-compile</id>
+            <phase>compile</phase>
+            <goals>
+              <goal>compile</goal>
+            </goals>
+            <configuration>
+              <annotationProcessorPaths>
+                <path>
+                  <groupId>org.projectlombok</groupId>
+                  <artifactId>lombok</artifactId>
+                </path>
+              </annotationProcessorPaths>
+            </configuration>
+          </execution>
+          <execution>
+            <id>default-testCompile</id>
+            <phase>test-compile</phase>
+            <goals>
+              <goal>testCompile</goal>
+            </goals>
+            <configuration>
+              <annotationProcessorPaths>
+                <path>
+                  <groupId>org.projectlombok</groupId>
+                  <artifactId>lombok</artifactId>
+                </path>
+              </annotationProcessorPaths>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
-
-      <!-- Surefire — the plugin that actually RUNS your JUnit tests        -->
-      <!-- Without this, `mvn test` would not find JUnit 5 tests at all    -->
-      <!-- (Maven's default surefire is too old to understand JUnit 5)     -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <version>${maven.surefire.version}</version>
-      </plugin>
-
     </plugins>
   </build>
 

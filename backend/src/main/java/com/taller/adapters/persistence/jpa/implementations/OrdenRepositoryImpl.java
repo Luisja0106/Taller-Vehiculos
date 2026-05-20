@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import com.taller.adapters.persistence.jpa.entities.EmpleadoJpaEntity;
 import com.taller.adapters.persistence.jpa.entities.OrdenJpaEntity;
+import com.taller.adapters.persistence.jpa.entities.ServicioJpaEntity;
 import com.taller.adapters.persistence.jpa.entities.VehiculoJpaEntity;
 import com.taller.adapters.persistence.jpa.repositories.EmpleadoJpaRepository;
 import com.taller.adapters.persistence.jpa.repositories.OrdenJpaRepository;
@@ -84,29 +85,52 @@ public class OrdenRepositoryImpl implements IOrdenRepository {
 
   @Override
   public List<EntidadConteo> serviciosMasPedidos() {
-    // FIXME: correct this method
-    return jpaRepo.findAll().stream() // same that listar filtros, don't relly think that the backend should do this
-        .map(OrdenJpaEntity::toDomain)
-        .flatMap(o -> o.getServicios().stream())
-        .collect(Collectors.groupingBy(
-            IServicio::getId))
-        .entrySet().stream()
-        .map(e -> new EntidadConteo(e.getKey(), e.getValue().get(0).getNombreDelServicio(), e.getValue().size()))
-        .sorted(Comparator.comparingInt(EntidadConteo::cantidad).reversed())
-        .toList();
+    var resu = jpaRepo.servicioMasPedidos();
 
+    return resu.stream()
+        .map(fila -> {
+          ServicioJpaEntity jpaEntity = (ServicioJpaEntity) fila[0];
+          long cantidad = (long) fila[1];
+
+          var servicioDominio = jpaEntity.toDomain();
+
+          return new EntidadConteo(servicioDominio.getId(), servicioDominio.getNombreDelServicio(), cantidad);
+        })
+        .toList();
   }
 
   @Override
   public List<EntidadConteo> mecanicoConMasServicio() {
-    // TODO: correct this method
-    throw new UnsupportedOperationException("Unimplemented method 'mecanicoConMasServicio'");
+    var resu = jpaRepo.mecanicoConMasOrdenes();
+
+    return resu.stream()
+        .map(fila -> {
+          EmpleadoJpaEntity jpaEntity = (EmpleadoJpaEntity) fila[0];
+          long cantidad = (long) fila[1];
+
+          var empleadoDomain = jpaEntity.toDomain();
+
+          return new EntidadConteo(empleadoDomain.getId(), empleadoDomain.getNombre(), cantidad);
+        })
+        .toList();
   }
 
   @Override
   public List<EntidadConteo> vehiculosPorServicio() {
-    // TODO: correct this method
-    throw new UnsupportedOperationException("Unimplemented method 'vehiculosPorServicio'");
+    var resu = jpaRepo.vehiculoConMasOrdenes();
+
+    return resu.stream()
+        .map(fila -> {
+          VehiculoJpaEntity jpaEntity = (VehiculoJpaEntity) fila[0];
+          long cantidad = (long) fila[1];
+
+          var vehiculoDomain = jpaEntity.toDomain();
+
+          return new EntidadConteo(vehiculoDomain.getPlaca().getValue(),
+              vehiculoDomain.getMarca().toString() + " " + vehiculoDomain.getModelo() + " " + vehiculoDomain.getAnio(),
+              cantidad);
+        })
+        .toList();
   }
 
   @Override

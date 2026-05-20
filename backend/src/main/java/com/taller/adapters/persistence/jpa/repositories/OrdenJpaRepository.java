@@ -26,5 +26,24 @@ public interface OrdenJpaRepository extends JpaRepository<OrdenJpaEntity, String
       @Param("mecanicoId") String mecanicoId,
       @Param("placa") String placa);
 
-  // TODO: Implement the rest of the querys for the reports
+  @Query(" SELECT s, COUNT(o) " +
+      " FROM OrdenJpaEntity o " +
+      " JOIN o.servicios s " +
+      " GROUP BY s " +
+      " ORDER BY COUNT(o) DESC ")
+  List<Object[]> servicioMasPedidos();
+
+  @Query(" SELECT m, COUNT(o) " +
+      " FROM OrdenJpaEntity o " +
+      " JOIN o.mecanico m " +
+      " GROUP BY m " +
+      " ORDER BY COUNT(o) DESC ")
+  List<Object[]> mecanicoConMasOrdenes();
+
+  @Query(" SELECT v, COUNT(o) " +
+      " FROM OrdenJpaEntity o " +
+      " JOIN o.vehiculo v " +
+      " GROUP BY v " +
+      " ORDER BY COUNT(o) DESC ")
+  List<Object[]> vehiculoConMasOrdenes();
 }

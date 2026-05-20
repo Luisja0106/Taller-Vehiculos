@@ -75,9 +75,6 @@ public class EmpleadoController {
 
   @PatchMapping("/{id}")
   public ResponseEntity<?> actualizar(@PathVariable String id, @RequestBody ActualizarEmpleadoCMD input) {
-    // TODO:
-    // need to inject the id from the URL into the cmd
-    // ActualizarEmpleadoCMD needs the id
     var resultado = actualizarEmpleado.ejecutar(input);
 
     if (!resultado.isSuccess) {

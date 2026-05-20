@@ -69,7 +69,7 @@ public class OrdenRepositoryFake implements IOrdenRepository {
         .map(e -> new EntidadConteo(e.getKey(), // create the record, key is the id
             e.getValue().get(0).getNombreDelServicio(), // nombre del servicio
             e.getValue().size())) // int quantity
-        .sorted(Comparator.comparingInt(EntidadConteo::cantidad).reversed()) // sort the info using the quantity
+        .sorted(Comparator.comparingLong(EntidadConteo::cantidad).reversed()) // sort the info using the quantity
         .toList(); // create a list with the info
   }
 
@@ -83,7 +83,7 @@ public class OrdenRepositoryFake implements IOrdenRepository {
           String nombre = e.getValue().get(0).getEmpleadoACargo().getNombre();
           return new EntidadConteo(e.getKey(), nombre, e.getValue().size());
         })
-        .sorted(Comparator.comparingInt(EntidadConteo::cantidad).reversed())
+        .sorted(Comparator.comparingLong(EntidadConteo::cantidad).reversed())
         .toList();
   }
 
@@ -97,7 +97,7 @@ public class OrdenRepositoryFake implements IOrdenRepository {
         .map(e -> new EntidadConteo(e.getKey(),
             e.getValue().get(0).getNombreDelServicio(),
             e.getValue().size()))
-        .sorted(Comparator.comparingInt(EntidadConteo::cantidad).reversed())
+        .sorted(Comparator.comparingLong(EntidadConteo::cantidad).reversed())
         .toList();
   }
 

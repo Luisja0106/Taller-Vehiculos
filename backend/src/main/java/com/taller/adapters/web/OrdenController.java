@@ -10,6 +10,7 @@ import com.taller.usecases.CrearOrden;
 import com.taller.usecases.ListarOrdenes;
 import com.taller.usecases.ReasignarEmpleadoAOrden;
 import com.taller.usecases.RegistrarPago;
+import com.taller.usecases.RemoveOrden;
 import com.taller.usecases.dto.AgregarServicioCMD;
 import com.taller.usecases.dto.AvanzarEstadoDeOrdenCMD;
 import com.taller.usecases.dto.BuscarOrdenPorIdCMD;
@@ -19,6 +20,7 @@ import com.taller.usecases.dto.ReasignarEmpleadoAOrdenCMD;
 import com.taller.usecases.dto.RegistrarPagoCMD;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,10 +41,12 @@ public class OrdenController {
   private final ReasignarEmpleadoAOrden reasignarEmpleadoAOrden;
   private final RegistrarPago registrarPago;
   private final BuscarOrdenPorId buscarOrdenPorId;
+  private final RemoveOrden removeOrden;
 
   public OrdenController(CrearOrden crearOrden, ListarOrdenes listarOrdenes,
       AvanzarEstadoDeOrden avanzarEstadoDeOrden, AgregarServicio agregarServicio,
-      ReasignarEmpleadoAOrden reasignarEmpleadoAOrden, RegistrarPago registrarPago, BuscarOrdenPorId buscarOrdenPorId) {
+      ReasignarEmpleadoAOrden reasignarEmpleadoAOrden, RegistrarPago registrarPago, BuscarOrdenPorId buscarOrdenPorId,
+      RemoveOrden removeOrden) {
     this.crearOrden = crearOrden;
     this.listarOrdenes = listarOrdenes;
     this.avanzarEstadoDeOrden = avanzarEstadoDeOrden;
@@ -50,6 +54,7 @@ public class OrdenController {
     this.reasignarEmpleadoAOrden = reasignarEmpleadoAOrden;
     this.registrarPago = registrarPago;
     this.buscarOrdenPorId = buscarOrdenPorId;
+    this.removeOrden = removeOrden;
   }
 
   @GetMapping
@@ -142,6 +147,17 @@ public class OrdenController {
           .body(Map.of("error", resultado.getError().getMessage()));
     }
     return ResponseEntity.ok(OrdenDTO.from(resultado.getValue()));
+  }
+
+  @DeleteMapping("/{id}")
+  public ResponseEntity<?> eliminarOrden(@PathVariable String id) {
+    var resu = removeOrden.ejecutar(id);
+    if (!resu.isSuccess) {
+      return ResponseEntity.badRequest()
+          .body(Map.of("error", resu.getError().getMessage()));
+    }
+
+    return ResponseEntity.noContent().build();
   }
 
 }

@@ -6,6 +6,7 @@ import java.util.Optional;
 import com.taller.adapters.persistence.jpa.entities.EmpleadoJpaEntity;
 import com.taller.adapters.persistence.jpa.repositories.EmpleadoJpaRepository;
 import com.taller.domain.entities.Empleado;
+import com.taller.domain.enums.Rol;
 import com.taller.domain.interfaces.IErrorApp;
 import com.taller.domain.repositories.IEmpleadoRepository;
 import com.taller.domain.utils.Result;
@@ -63,6 +64,13 @@ public class EmpleadoRepositoryImpl implements IEmpleadoRepository {
   @Override
   public int siguienteNumeroId() {
     return (int) jpaRepo.count() + 1;
+  }
+
+  @Override
+  public List<Empleado> findByRol(Rol rol) {
+    return jpaRepo.findByRol(rol).stream()
+        .map(EmpleadoJpaEntity::toDomain)
+        .toList();
   }
 
 }

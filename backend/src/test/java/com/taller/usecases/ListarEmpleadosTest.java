@@ -30,7 +30,7 @@ class ListarEmpleadosTest {
     @Test
     @DisplayName("Si no hay empleados, debe retornar una lista vacia")
     void sinEmpleados_RetornaListaVacia() {
-      var resultado = useCase.ejecutar();
+      var resultado = useCase.ejecutar(null);
 
       assertAll(
           () -> assertTrue(resultado.isSuccess),
@@ -45,7 +45,7 @@ class ListarEmpleadosTest {
       contratar.ejecutar(new CrearEmpleadoCMD("Carlos", "3108142119", "correo2@correo.com", "mecanico", "parcial"));
       contratar.ejecutar(new CrearEmpleadoCMD("Ana", "3008142119", "correo3@correo.com", "administrador", "fijo"));
 
-      var resultado = useCase.ejecutar();
+      var resultado = useCase.ejecutar(null);
 
       assertAll(
           () -> assertTrue(resultado.isSuccess),
@@ -59,7 +59,7 @@ class ListarEmpleadosTest {
       contratar.ejecutar(new CrearEmpleadoCMD("Luis", "3208142119", "correo1@correo.com", "mecanico", "fijo"));
       contratar.ejecutar(new CrearEmpleadoCMD("Carlos", "3108142119", "correo2@correo.com", "mecanico", "parcial"));
 
-      var resultado = useCase.ejecutar();
+      var resultado = useCase.ejecutar(null);
 
       assertAll(
           () -> assertTrue(resultado.isSuccess),

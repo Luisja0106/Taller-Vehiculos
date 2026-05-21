@@ -8,6 +8,7 @@ import com.taller.usecases.AvanzarEstadoDeOrden;
 import com.taller.usecases.BuscarOrdenPorId;
 import com.taller.usecases.CrearOrden;
 import com.taller.usecases.ListarOrdenes;
+import com.taller.usecases.ObtenerOrdenesPorServicioId;
 import com.taller.usecases.ReasignarEmpleadoAOrden;
 import com.taller.usecases.RegistrarPago;
 import com.taller.usecases.RemoveOrden;
@@ -42,11 +43,12 @@ public class OrdenController {
   private final RegistrarPago registrarPago;
   private final BuscarOrdenPorId buscarOrdenPorId;
   private final RemoveOrden removeOrden;
+  private final ObtenerOrdenesPorServicioId obtenerOrdenesPorServicioId;
 
   public OrdenController(CrearOrden crearOrden, ListarOrdenes listarOrdenes,
       AvanzarEstadoDeOrden avanzarEstadoDeOrden, AgregarServicio agregarServicio,
       ReasignarEmpleadoAOrden reasignarEmpleadoAOrden, RegistrarPago registrarPago, BuscarOrdenPorId buscarOrdenPorId,
-      RemoveOrden removeOrden) {
+      RemoveOrden removeOrden, ObtenerOrdenesPorServicioId obtenerOrdenesPorServicioId) {
     this.crearOrden = crearOrden;
     this.listarOrdenes = listarOrdenes;
     this.avanzarEstadoDeOrden = avanzarEstadoDeOrden;
@@ -55,6 +57,7 @@ public class OrdenController {
     this.registrarPago = registrarPago;
     this.buscarOrdenPorId = buscarOrdenPorId;
     this.removeOrden = removeOrden;
+    this.obtenerOrdenesPorServicioId = obtenerOrdenesPorServicioId;
   }
 
   @GetMapping
@@ -90,6 +93,21 @@ public class OrdenController {
     return ResponseEntity.ok(OrdenDTO.from(resultado.getValue()));
   }
 
+  @GetMapping("/servicio/{id}")
+  public ResponseEntity<?> buscarPorServicio(@PathVariable String id) {
+    var resultado = obtenerOrdenesPorServicioId.ejecutar(id);
+
+    if (!resultado.isSuccess) {
+      return ResponseEntity.internalServerError()
+          .body(Map.of("error", resultado.getError().getMessage()));
+    }
+    var dtos = resultado.getValue().stream()
+        .map(OrdenDTO::from)
+        .toList();
+
+    return ResponseEntity.ok(dtos);
+  }
+
   @PostMapping
   public ResponseEntity<?> crear(@RequestBody CrearOrdenCMD input) {
     var resultado = crearOrden.ejecutar(input);
@@ -113,7 +131,7 @@ public class OrdenController {
     return ResponseEntity.ok(OrdenDTO.from(resultado.getValue()));
   }
 
-  @PostMapping("/{id}/servicios")
+  @PatchMapping("/{id}/servicios")
   public ResponseEntity<?> agregarServicio(@PathVariable String id, @RequestBody AgregarServicioCMD input) {
     var cmd = new AgregarServicioCMD(id, input.servicioId());
     var resultado = agregarServicio.ejecutar(cmd);
@@ -137,7 +155,7 @@ public class OrdenController {
     return ResponseEntity.ok(OrdenDTO.from(resultado.getValue()));
   }
 
-  @PostMapping("/{id}/pago")
+  @PatchMapping("/{id}/pago")
   public ResponseEntity<?> registrarPago(@PathVariable String id, @RequestBody RegistrarPagoCMD input) {
     var cmd = new RegistrarPagoCMD(id, input.pago());
     var resultado = registrarPago.ejecutar(cmd);

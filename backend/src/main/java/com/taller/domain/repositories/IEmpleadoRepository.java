@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.taller.domain.entities.Empleado;
+import com.taller.domain.enums.Rol;
 import com.taller.domain.interfaces.IErrorApp;
 import com.taller.domain.utils.Result;
 
@@ -68,6 +69,8 @@ public interface IEmpleadoRepository {
    *         nunca retorna null
    */
   List<Empleado> listarTodos();
+
+  List<Empleado> findByRol(Rol rol);
 
   /**
    * Elimina un empleado por su identificador único.

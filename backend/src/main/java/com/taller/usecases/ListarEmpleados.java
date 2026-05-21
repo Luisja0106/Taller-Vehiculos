@@ -19,7 +19,7 @@ public class ListarEmpleados {
   }
 
   public Result<List<Empleado>, IErrorApp> ejecutar(ListarEmpleadosCMD input) {
-    if (input == null || input.rol().isBlank()) {
+    if (input == null || input.rol() == null) {
       return listarTodos();
     }
     var rol = Rol.buscarPorNombre(input.rol());

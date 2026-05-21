@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.taller.domain.entities.Empleado;
+import com.taller.domain.enums.Rol;
 import com.taller.domain.interfaces.IErrorApp;
 import com.taller.domain.repositories.IEmpleadoRepository;
 import com.taller.domain.utils.Result;
@@ -54,6 +55,12 @@ public class EmpleadoRepositoryFake implements IEmpleadoRepository {
   @Override
   public int siguienteNumeroId() {
     return ++contador;
+  }
+
+  @Override
+  public List<Empleado> findByRol(Rol rol) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'findByRol'");
   }
 
 }

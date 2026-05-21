@@ -1,5 +1,6 @@
 const API_URL = "http://localhost:8080/api";
 
+//constructors
 async function fetchData(url) {
 	try {
 		const response = await fetch(url);
@@ -55,6 +56,28 @@ async function patchData(url, body) {
 	}
 }
 
+async function deleteData(url) {
+	try {
+		const response = await fetch(url, {
+			method: "DELETE",
+			headers: { "Content-Type": "application/json" },
+		});
+
+		const data = await response.json();
+
+		if (!response.ok) {
+			return { succes: false, error: data.error || `Error ${response.error}` };
+		}
+
+		return { succes: true, data };
+	} catch (error) {
+		console.log("Error", error);
+		return { succes: false, error: "Error en la conexion" };
+	}
+}
+
+//create entity (post)
+
 async function crearOrden(vehiculoPlaca, empleadoId) {
 	return await postData(`${API_URL}/ordenes`, {
 		id_vehiculo: vehiculoPlaca,
@@ -96,6 +119,8 @@ async function registrarVehiculo(placa, idPropietario, modelo, marca, anio) {
 		anio: anio,
 	});
 }
+
+//obtener entidades (fetch)
 
 async function getEmpleados() {
 	return fetchData(`${API_URL}/empleados`);
@@ -159,6 +184,7 @@ async function getVehiculoByPlaca(vehiculoPlaca) {
 async function getVehiculosDeUnCliente(clienteId) {
 	return fetchData(`${API_URL}/vehiculos?clienteId=${clienteId}`);
 }
+
 async function getOrdenesByServicio(servicioId) {
 	//I've to do a specific use case for this, right?
 	const ordenes = await getOrdenes();
@@ -182,4 +208,100 @@ async function getOrdenesWithFilters(estado, empleadoId, vehiculoPlaca) {
 	if (empleadoId) url += `empleadoId=${empleadoId}&`;
 	if (vehiculoPlaca) url += `vehiculoPlaca=${vehiculoPlaca}&`;
 	return fetchData(url);
+}
+
+//modificar entidades (patch)
+
+async function avanzarEstadoDeOrden(idOrden) {
+	return patchData(`${API_URL}/ordenes/${idOrden}/avanzar`);
+}
+
+async function agregarServicioAOrden(idOrden, servicioId) {
+	return patchData(`${API_URL}/ordenes/${idOrden}/servicios`, {
+		ordenId: idOrden,
+		servicioId: servicioId,
+	});
+}
+
+async function reasignarEmpleado(ordenId, nuevoEmpleadoId) {
+	return patchData(`${API_URL}/ordenes/${ordenId}/empleado`, {
+		ordenId: ordenId,
+		nuevoEmpleadoId: nuevoEmpleadoId,
+	});
+}
+
+async function registrarPago(ordenId, pago) {
+	return patchData(`${API_URL}/ordenes/${ordenId}/pago`, {
+		ordenId: ordenId,
+		pago: pago,
+	});
+}
+
+async function actualizarCliente(idCliente, nombre, telefono, email) {
+	return patchData(`${API_URL}/clientes/${idCliente}`, {
+		idDelCliente: idCliente,
+		nombre: nombre,
+		telefono: telefono,
+		email: email,
+	});
+}
+
+async function actualizarEmpleado(
+	idEmpleado,
+	nombre,
+	telefono,
+	email,
+	rol,
+	contrato,
+) {
+	return patchData(`${API_URL}/empleado/${idEmpleado}`, {
+		idDelEmpleado: idEmpleado,
+		nombre: nombre,
+		telefono: telefono,
+		email: email,
+		rol: rol,
+		contrato: contrato,
+	});
+}
+
+async function actualizarServicio(idServicio, nombre, precio) {
+	return patchData(`${API_URL}/servicios/${idServicio}`, {
+		servicioId: idServicio,
+		nombre: nombre,
+		precio: precio,
+	});
+}
+
+async function actualizarVehiculo(
+	placaVehiculo,
+	nuevoDueñoId,
+	modelo,
+	marca,
+	anio,
+) {
+	return patchData(`${API_URL}/vehiculos/${placaVehiculo}`, {
+		placaVehiculo: placaVehiculo,
+		nuevoDueñoId: nuevoDueñoId,
+		modelo: modelo,
+		marca: marca,
+		anio: anio,
+	});
+}
+
+//eliminar entidad (delete)
+
+async function removeEmpleado(empleadoId) {
+	return deleteData(`${API_URL}/empleados/${empleadoId}`);
+}
+async function removeCliente(clienteId) {
+	return deleteData(`${API_URL}/clientes/${clienteId}`);
+}
+async function removeServicios(servicioId) {
+	return deleteData(`${API_URL}/servicios/${servicioId}`);
+}
+async function removeOrden(ordenId) {
+	return deleteData(`${API_URL}/ordenes/${ordenId}`);
+}
+async function removeVehiculos(vehiculoPlaca) {
+	return deleteData(`${API_URL}/vehiculos/${vehiculoPlaca}`);
 }

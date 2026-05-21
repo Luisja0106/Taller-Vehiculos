@@ -63,6 +63,8 @@ public interface IOrdenRepository {
    */
   List<OrdenDeTrabajo> listarTodos();
 
+  List<OrdenDeTrabajo> obtenerOrdenesPorServicioId(String servicioId);
+
   List<OrdenDeTrabajo> listarConFiltros(EstadoDelTrabajo estado, String empleadoId, String placaVehiculo);
 
   /**

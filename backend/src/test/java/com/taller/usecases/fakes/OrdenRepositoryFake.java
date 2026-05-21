@@ -106,4 +106,10 @@ public class OrdenRepositoryFake implements IOrdenRepository {
     return ++contador;
   }
 
+  @Override
+  public List<OrdenDeTrabajo> obtenerOrdenesPorServicioId(String servicioId) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'obtenerOrdenesPorServicioId'");
+  }
+
 }

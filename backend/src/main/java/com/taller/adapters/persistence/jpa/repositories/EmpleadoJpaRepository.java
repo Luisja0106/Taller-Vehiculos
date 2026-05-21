@@ -1,5 +1,6 @@
 package com.taller.adapters.persistence.jpa.repositories;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.taller.adapters.persistence.jpa.entities.EmpleadoJpaEntity;
@@ -11,5 +12,5 @@ public interface EmpleadoJpaRepository extends JpaRepository<EmpleadoJpaEntity, 
 
   Optional<EmpleadoJpaEntity> findByEmail(String email);
 
-  Optional<EmpleadoJpaEntity> findByRol(Rol rol);
+  List<EmpleadoJpaEntity> findByRol(Rol rol);
 }

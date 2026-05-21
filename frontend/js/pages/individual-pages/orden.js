@@ -57,13 +57,13 @@ function renderOrdenDetails(order, vehiculo) {
 	setupLink(
 		"orden-vehiculo-link",
 		order.vehiculoModelo,
-		`vehiculo.html?id=${vehiculo.id}`,
+		`vehiculo.html?placa=${vehiculo.placa}`,
 	);
 
 	// Estado y Fecha
 	const statusElement = document.getElementById("orden-estado");
-	statusElement.textContent = getEstadoText(order.estado);
-	statusElement.className = `info-estado ${getBadgeClass(order.estado)}`;
+	statusElement.textContent = getEstadoText(order.estado.toUpperCase());
+	statusElement.className = `info-estado ${getBadgeClass(order.estado.toUpperCase)}`;
 
 	document.getElementById("orden-fecha").textContent = order.fechaEntrada;
 }

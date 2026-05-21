@@ -68,8 +68,8 @@ async function renderOrdenesQueUsa(vehiculos) {
 	vehiculos.forEach((vehiculo) => {
 		const ordenHtml = `
             <div class="servicios-box">
-              <a class="servicio-name vehiculo-modelo" href="vehiculo.html?id=${vehiculo.id}">${getMarcaText(vehiculo.marca)} ${vehiculo.modelo} ${vehiculo.anio}</a>
-              <a class="servicio-name vehiculo-id info-estado" href="vehiculo.html?id=${vehiculo.id}">${vehiculo.id}</a>
+              <a class="servicio-name vehiculo-modelo" href="vehiculo.html?placa=${vehiculo.placa}">${getMarcaText(vehiculo.marca)} ${vehiculo.modelo} ${vehiculo.anio}</a>
+              <a class="servicio-name vehiculo-id info-estado" href="vehiculo.html?placa=${vehiculo.placa}">${vehiculo.placa}</a>
             </div>`;
 		container.insertAdjacentHTML("beforeend", ordenHtml);
 	});

@@ -34,7 +34,7 @@ async function handleSearch(event) {
 	}
 	hideError();
 
-	const encontrado = await fetchByPrefix(prefix, codigo);
+	const encontrado = await fetchByPrefix(codigo);
 
 	if (!encontrado) {
 		showError("No se encontro ningun resultado para ese codigo");

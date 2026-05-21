@@ -174,11 +174,7 @@ async function getOrdenesByVehiculo(vehiculoPlaca) {
 }
 
 async function getVehiculoByPlaca(vehiculoPlaca) {
-	const vehicles = await fetchData(`${API_URL}/vehiculos/${vehiculoPlaca}`);
-
-	if (!vehicles || vehicles.length === 0) return null;
-
-	return vehicles[0];
+	return await fetchData(`${API_URL}/vehiculos/${vehiculoPlaca}`);
 }
 
 async function getVehiculosDeUnCliente(clienteId) {
@@ -186,12 +182,7 @@ async function getVehiculosDeUnCliente(clienteId) {
 }
 
 async function getOrdenesByServicio(servicioId) {
-	//I've to do a specific use case for this, right?
-	const ordenes = await getOrdenes();
-	if (!ordenes) return [];
-	return ordenes.filter((orden) =>
-		orden.servicios.some((s) => s.id === servicioId),
-	);
+	return fetchData(`${API_URL}/ordenes/servicio/${servicioId}`);
 }
 
 async function fetchByPrefix(codigo) {

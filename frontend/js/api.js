@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:3002";
+const API_URL = "http://localhost:8080/api";
 
 async function fetchData(url) {
 	try {
@@ -17,8 +17,8 @@ async function crearOrden(vehiculoPlaca, empleadoId) {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify({
-				vehiculoPlaca: vehiculoPlaca,
-				empleadoId: empleadoId,
+				id_vehiculo: vehiculoPlaca,
+				id_mecanico: empleadoId,
 			}),
 		});
 		if (!response.ok)
@@ -98,10 +98,10 @@ async function registrarVehiculo(placa, idPropietario, modelo, marca, anio) {
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify({
 				placa: placa,
+				id_cliente: idPropietario,
 				modelo: modelo,
 				marca: marca,
 				anio: anio,
-				clienteId: idPropietario,
 			}),
 		});
 		if (!response.ok)
@@ -197,6 +197,8 @@ async function fetchByPrefix(prefix, codigo) {
 			return null;
 	}
 }
+
+//FIXME: add the message error
 
 async function getMecanicos() {
 	return fetchData(`${API_URL}/empleados?rol=MECANICO`);

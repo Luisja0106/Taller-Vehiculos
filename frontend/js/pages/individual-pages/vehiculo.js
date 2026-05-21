@@ -1,7 +1,7 @@
 const btnClose = document.getElementById("close-slide");
 
 async function initializeOrderView() {
-	const vehiculoId = new URLSearchParams(window.location.search).get("id");
+	const vehiculoId = new URLSearchParams(window.location.search).get("placa");
 
 	if (!vehiculoId) {
 		redirectToDashboard();
@@ -9,12 +9,23 @@ async function initializeOrderView() {
 	}
 
 	const vehiculoData = await getVehiculo(vehiculoId);
-	const dueñoData = await getCliente(vehiculoData.clienteId);
-	const vehiculoOrdenes = await getOrdenesByVehiculo(vehiculoData.placa);
-
+	console.log("show vehiculo info", vehiculoData);
 	if (!vehiculoData) {
 		redirectToDashboard();
 		return;
+	}
+	const idCliente = vehiculoData.dueñoId || vehiculoData.id_cliente;
+
+	let dueñoData = { nombre: "No asignado" };
+	let vehiculoOrdenes = [];
+
+	try {
+		if (idCliente) {
+			dueñoData = await getCliente(idCliente);
+		}
+		vehiculoOrdenes = await getOrdenesByVehiculo(vehiculoData.placa);
+	} catch (error) {
+		console.error("Error cargando datos relaciones", error);
 	}
 
 	updatePageMetadata(vehiculoData.id);
@@ -39,7 +50,7 @@ function renderVehiculoHeader(vehiculo) {
 	const heroSection = document.getElementById("hero");
 	const idDisplay = document.getElementById("vehiculo-id");
 
-	idDisplay.textContent = vehiculo.id;
+	idDisplay.textContent = vehiculo.placa;
 	heroSection.style.background = getBrandColor(vehiculo.marca);
 }
 

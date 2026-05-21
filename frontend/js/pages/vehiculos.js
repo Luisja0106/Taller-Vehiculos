@@ -2,9 +2,9 @@ const grid = document.getElementById("cards-grid"); //grid in the index html
 
 function renderVehiculoCard(vehiculo) {
 	return `
-        <article class="card" onclick="window.location.href='./individual-pages/vehiculo.html?id=${vehiculo.id}'">
+        <article class="card" onclick="window.location.href='./individual-pages/vehiculo.html?placa=${vehiculo.placa}'">
           <div class="card-header" style="background: ${getBrandColor(vehiculo.marca)}">
-            <span class="order-id">${vehiculo.id}</span>
+            <span class="order-id">VHC-${vehiculo.placa}</span>
           </div>
           <div class="card-body">
             <h3>${getMarcaText(vehiculo.marca)} ${vehiculo.modelo} ${vehiculo.anio}</h3>

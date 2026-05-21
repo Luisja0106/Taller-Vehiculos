@@ -11,106 +11,90 @@ async function fetchData(url) {
 	}
 }
 
-async function crearOrden(vehiculoPlaca, empleadoId) {
+async function postData(url, body) {
 	try {
-		const response = await fetch(`${API_URL}/ordenes`, {
+		const response = await fetch(url, {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({
-				id_vehiculo: vehiculoPlaca,
-				id_mecanico: empleadoId,
-			}),
+			body: JSON.stringify(body),
 		});
-		if (!response.ok)
-			throw new Error(`Error al crear orden: ${response.status}`);
-		return await response.json();
+
+		const data = await response.json();
+
+		if (!response.ok) {
+			return {
+				succes: false,
+				error: data.error || `Error ${response.status}`,
+			};
+		}
+		return { succes: true, data };
 	} catch (error) {
-		console.error("Error:", error);
-		return null;
+		console.log("Error", error);
+		return { succes: false, error: "Error en la conexion" };
 	}
+}
+
+async function patchData(url, body) {
+	try {
+		const response = await fetch(url, {
+			method: "PATCH",
+			headers: { "Content-Type": "application/json" },
+			body: body ? JSON.stringify(body) : undefined,
+		});
+
+		const data = await response.json();
+
+		if (!response.ok) {
+			return { succes: false, error: data.error || `Error ${response.error}` };
+		}
+
+		return { succes: true, data };
+	} catch (error) {
+		console.log("Error", error);
+		return { succes: false, error: "Error en la conexion" };
+	}
+}
+
+async function crearOrden(vehiculoPlaca, empleadoId) {
+	return await postData(`${API_URL}/ordenes`, {
+		id_vehiculo: vehiculoPlaca,
+		id_mecanico: empleadoId,
+	});
 }
 
 async function crearServicio(nombre, precio) {
-	try {
-		const response = await fetch(`${API_URL}/servicios`, {
-			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({
-				nombre: nombre,
-				precio: precio,
-			}),
-		});
-		if (!response.ok)
-			throw new Error(`Error al crear servicio: ${response.status}`);
-		return await response.json();
-	} catch (error) {
-		console.error("Error:", error);
-		return null;
-	}
+	return await postData(`${API_URL}/servicios`, {
+		nombre: nombre,
+		precio: precio,
+	});
 }
 
 async function registrarEmpleado(nombre, telefono, email, rol, contrato) {
-	try {
-		const response = await fetch(`${API_URL}/empleados`, {
-			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({
-				nombre: nombre,
-				email: email,
-				telefono: telefono,
-				rol: rol,
-				contrato: contrato,
-			}),
-		});
-		if (!response.ok)
-			throw new Error(`Error al crear empleado: ${response.status}`);
-		return await response.json();
-	} catch (error) {
-		console.error("Error:", error);
-		return null;
-	}
+	return await postData(`${API_URL}/empleados`, {
+		nombre: nombre,
+		email: email,
+		telefono: telefono,
+		rol: rol,
+		contrato: contrato,
+	});
 }
 
 async function registrarCliente(nombre, telefono, email) {
-	try {
-		const response = await fetch(`${API_URL}/clientes`, {
-			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({
-				nombre: nombre,
-				email: email,
-				telefono: telefono,
-			}),
-		});
-		if (!response.ok)
-			throw new Error(`Error al crear cliente: ${response.status}`);
-		return await response.json();
-	} catch (error) {
-		console.error("Error:", error);
-		return null;
-	}
+	return await postData(`${API_URL}/clientes`, {
+		nombre: nombre,
+		email: email,
+		telefono: telefono,
+	});
 }
 
 async function registrarVehiculo(placa, idPropietario, modelo, marca, anio) {
-	try {
-		const response = await fetch(`${API_URL}/vehiculos`, {
-			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({
-				placa: placa,
-				id_cliente: idPropietario,
-				modelo: modelo,
-				marca: marca,
-				anio: anio,
-			}),
-		});
-		if (!response.ok)
-			throw new Error(`Error al crear vehiculo: ${response.status}`);
-		return await response.json();
-	} catch (error) {
-		console.error("Error:", error);
-		return null;
-	}
+	return await postData(`${API_URL}/vehiculos`, {
+		placa: placa,
+		id_cliente: idPropietario,
+		modelo: modelo,
+		marca: marca,
+		anio: anio,
+	});
 }
 
 async function getEmpleados() {
@@ -156,14 +140,16 @@ async function getOrdenesByEmpleado(empleadoId) {
 	return fetchData(`${API_URL}/ordenes?empleadoId=${empleadoId}`);
 }
 
+async function getOrdenesByEstado(estado) {
+	return fetchData(`${API_URL}/ordenes?estado=${estado}`);
+}
+
 async function getOrdenesByVehiculo(vehiculoPlaca) {
-	return fetchData(`${API_URL}/ordenes?vehiculoPlaca=${vehiculoPlaca}`);
+	return fetchData(`${API_URL}/ordenes?placaVehiculo=${vehiculoPlaca}`);
 }
 
 async function getVehiculoByPlaca(vehiculoPlaca) {
-	const vehicles = await fetchData(
-		`${API_URL}/vehiculos?placa=${vehiculoPlaca}`,
-	);
+	const vehicles = await fetchData(`${API_URL}/vehiculos/${vehiculoPlaca}`);
 
 	if (!vehicles || vehicles.length === 0) return null;
 
@@ -174,6 +160,7 @@ async function getVehiculosDeUnCliente(clienteId) {
 	return fetchData(`${API_URL}/vehiculos?clienteId=${clienteId}`);
 }
 async function getOrdenesByServicio(servicioId) {
+	//I've to do a specific use case for this, right?
 	const ordenes = await getOrdenes();
 	if (!ordenes) return [];
 	return ordenes.filter((orden) =>
@@ -181,24 +168,9 @@ async function getOrdenesByServicio(servicioId) {
 	);
 }
 
-async function fetchByPrefix(prefix, codigo) {
-	switch (prefix) {
-		case "EMP":
-			return await getEmpleado(codigo);
-		case "CLI":
-			return await getCliente(codigo);
-		case "ORD":
-			return await getOrden(codigo);
-		case "SRV":
-			return await getServicio(codigo);
-		case "VHC":
-			return await getVehiculo(codigo);
-		default:
-			return null;
-	}
+async function fetchByPrefix(codigo) {
+	return fetchData(`${API_URL}/buscar/${codigo}`);
 }
-
-//FIXME: add the message error
 
 async function getMecanicos() {
 	return fetchData(`${API_URL}/empleados?rol=MECANICO`);

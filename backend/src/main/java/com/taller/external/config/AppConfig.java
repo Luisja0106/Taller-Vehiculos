@@ -196,4 +196,10 @@ public class AppConfig {
     return new RemoveOrden(ordenRepo);
   }
 
+  @Bean
+  public ObtenerOrdenesPorServicioId obtenerOrdenesPorServicioId(IOrdenRepository ordenRepo,
+      IServicioRepository servicioRepo) {
+    return new ObtenerOrdenesPorServicioId(ordenRepo, servicioRepo);
+  }
+
 }

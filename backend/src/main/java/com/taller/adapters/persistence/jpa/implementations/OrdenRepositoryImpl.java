@@ -1,9 +1,7 @@
 package com.taller.adapters.persistence.jpa.implementations;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import com.taller.adapters.persistence.jpa.entities.EmpleadoJpaEntity;
 import com.taller.adapters.persistence.jpa.entities.OrdenJpaEntity;
@@ -135,6 +133,15 @@ public class OrdenRepositoryImpl implements IOrdenRepository {
   @Override
   public int siguienteNumeroParaId() {
     return (int) jpaRepo.count() + 1;
+  }
+
+  @Override
+  public List<OrdenDeTrabajo> obtenerOrdenesPorServicioId(String servicioId) {
+    List<OrdenJpaEntity> entidades = jpaRepo.findOrdenesByServicioId(servicioId);
+
+    return entidades.stream()
+        .map(OrdenJpaEntity::toDomain)
+        .toList();
   }
 
 }

@@ -46,4 +46,10 @@ public interface OrdenJpaRepository extends JpaRepository<OrdenJpaEntity, String
       " GROUP BY v " +
       " ORDER BY COUNT(o) DESC ")
   List<Object[]> vehiculoConMasOrdenes();
+
+  @Query(" SELECT o " +
+      " FROM OrdenJpaEntity o " +
+      " JOIN o.servicios s " +
+      " WHERE s.id = :servicioId ")
+  List<OrdenJpaEntity> findOrdenesByServicioId(@Param("servicioId") String servicioId);
 }

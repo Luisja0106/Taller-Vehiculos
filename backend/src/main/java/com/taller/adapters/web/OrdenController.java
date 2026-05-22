@@ -93,9 +93,9 @@ public class OrdenController {
     return ResponseEntity.ok(OrdenDTO.from(resultado.getValue()));
   }
 
-  @GetMapping("/servicio/{id}")
-  public ResponseEntity<?> buscarPorServicio(@PathVariable String id) {
-    var resultado = obtenerOrdenesPorServicioId.ejecutar(id);
+  @GetMapping("/servicio/{servicioId}")
+  public ResponseEntity<?> buscarPorServicio(@PathVariable String servicioId) {
+    var resultado = obtenerOrdenesPorServicioId.ejecutar(servicioId);
 
     if (!resultado.isSuccess) {
       return ResponseEntity.internalServerError()
@@ -133,8 +133,7 @@ public class OrdenController {
 
   @PatchMapping("/{id}/servicios")
   public ResponseEntity<?> agregarServicio(@PathVariable String id, @RequestBody AgregarServicioCMD input) {
-    var cmd = new AgregarServicioCMD(id, input.servicioId());
-    var resultado = agregarServicio.ejecutar(cmd);
+    var resultado = agregarServicio.ejecutar(input);
 
     if (!resultado.isSuccess) {
       return ResponseEntity.badRequest()
@@ -145,8 +144,7 @@ public class OrdenController {
 
   @PatchMapping("/{id}/empleado")
   public ResponseEntity<?> reasignarEmpleado(@PathVariable String id, @RequestBody ReasignarEmpleadoAOrdenCMD input) {
-    var cmd = new ReasignarEmpleadoAOrdenCMD(id, input.nuevoEmpleadoId());
-    var resultado = reasignarEmpleadoAOrden.ejecutar(cmd);
+    var resultado = reasignarEmpleadoAOrden.ejecutar(input);
 
     if (!resultado.isSuccess) {
       return ResponseEntity.badRequest()
@@ -157,8 +155,7 @@ public class OrdenController {
 
   @PatchMapping("/{id}/pago")
   public ResponseEntity<?> registrarPago(@PathVariable String id, @RequestBody RegistrarPagoCMD input) {
-    var cmd = new RegistrarPagoCMD(id, input.pago());
-    var resultado = registrarPago.ejecutar(cmd);
+    var resultado = registrarPago.ejecutar(input);
 
     if (!resultado.isSuccess) {
       return ResponseEntity.badRequest()

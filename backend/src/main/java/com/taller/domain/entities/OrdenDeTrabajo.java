@@ -192,14 +192,14 @@ public class OrdenDeTrabajo {
       }
       case EN_PROCESO -> {
         this.estado = EstadoDelTrabajo.EN_ESPERA_DE_PAGO;
-        this.fechaDeFinalizacion = LocalDateTime.now();
+        this.fechaDePago = LocalDateTime.now();
         yield Result.success(null);
       }
       case EN_ESPERA_DE_PAGO -> {
         if (valorVenta == null)
           yield Result.error(new VerificationError("No se puede pasar a finalizado sin definir el pago"));
         this.estado = EstadoDelTrabajo.FINALIZADO;
-        this.fechaDePago = LocalDateTime.now();
+        this.fechaDeFinalizacion = LocalDateTime.now();
         yield Result.success(null);
       }
       case FINALIZADO -> Result.error(new VerificationError("La orden ya esta finalizada"));

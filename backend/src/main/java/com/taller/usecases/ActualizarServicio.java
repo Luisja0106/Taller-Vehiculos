@@ -41,7 +41,7 @@ public class ActualizarServicio {
     }
 
     servicioRepository.actualizar(servicio);
-    return Result.success(null);
+    return Result.success(servicio);
   }
 
   private Result<Void, IErrorApp> actualizarNombre(Servicio servicio, String nuevoNombre) {

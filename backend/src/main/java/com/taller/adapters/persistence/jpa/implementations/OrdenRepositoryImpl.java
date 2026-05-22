@@ -50,7 +50,15 @@ public class OrdenRepositoryImpl implements IOrdenRepository {
 
   @Override
   public Result<OrdenDeTrabajo, IErrorApp> actualizar(OrdenDeTrabajo orden) {
-    OrdenJpaEntity entity = new OrdenJpaEntity(orden);
+    VehiculoJpaEntity vehiculoEntity = vehiculoJpaRepo
+        .findByPlaca(orden.getVehiculo().getPlaca().toString())
+        .orElseThrow(() -> new IllegalStateException("Vehiculo no encontrado en DB"));
+
+    EmpleadoJpaEntity empleadoEntity = empleadoJpaRepo
+        .findById(orden.getEmpleadoACargo().getId())
+        .orElseThrow(() -> new IllegalStateException("Empleado no encontrado en DB"));
+
+    OrdenJpaEntity entity = new OrdenJpaEntity(orden, vehiculoEntity, empleadoEntity);
     jpaRepo.save(entity);
     return Result.success(orden);
   }

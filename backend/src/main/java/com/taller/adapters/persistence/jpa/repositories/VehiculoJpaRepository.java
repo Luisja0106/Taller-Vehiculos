@@ -6,7 +6,7 @@ import com.taller.adapters.persistence.jpa.entities.VehiculoJpaEntity;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface VehiculoJpaRepository extends JpaRepository<VehiculoJpaEntity, Long> {
+public interface VehiculoJpaRepository extends JpaRepository<VehiculoJpaEntity, String> {
 
   Optional<VehiculoJpaEntity> findByPlaca(String placa);
 

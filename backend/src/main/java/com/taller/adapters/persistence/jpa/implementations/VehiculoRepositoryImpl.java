@@ -3,7 +3,9 @@ package com.taller.adapters.persistence.jpa.implementations;
 import java.util.List;
 import java.util.Optional;
 
+import com.taller.adapters.persistence.jpa.entities.ClienteJpaEntity;
 import com.taller.adapters.persistence.jpa.entities.VehiculoJpaEntity;
+import com.taller.adapters.persistence.jpa.repositories.ClienteJpaRepository;
 import com.taller.adapters.persistence.jpa.repositories.VehiculoJpaRepository;
 import com.taller.domain.entities.Vehiculo;
 import com.taller.domain.interfaces.IErrorApp;
@@ -19,9 +21,11 @@ import jakarta.transaction.Transactional;
 public class VehiculoRepositoryImpl implements IVehiculoRepository {
 
   private final VehiculoJpaRepository jpaRepo;
+  private final ClienteJpaRepository clienteRepo;
 
-  public VehiculoRepositoryImpl(VehiculoJpaRepository jpaRepo) {
+  public VehiculoRepositoryImpl(VehiculoJpaRepository jpaRepo, ClienteJpaRepository clienteRepo) {
     this.jpaRepo = jpaRepo;
+    this.clienteRepo = clienteRepo;
   }
 
   @Override
@@ -33,7 +37,10 @@ public class VehiculoRepositoryImpl implements IVehiculoRepository {
 
   @Override
   public Result<Vehiculo, IErrorApp> actualizar(Vehiculo vehiculo) {
-    VehiculoJpaEntity entity = new VehiculoJpaEntity(vehiculo);
+    ClienteJpaEntity clienteEntity = clienteRepo.findById(vehiculo.getDueño().getId())
+        .orElseThrow(() -> new IllegalStateException("Cliente no encontrado"));
+
+    VehiculoJpaEntity entity = new VehiculoJpaEntity(vehiculo, clienteEntity);
     jpaRepo.save(entity);
     return Result.success(vehiculo);
   }

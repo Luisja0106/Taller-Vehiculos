@@ -27,8 +27,9 @@ public class AppConfig {
 
   @Bean
   @Primary
-  public IVehiculoRepository vehiculoRepository(VehiculoJpaRepository jpa) {
-    return new VehiculoRepositoryImpl(jpa);
+  public IVehiculoRepository vehiculoRepository(VehiculoJpaRepository vehiculoJpaRepo,
+      ClienteJpaRepository clienteJpaRepo) {
+    return new VehiculoRepositoryImpl(vehiculoJpaRepo, clienteJpaRepo);
   }
 
   @Bean

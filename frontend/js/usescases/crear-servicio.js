@@ -37,14 +37,14 @@ async function confirmarCreacion() {
 	}
 
 	const nuevoServicio = await crearServicio(nombreServicio, precioServicio);
-	if (!nuevoServicio) {
-		modalError.textContent = "Error al registrar el servicio, intenta de nuevo";
+	if (!nuevoServicio.success) {
+		modalError.textContent = nuevoServicio.error;
 		modalError.style.display = "block";
 		return;
 	}
 
 	closeModalOverlay();
-	window.location.href = `./individual-pages/servicio.html?id=${nuevoServicio.id}`;
+	window.location.href = `./individual-pages/servicio.html?id=${nuevoServicio.data.id}`;
 }
 
 confirmModalBtn.addEventListener("click", confirmarCreacion);

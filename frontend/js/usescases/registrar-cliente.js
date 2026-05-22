@@ -44,14 +44,14 @@ async function confirmarCreacion() {
 		telefonoCliente,
 		emailCliente,
 	);
-	if (!nuevoCliente) {
-		modalError.textContent = "Error al registrar el cliente, intenta de nuevo";
+	if (!nuevoCliente.success) {
+		modalError.textContent = nuevoCliente.error;
 		modalError.style.display = "block";
 		return;
 	}
 
 	closeModalOverlay();
-	window.location.href = `./individual-pages/cliente.html?id=${nuevoCliente.id}`;
+	window.location.href = `./individual-pages/cliente.html?id=${nuevoCliente.data.id}`;
 }
 
 confirmModalBtn.addEventListener("click", confirmarCreacion);

@@ -57,14 +57,14 @@ async function confirmarCreacion() {
 
 	const nuevaOrden = await crearOrden(vehiculoPlaca, empleadoId);
 
-	if (!nuevaOrden) {
-		modalError.textContent = "Error al crear la orden, intenta de nuevo";
+	if (!nuevaOrden.success) {
+		modalError.textContent = nuevaOrden.error;
 		modalError.style.display = "block";
 		return;
 	}
 
 	closeModalOverlay();
-	window.location.href = `pages/individual-pages/orden.html?id=${nuevaOrden.id}`;
+	window.location.href = `pages/individual-pages/orden.html?id=${nuevaOrden.data.id}`;
 }
 
 confirmModalBtn.addEventListener("click", confirmarCreacion);

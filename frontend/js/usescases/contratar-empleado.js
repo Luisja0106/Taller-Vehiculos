@@ -58,14 +58,14 @@ async function confirmarCreacion() {
 		rolEmpleado,
 		contratoEmpleado,
 	);
-	if (!nuevoEmpleado) {
-		modalError.textContent = "Error al registrar el empleado, intenta de nuevo";
+	if (!nuevoEmpleado.success) {
+		modalError.textContent = nuevoEmpleado.error;
 		modalError.style.display = "block";
 		return;
 	}
 
 	closeModalOverlay();
-	window.location.href = `./individual-pages/empleado.html?id=${nuevoEmpleado.id}`;
+	window.location.href = `./individual-pages/empleado.html?id=${nuevoEmpleado.data.id}`;
 }
 
 confirmModalBtn.addEventListener("click", confirmarCreacion);

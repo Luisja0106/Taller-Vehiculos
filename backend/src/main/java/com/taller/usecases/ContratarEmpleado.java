@@ -19,6 +19,7 @@ public class ContratarEmpleado {
   }
 
   public Result<Empleado, IErrorApp> ejecutar(CrearEmpleadoCMD input) {
+    // TODO: agregar verificacion de telefonos duplicados
     if (input == null)
       return Result.error(new ActionError("Los datos no pueden ser nulos"));
 

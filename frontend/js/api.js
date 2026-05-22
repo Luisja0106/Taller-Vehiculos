@@ -24,14 +24,14 @@ async function postData(url, body) {
 
 		if (!response.ok) {
 			return {
-				succes: false,
+				success: false,
 				error: data.error || `Error ${response.status}`,
 			};
 		}
-		return { succes: true, data };
+		return { success: true, data };
 	} catch (error) {
 		console.log("Error", error);
-		return { succes: false, error: "Error en la conexion" };
+		return { success: false, error: "Error en la conexion" };
 	}
 }
 
@@ -46,13 +46,13 @@ async function patchData(url, body) {
 		const data = await response.json();
 
 		if (!response.ok) {
-			return { succes: false, error: data.error || `Error ${response.error}` };
+			return { success: false, error: data.error || `Error ${response.error}` };
 		}
 
-		return { succes: true, data };
+		return { success: true, data };
 	} catch (error) {
 		console.log("Error", error);
-		return { succes: false, error: "Error en la conexion" };
+		return { success: false, error: "Error en la conexion" };
 	}
 }
 
@@ -63,16 +63,14 @@ async function deleteData(url) {
 			headers: { "Content-Type": "application/json" },
 		});
 
-		const data = await response.json();
-
 		if (!response.ok) {
-			return { succes: false, error: data.error || `Error ${response.error}` };
+			return { success: false, error: data.error || `Error ${response.error}` };
 		}
 
-		return { succes: true, data };
+		return { success: true };
 	} catch (error) {
 		console.log("Error", error);
-		return { succes: false, error: "Error en la conexion" };
+		return { success: false, error: "Error en la conexion" };
 	}
 }
 

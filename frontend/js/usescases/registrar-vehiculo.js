@@ -60,14 +60,14 @@ async function confirmarCreacion() {
 		marcaVehiculo,
 		anioVehiculo,
 	);
-	if (!nuevoVehiculo) {
-		modalError.textContent = "Error al registrar el vehiculo, intenta de nuevo";
+	if (!nuevoVehiculo.success) {
+		modalError.textContent = nuevoVehiculo.error;
 		modalError.style.display = "block";
 		return;
 	}
 
 	closeModalOverlay();
-	window.location.href = `./individual-pages/vehiculo.html?id=${nuevoVehiculo.id}`;
+	window.location.href = `./individual-pages/vehiculo.html?placa=${nuevoVehiculo.data.placa}`;
 }
 
 async function setUpPropietario() {

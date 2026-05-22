@@ -1,5 +1,6 @@
 package com.taller.adapters.persistence.jpa.repositories;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.taller.adapters.persistence.jpa.entities.VehiculoJpaEntity;
@@ -10,7 +11,7 @@ public interface VehiculoJpaRepository extends JpaRepository<VehiculoJpaEntity, 
 
   Optional<VehiculoJpaEntity> findByPlaca(String placa);
 
-  Optional<VehiculoJpaEntity> findByClienteId(String clienteId);
+  List<VehiculoJpaEntity> findByClienteId(String clienteId);
 
   void deleteByPlaca(String placa);
 

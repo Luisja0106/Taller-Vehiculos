@@ -305,6 +305,16 @@ body {
 	font-size: var(--font-size-lg);
 	font-weight: 700;
 }
+
+.hidden-info,
+.hidden-info-final {
+	display: none;
+}
+
+.hidden-info.show,
+.hidden-info-final.show {
+	display: flex;
+}
 #modal-confirmation-error,
 #modal-select-error,
 #modal-input-error {

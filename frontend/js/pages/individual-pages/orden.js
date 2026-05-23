@@ -6,6 +6,35 @@ async function initPage() {
 	setUpCloseOrder();
 	setUpEliminarOrden();
 	setUpUsesCases();
+	displayPagoInfo();
+}
+
+function displayPagoInfo() {
+	const pagoElements = document.querySelectorAll(".hidden-info");
+	const currentEstado = document.getElementById("orden-estado").textContent;
+	if (currentEstado !== "Finalizado" && currentEstado !== "En espera de pago") {
+		pagoElements.forEach((element) => {
+			element.classList.remove("show");
+		});
+		return;
+	}
+	pagoElements.forEach((element) => {
+		element.classList.add("show");
+	});
+}
+
+function displayFinalizacionInfo() {
+	const finalizacionElement = document.querySelector(".hidden-info-final");
+	const currentEstado = document.getElementById("orden-estado").textContent;
+	if (currentEstado !== "Finalizado") {
+		finalizacionElement.forEach((element) => {
+			element.classList.add("show");
+		});
+		return;
+	}
+	finalizacionElement.forEach((element) => {
+		element.classList.add("show");
+	});
 }
 
 async function initializeOrderView() {
@@ -79,6 +108,12 @@ function renderOrdenDetails(order, vehiculo) {
 	statusElement.className = `info-estado ${getBadgeClass(estadoFormateado)}`;
 
 	document.getElementById("orden-fecha").textContent = order.fechaEntrada;
+
+	//hidden elements
+	document.getElementById("orden-precio").textContent = order.valorVenta;
+	document.getElementById("orden-fecha-pago").textContent = order.fechaDePago;
+	document.getElementById("orden-fecha-finalizacion").textContent =
+		order.fechaDeFinalizacion;
 }
 
 function setupLink(elementId, text, href) {

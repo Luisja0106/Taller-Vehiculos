@@ -28,7 +28,7 @@ async function initializeOrderView() {
 		console.error("Error cargando datos relaciones", error);
 	}
 
-	updatePageMetadata(vehiculoData.id);
+	updatePageMetadata(vehiculoData.placa);
 	renderVehiculoHeader(vehiculoData);
 	renderVehiculoDetails(vehiculoData, dueñoData);
 	renderOrdenesList(vehiculoOrdenes);

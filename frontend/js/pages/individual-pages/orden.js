@@ -37,6 +37,14 @@ function displayFinalizacionInfo() {
 	});
 }
 
+async function handleRemoveService(servicioId) {
+	openConfirmation("¿Remover este servicio de la orden?", async () => {
+		const res = await removeServicioFromOrden(orderId, servicioId);
+		if (res.success) window.location.reload();
+		return res;
+	});
+}
+
 async function initializeOrderView() {
 	if (!orderId) {
 		redirectToDashboard();

@@ -294,3 +294,6 @@ async function removeOrden(ordenId) {
 async function removeVehiculos(vehiculoPlaca) {
 	return deleteData(`${API_URL}/vehiculos/${vehiculoPlaca}`);
 }
+async function removeServicioFromOrden(ordenId, servicioId) {
+	return deleteData(`${API_URL}/ordenes/${ordenId}/servicios/${servicioId}`);
+}

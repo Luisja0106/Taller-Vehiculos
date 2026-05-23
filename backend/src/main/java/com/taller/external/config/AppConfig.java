@@ -203,4 +203,9 @@ public class AppConfig {
     return new ObtenerOrdenesPorServicioId(ordenRepo, servicioRepo);
   }
 
+  @Bean
+  public EliminarServicioDeOrden eliminarServicioDeOrden(IOrdenRepository ordenRepo, IServicioRepository servicioRepo) {
+    return new EliminarServicioDeOrden(ordenRepo, servicioRepo);
+  }
+
 }

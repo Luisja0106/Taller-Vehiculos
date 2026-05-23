@@ -7,6 +7,7 @@ import com.taller.usecases.AgregarServicio;
 import com.taller.usecases.AvanzarEstadoDeOrden;
 import com.taller.usecases.BuscarOrdenPorId;
 import com.taller.usecases.CrearOrden;
+import com.taller.usecases.EliminarServicioDeOrden;
 import com.taller.usecases.ListarOrdenes;
 import com.taller.usecases.ObtenerOrdenesPorServicioId;
 import com.taller.usecases.ReasignarEmpleadoAOrden;
@@ -16,6 +17,7 @@ import com.taller.usecases.dto.AgregarServicioCMD;
 import com.taller.usecases.dto.AvanzarEstadoDeOrdenCMD;
 import com.taller.usecases.dto.BuscarOrdenPorIdCMD;
 import com.taller.usecases.dto.CrearOrdenCMD;
+import com.taller.usecases.dto.EliminarServicioDeOrdenCMD;
 import com.taller.usecases.dto.ListarOrdenesCMD;
 import com.taller.usecases.dto.ReasignarEmpleadoAOrdenCMD;
 import com.taller.usecases.dto.RegistrarPagoCMD;
@@ -44,11 +46,13 @@ public class OrdenController {
   private final BuscarOrdenPorId buscarOrdenPorId;
   private final RemoveOrden removeOrden;
   private final ObtenerOrdenesPorServicioId obtenerOrdenesPorServicioId;
+  private final EliminarServicioDeOrden eliminarServicioDeOrden;
 
   public OrdenController(CrearOrden crearOrden, ListarOrdenes listarOrdenes,
       AvanzarEstadoDeOrden avanzarEstadoDeOrden, AgregarServicio agregarServicio,
       ReasignarEmpleadoAOrden reasignarEmpleadoAOrden, RegistrarPago registrarPago, BuscarOrdenPorId buscarOrdenPorId,
-      RemoveOrden removeOrden, ObtenerOrdenesPorServicioId obtenerOrdenesPorServicioId) {
+      RemoveOrden removeOrden, ObtenerOrdenesPorServicioId obtenerOrdenesPorServicioId,
+      EliminarServicioDeOrden eliminarServicioDeOrden) {
     this.crearOrden = crearOrden;
     this.listarOrdenes = listarOrdenes;
     this.avanzarEstadoDeOrden = avanzarEstadoDeOrden;
@@ -58,6 +62,7 @@ public class OrdenController {
     this.buscarOrdenPorId = buscarOrdenPorId;
     this.removeOrden = removeOrden;
     this.obtenerOrdenesPorServicioId = obtenerOrdenesPorServicioId;
+    this.eliminarServicioDeOrden = eliminarServicioDeOrden;
   }
 
   @GetMapping
@@ -173,6 +178,18 @@ public class OrdenController {
     }
 
     return ResponseEntity.noContent().build();
+  }
+
+  @DeleteMapping("/{id}/servicios/{servicioId}")
+  public ResponseEntity<?> eliminarServicio(@PathVariable String id, @PathVariable String servicioId) {
+    var input = new EliminarServicioDeOrdenCMD(id, servicioId);
+    var resu = eliminarServicioDeOrden.ejecutar(input);
+    if (!resu.isSuccess) {
+      return ResponseEntity.badRequest()
+          .body(Map.of("error", resu.getError().getMessage()));
+    }
+
+    return ResponseEntity.ok(OrdenDTO.from(resu.getValue()));
   }
 
 }

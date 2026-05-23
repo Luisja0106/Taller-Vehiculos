@@ -214,7 +214,7 @@ async function agregarServicioAOrden(idOrden, servicioId) {
 
 async function reasignarEmpleado(ordenId, nuevoEmpleadoId) {
 	return patchData(`${API_URL}/ordenes/${ordenId}/empleado`, {
-		ordenId: ordenId,
+		orderId: ordenId,
 		nuevoEmpleadoId: nuevoEmpleadoId,
 	});
 }

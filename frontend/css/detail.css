@@ -261,3 +261,120 @@ body {
 .button-action:hover {
 	background: var(--color-border);
 }
+
+#modal-confirmation,
+#modal-input,
+#modal-select {
+	position: fixed;
+	inset: 0;
+	background: var(--color-overlay);
+	z-index: 99;
+
+	display: none;
+	justify-content: center;
+	align-items: center;
+}
+
+#modal-confirmation.open,
+#modal-input.open,
+#modal-select.open {
+	display: flex;
+}
+
+#modal-confirm-box,
+#modal-input-box,
+#modal-select-box {
+	background: var(--color-white);
+	border-radius: var(--radius-lg);
+	box-shadow: var(--shadow-drawer);
+	width: 500px;
+	max-width: 90%;
+	z-index: 100;
+
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	gap: var(--space-md);
+	padding: var(--space-xl);
+}
+
+#modal-confirmation-messaje,
+#modal-input-label,
+#modal-select-label {
+	text-align: center;
+	font-size: var(--font-size-lg);
+	font-weight: 700;
+}
+#modal-confirmation-error,
+#modal-select-error,
+#modal-input-error {
+	font-family: var(--font-family);
+	font-weight: 500;
+	font-size: var(--font-size-md);
+	color: red;
+	display: none;
+}
+
+#modal-select-error.show,
+#modal-confirmation-error.show,
+#modal-input-error.show {
+	display: flex;
+}
+
+#modal-input-field,
+#modal-select-field {
+	width: 100%;
+	max-width: 400px;
+	height: 2rem;
+	box-sizing: border-box;
+	padding: 0 1rem;
+	border: 2px solid var(--color-border);
+	border-radius: var(--radius-sm);
+	font-size: var(--font-size-base);
+	font-family: var(--font-family);
+	background: var(--color-white);
+	cursor: pointer;
+	outline: none;
+	transition: var(--transition);
+}
+
+.modal-footer {
+	padding: 0 var(--space-xl);
+	display: flex;
+	justify-content: space-between;
+	gap: var(--space-3xl);
+}
+
+.modal-footer button {
+	padding: var(--space-md) var(--space-3xl);
+	border-radius: var(--radius-sm);
+	font-size: var(--font-size-base);
+	font-family: var(--font-family);
+	font-weight: 500;
+	cursor: pointer;
+	transition: var(--transition);
+	border: none;
+}
+
+#modal-confirm-cancelar,
+#modal-input-cancelar {
+	background: var(--color-bg);
+	color: var(--color-text-muted);
+	border: 1px solid var(--color-border);
+}
+
+#modal-confirm-cancelar:hover,
+#modal-input-cancelar:hover {
+	background: var(--color-border);
+}
+
+#modal-confirm-ok,
+#modal-input-ok {
+	background: var(--color-primary);
+	color: var(--color-white);
+}
+
+#modal-confirm-ok:hover,
+#modal-input-ok:hover {
+	background: var(--color-primary-dark);
+}

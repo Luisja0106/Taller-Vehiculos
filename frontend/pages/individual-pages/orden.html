@@ -93,9 +93,11 @@
         </section>
         <section id="actions" class="slide">
           <div class="title-slide">Acciones</div>
-          <div id="button-grid"><button class="button-action" type="button">Cambiar Estado</button><button
-              class="button-action" type="button">Cambiar Mecanico</button><button class="button-action"
-              type="button">Registrar pago</button><button class="button-action" type="button">Añadir Servicio</button>
+          <div id="button-grid">
+            <button class="button-action" id="avanzar-estado-btn" type="button">Avanzar Estado</button>
+            <button class="button-action" id="cambiar-mecanico-btn" type="button">Cambiar Mecanico</button>
+            <button class="button-action" id="registrar-pago-btn" type="button">Registrar pago</button>
+            <button class="button-action" id="anadir-servicio-btn" type="button">Añadir Servicio</button>
           </div>
         </section>
         <button type="button" class="eliminar-entidad-btn" id="eliminar-orden-btn">
@@ -104,6 +106,41 @@
       </section>
     </section>
   </main>
+
+  <!-- Use case's modals-->
+  <div id="modal-confirmation">
+    <div id="modal-confirm-box">
+      <p id="modal-confirmation-messaje"></p>
+      <p id="modal-confirmation-error"></p>
+        <div class="modal-footer">
+          <button id="modal-confirm-cancelar">Cancelar</button>
+          <button id="modal-confirm-ok">Confirmar</button>
+        </div>
+    </div>
+  </div>
+
+  <div id="modal-input">
+    <div id="modal-input-box">
+      <p id="modal-input-label"></p>
+      <input id="modal-input-field">
+      <p id="modal-input-error"></p>
+      <div class="modal-footer">
+        <button id="modal-input-cancelar">Cancelar</button>
+        <button id="modal-input-ok">Confirmar</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="modal-select">
+    <div id="modal-select-box">
+      <p id="modal-select-label"></p>
+      <select id="modal-select-field"></select>
+      <p id="modal-select-error"></p>
+      <div class="modal-footer">
+        <button id="modal-select-cancelar">Cancelar</button>
+        <button id="modal-select-ok">Confirmar</button>      </div>
+    </div>
+  </div>
 
   <script src="../../js/api.js"></script>
   <script src="../../js/helpers.js"></script>

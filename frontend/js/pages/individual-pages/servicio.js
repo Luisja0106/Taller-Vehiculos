@@ -1,4 +1,5 @@
 const btnClose = document.getElementById("close-slide");
+const btnEliminar = document.getElementById("eliminar-servicio-btn");
 
 async function initializeOrderView() {
 	const servicioId = new URLSearchParams(window.location.search).get("id");

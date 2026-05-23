@@ -205,4 +205,11 @@ public class OrdenDeTrabajo {
       case FINALIZADO -> Result.error(new VerificationError("La orden ya esta finalizada"));
     };
   }
+
+  public Result<Void, IErrorApp> removerServicio(Servicio servicio) {
+    if (!servicios.remove(servicio)) {
+      return Result.error(new VerificationError("Error el servicio no pertenece a la orden"));
+    }
+    return Result.success(null);
+  }
 }

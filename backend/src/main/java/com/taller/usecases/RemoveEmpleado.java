@@ -31,7 +31,7 @@ public class RemoveEmpleado {
         .anyMatch(orden -> orden.getEstado() != EstadoDelTrabajo.FINALIZADO);
     if (haveOrdens) {
       return Result.error(new VerificationError(
-          "Error el empleado cuenta con ordenes activas, favor finalizar las ordenes o asignar un nuevo empleado a csargo enn  ellas "));
+          "Error el empleado cuenta con ordenes activas, favor finalizar las ordenes o asignar un nuevo empleado a cargo en  ellas "));
     }
     empleadoRepo.eliminar(empleadoId);
     return Result.success(null);

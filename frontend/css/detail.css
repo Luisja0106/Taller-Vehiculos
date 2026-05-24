@@ -16,6 +16,127 @@ body {
 }
 
 /* ==========================================================================
+        MODAL
+   ========================================================================== */
+#modal-overlay {
+	position: fixed;
+	inset: 0;
+	background: var(--color-overlay);
+	z-index: 99;
+
+	display: none;
+	justify-content: center;
+	align-items: center;
+}
+
+#modal-overlay.open {
+	display: flex;
+}
+
+.modal-crear-entity {
+	background: var(--color-white);
+	border-radius: var(--radius-lg);
+	box-shadow: var(--shadow-drawer);
+	width: 500px;
+	max-width: 90%;
+	z-index: 100;
+
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-lg);
+	padding: var(--space-xl);
+}
+
+.modal-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.modal-header h2 {
+	font-size: var(--font-size-lg);
+	font-weight: 700;
+}
+
+.modal-header button {
+	background: none;
+	border: none;
+	font-size: var(--font-size-lg);
+	cursor: pointer;
+	color: var(--color-text-muted);
+	transition: var(--transition);
+}
+
+.modal-header button:hover {
+	color: var(--color-text);
+}
+
+.form-group {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-xs);
+}
+
+.form-group label {
+	font-size: var(--font-size-sm);
+	font-weight: 500;
+	color: var(--color-text-muted);
+}
+
+.form-group select,
+.form-group input {
+	padding: var(--space-sm) var(--space-md);
+	border: 1px solid var(--color-border);
+	border-radius: var(--radius-sm);
+	font-size: var(--font-size-base);
+	font-family: var(--font-family);
+	background: var(--color-white);
+	cursor: pointer;
+	outline: none;
+	transition: var(--transition);
+}
+
+.form-group select:focus {
+	border-color: var(--color-primary);
+}
+
+.modal-footer-actualizar {
+	display: flex;
+	justify-content: flex-end;
+	gap: var(--space-md);
+}
+
+.modal-footer-actualizar button {
+	padding: var(--space-sm) var(--space-xl);
+	border-radius: var(--radius-sm);
+	font-size: var(--font-size-base);
+	font-family: var(--font-family);
+	font-weight: 500;
+	cursor: pointer;
+	transition: var(--transition);
+	border: none;
+}
+
+#modal-cancel {
+	background: var(--color-bg);
+	color: var(--color-text-muted);
+	border: 1px solid var(--color-border);
+}
+
+#modal-cancel:hover {
+	background: var(--color-border);
+}
+
+#modal-confirm {
+	background: var(--color-primary);
+	color: var(--color-white);
+}
+
+#modal-confirm:hover {
+	background: var(--color-primary-dark);
+}
+
+/* ==========================================================================
    2. HEADER & HERO (Identidad visual de la Orden)
    ========================================================================== */
 #order-header {

@@ -63,6 +63,8 @@ async function deleteData(url) {
 			headers: { "Content-Type": "application/json" },
 		});
 
+		const data = await response.json();
+
 		if (!response.ok) {
 			return { success: false, error: data.error || `Error ${response.error}` };
 		}
@@ -243,7 +245,7 @@ async function actualizarEmpleado(
 	rol,
 	contrato,
 ) {
-	return patchData(`${API_URL}/empleado/${idEmpleado}`, {
+	return patchData(`${API_URL}/empleados/${idEmpleado}`, {
 		idDelEmpleado: idEmpleado,
 		nombre: nombre,
 		telefono: telefono,

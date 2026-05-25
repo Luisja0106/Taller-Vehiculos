@@ -150,7 +150,6 @@ function openSelectModal(label, options, onConfirm) {
 	select.innerHTML = "";
 	select.add(new Option("Seleccione", "", true));
 	options.forEach((op) => {
-		console.log(`Nombre: ${op.nombre}, Id: ${op.id}`);
 		select.add(new Option(op.nombre, op.id));
 	});
 
@@ -164,6 +163,42 @@ function openSelectModal(label, options, onConfirm) {
 			return;
 		}
 		const resu = await onConfirm(mecanicoId);
+		if (!resu.success) {
+			error.textContent = resu.error;
+			error.classList.add("show");
+		} else {
+			cerrarSelect();
+		}
+	};
+	document.getElementById("modal-select-cancelar").onclick = cerrarSelect;
+}
+
+function openSelectModalVehiculo(label, options, onConfirm) {
+	const select = document.getElementById("modal-select-field");
+	const error = document.getElementById("modal-select-error");
+	error.textContent = " ";
+	error.classList.remove("show");
+	select.value = "";
+
+	document.getElementById("modal-select-label").textContent = label;
+	select.innerHTML = "";
+	select.add(new Option("Seleccione", "", true));
+	options.forEach((op) => {
+		select.add(
+			new Option(`${op.marca} ${op.modelo.toLowerCase()} ${op.anio}`, op.placa),
+		);
+	});
+
+	document.getElementById("modal-select").classList.add("open");
+
+	document.getElementById("modal-select-ok").onclick = async () => {
+		const vehiculoPlaca = select.value;
+		if (vehiculoPlaca === "") {
+			error.textContent = "Debe seleccionar una opcion";
+			error.classList.add("show");
+			return;
+		}
+		const resu = await onConfirm(vehiculoPlaca);
 		if (!resu.success) {
 			error.textContent = resu.error;
 			error.classList.add("show");

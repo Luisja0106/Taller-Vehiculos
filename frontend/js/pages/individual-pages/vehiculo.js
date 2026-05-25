@@ -24,14 +24,16 @@ async function setUpEliminarVehculo() {
 }
 
 async function initializeOrderView() {
-	const vehiculoId = new URLSearchParams(window.location.search).get("placa");
+	const vehiculoPlaca = new URLSearchParams(window.location.search).get(
+		"placa",
+	);
 
-	if (!vehiculoId) {
+	if (!vehiculoPlaca) {
 		redirectToDashboard();
 		return;
 	}
 
-	const vehiculoData = await getVehiculo(vehiculoId);
+	const vehiculoData = await getVehiculo(vehiculoPlaca);
 	if (!vehiculoData) {
 		redirectToDashboard();
 		return;
@@ -69,8 +71,8 @@ function closeSlide() {
 	window.location.href = "../vehiculos.html";
 }
 
-function updatePageMetadata(id) {
-	document.title = `Vehiculo ${id} - AutoService`;
+function updatePageMetadata(placa) {
+	document.title = `Vehiculo ${placa} - AutoService`;
 }
 
 function renderVehiculoHeader(vehiculo) {
@@ -94,7 +96,7 @@ function renderVehiculoDetails(vehiculo, cliente) {
 	//vehiculo dueño
 	document.getElementById("dueño-vehiculo").textContent = cliente.nombre;
 	document.getElementById("dueño-vehiculo").href =
-		`cliente.html?id=${vehiculo.clienteId}`;
+		`cliente.html?id=${vehiculo.dueñoId}`;
 
 	//año vehiculo
 	document.getElementById("anio-vehiculo").textContent = vehiculo.anio;

@@ -1,6 +1,10 @@
-const btnClose = document.getElementById("close-slide");
-const btnEliminar = document.getElementById("eliminar-servicio-btn");
+const servicioId = new URLSearchParams(window.location.search).get("id");
 
+async function initPage() {
+	await initializeOrderView();
+	setUpCloseButton();
+	setUpEliminarServcio();
+}
 async function initializeOrderView() {
 	const servicioId = new URLSearchParams(window.location.search).get("id");
 
@@ -21,6 +25,22 @@ async function initializeOrderView() {
 	renderServicioHeader(servicioData);
 	renderServicioDetails(servicioData);
 	renderOrdenesQueUsa(ordenesAplicado);
+}
+
+async function setUpEliminarServcio() {
+	const btnEliminar = document.getElementById("eliminar-servicio-btn");
+	btnEliminar.addEventListener("click", async () => {
+		openConfirmation(
+			"¿Estás seguro de que deseas eliminar este servicio?",
+			async () => {
+				const resu = await removeServicio(servicioId);
+				if (resu.success) {
+					closeSlide();
+				}
+				return resu;
+			},
+		);
+	});
 }
 
 function redirectToDashboard() {
@@ -54,6 +74,11 @@ function renderServicioDetails(servicio) {
 	document.getElementById("precio-servicio").textContent = servicio.precio;
 }
 
+function setUpCloseButton() {
+	const btnClose = document.getElementById("close-slide");
+	btnClose.addEventListener("click", closeSlide);
+}
+
 async function renderOrdenesQueUsa(ordenes) {
 	const container = document.getElementById("ordenes-aplicadas");
 
@@ -75,5 +100,4 @@ async function renderOrdenesQueUsa(ordenes) {
 	});
 }
 
-document.addEventListener("DOMContentLoaded", initializeOrderView);
-btnClose.addEventListener("click", closeSlide);
+document.addEventListener("DOMContentLoaded", initPage);

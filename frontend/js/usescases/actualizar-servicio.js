@@ -1,4 +1,4 @@
-const nuevoServicioBtn = document.getElementById("nuevo-servicio-button");
+const actualizarServicioBtn = document.getElementById("actualizar-servcio-btn");
 const cerrarServicioBtn = document.getElementById("modal-close");
 const cancelModalBtn = document.getElementById("modal-cancel");
 const confirmModalBtn = document.getElementById("modal-confirm");
@@ -26,17 +26,16 @@ function closeModalOverlay() {
 }
 
 async function confirmarActualizacion() {
-	const nombreServicio = modalNombre.value;
-	const precioServicio = modalPrecio.value;
+	const idServicio = new URLSearchParams(window.location.search).get("id");
+	const nombreServicio = modalNombre.value || null;
+	const precioServicio = modalPrecio.value || null;
 	const modalError = document.getElementById("modal-error");
 
-	if (!nombreServicio || !precioServicio) {
-		modalError.textContent = "Llene todos los datos";
-		modalError.style.display = "block";
-		return;
-	}
-
-	const nuevoServicio = await crearServicio(nombreServicio, precioServicio);
+	const nuevoServicio = await actualizarServicio(
+		idServicio,
+		nombreServicio,
+		precioServicio,
+	);
 	if (!nuevoServicio.success) {
 		modalError.textContent = nuevoServicio.error;
 		modalError.style.display = "block";
@@ -44,7 +43,7 @@ async function confirmarActualizacion() {
 	}
 
 	closeModalOverlay();
-	window.location.href = `./individual-pages/servicio.html?id=${nuevoServicio.data.id}`;
+	window.location.reload();
 }
 
 confirmModalBtn.addEventListener("click", confirmarActualizacion);

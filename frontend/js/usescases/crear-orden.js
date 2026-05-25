@@ -12,7 +12,7 @@ function openModalOverlay() {
 	modalOverlay.classList.add("open");
 }
 
-function cancelarCreation() {
+function cancelarActualizacion() {
 	const modalError = document.getElementById("modal-error");
 
 	modalMecanico.innerHTML = "<option value=''>Seleccione un Mecánico</option>";
@@ -44,7 +44,7 @@ async function setUpOverlay() {
 	});
 }
 
-async function confirmarCreacion() {
+async function confirmarActualizacion() {
 	const vehiculoPlaca = modalVehiculo.value;
 	const empleadoId = modalMecanico.value;
 	const modalError = document.getElementById("modal-error");
@@ -67,7 +67,7 @@ async function confirmarCreacion() {
 	window.location.href = `pages/individual-pages/orden.html?id=${nuevaOrden.data.id}`;
 }
 
-confirmModalBtn.addEventListener("click", confirmarCreacion);
+confirmModalBtn.addEventListener("click", confirmarActualizacion);
 nuevaOrdenBtn.addEventListener("click", openModalOverlay);
-cancelModalBtn.addEventListener("click", cancelarCreation);
+cancelModalBtn.addEventListener("click", cancelarActualizacion);
 cerrarOrdenBtn.addEventListener("click", closeModalOverlay);

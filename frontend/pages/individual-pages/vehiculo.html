@@ -95,7 +95,7 @@
         <section id="actions" class="slide">
           <div class="title-slide">Acciones</div>
           <div id="button-grid">
-            <button class="button-action" type="button">Actualizar Informacion</button>
+            <button class="button-action" id="actualizar-vehiculo-btn" type="button">Actualizar Informacion</button>
             <button class="button-action" type="button">Ver Ordenes Pasadas</button>
           </div>
         </section>
@@ -106,12 +106,67 @@
     </section>
   </main>
 
+  <!-- modals -->
+  <div id="modal-confirmation">
+    <div id="modal-confirm-box">
+      <p id="modal-confirmation-messaje"></p>
+      <p id="modal-confirmation-error"></p>
+        <div class="modal-footer">
+          <button id="modal-confirm-cancelar">Cancelar</button>
+          <button id="modal-confirm-ok">Confirmar</button>
+        </div>
+    </div>
+  </div>
+
   <script src="../../js/api.js"></script>
   <script src="../../js/helpers.js"></script>
   <script src="../../js/navbar.js"></script>
   <script src="../../js/drawer.js"></script>
   <script src="../../js/pages/individual-pages/vehiculo.js"></script>
   <script src="../../js/app.js"></script>
+
+
+  <div id="modal-overlay">
+    <div class="modal-crear-entity">
+        <div class="modal-header">
+            <h2>Actualizar Vehiculo</h2>
+            <button type="button" id="modal-close">✕</button>
+        </div>
+        <form id="form-contratar-empleado">
+            <div class="form-group">
+                <label for="modal-propietario">Cambiar Propietario/a</label>
+                <select id="modal-propietario">
+                    <option value="">Seleccion un Propietario</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="modal-modelo">Cambiar Modelo</label>
+                <input type="text" id="modal-modelo" placeholder="Ingrese el Modelo del Vehiculo">
+            </div>
+            <div class="form-group">
+                <label for="modal-marca">Cambiar Marca</label>
+                <select id="modal-marca">
+                    <option value="">Selecciona una Marca</option>
+                    <option value="CHEVROLET">Chevrolet</option>
+                    <option value="MAZDA">Mazda</option>
+                    <option value="TOYOTA">Toyota</option>
+                    <option value="RENAULT">Renault</option>
+                    <option value="KIA">Kia</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="modal-anio">Cambiar Año</label>
+                <input type="number" id="modal-anio" min="1900" max="3000" placeholder="Ingrese el Año del Vehiculo">
+            </div>
+        </form>
+        <p id="modal-error" style='color: red; display: none;'></p>
+        <div class="modal-footer-actualizar">
+            <button type="button" id="modal-cancel">Cancelar</button>
+            <button type="button" id="modal-confirm">Actualizar Vehiculo</button>
+        </div>
+    </div>
+  </div>
+  <script src="../../js/usescases/actualizar-vehiculo.js"></script>
 
 </body>
 </html>

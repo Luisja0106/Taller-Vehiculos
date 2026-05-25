@@ -15,8 +15,8 @@ function openModalOverlay() {
 function cancelarCreation() {
 	const modalError = document.getElementById("modal-error");
 
-	modalMecanico.value = "";
-	modalVehiculo.value = "";
+	modalMecanico.innerHTML = "<option value=''>Seleccione un Mecánico</option>";
+	modalVehiculo.innerHTML = "<option value=''>Seleccione un Vehículo</option>";
 	modalError.style.display = "none";
 
 	closeModalOverlay();

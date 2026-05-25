@@ -1,4 +1,27 @@
-const btnClose = document.getElementById("close-slide");
+const vehiculoPlaca = new URLSearchParams(window.location.search).get("placa");
+
+async function initPage() {
+	await initializeOrderView();
+	setUpCloseButton();
+	await setUpEliminarVehculo();
+}
+
+async function setUpEliminarVehculo() {
+	const eliminarBtn = document.getElementById("eliminar-vehiculo-btn");
+
+	eliminarBtn.addEventListener("click", async () => {
+		openConfirmation(
+			"¿Esta seguro que desea eliminar este vehiculo?",
+			async () => {
+				const resu = await removeVehiculo(vehiculoPlaca);
+				if (resu.success) {
+					closeSlide();
+				}
+				return resu;
+			},
+		);
+	});
+}
 
 async function initializeOrderView() {
 	const vehiculoId = new URLSearchParams(window.location.search).get("placa");
@@ -9,7 +32,6 @@ async function initializeOrderView() {
 	}
 
 	const vehiculoData = await getVehiculo(vehiculoId);
-	console.log("show vehiculo info", vehiculoData);
 	if (!vehiculoData) {
 		redirectToDashboard();
 		return;
@@ -36,6 +58,11 @@ async function initializeOrderView() {
 
 function redirectToDashboard() {
 	window.location.href = "../../index.html";
+}
+
+function setUpCloseButton() {
+	const btnClose = document.getElementById("close-slide");
+	btnClose.addEventListener("click", closeSlide);
 }
 
 function closeSlide() {
@@ -99,5 +126,4 @@ function renderOrdenesList(ordenes) {
 	});
 }
 
-document.addEventListener("DOMContentLoaded", initializeOrderView);
-btnClose.addEventListener("click", closeSlide);
+document.addEventListener("DOMContentLoaded", initPage);

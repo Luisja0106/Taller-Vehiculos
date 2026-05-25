@@ -63,9 +63,8 @@ async function deleteData(url) {
 			headers: { "Content-Type": "application/json" },
 		});
 
-		const data = await response.json();
-
 		if (!response.ok) {
+			const data = await response.json();
 			return { success: false, error: data.error || `Error ${response.error}` };
 		}
 
@@ -287,13 +286,13 @@ async function removeEmpleado(empleadoId) {
 async function removeCliente(clienteId) {
 	return deleteData(`${API_URL}/clientes/${clienteId}`);
 }
-async function removeServicios(servicioId) {
+async function removeServicio(servicioId) {
 	return deleteData(`${API_URL}/servicios/${servicioId}`);
 }
 async function removeOrden(ordenId) {
 	return deleteData(`${API_URL}/ordenes/${ordenId}`);
 }
-async function removeVehiculos(vehiculoPlaca) {
+async function removeVehiculo(vehiculoPlaca) {
 	return deleteData(`${API_URL}/vehiculos/${vehiculoPlaca}`);
 }
 async function removeServicioFromOrden(ordenId, servicioId) {

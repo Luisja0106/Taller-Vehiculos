@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import com.taller.domain.enums.EstadoDelTrabajo;
+import com.taller.domain.enums.Rol;
 import com.taller.domain.errors.VerificationError;
 import com.taller.domain.interfaces.IErrorApp;
 import com.taller.domain.interfaces.IServicio;
@@ -91,12 +92,19 @@ public class OrdenDeTrabajo {
       return Result.error(new VerificationError("Error el empleado a cargo no puede ser nulo"));
     }
 
+    if (empleado.getRol() != Rol.MECANICO) {
+      return Result.error(new VerificationError("Error el empleado a cargo debe ser un mecanico"));
+    }
+
     return Result.success(new OrdenDeTrabajo(id, vehiculo, empleado));
   }
 
   public Result<Void, IErrorApp> cambiarEmpleadoACargo(Empleado nuevoEmpleado) {
     if (nuevoEmpleado == null) {
       return Result.error(new VerificationError("Error el empleado no puede ser nulo"));
+    }
+    if (nuevoEmpleado.getRol() != Rol.MECANICO) {
+      return Result.error(new VerificationError("Error el empleado a cargo debe ser un mecanico"));
     }
     if (nuevoEmpleado.equals(this.empleadoACargo)) {
       return Result.error(new VerificationError("Error el empleado seleccionado ya es el encargado del trabajo"));

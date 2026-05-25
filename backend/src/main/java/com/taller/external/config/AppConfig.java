@@ -53,8 +53,8 @@ public class AppConfig {
   }
 
   @Bean
-  public ActualizarEmpleado actualizarEmpleado(IEmpleadoRepository repo) {
-    return new ActualizarEmpleado(repo);
+  public ActualizarEmpleado actualizarEmpleado(IEmpleadoRepository repo, IOrdenRepository ordenRepo) {
+    return new ActualizarEmpleado(repo, ordenRepo);
   }
 
   @Bean

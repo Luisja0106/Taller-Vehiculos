@@ -1,23 +1,58 @@
-const btnClose = document.getElementById("close-slide");
+const vehiculoPlaca = new URLSearchParams(window.location.search).get("placa");
+
+async function initPage() {
+	await initializeOrderView();
+	setUpCloseButton();
+	await setUpEliminarVehculo();
+}
+
+async function setUpEliminarVehculo() {
+	const eliminarBtn = document.getElementById("eliminar-vehiculo-btn");
+
+	eliminarBtn.addEventListener("click", async () => {
+		openConfirmation(
+			"¿Esta seguro que desea eliminar este vehiculo?",
+			async () => {
+				const resu = await removeVehiculo(vehiculoPlaca);
+				if (resu.success) {
+					closeSlide();
+				}
+				return resu;
+			},
+		);
+	});
+}
 
 async function initializeOrderView() {
-	const vehiculoId = new URLSearchParams(window.location.search).get("id");
+	const vehiculoPlaca = new URLSearchParams(window.location.search).get(
+		"placa",
+	);
 
-	if (!vehiculoId) {
+	if (!vehiculoPlaca) {
 		redirectToDashboard();
 		return;
 	}
 
-	const vehiculoData = await getVehiculo(vehiculoId);
-	const dueñoData = await getCliente(vehiculoData.clienteId);
-	const vehiculoOrdenes = await getOrdenesByVehiculo(vehiculoData.placa);
-
+	const vehiculoData = await getVehiculo(vehiculoPlaca);
 	if (!vehiculoData) {
 		redirectToDashboard();
 		return;
 	}
+	const idCliente = vehiculoData.dueñoId || vehiculoData.id_cliente;
 
-	updatePageMetadata(vehiculoData.id);
+	let dueñoData = { nombre: "No asignado" };
+	let vehiculoOrdenes = [];
+
+	try {
+		if (idCliente) {
+			dueñoData = await getCliente(idCliente);
+		}
+		vehiculoOrdenes = await getOrdenesByVehiculo(vehiculoData.placa);
+	} catch (error) {
+		console.error("Error cargando datos relaciones", error);
+	}
+
+	updatePageMetadata(vehiculoData.placa);
 	renderVehiculoHeader(vehiculoData);
 	renderVehiculoDetails(vehiculoData, dueñoData);
 	renderOrdenesList(vehiculoOrdenes);
@@ -27,19 +62,24 @@ function redirectToDashboard() {
 	window.location.href = "../../index.html";
 }
 
+function setUpCloseButton() {
+	const btnClose = document.getElementById("close-slide");
+	btnClose.addEventListener("click", closeSlide);
+}
+
 function closeSlide() {
 	window.location.href = "../vehiculos.html";
 }
 
-function updatePageMetadata(id) {
-	document.title = `Vehiculo ${id} - AutoService`;
+function updatePageMetadata(placa) {
+	document.title = `Vehiculo ${placa} - AutoService`;
 }
 
 function renderVehiculoHeader(vehiculo) {
 	const heroSection = document.getElementById("hero");
 	const idDisplay = document.getElementById("vehiculo-id");
 
-	idDisplay.textContent = vehiculo.id;
+	idDisplay.textContent = vehiculo.placa;
 	heroSection.style.background = getBrandColor(vehiculo.marca);
 }
 
@@ -56,7 +96,7 @@ function renderVehiculoDetails(vehiculo, cliente) {
 	//vehiculo dueño
 	document.getElementById("dueño-vehiculo").textContent = cliente.nombre;
 	document.getElementById("dueño-vehiculo").href =
-		`cliente.html?id=${vehiculo.clienteId}`;
+		`cliente.html?id=${vehiculo.dueñoId}`;
 
 	//año vehiculo
 	document.getElementById("anio-vehiculo").textContent = vehiculo.anio;
@@ -88,5 +128,4 @@ function renderOrdenesList(ordenes) {
 	});
 }
 
-document.addEventListener("DOMContentLoaded", initializeOrderView);
-btnClose.addEventListener("click", closeSlide);
+document.addEventListener("DOMContentLoaded", initPage);

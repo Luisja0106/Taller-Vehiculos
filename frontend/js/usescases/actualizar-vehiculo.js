@@ -1,10 +1,9 @@
-const nuevoVehiculoBtn = document.getElementById("nuevo-vehiculo-button");
+const nuevoVehiculoBtn = document.getElementById("actualizar-vehiculo-btn");
 const cerrarVehiculoBtn = document.getElementById("modal-close");
 const cancelModalBtn = document.getElementById("modal-cancel");
 const confirmModalBtn = document.getElementById("modal-confirm");
 
 const modalOverlay = document.getElementById("modal-overlay");
-const modalPlaca = document.getElementById("modal-placa");
 const modalPropietario = document.getElementById("modal-propietario");
 const modalModelo = document.getElementById("modal-modelo");
 const modalMarca = document.getElementById("modal-marca");
@@ -19,7 +18,6 @@ function cancelarActualizacion() {
 	const modalError = document.getElementById("modal-error");
 
 	modalOverlay.value = "";
-	modalPlaca.value = "";
 	modalPropietario.innerHTML =
 		"<option value=''>Seleccione un Propietario</option>";
 	modalModelo.value = "";
@@ -35,40 +33,30 @@ function closeModalOverlay() {
 }
 
 async function confirmarActualizacion() {
-	const placaVehiculo = modalPlaca.value;
-	const propietarioVehiculo = modalPropietario.value;
-	const modeloVehiculo = modalModelo.value;
-	const marcaVehiculo = modalMarca.value;
-	const anioVehiculo = modalAnio.value;
+	const placaVehiculo = new URLSearchParams(window.location.search).get(
+		"placa",
+	);
+	const propietarioVehiculo = modalPropietario.value || null;
+	const modeloVehiculo = modalModelo.value || null;
+	const marcaVehiculo = modalMarca.value || null;
+	const anioVehiculo = modalAnio.value || null;
 	const modalError = document.getElementById("modal-error");
 
-	if (
-		!placaVehiculo ||
-		!propietarioVehiculo ||
-		!modeloVehiculo ||
-		!marcaVehiculo ||
-		!anioVehiculo
-	) {
-		modalError.textContent = "Llene todos los datos";
-		modalError.style.display = "block";
-		return;
-	}
-
-	const nuevoVehiculo = await registrarVehiculo(
+	const vehiculoActualizado = await actualizarVehiculo(
 		placaVehiculo,
 		propietarioVehiculo,
 		modeloVehiculo,
 		marcaVehiculo,
 		anioVehiculo,
 	);
-	if (!nuevoVehiculo.success) {
-		modalError.textContent = nuevoVehiculo.error;
+	if (!vehiculoActualizado.success) {
+		modalError.textContent = vehiculoActualizado.error;
 		modalError.style.display = "block";
 		return;
 	}
 
 	closeModalOverlay();
-	window.location.href = `./individual-pages/vehiculo.html?placa=${nuevoVehiculo.data.placa}`;
+	window.location.reload();
 }
 
 async function setUpPropietario() {

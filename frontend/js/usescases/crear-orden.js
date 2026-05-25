@@ -12,11 +12,11 @@ function openModalOverlay() {
 	modalOverlay.classList.add("open");
 }
 
-function cancelarCreation() {
+function cancelarActualizacion() {
 	const modalError = document.getElementById("modal-error");
 
-	modalMecanico.value = "";
-	modalVehiculo.value = "";
+	modalMecanico.innerHTML = "<option value=''>Seleccione un Mecánico</option>";
+	modalVehiculo.innerHTML = "<option value=''>Seleccione un Vehículo</option>";
 	modalError.style.display = "none";
 
 	closeModalOverlay();
@@ -44,7 +44,7 @@ async function setUpOverlay() {
 	});
 }
 
-async function confirmarCreacion() {
+async function confirmarActualizacion() {
 	const vehiculoPlaca = modalVehiculo.value;
 	const empleadoId = modalMecanico.value;
 	const modalError = document.getElementById("modal-error");
@@ -57,17 +57,17 @@ async function confirmarCreacion() {
 
 	const nuevaOrden = await crearOrden(vehiculoPlaca, empleadoId);
 
-	if (!nuevaOrden) {
-		modalError.textContent = "Error al crear la orden, intenta de nuevo";
+	if (!nuevaOrden.success) {
+		modalError.textContent = nuevaOrden.error;
 		modalError.style.display = "block";
 		return;
 	}
 
 	closeModalOverlay();
-	window.location.href = `pages/individual-pages/orden.html?id=${nuevaOrden.id}`;
+	window.location.href = `pages/individual-pages/orden.html?id=${nuevaOrden.data.id}`;
 }
 
-confirmModalBtn.addEventListener("click", confirmarCreacion);
+confirmModalBtn.addEventListener("click", confirmarActualizacion);
 nuevaOrdenBtn.addEventListener("click", openModalOverlay);
-cancelModalBtn.addEventListener("click", cancelarCreation);
+cancelModalBtn.addEventListener("click", cancelarActualizacion);
 cerrarOrdenBtn.addEventListener("click", closeModalOverlay);

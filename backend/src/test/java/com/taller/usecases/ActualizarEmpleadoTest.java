@@ -9,6 +9,7 @@ import com.taller.domain.entities.Empleado;
 import com.taller.usecases.dto.ActualizarEmpleadoCMD;
 import com.taller.usecases.dto.CrearEmpleadoCMD;
 import com.taller.usecases.fakes.EmpleadoRepositoryFake;
+import com.taller.usecases.fakes.OrdenRepositoryFake;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -20,13 +21,15 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 class ActualizarEmpleadoTest {
   EmpleadoRepositoryFake repo;
+  OrdenRepositoryFake ordenRepo;
   ActualizarEmpleado useCase;
   Empleado empleado;
 
   @BeforeEach
   void setUp() {
     repo = new EmpleadoRepositoryFake();
-    useCase = new ActualizarEmpleado(repo);
+    ordenRepo = new OrdenRepositoryFake();
+    useCase = new ActualizarEmpleado(repo, ordenRepo);
 
     var empleadoUseCase = new ContratarEmpleado(repo);
     var empleadoInput = new CrearEmpleadoCMD("Luis", "3208142119", "correo@correo.com", "Mecanico", "Fijo");

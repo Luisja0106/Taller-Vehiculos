@@ -87,13 +87,39 @@
         <section id="actions" class="slide">
           <div class="title-slide">Acciones</div>
           <div id="button-grid">
-            <button class="button-action" type="button">Actualizar Informacion</button>
-            <button class="button-action" type="button">Asignar Nuevo Vehiculo</button>
+            <button class="button-action" id="actualizar-cliente-btn" type="button">Actualizar Informacion</button>
+            <button class="button-action" id="asignar-nuevo-vehiculo-btn" type="button">Asignar Nuevo Vehiculo</button>
           </div>
         </section>
+        <button type="button" class="eliminar-entidad-btn" id="eliminar-cliente-btn">
+          Eliminar Cliente 
+        </button>
       </section>
     </section>
   </main>
+
+  <!-- modals -->
+  <div id="modal-confirmation">
+    <div id="modal-confirm-box">
+      <p id="modal-confirmation-messaje"></p>
+      <p id="modal-confirmation-error"></p>
+        <div class="modal-footer">
+          <button id="modal-confirm-cancelar">Cancelar</button>
+          <button id="modal-confirm-ok">Confirmar</button>
+        </div>
+    </div>
+  </div>
+
+  <div id="modal-select">
+    <div id="modal-select-box">
+      <p id="modal-select-label"></p>
+      <select id="modal-select-field"></select>
+      <p id="modal-select-error"></p>
+      <div class="modal-footer">
+        <button id="modal-select-cancelar">Cancelar</button>
+        <button id="modal-select-ok">Confirmar</button>      </div>
+    </div>
+  </div>
 
   <script src="../../js/api.js"></script>
   <script src="../../js/helpers.js"></script>
@@ -101,6 +127,36 @@
   <script src="../../js/drawer.js"></script>
   <script src="../../js/pages/individual-pages/cliente.js"></script>
   <script src="../../js/app.js"></script>
+
+  <div id="modal-overlay">
+    <div class="modal-crear-entity">
+        <div class="modal-header">
+            <h2>Actualizar Cliente</h2>
+            <button type="button" id="modal-close">✕</button>
+        </div>
+        <form id="form-contratar-cliente">
+            <div class="form-group">
+                <label for="modal-nombre">Cambiar Nombre</label>
+                <input type="text" id="modal-nombre" placeholder="Ingrese el Nombre del Cliente">
+            </div>
+            <div class="form-group">
+                <label for="modal-telefono">Cambiar Telefono</label>
+                <input type="tel" id="modal-telefono" placeholder="Ingrese el Telefono del Cliente">
+            </div>
+            <div class="form-group">
+                <label for="modal-email">Cambiar Email</label>
+                <input type="email" id="modal-email" placeholder="Ingrese el email del Cliente">
+            </div>
+        </form>
+        <p id="modal-error" style='color: red; display: none;'></p>
+        <div class="modal-footer-actualizar">
+            <button type="button" id="modal-cancel">Cancelar</button>
+            <button type="button" id="modal-confirm">Registrar Cliente</button>
+        </div>
+    </div>
+  </div>
+
+  <script src="../../js/usescases/actualizar-cliente.js"></script>
 
 </body>
 </html>

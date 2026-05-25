@@ -1,7 +1,12 @@
-const btnClose = document.getElementById("close-slide");
-async function initializeOrderView() {
-	const empleadoId = new URLSearchParams(window.location.search).get("id");
+const empleadoId = new URLSearchParams(window.location.search).get("id");
 
+async function initView() {
+	await initializeOrderView();
+	closeInfo();
+	setUpEliminarEmpleado();
+}
+
+async function initializeOrderView() {
 	if (!empleadoId) {
 		redirectToDashboard();
 		return;
@@ -19,6 +24,11 @@ async function initializeOrderView() {
 	renderEmpleadoHeader(empleadoData);
 	renderVehiculoDetails(empleadoData);
 	renderOrdenesList(empleadoOrdenes);
+}
+
+function closeInfo() {
+	const btnClose = document.getElementById("close-slide");
+	btnClose.addEventListener("click", closeSlide);
 }
 
 function redirectToDashboard() {
@@ -90,6 +100,21 @@ async function renderOrdenesList(ordenes) {
 		container.insertAdjacentHTML("beforeend", ordenHtml);
 	});
 }
+async function setUpEliminarEmpleado() {
+	const btnEliminar = document.getElementById("eliminar-empleado-btn");
 
-document.addEventListener("DOMContentLoaded", initializeOrderView);
-btnClose.addEventListener("click", closeSlide);
+	btnEliminar.addEventListener("click", () =>
+		openConfirmation(
+			"¿Estas seguro? esta accion no se puede deshacer.",
+			async () => {
+				const res = await removeEmpleado(empleadoId);
+				if (res.success) {
+					closeSlide();
+				}
+				return res;
+			},
+		),
+	);
+}
+
+document.addEventListener("DOMContentLoaded", initView);

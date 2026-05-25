@@ -1,4 +1,4 @@
-const nuevoClienteBtn = document.getElementById("nuevo-cliente-button");
+const nuevoClienteBtn = document.getElementById("actualizar-cliente-btn");
 const cerrarClienteBtn = document.getElementById("modal-close");
 const cancelModalBtn = document.getElementById("modal-cancel");
 const confirmModalBtn = document.getElementById("modal-confirm");
@@ -28,30 +28,26 @@ function closeModalOverlay() {
 }
 
 async function confirmarActualizacion() {
-	const nombreCliente = modalNombre.value;
-	const telefonoCliente = modalTelefono.value;
-	const emailCliente = modalEmail.value;
+	const idCliente = new URLSearchParams(window.location.search).get("id");
+	const nombreCliente = modalNombre.value || null;
+	const telefonoCliente = modalTelefono.value || null;
+	const emailCliente = modalEmail.value || null;
 	const modalError = document.getElementById("modal-error");
 
-	if (!nombreCliente || !telefonoCliente || !emailCliente) {
-		modalError.textContent = "Llene todos los datos";
-		modalError.style.display = "block";
-		return;
-	}
-
-	const nuevoCliente = await registrarCliente(
+	const clienteActualizado = await actualizarCliente(
+		idCliente,
 		nombreCliente,
 		telefonoCliente,
 		emailCliente,
 	);
-	if (!nuevoCliente.success) {
-		modalError.textContent = nuevoCliente.error;
+	if (!clienteActualizado.success) {
+		modalError.textContent = clienteActualizado.error;
 		modalError.style.display = "block";
 		return;
 	}
 
 	closeModalOverlay();
-	window.location.href = `./individual-pages/cliente.html?id=${nuevoCliente.data.id}`;
+	window.location.reload();
 }
 
 confirmModalBtn.addEventListener("click", confirmarActualizacion);

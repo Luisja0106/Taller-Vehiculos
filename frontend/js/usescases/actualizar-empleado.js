@@ -1,5 +1,5 @@
-const nuevoClienteBtn = document.getElementById("nuevo-cliente-button");
-const cerrarClienteBtn = document.getElementById("modal-close");
+const nuevoEmpleadoBtn = document.getElementById("actualizar-empleado-btn");
+const cerrarEmpleadoBtn = document.getElementById("modal-close");
 const cancelModalBtn = document.getElementById("modal-cancel");
 const confirmModalBtn = document.getElementById("modal-confirm");
 
@@ -7,6 +7,8 @@ const modalOverlay = document.getElementById("modal-overlay");
 const modalNombre = document.getElementById("modal-nombre");
 const modalTelefono = document.getElementById("modal-telefono");
 const modalEmail = document.getElementById("modal-email");
+const modalRol = document.getElementById("modal-rol");
+const modalContrato = document.getElementById("modal-contrato");
 
 function openModalOverlay() {
 	modalOverlay.classList.add("open");
@@ -18,6 +20,8 @@ function cancelarActualizacion() {
 	modalNombre.value = "";
 	modalTelefono.value = "";
 	modalEmail.value = "";
+	modalRol.value = "";
+	modalContrato.value = "";
 	modalError.style.display = "none";
 
 	closeModalOverlay();
@@ -28,33 +32,33 @@ function closeModalOverlay() {
 }
 
 async function confirmarActualizacion() {
-	const nombreCliente = modalNombre.value;
-	const telefonoCliente = modalTelefono.value;
-	const emailCliente = modalEmail.value;
+	const empleadoId = new URLSearchParams(window.location.search).get("id");
+	const nombreEmpleado = modalNombre.value || null;
+	const telefonoEmpleado = modalTelefono.value || null;
+	const emailEmpleado = modalEmail.value || null;
+	const rolEmpleado = modalRol.value || null;
+	const contratoEmpleado = modalContrato.value || null;
 	const modalError = document.getElementById("modal-error");
 
-	if (!nombreCliente || !telefonoCliente || !emailCliente) {
-		modalError.textContent = "Llene todos los datos";
-		modalError.style.display = "block";
-		return;
-	}
-
-	const nuevoCliente = await registrarCliente(
-		nombreCliente,
-		telefonoCliente,
-		emailCliente,
+	const actuEmpleado = await actualizarEmpleado(
+		empleadoId,
+		nombreEmpleado,
+		telefonoEmpleado,
+		emailEmpleado,
+		rolEmpleado,
+		contratoEmpleado,
 	);
-	if (!nuevoCliente.success) {
-		modalError.textContent = nuevoCliente.error;
+	if (!actuEmpleado.success) {
+		modalError.textContent = actuEmpleado.error;
 		modalError.style.display = "block";
 		return;
 	}
 
 	closeModalOverlay();
-	window.location.href = `./individual-pages/cliente.html?id=${nuevoCliente.data.id}`;
+	window.location.reload();
 }
 
 confirmModalBtn.addEventListener("click", confirmarActualizacion);
-nuevoClienteBtn.addEventListener("click", openModalOverlay);
+nuevoEmpleadoBtn.addEventListener("click", openModalOverlay);
 cancelModalBtn.addEventListener("click", cancelarActualizacion);
-cerrarClienteBtn.addEventListener("click", closeModalOverlay);
+cerrarEmpleadoBtn.addEventListener("click", closeModalOverlay);

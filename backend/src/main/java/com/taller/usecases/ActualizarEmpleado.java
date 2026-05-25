@@ -7,6 +7,7 @@ import com.taller.domain.errors.ActionError;
 import com.taller.domain.errors.VerificationError;
 import com.taller.domain.interfaces.IErrorApp;
 import com.taller.domain.repositories.IEmpleadoRepository;
+import com.taller.domain.repositories.IOrdenRepository;
 import com.taller.domain.utils.Result;
 import com.taller.domain.valueobjects.Email;
 import com.taller.domain.valueobjects.Telefono;
@@ -14,9 +15,11 @@ import com.taller.usecases.dto.ActualizarEmpleadoCMD;
 
 public class ActualizarEmpleado {
   private final IEmpleadoRepository empleadoRepository;
+  private final IOrdenRepository ordenRepository;
 
-  public ActualizarEmpleado(IEmpleadoRepository empleadoRepository) {
+  public ActualizarEmpleado(IEmpleadoRepository empleadoRepository, IOrdenRepository ordenRepository) {
     this.empleadoRepository = empleadoRepository;
+    this.ordenRepository = ordenRepository;
   }
 
   public Result<Empleado, IErrorApp> ejecutar(ActualizarEmpleadoCMD input) {
@@ -94,6 +97,12 @@ public class ActualizarEmpleado {
     var rol = Rol.buscarPorNombre(rolRaw);
     if (rol.isEmpty()) {
       return Result.error(new VerificationError("Error el rol no es valido"));
+    }
+    var hasOrdenes = ordenRepository.listarConFiltros(null, empleado.getId(), null).size() > 0;
+    if (hasOrdenes && rol.get() != Rol.MECANICO) {
+      return Result
+          .error(new VerificationError("Error no se puede cambiar el rol del empleado porque tiene ordenes asignadas"));
+
     }
     empleado.setRol(rol.get());
     return Result.success(null);

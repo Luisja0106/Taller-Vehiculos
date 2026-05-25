@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.taller.domain.entities.OrdenDeTrabajo;
 import com.taller.domain.entities.Servicio;
+import com.taller.domain.enums.EstadoDelTrabajo;
 import com.taller.domain.errors.VerificationError;
 import com.taller.domain.interfaces.IErrorApp;
 import com.taller.domain.interfaces.IServicio;
@@ -40,6 +41,13 @@ public class EliminarServicioDeOrden {
     if (ordenOPT.isEmpty()) {
       return Result.error(new VerificationError("Error no se encontro ninguna orden con el id ingresado"));
     }
+    OrdenDeTrabajo orden = ordenOPT.get();
+
+    if (orden.getEstado().equals(EstadoDelTrabajo.EN_ESPERA_DE_PAGO)
+        || orden.getEstado().equals(EstadoDelTrabajo.FINALIZADO)) {
+      return Result.error(
+          new VerificationError("Error no se pueden modificar ordenes que estan en espera de pago o finalizadas"));
+    }
 
     if (input.servicioId() == null) {
       return Result.error(new VerificationError("Error el servicio no puede ser nulo"));
@@ -55,7 +63,6 @@ public class EliminarServicioDeOrden {
       return Result.error(new VerificationError("Error no se encontro ningun servicio con el id ingresado"));
     }
 
-    OrdenDeTrabajo orden = ordenOPT.get();
     Servicio servicio = servicioOPT.get();
 
     List<IServicio> servicios = orden.getServicios();

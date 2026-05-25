@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Empleados - AutoService</title>
+  <link rel="icon" type="image/webp" href="../assets/logo.webp">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="../css/drawer.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="../css/cards.css">
+</head>
+
+<body> <!--persistent objects-->
+  <header> <!-- Top bar-->
+    <div id="open-drawer">
+      AutoService
+    </div>
+    <nav>
+      <a id="goto-dashboard" href="#">Dashboard</a>
+      <a id="goto-inventario" href="#">Inventario</a>
+      <a id="goto-reportes" href="#">Reportes</a>
+    </nav>
+    <div>
+      <span>icon</span>
+      <span>UserName</span>
+    </div>
+  </header>
+
+  <aside id="drawer"> <!--left bar-->
+    <div>
+      <span>AutoService</span>
+      <button type="button" id="close-drawer">x</button>
+    </div>
+    <ul> <!-- list-->
+      <li>
+        <a id="goto-empleados" href="#">Empleados</a>
+      </li>
+      <li>
+        <a id="goto-vehiculos" href="#">Vehiculos</a>
+      </li>
+      <li>
+        <a id="goto-clientes" href="#">Clientes</a>
+      </li>
+      <li>
+        <a id="goto-servicios" href="#">Servicios</a>
+      </li>
+    </ul>
+  </aside>
+  <div id="overlay"> <!--dark background in the bar--> </div>
+
+  <main id="main-content">
+    <section id="view-dashboard">
+      <section class="hero" id="empleados-hero">
+        <form id="search-form">
+          <input type="search" id="search-input" , placeholder="buscar empleados por ID, Email">
+          <button type="submit" id="button-empleados-buscar">Buscar</button>
+        </form>
+      </section>
+      <div class="creacion-entidad-container" id="nuevo-empleado-container">
+        <button type="button" class="creacion-entidad-button" id="nuevo-empleado-button">Nuevo empleado</button>
+      </div>
+      <section id="cards-grid">
+      </section>
+    </section>
+  </main>
+
+  <script src="../js/api.js"></script>
+  <script src="../js/helpers.js"></script>
+  <script src="../js/navbar.js"></script>
+  <script src="../js/drawer.js"></script>
+  <script src="../js/pages/empleados.js"></script>
+  <script src="../js/app.js"></script>
+
+
+  <!--floating info for crear new cliente-->
+  <div id="modal-overlay">
+    <div class="modal-crear-entity">
+        <div class="modal-header">
+            <h2>Registrar Nuevo Empleado</h2>
+            <button type="button" id="modal-close">✕</button>
+        </div>
+        <form id="form-contratar-empleado">
+            <div class="form-group">
+                <label for="modal-nombre">Nombre</label>
+                <input type="text" id="modal-nombre" placeholder="Ingrese el Nombre del Empleado">
+            </div>
+            <div class="form-group">
+                <label for="modal-telefono">Telefono</label>
+                <input type="tel" id="modal-telefono" placeholder="Ingrese el Telefono del Empleado">
+            </div>
+            <div class="form-group">
+                <label for="modal-email">Email</label>
+                <input type="email" id="modal-email" placeholder="Ingrese el email del Empleado">
+            </div>
+            <div class="form-group">
+                <label for="modal-rol">Rol</label>
+                <select id="modal-rol">
+                    <option value="">Selecciona un rol</option>
+                    <option value="MECANICO">Mecanico</option>
+                    <option value="ADMINISTRADOR">Adminstrador</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="modal-contrato">Tipo de Contrato</label>
+                <select id="modal-contrato">
+                    <option value="">Selecciona un Tipo de Contrato</option>
+                    <option value="FIJO">Fijo</option>
+                    <option value="PARCIAL">Parcial</option>
+                </select>
+            </div>
+        </form>
+        <p id="modal-error" style='color: red; display: none;'></p>
+        <div class="modal-footer">
+            <button type="button" id="modal-cancel">Cancelar</button>
+            <button type="button" id="modal-confirm">Registrar Empleado</button>
+        </div>
+    </div>
+  </div>
+  <script src="../js/usescases/contratar-empleado.js"></script>
+</body>
+
+</html>
+

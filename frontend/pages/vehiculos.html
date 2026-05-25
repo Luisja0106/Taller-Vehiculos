@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vehiculos - AutoService</title>
+  <link rel="icon" type="image/webp" href="../assets/logo.webp">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="../css/drawer.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="../css/cards.css">
+</head>
+
+<body> <!--persistent objects-->
+  <header> <!-- Top bar-->
+    <div id="open-drawer">
+      AutoService
+    </div>
+    <nav>
+      <a id="goto-dashboard" href="#">Dashboard</a>
+      <a id="goto-inventario" href="#">Inventario</a>
+      <a id="goto-reportes" href="#">Reportes</a>
+    </nav>
+    <div>
+      <span>icon</span>
+      <span>UserName</span>
+    </div>
+  </header>
+
+  <aside id="drawer"> <!--left bar-->
+    <div>
+      <span>AutoService</span>
+      <button type="button" id="close-drawer">x</button>
+    </div>
+    <ul> <!-- list-->
+      <li>
+        <a id="goto-empleados" href="#">Empleados</a>
+      </li>
+      <li>
+        <a id="goto-vehiculos" href="#">Vehiculos</a>
+      </li>
+      <li>
+        <a id="goto-clientes" href="#">Clientes</a>
+      </li>
+      <li>
+        <a id="goto-servicios" href="#">Servicios</a>
+      </li>
+    </ul>
+  </aside>
+  <div id="overlay"> <!--dark background in the bar--> </div>
+
+  <main id="main-content">
+    <section id="view-dashboard">
+      <section class="hero" id="vehiculos-hero">
+        <form id="search-form">
+          <input type="search" id="search-input" , placeholder="buscar Vehiculos por Placa">
+          <button type="submit" id="button-vehiculos-buscar">Buscar</button>
+        </form>
+      </section>
+      <div class="creacion-entidad-container" id="nuevo-vehiculo-container">
+        <button type="button" class="creacion-entidad-button" id="nuevo-vehiculo-button">Nuevo Vehiculo</button>
+      </div>
+      <section id="cards-grid">
+      </section>
+    </section>
+  </main>
+
+  <script src="../js/api.js"></script>
+  <script src="../js/helpers.js"></script>
+  <script src="../js/navbar.js"></script>
+  <script src="../js/drawer.js"></script>
+  <script src="../js/pages/vehiculos.js"></script>
+  <script src="../js/app.js"></script>
+
+
+  <!--floating info for crear new vehiculo-->
+  <div id="modal-overlay">
+    <div class="modal-crear-entity">
+        <div class="modal-header">
+            <h2>Registrar Nuevo Vehiculo</h2>
+            <button type="button" id="modal-close">✕</button>
+        </div>
+        <form id="form-contratar-empleado">
+            <div class="form-group">
+                <label for="modal-placa">Placa</label>
+                <input type="text" id="modal-placa" placeholder="Ingrese la Placa del Vehiculo">
+            </div>
+            <div class="form-group">
+                <label for="modal-propietario">Propietario/a</label>
+                <select id="modal-propietario">
+                    <option value="">Selecciona el/la Propietario/a del Vehiculo</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="modal-modelo">Modelo</label>
+                <input type="text" id="modal-modelo" placeholder="Ingrese el Modelo del Vehiculo">
+            </div>
+            <div class="form-group">
+                <label for="modal-marca">Marca</label>
+                <select id="modal-marca">
+                    <option value="">Selecciona una Marca</option>
+                    <option value="CHEVROLET">Chevrolet</option>
+                    <option value="MAZDA">Mazda</option>
+                    <option value="TOYOTA">Toyota</option>
+                    <option value="RENAULT">Renault</option>
+                    <option value="KIA">Kia</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="modal-anio">Año</label>
+                <input type="number" id="modal-anio" min="1900" max="3000" placeholder="Ingrese el Año del Vehiculo">
+            </div>
+        </form>
+        <p id="modal-error" style='color: red; display: none;'></p>
+        <div class="modal-footer">
+            <button type="button" id="modal-cancel">Cancelar</button>
+            <button type="button" id="modal-confirm">Registrar Vehiculo</button>
+        </div>
+    </div>
+  </div>
+  <script src="../js/usescases/registrar-vehiculo.js"></script>
+</body>
+
+</html>
+

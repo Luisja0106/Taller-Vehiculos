@@ -196,7 +196,7 @@ async function getOrdenesWithFilters(estado, empleadoId, vehiculoPlaca) {
 	let url = `${API_URL}/ordenes?`;
 	if (estado) url += `estado=${estado}&`;
 	if (empleadoId) url += `empleadoId=${empleadoId}&`;
-	if (vehiculoPlaca) url += `vehiculoPlaca=${vehiculoPlaca}&`;
+	if (vehiculoPlaca) url += `placaVehiculo=${vehiculoPlaca}&`;
 	return fetchData(url);
 }
 

@@ -2,6 +2,7 @@ package com.taller.adapters.web;
 
 import java.util.Map;
 
+import com.taller.adapters.persistence.jpa.implementations.ServicioRepositoryImpl;
 import com.taller.adapters.web.dto.ServicioDTO;
 import com.taller.usecases.ActualizarServicio;
 import com.taller.usecases.BuscarServicioPorId;
@@ -31,14 +32,17 @@ public class ServicioController {
   private final ListarServicios listarServicios;
   private final BuscarServicioPorId buscarServicioPorId;
   private final RemoveServicio removeServicio;
+  private final ServicioRepositoryImpl servicoRepositoryImpl;
 
   public ServicioController(CrearServicio crearServicio, ActualizarServicio actualizarServicio,
-      ListarServicios listarServicios, BuscarServicioPorId buscarServicioPorId, RemoveServicio removeServicio) {
+      ListarServicios listarServicios, BuscarServicioPorId buscarServicioPorId, RemoveServicio removeServicio,
+      ServicioRepositoryImpl servicoRepositoryImpl) {
     this.crearServicio = crearServicio;
     this.actualizarServicio = actualizarServicio;
     this.listarServicios = listarServicios;
     this.buscarServicioPorId = buscarServicioPorId;
     this.removeServicio = removeServicio;
+    this.servicoRepositoryImpl = servicoRepositoryImpl;
   }
 
   @GetMapping
@@ -68,6 +72,18 @@ public class ServicioController {
     }
 
     return ResponseEntity.ok(ServicioDTO.from(resultado.getValue()));
+  }
+
+  @GetMapping("/nombre/{nombre}")
+  public ResponseEntity<?> buscarPorNombre(@PathVariable String nombre) {
+    var resultado = servicoRepositoryImpl.buscarPorNombre(nombre);
+
+    if (resultado.isEmpty()) {
+      return ResponseEntity.internalServerError()
+          .body(Map.of("error", "Servicio no encontrado con el nombre: " + nombre));
+    }
+
+    return ResponseEntity.ok(ServicioDTO.from(resultado.get()));
   }
 
   @PostMapping

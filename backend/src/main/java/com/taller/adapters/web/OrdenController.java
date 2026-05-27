@@ -2,6 +2,7 @@ package com.taller.adapters.web;
 
 import java.util.Map;
 
+import com.taller.adapters.persistence.jpa.implementations.OrdenRepositoryImpl;
 import com.taller.adapters.web.dto.OrdenDTO;
 import com.taller.usecases.AgregarServicio;
 import com.taller.usecases.AvanzarEstadoDeOrden;
@@ -47,12 +48,13 @@ public class OrdenController {
   private final RemoveOrden removeOrden;
   private final ObtenerOrdenesPorServicioId obtenerOrdenesPorServicioId;
   private final EliminarServicioDeOrden eliminarServicioDeOrden;
+  private final OrdenRepositoryImpl ordenRepo;
 
   public OrdenController(CrearOrden crearOrden, ListarOrdenes listarOrdenes,
       AvanzarEstadoDeOrden avanzarEstadoDeOrden, AgregarServicio agregarServicio,
       ReasignarEmpleadoAOrden reasignarEmpleadoAOrden, RegistrarPago registrarPago, BuscarOrdenPorId buscarOrdenPorId,
       RemoveOrden removeOrden, ObtenerOrdenesPorServicioId obtenerOrdenesPorServicioId,
-      EliminarServicioDeOrden eliminarServicioDeOrden) {
+      EliminarServicioDeOrden eliminarServicioDeOrden, OrdenRepositoryImpl ordenRepo) {
     this.crearOrden = crearOrden;
     this.listarOrdenes = listarOrdenes;
     this.avanzarEstadoDeOrden = avanzarEstadoDeOrden;
@@ -63,6 +65,7 @@ public class OrdenController {
     this.removeOrden = removeOrden;
     this.obtenerOrdenesPorServicioId = obtenerOrdenesPorServicioId;
     this.eliminarServicioDeOrden = eliminarServicioDeOrden;
+    this.ordenRepo = ordenRepo;
   }
 
   @GetMapping
@@ -111,6 +114,17 @@ public class OrdenController {
         .toList();
 
     return ResponseEntity.ok(dtos);
+  }
+
+  @GetMapping("/activas")
+  public ResponseEntity<?> listarOrdenesActivas(
+      @RequestParam(required = false) String placaVehiculo,
+      @RequestParam(required = false) String empleadoId) {
+    var ordenes = ordenRepo.listarOrdenesActivas(empleadoId, placaVehiculo);
+
+    return ResponseEntity.ok(ordenes.stream()
+        .map(OrdenDTO::from)
+        .toList());
   }
 
   @PostMapping

@@ -2,6 +2,7 @@ package com.taller.adapters.web;
 
 import java.util.Map;
 
+import com.taller.adapters.persistence.jpa.implementations.EmpleadoRepositoryImpl;
 import com.taller.adapters.web.dto.EmpleadoDTO;
 import com.taller.usecases.ActualizarEmpleado;
 import com.taller.usecases.BuscarEmpleadoPorId;
@@ -33,14 +34,17 @@ public class EmpleadoController {
   private final ListarEmpleados listarEmpleados;
   private final BuscarEmpleadoPorId buscarEmpleadoPorId;
   private final RemoveEmpleado removeEmpleado;
+  private final EmpleadoRepositoryImpl empleadoRepository;
 
   public EmpleadoController(ContratarEmpleado contratarEmpleado, ActualizarEmpleado actualizarEmpleado,
-      ListarEmpleados listarEmpleados, BuscarEmpleadoPorId buscarEmpleadoPorId, RemoveEmpleado removeEmpleado) {
+      ListarEmpleados listarEmpleados, BuscarEmpleadoPorId buscarEmpleadoPorId, RemoveEmpleado removeEmpleado,
+      EmpleadoRepositoryImpl empleadoRepository) {
     this.contratarEmpleado = contratarEmpleado;
     this.actualizarEmpleado = actualizarEmpleado;
     this.listarEmpleados = listarEmpleados;
     this.buscarEmpleadoPorId = buscarEmpleadoPorId;
     this.removeEmpleado = removeEmpleado;
+    this.empleadoRepository = empleadoRepository;
   }
 
   @GetMapping
@@ -66,6 +70,17 @@ public class EmpleadoController {
           .body(Map.of("error", resultado.getError().getMessage()));
     }
     return ResponseEntity.ok(EmpleadoDTO.from(resultado.getValue()));
+  }
+
+  @GetMapping("/email/{email}")
+  public ResponseEntity<?> buscarPorEmail(@PathVariable String email) {
+    var resultado = empleadoRepository.buscarPorEmail(email);
+
+    if (resultado.isEmpty()) {
+      return ResponseEntity.internalServerError()
+          .body(Map.of("error", "Empleado no encontrado con email: " + email));
+    }
+    return ResponseEntity.ok(EmpleadoDTO.from(resultado.get()));
   }
 
   @PostMapping

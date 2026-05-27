@@ -24,7 +24,7 @@ async function handleSearch(event) {
 
 	hideError();
 
-	const prefix = codigo.substring(0, 3);
+	const prefix = codigo.substring(0, 3).toUpperCase();
 
 	const validPrefix = ["EMP", "CLI", "VHC", "ORD", "SRV"];
 

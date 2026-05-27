@@ -129,6 +129,10 @@ async function getEmpleado(id) {
 	return fetchData(`${API_URL}/empleados/${id}`);
 }
 
+async function getEmpleadoEmail(email) {
+	return fetchData(`${API_URL}/empleados/email/${email}`);
+}
+
 async function getOrdenes() {
 	return fetchData(`${API_URL}/ordenes`);
 }
@@ -137,12 +141,23 @@ async function getOrden(id) {
 	return fetchData(`${API_URL}/ordenes/${id}`);
 }
 
+async function getOrdenesActivas(empleadoId, placaVehiculo) {
+	let url = `${API_URL}/ordenes/activas?`;
+	if (empleadoId) url += `empleadoId=${empleadoId}&`;
+	if (placaVehiculo) url += `placaVehiculo=${placaVehiculo}&`;
+	return fetchData(url);
+}
+
 async function getClientes() {
 	return fetchData(`${API_URL}/clientes`);
 }
 
 async function getCliente(id) {
 	return fetchData(`${API_URL}/clientes/${id}`);
+}
+
+async function getClienteByEmail(email) {
+	return fetchData(`${API_URL}/clientes/email/${email}`);
 }
 
 async function getVehiculos() {
@@ -156,8 +171,13 @@ async function getVehiculo(id) {
 async function getServicios() {
 	return fetchData(`${API_URL}/servicios`);
 }
+
 async function getServicio(id) {
 	return fetchData(`${API_URL}/servicios/${id}`);
+}
+
+async function getServicioPorNombre(nombre) {
+	return fetchData(`${API_URL}/servicios/nombre/${nombre}`);
 }
 
 async function getOrdenesByEmpleado(empleadoId) {

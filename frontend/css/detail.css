@@ -136,6 +136,110 @@ body {
 	background: var(--color-primary-dark);
 }
 
+#ordenes-finalizadas-modal {
+	position: fixed;
+	inset: 0;
+	background: var(--color-overlay);
+	z-index: 99;
+	display: none;
+	justify-content: center;
+	align-items: center;
+}
+
+#ordenes-finalizadas-modal.open {
+	display: flex;
+}
+
+#ordenes-finalizadas-content {
+	background: var(--color-white);
+	border-radius: var(--radius-lg);
+	box-shadow: var(--shadow-drawer);
+	width: 50vw;
+	max-width: 90%;
+	max-height: 90%;
+	z-index: 100;
+	padding: var(--space-xl);
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-xl);
+	align-items: center;
+}
+
+#ordenes-finalizadas-header {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--space-xl);
+}
+
+#ordenes-finalizadas-header > button {
+	background: none;
+	border: none;
+	font-size: var(--font-size-xl);
+	font-weight: 600;
+	cursor: pointer;
+	color: var(--color-text-muted);
+	transition: var(--transition);
+	cursor: pointer;
+}
+
+#ordenes-finalizadas-header > h2 {
+	font-size: var(--font-size-2xl);
+}
+
+#ordenes-finalizadas-nav {
+	width: 100%;
+	flex: 1;
+	overflow-y: auto;
+}
+
+#ordenes-finalizadas-list {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-lg);
+}
+
+#ordenes-finalizadas-list > li {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	background-color: var(--color-bg);
+	padding: var(--space-lg) var(--space-md);
+	border-radius: var(--radius-md);
+}
+
+.ordenes-finalizado-ordenId,
+.ordenes-finalizado-vehiculoPlaca,
+.ordenes-finalizado-valor {
+	font-family: var(--font-family);
+	font-size: var(--font-size-md);
+	font-weight: 700;
+}
+
+.ordenes-finalizado-ordenId {
+	padding-right: var(--space-md);
+	color: var(--color-primary);
+	cursor: pointer;
+}
+
+.ordenes-finalizado-valor {
+	padding-right: var(--space-md);
+}
+
+.ordenes-finalizado-vehiculoPlaca {
+	padding-right: var(--space-lg);
+	cursor: pointer;
+}
+
+#ordenes-finalizadas-fallback {
+	align-self: center;
+	font-family: var(--font-family);
+	font-size: var(--font-size-lg);
+	font-weight: 500;
+	color: var(--color-text-muted);
+}
 /* ==========================================================================
    2. HEADER & HERO (Identidad visual de la Orden)
    ========================================================================== */

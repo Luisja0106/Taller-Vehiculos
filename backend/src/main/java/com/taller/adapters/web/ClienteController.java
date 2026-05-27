@@ -2,6 +2,7 @@ package com.taller.adapters.web;
 
 import java.util.Map;
 
+import com.taller.adapters.persistence.jpa.implementations.ClienteRepositoryImpl;
 import com.taller.adapters.web.dto.ClienteDTO;
 import com.taller.usecases.ActualizarCliente;
 import com.taller.usecases.BuscarClientePorId;
@@ -31,14 +32,17 @@ public class ClienteController {
   private final ListarClientes listarClientes;
   private final BuscarClientePorId buscarClientePorId;
   private final RemoveCliente removeCliente;
+  private final ClienteRepositoryImpl clienteRepositoryImpl;
 
   public ClienteController(RegistrarCliente registrarCliente, ActualizarCliente actualizarCliente,
-      ListarClientes listarClientes, BuscarClientePorId buscarClientePorId, RemoveCliente removeCliente) {
+      ListarClientes listarClientes, BuscarClientePorId buscarClientePorId, RemoveCliente removeCliente,
+      ClienteRepositoryImpl clienteRepositoryImpl) {
     this.registrarCliente = registrarCliente;
     this.actualizarCliente = actualizarCliente;
     this.listarClientes = listarClientes;
     this.buscarClientePorId = buscarClientePorId;
     this.removeCliente = removeCliente;
+    this.clienteRepositoryImpl = clienteRepositoryImpl;
   }
 
   @GetMapping
@@ -68,6 +72,18 @@ public class ClienteController {
     }
 
     return ResponseEntity.ok(ClienteDTO.from(resultado.getValue()));
+  }
+
+  @GetMapping("/email/{email}")
+  public ResponseEntity<?> buscarPorEmail(@PathVariable String email) {
+    var resultado = clienteRepositoryImpl.buscarPorEmail(email);
+
+    if (resultado.isEmpty()) {
+      return ResponseEntity.internalServerError()
+          .body(Map.of("error", "Cliente no encontrado con email: " + email));
+    }
+
+    return ResponseEntity.ok(ClienteDTO.from(resultado.get()));
   }
 
   @PostMapping

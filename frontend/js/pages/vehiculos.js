@@ -1,4 +1,7 @@
 const grid = document.getElementById("cards-grid"); //grid in the index html
+const input = document.getElementById("search-input");
+const error = document.getElementById("search-error");
+const form = document.getElementById("search-form");
 
 function renderVehiculoCard(vehiculo) {
 	return `
@@ -39,4 +42,43 @@ async function initDashboard() {
 	renderVehiculosCards(vehiculos);
 }
 
+function showError(message) {
+	error.textContent = message;
+
+	error.classList.add("show");
+}
+
+function hideError() {
+	error.classList.remove("show");
+}
+
+async function searchBarHandle(event) {
+	event.preventDefault(); //prevent pages reload on form submit
+
+	const inputSearch = input.value.trim().toUpperCase();
+
+	if (!inputSearch) {
+		hideError();
+		return;
+	}
+
+	hideError();
+
+	const prefix = inputSearch.substring(0, 3).toUpperCase();
+
+	let busqueda;
+	if (prefix === "VHC") {
+		busqueda = await fetchByPrefix(inputSearch);
+	} else {
+		busqueda = await getVehiculoByPlaca(inputSearch);
+	}
+	if (!busqueda) {
+		showError("No se encontro ningun resultado");
+		return;
+	}
+	console.log("working");
+	window.location.href = `./individual-pages/vehiculo.html?placa=${busqueda.placa}`;
+}
+
 document.addEventListener("DOMContentLoaded", initDashboard);
+form.addEventListener("submit", searchBarHandle);

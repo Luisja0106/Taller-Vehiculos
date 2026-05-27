@@ -11,12 +11,6 @@ import org.springframework.data.repository.query.Param;
 
 public interface OrdenJpaRepository extends JpaRepository<OrdenJpaEntity, String> {
 
-  List<OrdenJpaEntity> findByMecanicoId(String mecanicoId);
-
-  List<OrdenJpaEntity> findByVehiculoPlaca(String placa);
-
-  List<OrdenJpaEntity> findByEstado(EstadoDelTrabajo estado);
-
   @Query("SELECT o FROM OrdenJpaEntity o WHERE " +
       "(:estado IS NULL OR o.estado = :estado) AND " +
       "(:mecanicoId IS NULL OR o.mecanico.id = :mecanicoId) AND " +
@@ -25,6 +19,12 @@ public interface OrdenJpaRepository extends JpaRepository<OrdenJpaEntity, String
       @Param("estado") EstadoDelTrabajo estado,
       @Param("mecanicoId") String mecanicoId,
       @Param("placa") String placa);
+
+  @Query("SELECT o FROM OrdenJpaEntity o WHERE " +
+      "o.estado != 'FINALIZADO' AND " +
+      "(:empleadoId IS NULL OR o.mecanico.id = :empleadoId) AND " +
+      "(:placa IS NULL OR o.vehiculo.placa = :placa)")
+  List<OrdenJpaEntity> findOrdenesActivas(@Param("empleadoId") String empleadoId, @Param("placa") String placa);
 
   @Query(" SELECT s, COUNT(o) " +
       " FROM OrdenJpaEntity o " +

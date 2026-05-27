@@ -152,4 +152,11 @@ public class OrdenRepositoryImpl implements IOrdenRepository {
         .toList();
   }
 
+  @Override
+  public List<OrdenDeTrabajo> listarOrdenesActivas(String empleadoId, String placaVehiculo) {
+    return jpaRepo.findOrdenesActivas(empleadoId, placaVehiculo).stream()
+        .map(OrdenJpaEntity::toDomain)
+        .toList();
+  }
+
 }

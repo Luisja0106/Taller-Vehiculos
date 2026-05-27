@@ -47,7 +47,7 @@ async function initializeOrderView() {
 		if (idCliente) {
 			dueñoData = await getCliente(idCliente);
 		}
-		vehiculoOrdenes = await getOrdenesByVehiculo(vehiculoData.placa);
+		vehiculoOrdenes = await getOrdenesActivas(null, vehiculoData.placa);
 	} catch (error) {
 		console.error("Error cargando datos relaciones", error);
 	}

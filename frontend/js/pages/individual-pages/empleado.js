@@ -13,7 +13,7 @@ async function initializeOrderView() {
 	}
 
 	const empleadoData = await getEmpleado(empleadoId);
-	const empleadoOrdenes = await getOrdenesByEmpleado(empleadoId);
+	const empleadoOrdenes = await getOrdenesActivas(empleadoId, null);
 
 	if (!empleadoData) {
 		redirectToDashboard();

@@ -67,6 +67,8 @@ public interface IOrdenRepository {
 
   List<OrdenDeTrabajo> listarConFiltros(EstadoDelTrabajo estado, String empleadoId, String placaVehiculo);
 
+  List<OrdenDeTrabajo> listarOrdenesActivas(String empleadoId, String placaVehiculo);
+
   /**
    * Elimina una orden de trabajo por su identificador único.
    *

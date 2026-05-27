@@ -112,4 +112,10 @@ public class OrdenRepositoryFake implements IOrdenRepository {
     throw new UnsupportedOperationException("Unimplemented method 'obtenerOrdenesPorServicioId'");
   }
 
+  @Override
+  public List<OrdenDeTrabajo> listarOrdenesActivas(String empleadoId, String placaVehiculo) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'listarOrdenesActivas'");
+  }
+
 }

@@ -96,7 +96,7 @@
           <div class="title-slide">Acciones</div>
           <div id="button-grid">
             <button class="button-action" id="actualizar-vehiculo-btn" type="button">Actualizar Informacion</button>
-            <button class="button-action" type="button">Ver Ordenes Pasadas</button>
+            <button class="button-action" id="ver-ordenes-pasadas-btn" type="button">Ver Ordenes Pasadas</button>
           </div>
         </section>
         <button type="button" class="eliminar-entidad-btn", id="eliminar-vehiculo-btn">
@@ -167,6 +167,19 @@
     </div>
   </div>
   <script src="../../js/usescases/actualizar-vehiculo.js"></script>
+
+  <div id="ordenes-finalizadas-modal">
+    <div id="ordenes-finalizadas-content">
+      <div id="ordenes-finalizadas-header">
+        <h2>Ordenes Finalizadas</h2>
+        <button type="button" id="close-ordenes-finalizadas-btn">X</button>
+      </div>
+      <nav id="ordenes-finalizadas-nav">
+        <ul id="ordenes-finalizadas-list"></ul>
+      </nav>
+    </div>
+  </div>
+  <script src="../../js/usescases/cargar-ordenes-finalizadas.js"></script>
 
 </body>
 </html>

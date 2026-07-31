@@ -50,7 +50,7 @@ public class ClienteController {
     var resultado = listarClientes.ejecutar();
 
     if (!resultado.isSuccess) {
-      return ResponseEntity.internalServerError()
+      return ResponseEntity.status(404)
           .body(Map.of("error", resultado.getError().getMessage()));
     }
 
@@ -67,7 +67,7 @@ public class ClienteController {
     var resultado = buscarClientePorId.ejecutar(input);
 
     if (!resultado.isSuccess) {
-      return ResponseEntity.internalServerError()
+      return ResponseEntity.status(404)
           .body(Map.of("error", resultado.getError().getMessage()));
     }
 
@@ -79,7 +79,7 @@ public class ClienteController {
     var resultado = clienteRepositoryImpl.buscarPorEmail(email);
 
     if (resultado.isEmpty()) {
-      return ResponseEntity.internalServerError()
+      return ResponseEntity.status(404)
           .body(Map.of("error", "Cliente no encontrado con email: " + email));
     }
 

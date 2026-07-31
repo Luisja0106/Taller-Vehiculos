@@ -50,7 +50,7 @@ public class ServicioController {
     var resultado = listarServicios.ejecutar();
 
     if (!resultado.isSuccess) {
-      return ResponseEntity.internalServerError()
+      return ResponseEntity.status(404)
           .body(Map.of("error", resultado.getError().getMessage()));
     }
 
@@ -67,7 +67,7 @@ public class ServicioController {
     var resultado = buscarServicioPorId.ejecutar(input);
 
     if (!resultado.isSuccess) {
-      return ResponseEntity.internalServerError()
+      return ResponseEntity.status(404)
           .body(Map.of("error", resultado.getError().getMessage()));
     }
 
@@ -79,7 +79,7 @@ public class ServicioController {
     var resultado = servicoRepositoryImpl.buscarPorNombre(nombre);
 
     if (resultado.isEmpty()) {
-      return ResponseEntity.internalServerError()
+      return ResponseEntity.status(404)
           .body(Map.of("error", "Servicio no encontrado con el nombre: " + nombre));
     }
 

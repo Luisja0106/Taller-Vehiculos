@@ -66,7 +66,7 @@ public class EmpleadoController {
     var resultado = buscarEmpleadoPorId.ejecutar(input);
 
     if (!resultado.isSuccess) {
-      return ResponseEntity.internalServerError()
+      return ResponseEntity.status(404)
           .body(Map.of("error", resultado.getError().getMessage()));
     }
     return ResponseEntity.ok(EmpleadoDTO.from(resultado.getValue()));
@@ -77,7 +77,7 @@ public class EmpleadoController {
     var resultado = empleadoRepository.buscarPorEmail(email);
 
     if (resultado.isEmpty()) {
-      return ResponseEntity.internalServerError()
+      return ResponseEntity.status(404)
           .body(Map.of("error", "Empleado no encontrado con email: " + email));
     }
     return ResponseEntity.ok(EmpleadoDTO.from(resultado.get()));

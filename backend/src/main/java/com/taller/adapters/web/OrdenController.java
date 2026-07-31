@@ -4,6 +4,7 @@ import java.util.Map;
 
 import com.taller.adapters.persistence.jpa.implementations.OrdenRepositoryImpl;
 import com.taller.adapters.web.dto.OrdenDTO;
+import com.taller.domain.repositories.IOrdenRepository;
 import com.taller.usecases.AgregarServicio;
 import com.taller.usecases.AvanzarEstadoDeOrden;
 import com.taller.usecases.BuscarOrdenPorId;
@@ -48,13 +49,13 @@ public class OrdenController {
   private final RemoveOrden removeOrden;
   private final ObtenerOrdenesPorServicioId obtenerOrdenesPorServicioId;
   private final EliminarServicioDeOrden eliminarServicioDeOrden;
-  private final OrdenRepositoryImpl ordenRepo;
+  private final IOrdenRepository ordenRepo;
 
   public OrdenController(CrearOrden crearOrden, ListarOrdenes listarOrdenes,
       AvanzarEstadoDeOrden avanzarEstadoDeOrden, AgregarServicio agregarServicio,
       ReasignarEmpleadoAOrden reasignarEmpleadoAOrden, RegistrarPago registrarPago, BuscarOrdenPorId buscarOrdenPorId,
       RemoveOrden removeOrden, ObtenerOrdenesPorServicioId obtenerOrdenesPorServicioId,
-      EliminarServicioDeOrden eliminarServicioDeOrden, OrdenRepositoryImpl ordenRepo) {
+      EliminarServicioDeOrden eliminarServicioDeOrden, IOrdenRepository ordenRepo) {
     this.crearOrden = crearOrden;
     this.listarOrdenes = listarOrdenes;
     this.avanzarEstadoDeOrden = avanzarEstadoDeOrden;
@@ -78,7 +79,7 @@ public class OrdenController {
     var resultado = listarOrdenes.ejecutar(input);
 
     if (!resultado.isSuccess) {
-      return ResponseEntity.internalServerError()
+      return ResponseEntity.status(404)
           .body(Map.of("error", resultado.getError().getMessage()));
     }
 
@@ -95,7 +96,7 @@ public class OrdenController {
     var resultado = buscarOrdenPorId.ejecutar(input);
 
     if (!resultado.isSuccess) {
-      return ResponseEntity.internalServerError()
+      return ResponseEntity.status(404)
           .body(Map.of("error", resultado.getError().getMessage()));
     }
     return ResponseEntity.ok(OrdenDTO.from(resultado.getValue()));
@@ -106,7 +107,7 @@ public class OrdenController {
     var resultado = obtenerOrdenesPorServicioId.ejecutar(servicioId);
 
     if (!resultado.isSuccess) {
-      return ResponseEntity.internalServerError()
+      return ResponseEntity.status(404)
           .body(Map.of("error", resultado.getError().getMessage()));
     }
     var dtos = resultado.getValue().stream()

@@ -7,6 +7,7 @@ async function initPage() {
 	setUpEliminarOrden();
 	setUpUsesCases();
 	displayPagoInfo();
+	displayFinalizacionInfo();
 }
 
 function displayPagoInfo() {
@@ -24,11 +25,11 @@ function displayPagoInfo() {
 }
 
 function displayFinalizacionInfo() {
-	const finalizacionElement = document.querySelector(".hidden-info-final");
+	const finalizacionElement = document.querySelectorAll(".hidden-info-final");
 	const currentEstado = document.getElementById("orden-estado").textContent;
 	if (currentEstado !== "Finalizado") {
 		finalizacionElement.forEach((element) => {
-			element.classList.add("show");
+			element.classList.remove("show");
 		});
 		return;
 	}

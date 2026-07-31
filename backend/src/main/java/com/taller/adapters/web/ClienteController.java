@@ -2,8 +2,8 @@ package com.taller.adapters.web;
 
 import java.util.Map;
 
-import com.taller.adapters.persistence.jpa.implementations.ClienteRepositoryImpl;
 import com.taller.adapters.web.dto.ClienteDTO;
+import com.taller.domain.repositories.IClienteRepository;
 import com.taller.usecases.ActualizarCliente;
 import com.taller.usecases.BuscarClientePorId;
 import com.taller.usecases.ListarClientes;
@@ -32,17 +32,17 @@ public class ClienteController {
   private final ListarClientes listarClientes;
   private final BuscarClientePorId buscarClientePorId;
   private final RemoveCliente removeCliente;
-  private final ClienteRepositoryImpl clienteRepositoryImpl;
+  private final IClienteRepository clienteRepository;
 
   public ClienteController(RegistrarCliente registrarCliente, ActualizarCliente actualizarCliente,
       ListarClientes listarClientes, BuscarClientePorId buscarClientePorId, RemoveCliente removeCliente,
-      ClienteRepositoryImpl clienteRepositoryImpl) {
+      IClienteRepository clienteRepository) {
     this.registrarCliente = registrarCliente;
     this.actualizarCliente = actualizarCliente;
     this.listarClientes = listarClientes;
     this.buscarClientePorId = buscarClientePorId;
     this.removeCliente = removeCliente;
-    this.clienteRepositoryImpl = clienteRepositoryImpl;
+    this.clienteRepository = clienteRepository;
   }
 
   @GetMapping
@@ -76,7 +76,7 @@ public class ClienteController {
 
   @GetMapping("/email/{email}")
   public ResponseEntity<?> buscarPorEmail(@PathVariable String email) {
-    var resultado = clienteRepositoryImpl.buscarPorEmail(email);
+    var resultado = clienteRepository.buscarPorEmail(email);
 
     if (resultado.isEmpty()) {
       return ResponseEntity.status(404)

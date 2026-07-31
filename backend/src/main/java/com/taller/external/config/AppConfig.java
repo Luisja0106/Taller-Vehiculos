@@ -208,4 +208,9 @@ public class AppConfig {
     return new EliminarServicioDeOrden(ordenRepo, servicioRepo);
   }
 
+  @Bean
+  public ListarOrdenesActivas listarOrdenesActivas(IOrdenRepository ordenRepo) {
+    return new ListarOrdenesActivas(ordenRepo);
+  }
+
 }

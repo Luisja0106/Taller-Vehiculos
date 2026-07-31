@@ -2,8 +2,8 @@ package com.taller.adapters.web;
 
 import java.util.Map;
 
-import com.taller.adapters.persistence.jpa.implementations.ServicioRepositoryImpl;
 import com.taller.adapters.web.dto.ServicioDTO;
+import com.taller.domain.repositories.IServicioRepository;
 import com.taller.usecases.ActualizarServicio;
 import com.taller.usecases.BuscarServicioPorId;
 import com.taller.usecases.CrearServicio;
@@ -32,17 +32,17 @@ public class ServicioController {
   private final ListarServicios listarServicios;
   private final BuscarServicioPorId buscarServicioPorId;
   private final RemoveServicio removeServicio;
-  private final ServicioRepositoryImpl servicoRepositoryImpl;
+  private final IServicioRepository servicoRepository;
 
   public ServicioController(CrearServicio crearServicio, ActualizarServicio actualizarServicio,
       ListarServicios listarServicios, BuscarServicioPorId buscarServicioPorId, RemoveServicio removeServicio,
-      ServicioRepositoryImpl servicoRepositoryImpl) {
+      IServicioRepository servicoRepository) {
     this.crearServicio = crearServicio;
     this.actualizarServicio = actualizarServicio;
     this.listarServicios = listarServicios;
     this.buscarServicioPorId = buscarServicioPorId;
     this.removeServicio = removeServicio;
-    this.servicoRepositoryImpl = servicoRepositoryImpl;
+    this.servicoRepository = servicoRepository;
   }
 
   @GetMapping
@@ -76,7 +76,7 @@ public class ServicioController {
 
   @GetMapping("/nombre/{nombre}")
   public ResponseEntity<?> buscarPorNombre(@PathVariable String nombre) {
-    var resultado = servicoRepositoryImpl.buscarPorNombre(nombre);
+    var resultado = servicoRepository.buscarPorNombre(nombre);
 
     if (resultado.isEmpty()) {
       return ResponseEntity.status(404)

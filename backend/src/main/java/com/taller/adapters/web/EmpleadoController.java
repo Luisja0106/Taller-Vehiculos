@@ -2,8 +2,8 @@ package com.taller.adapters.web;
 
 import java.util.Map;
 
-import com.taller.adapters.persistence.jpa.implementations.EmpleadoRepositoryImpl;
 import com.taller.adapters.web.dto.EmpleadoDTO;
+import com.taller.domain.repositories.IEmpleadoRepository;
 import com.taller.usecases.ActualizarEmpleado;
 import com.taller.usecases.BuscarEmpleadoPorId;
 import com.taller.usecases.ContratarEmpleado;
@@ -34,11 +34,11 @@ public class EmpleadoController {
   private final ListarEmpleados listarEmpleados;
   private final BuscarEmpleadoPorId buscarEmpleadoPorId;
   private final RemoveEmpleado removeEmpleado;
-  private final EmpleadoRepositoryImpl empleadoRepository;
+  private final IEmpleadoRepository empleadoRepository;
 
   public EmpleadoController(ContratarEmpleado contratarEmpleado, ActualizarEmpleado actualizarEmpleado,
       ListarEmpleados listarEmpleados, BuscarEmpleadoPorId buscarEmpleadoPorId, RemoveEmpleado removeEmpleado,
-      EmpleadoRepositoryImpl empleadoRepository) {
+      IEmpleadoRepository empleadoRepository) {
     this.contratarEmpleado = contratarEmpleado;
     this.actualizarEmpleado = actualizarEmpleado;
     this.listarEmpleados = listarEmpleados;

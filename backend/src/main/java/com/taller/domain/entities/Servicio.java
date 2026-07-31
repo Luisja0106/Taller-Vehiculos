@@ -58,6 +58,7 @@ public class Servicio implements IServicio {
     this.nombre = nuevoNombre;
   }
 
+  @Override
   public BigDecimal getPrecio() {
     return precio;
   }

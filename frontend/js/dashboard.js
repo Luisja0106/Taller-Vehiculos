@@ -4,12 +4,6 @@ const filterArrow = document.getElementById("filters-arrow");
 const filterBtn = document.getElementById("filters-header");
 
 function renderOrderCard(orden) {
-	const estadosFormat = {
-		Pendiente: "PENDIENTE",
-		"En Proceso": "EN_PROCESO",
-		"En espera de pago": "EN_ESPERA_DE_PAGO",
-		Finalizado: "FINALIZADO",
-	};
 	return `
         <article class="card" onclick="window.location.href='pages/individual-pages/orden.html?id=${orden.id}'">
           <div class="card-header" style="background: ${getBrandColor(orden.vehiculoMarca)}">
@@ -23,7 +17,7 @@ function renderOrderCard(orden) {
             </div>
             <div class="card-row">
               <span class="card-label">Estado:</span>
-              <span class="${getBadgeClass(estadosFormat[orden.estado])}">${getEstadoText(estadosFormat[orden.estado])}</span>
+              <span class="${getBadgeClass(orden.estado)}">${orden.estado}</span>
             </div>
             <div class="card-row">
               <span class="card-label">Fecha de inicio:</span>

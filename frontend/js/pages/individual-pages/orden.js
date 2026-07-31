@@ -104,16 +104,10 @@ function renderOrdenDetails(order, vehiculo) {
 	);
 
 	// Estado y Fecha
-	const estadosFormat = {
-		Pendiente: "PENDIENTE",
-		"En Proceso": "EN_PROCESO",
-		"En espera de pago": "EN_ESPERA_DE_PAGO",
-		Finalizado: "FINALIZADO",
-	};
-	const estadoFormateado = estadosFormat[order.estado];
+	const estado = order.estado;
 	const statusElement = document.getElementById("orden-estado");
-	statusElement.textContent = getEstadoText(estadoFormateado);
-	statusElement.className = `info-estado ${getBadgeClass(estadoFormateado)}`;
+	statusElement.textContent = estado;
+	statusElement.className = `info-estado ${getBadgeClass(estado)}`;
 
 	document.getElementById("orden-fecha").textContent = order.fechaEntrada;
 

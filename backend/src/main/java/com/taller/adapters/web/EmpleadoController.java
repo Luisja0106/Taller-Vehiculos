@@ -3,14 +3,15 @@ package com.taller.adapters.web;
 import java.util.Map;
 
 import com.taller.adapters.web.dto.EmpleadoDTO;
-import com.taller.domain.repositories.IEmpleadoRepository;
 import com.taller.usecases.ActualizarEmpleado;
+import com.taller.usecases.BuscarEmpleadoPorEmail;
 import com.taller.usecases.BuscarEmpleadoPorId;
 import com.taller.usecases.ContratarEmpleado;
 import com.taller.usecases.ListarEmpleados;
 import com.taller.usecases.RemoveEmpleado;
 import com.taller.usecases.dto.ActualizarEmpleadoCMD;
 import com.taller.usecases.dto.BuscarEmpleadoPorIdCMD;
+import com.taller.usecases.dto.BuscarPorEmailCMD;
 import com.taller.usecases.dto.CrearEmpleadoCMD;
 import com.taller.usecases.dto.ListarEmpleadosCMD;
 
@@ -34,17 +35,17 @@ public class EmpleadoController {
   private final ListarEmpleados listarEmpleados;
   private final BuscarEmpleadoPorId buscarEmpleadoPorId;
   private final RemoveEmpleado removeEmpleado;
-  private final IEmpleadoRepository empleadoRepository;
+  private final BuscarEmpleadoPorEmail buscarEmpleadoPorEmail;
 
   public EmpleadoController(ContratarEmpleado contratarEmpleado, ActualizarEmpleado actualizarEmpleado,
       ListarEmpleados listarEmpleados, BuscarEmpleadoPorId buscarEmpleadoPorId, RemoveEmpleado removeEmpleado,
-      IEmpleadoRepository empleadoRepository) {
+      BuscarEmpleadoPorEmail buscarEmpleadoPorEmail) {
     this.contratarEmpleado = contratarEmpleado;
     this.actualizarEmpleado = actualizarEmpleado;
     this.listarEmpleados = listarEmpleados;
     this.buscarEmpleadoPorId = buscarEmpleadoPorId;
     this.removeEmpleado = removeEmpleado;
-    this.empleadoRepository = empleadoRepository;
+    this.buscarEmpleadoPorEmail = buscarEmpleadoPorEmail;
   }
 
   @GetMapping
@@ -74,13 +75,14 @@ public class EmpleadoController {
 
   @GetMapping("/email/{email}")
   public ResponseEntity<?> buscarPorEmail(@PathVariable String email) {
-    var resultado = empleadoRepository.buscarPorEmail(email);
+    var input = new BuscarPorEmailCMD(email);
+    var resultado = buscarEmpleadoPorEmail.ejecutar(input);
 
-    if (resultado.isEmpty()) {
+    if (!resultado.isSuccess) {
       return ResponseEntity.status(404)
-          .body(Map.of("error", "Empleado no encontrado con email: " + email));
+          .body(Map.of("error", resultado.getError().getMessage()));
     }
-    return ResponseEntity.ok(EmpleadoDTO.from(resultado.get()));
+    return ResponseEntity.ok(EmpleadoDTO.from(resultado.getValue()));
   }
 
   @PostMapping

@@ -3,14 +3,15 @@ package com.taller.adapters.web;
 import java.util.Map;
 
 import com.taller.adapters.web.dto.ClienteDTO;
-import com.taller.domain.repositories.IClienteRepository;
 import com.taller.usecases.ActualizarCliente;
+import com.taller.usecases.BuscarClientePorEmail;
 import com.taller.usecases.BuscarClientePorId;
 import com.taller.usecases.ListarClientes;
 import com.taller.usecases.RegistrarCliente;
 import com.taller.usecases.RemoveCliente;
 import com.taller.usecases.dto.ActualizarClienteCMD;
 import com.taller.usecases.dto.BuscarClientePorIdCMD;
+import com.taller.usecases.dto.BuscarPorEmailCMD;
 import com.taller.usecases.dto.CrearClienteCMD;
 
 import org.springframework.http.ResponseEntity;
@@ -32,17 +33,17 @@ public class ClienteController {
   private final ListarClientes listarClientes;
   private final BuscarClientePorId buscarClientePorId;
   private final RemoveCliente removeCliente;
-  private final IClienteRepository clienteRepository;
+  private final BuscarClientePorEmail buscarClientePorEmail;
 
   public ClienteController(RegistrarCliente registrarCliente, ActualizarCliente actualizarCliente,
       ListarClientes listarClientes, BuscarClientePorId buscarClientePorId, RemoveCliente removeCliente,
-      IClienteRepository clienteRepository) {
+      BuscarClientePorEmail buscarClientePorEmail) {
     this.registrarCliente = registrarCliente;
     this.actualizarCliente = actualizarCliente;
     this.listarClientes = listarClientes;
     this.buscarClientePorId = buscarClientePorId;
     this.removeCliente = removeCliente;
-    this.clienteRepository = clienteRepository;
+    this.buscarClientePorEmail = buscarClientePorEmail;
   }
 
   @GetMapping
@@ -76,14 +77,15 @@ public class ClienteController {
 
   @GetMapping("/email/{email}")
   public ResponseEntity<?> buscarPorEmail(@PathVariable String email) {
-    var resultado = clienteRepository.buscarPorEmail(email);
+    var input = new BuscarPorEmailCMD(email);
+    var resultado = buscarClientePorEmail.ejecutar(input);
 
-    if (resultado.isEmpty()) {
+    if (!resultado.isSuccess) {
       return ResponseEntity.status(404)
-          .body(Map.of("error", "Cliente no encontrado con email: " + email));
+          .body(Map.of("error", resultado.getError().getMessage()));
     }
 
-    return ResponseEntity.ok(ClienteDTO.from(resultado.get()));
+    return ResponseEntity.ok(ClienteDTO.from(resultado.getValue()));
   }
 
   @PostMapping

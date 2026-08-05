@@ -213,4 +213,14 @@ public class AppConfig {
     return new ListarOrdenesActivas(ordenRepo);
   }
 
+  @Bean
+  public BuscarClientePorEmail buscarClientePorEmail(IClienteRepository clienteRepo) {
+    return new BuscarClientePorEmail(clienteRepo);
+  }
+
+  @Bean
+  public BuscarEmpleadoPorEmail buscarEmpleadoPorEmail(IEmpleadoRepository empleadoRepo) {
+    return new BuscarEmpleadoPorEmail(empleadoRepo);
+  }
+
 }

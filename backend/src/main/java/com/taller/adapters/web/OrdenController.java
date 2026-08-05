@@ -118,7 +118,10 @@ public class OrdenController {
   }
 
   @GetMapping("/activas")
-  public ResponseEntity<?> listarOrdenesActivas(@RequestBody ListarOrdenesActivasCMD input) {
+  public ResponseEntity<?> listarOrdenesActivas(@RequestParam(required = false) String empleadoId,
+      @RequestParam(required = false) String placaVehiculo) {
+    var input = new ListarOrdenesActivasCMD(placaVehiculo, empleadoId);
+
     var resultado = listarOrdenesActivas.ejecutar(input);
 
     if (!resultado.isSuccess) {

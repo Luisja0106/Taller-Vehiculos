@@ -31,7 +31,7 @@ public class RemoveVehiculo {
     if (resu.isEmpty()) {
       return Result.error(new VerificationError("Error no se encontro la placa ingresada"));
     }
-    boolean isInOrden = ordenRepo.listarConFiltros(null, null, vehiculoPlaca).stream()
+    boolean isInOrden = ordenRepo.listarConFiltros(null, null, placa.getValue().getValue()).stream()
         .anyMatch(o -> o.getEstado() != EstadoDelTrabajo.FINALIZADO);
 
     if (isInOrden) {

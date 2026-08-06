@@ -52,7 +52,7 @@ public class EmpleadoController {
   public ResponseEntity<?> listar(@RequestParam(required = false) String rol) {
     var resultado = listarEmpleados.ejecutar(new ListarEmpleadosCMD(rol));
     if (!resultado.isSuccess) {
-      return ResponseEntity.internalServerError()
+      return ResponseEntity.status(404)
           .body(Map.of("error", resultado.getError().getMessage()));
     }
     var dtos = resultado.getValue().stream()

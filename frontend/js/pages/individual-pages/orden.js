@@ -53,12 +53,13 @@ async function initializeOrderView() {
 	}
 
 	const orderData = await getOrden(orderId);
-	const vehiculoData = await getVehiculoByPlaca(orderData.vehiculoPlaca);
 
 	if (!orderData) {
 		redirectToDashboard();
 		return;
 	}
+
+	const vehiculoData = await getVehiculoByPlaca(orderData.vehiculoPlaca);
 
 	updatePageMetadata(orderData.id);
 	renderOrdenHeader(orderData);

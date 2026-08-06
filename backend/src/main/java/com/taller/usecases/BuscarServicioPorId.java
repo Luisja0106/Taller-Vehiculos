@@ -19,7 +19,7 @@ public class BuscarServicioPorId {
     if (input == null) {
       return Result.error(new ActionError("Error no se puede realizar la busqueda con un input nulo"));
     }
-    if (input.servicioId().isBlank()) {
+    if (input.servicioId() == null || input.servicioId().isBlank()) {
       return Result.error(new ActionError("Error el id es nulo"));
     }
 

@@ -20,7 +20,7 @@ public class BuscarEmpleadoPorId {
       return Result.error(new ActionError("El input no puede ser nulo"));
     }
 
-    if (input.empleadoId().isBlank()) {
+    if (input.empleadoId() == null || input.empleadoId().isBlank()) {
       return Result.error(new ActionError("No se puede buscar con el id null"));
     }
 

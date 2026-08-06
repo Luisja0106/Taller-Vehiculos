@@ -20,7 +20,7 @@ public class BuscarOrdenPorId {
       return Result.error(new ActionError("Error el input no puede ser nulo"));
     }
 
-    if (input.ordenId().isBlank()) {
+    if (input.ordenId() == null || input.ordenId().isBlank()) {
       return Result.error(new ActionError("Error el id es nulo"));
     }
 

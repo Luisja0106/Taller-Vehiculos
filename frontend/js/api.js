@@ -46,7 +46,10 @@ async function patchData(url, body) {
 		const data = await response.json();
 
 		if (!response.ok) {
-			return { success: false, error: data.error || `Error ${response.error}` };
+			return {
+				success: false,
+				error: data.error || `Error ${response.status}`,
+			};
 		}
 
 		return { success: true, data };

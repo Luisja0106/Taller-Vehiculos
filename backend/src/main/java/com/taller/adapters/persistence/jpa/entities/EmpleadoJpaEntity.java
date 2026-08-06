@@ -50,6 +50,11 @@ public class EmpleadoJpaEntity {
   }
 
   public Empleado toDomain() {
-    return Empleado.crear(id, nombre, telefono, email, rol, contrato).getValue();
+    var resultado = Empleado.crear(id, nombre, telefono, email, rol, contrato);
+
+    if (!resultado.isSuccess) {
+      throw new IllegalStateException("Error reconstruyendo el empleado" + resultado.getError());
+    }
+    return resultado.getValue();
   }
 }

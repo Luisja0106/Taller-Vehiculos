@@ -33,6 +33,10 @@ public class ServicioJpaEntity {
   }
 
   public Servicio toDomain() {
-    return Servicio.crear(id, nombre, precio).getValue();
+    var resultado = Servicio.crear(id, nombre, precio);
+    if (!resultado.isSuccess) {
+      throw new IllegalStateException("Error reconstruyendo el servicio" + resultado.getError());
+    }
+    return resultado.getValue();
   }
 }

@@ -159,8 +159,8 @@ function cambiarEstadoSetUp() {
 	const avanzarEstadoBtn = document.getElementById("avanzar-estado-btn");
 
 	const nextEstado = {
-		Pendiente: "En proceso",
-		"En proceso": "En espera de pago",
+		Pendiente: "En Proceso",
+		"En Proceso": "En espera de pago",
 		"En espera de pago": "Finalizado",
 		Finalizado: "INVALIDO",
 	};

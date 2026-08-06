@@ -7,7 +7,7 @@ public enum TipoDeEntidad {
   EMP, CLI, ORD, VHC, SRV;
 
   public static Optional<TipoDeEntidad> buscarPorPrefijo(String codigo) {
-    if (codigo.isBlank() || codigo == null || codigo.length() < 3) {
+    if (codigo == null || codigo.isBlank() || codigo.length() < 3) {
       return Optional.empty();
     }
     String prefijo = codigo.substring(0, 3).toUpperCase();

@@ -223,4 +223,8 @@ public class AppConfig {
     return new BuscarEmpleadoPorEmail(empleadoRepo);
   }
 
+  @Bean
+  public BuscarServicioPorNombre buscarServicioPorNombre(IServicioRepository servicioRepo) {
+    return new BuscarServicioPorNombre(servicioRepo);
+  }
 }

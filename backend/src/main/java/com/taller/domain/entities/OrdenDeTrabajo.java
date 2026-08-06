@@ -176,6 +176,10 @@ public class OrdenDeTrabajo {
     if ((this.estado == EstadoDelTrabajo.FINALIZADO) || (this.estado == EstadoDelTrabajo.EN_ESPERA_DE_PAGO)) {
       return Result.error(new VerificationError("No se pueden añadir servicios a un Trabajo terminado"));
     }
+
+    if (this.servicios.contains(servicio)) {
+      return Result.error(new VerificationError("El servicio ya se encuentra en la orden"));
+    }
     servicios.add(servicio);
     return Result.success(null);
   }
@@ -217,6 +221,10 @@ public class OrdenDeTrabajo {
   public Result<Void, IErrorApp> removerServicio(Servicio servicio) {
     if (!servicios.remove(servicio)) {
       return Result.error(new VerificationError("Error el servicio no pertenece a la orden"));
+    }
+    if (this.estado == EstadoDelTrabajo.FINALIZADO || this.estado == EstadoDelTrabajo.EN_ESPERA_DE_PAGO) {
+      return Result
+          .error(new VerificationError("No se pueden remover servicios de una orden finalizada o en espera de pago"));
     }
     return Result.success(null);
   }

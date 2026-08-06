@@ -38,7 +38,7 @@ public class OrdenJpaEntity {
   @JoinColumn(name = "id_mecanico", nullable = false)
   private EmpleadoJpaEntity mecanico;
 
-  @Column(name = "fecha_entrada")
+  @Column(name = "fecha_entrada", columnDefinition = "date")
   private LocalDateTime fechaEntrada;
 
   @Column(name = "fecha_salida", columnDefinition = "date")

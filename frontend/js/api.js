@@ -294,7 +294,7 @@ async function actualizarVehiculo(
 		nuevoDueñoId: nuevoDueñoId,
 		modelo: modelo,
 		marca: marca,
-		anio: anio,
+		año: anio,
 	});
 }
 

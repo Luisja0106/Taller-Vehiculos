@@ -48,6 +48,6 @@ async function confirmarActualizacion() {
 }
 
 confirmModalBtn.addEventListener("click", confirmarActualizacion);
-actualizarServicioBtn.addEventListener("click", openModalOverlay);
+nuevoServicioBtn.addEventListener("click", openModalOverlay);
 cancelModalBtn.addEventListener("click", cancelarActualizacion);
 cerrarServicioBtn.addEventListener("click", closeModalOverlay);

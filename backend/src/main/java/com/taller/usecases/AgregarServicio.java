@@ -22,6 +22,9 @@ public class AgregarServicio {
     if (input == null) {
       return Result.error(new ActionError("Error los datos no pueden ser nulos"));
     }
+    if (input.ordenId() == null || input.ordenId().isBlank()) {
+      return Result.error(new VerificationError("Error el id de la orden es invalido"));
+    }
     var orden = ordenRepository.buscarPorId(input.ordenId());
     if (orden.isEmpty()) {
       return Result.error(new VerificationError("Error no se pudo encontrar la orden de trabajo"));

@@ -1,6 +1,5 @@
 package com.taller.usecases;
 
-import com.taller.domain.enums.EstadoDelTrabajo;
 import com.taller.domain.errors.VerificationError;
 import com.taller.domain.interfaces.IErrorApp;
 import com.taller.domain.repositories.IEmpleadoRepository;

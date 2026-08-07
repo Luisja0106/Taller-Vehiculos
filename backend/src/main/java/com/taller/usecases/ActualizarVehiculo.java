@@ -26,6 +26,9 @@ public class ActualizarVehiculo {
     if (input == null) {
       return Result.error(new ActionError("Error los datos a cambiar no puden ser nulos"));
     }
+    if (input.placaVehiculo() == null || input.placaVehiculo().isBlank()) {
+      return Result.error(new VerificationError("Error la placa ingresada es invalida"));
+    }
     var placaResult = Placa.crear(input.placaVehiculo());
 
     if (!placaResult.isSuccess) {

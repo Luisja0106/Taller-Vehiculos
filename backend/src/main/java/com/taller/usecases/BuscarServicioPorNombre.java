@@ -19,7 +19,7 @@ public class BuscarServicioPorNombre {
     if (input == null) {
       return Result.error(new ActionError("Error no se puede realizar la busqueda con un input nulo"));
     }
-    if (input.nombre().isBlank()) {
+    if (input.nombre() == null || input.nombre().isBlank()) {
       return Result.error(new ActionError("Error el nombre es nulo"));
     }
 

@@ -21,6 +21,9 @@ public class ActualizarServicio {
     if (input == null) {
       return Result.error(new ActionError("Error los datos a actualizar no pueden ser nulos"));
     }
+    if (input.servicioId() == null || input.servicioId().isBlank()) {
+      return Result.error(new VerificationError("Error el id ingresado es invalido"));
+    }
 
     var servicioOPT = servicioRepository.buscarPorId(input.servicioId());
 

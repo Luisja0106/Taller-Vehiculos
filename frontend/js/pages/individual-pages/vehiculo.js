@@ -120,9 +120,9 @@ function renderOrdenesList(ordenes) {
 	ordenes.forEach((orden) => {
 		const ordenHtml = `
             <div class="servicios-box">
-              <a class="servicio-name order-id" href="orden.html?id=${orden.id}"> ${orden.id}</a>
-              <a class="servicio-name order-empleado" href="empleado.html?id=${orden.empleadoId}"> ${orden.empleadoNombre}</a>
-              <span class="servicio-name order-estado ${getBadgeClass(orden.estado)}" href="orden.html?id=${orden.id}">${orden.estado}</span>
+              <a class="servicio-name order-id" href="orden.html?id=${orden.id}"> ${escapeHtml(orden.id)}</a>
+              <a class="servicio-name order-empleado" href="empleado.html?id=${escapeHtml(orden.empleadoId)}"> ${escapeHtml(orden.empleadoNombre)}</a>
+              <span class="servicio-name order-estado ${getBadgeClass(orden.estado)}" href="orden.html?id=${orden.id}">${escapeHtml(orden.estado)}</span>
             </div>`;
 		container.insertAdjacentHTML("beforeend", ordenHtml);
 	});

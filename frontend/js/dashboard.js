@@ -7,21 +7,21 @@ function renderOrderCard(orden) {
 	return `
         <article class="card" onclick="window.location.href='pages/individual-pages/orden.html?id=${orden.id}'">
           <div class="card-header" style="background: ${getBrandColor(orden.vehiculoMarca)}">
-            <span class="order-id">${orden.id}</span>
+            <span class="order-id">${escapeHtml(orden.id)}</span>
           </div>
           <div class="card-body">
-            <h3>${orden.vehiculoModelo} ${orden.vehiculoAnio}</h3>
+            <h3>${escapeHtml(orden.vehiculoModelo)} ${escapeHtml(orden.vehiculoAnio)}</h3>
             <div class="card-row">
               <span class="card-label">Mecánico:</span>
-              <span class="card-value">${orden.empleadoNombre}</span>
+              <span class="card-value">${escapeHtml(orden.empleadoNombre)}</span>
             </div>
             <div class="card-row">
               <span class="card-label">Estado:</span>
-              <span class="${getBadgeClass(orden.estado)}">${orden.estado}</span>
+              <span class="${getBadgeClass(orden.estado)}">${escapeHtml(orden.estado)}</span>
             </div>
             <div class="card-row">
               <span class="card-label">Fecha de inicio:</span>
-              <span class="card-value">${orden.fechaEntrada}</span>
+              <span class="card-value">${escapeHtml(orden.fechaEntrada)}</span>
             </div>
           </div>
         </article>

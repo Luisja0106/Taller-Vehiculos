@@ -92,8 +92,8 @@ async function renderOrdenesQueUsa(ordenes) {
 	ordenes.forEach((orden) => {
 		const ordenHtml = `
             <div class="servicios-box">
-              <a class="servicio-name order-id" href="orden.html?id=${orden.id}">${orden.id}</a>
-              <span class="servicio-name order-estado badge-${getBadgeClass(orden.estado)} info-estado" href="orden.html?id=${orden.id}">${orden.estado}</span>
+              <a class="servicio-name order-id" href="orden.html?id=${orden.id}">${escapeHtml(orden.id)}</a>
+              <span class="servicio-name order-estado badge-${getBadgeClass(escapeHtml(orden.estado))} info-estado" href="orden.html?id=${orden.id}">${escapeHtml(orden.estado)}</span>
             </div>`;
 		container.insertAdjacentHTML("beforeend", ordenHtml);
 	});

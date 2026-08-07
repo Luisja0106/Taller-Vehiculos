@@ -7,13 +7,13 @@ function renderServicioCard(servicio) {
 	return `
         <article class="card" onclick="window.location.href='./individual-pages/servicio.html?id=${servicio.id}'">
           <div class="card-header" style="background: var(--color-servicio)">
-            <span class="order-id">${servicio.id}</span>
+            <span class="order-id">${escapeHtml(servicio.id)}</span>
           </div>
           <div class="card-body">
-            <h3>${servicio.nombre}</h3>
+            <h3>${escapeHtml(servicio.nombre)}</h3>
             <div class="card-row">
               <span class="card-label">Precio:</span>
-              <span class="card-value">$${servicio.precio}</span>
+              <span class="card-value">$${escapeHtml(servicio.precio)}</span>
             </div>
           </div>
         </article>

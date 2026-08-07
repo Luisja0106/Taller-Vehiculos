@@ -7,21 +7,21 @@ function renderEmpleadoCard(empleado) {
 	return `
         <article class="card" onclick="window.location.href='./individual-pages/empleado.html?id=${empleado.id}'">
           <div class="card-header" style="background: ${getRoleColor(empleado.rol)}">
-            <span class="order-id">${empleado.id}</span>
+            <span class="order-id">${escapeHtml(empleado.id)}</span>
           </div>
           <div class="card-body">
-            <h3>${empleado.nombre}</h3>
+            <h3>${escapeHtml(empleado.nombre)}</h3>
             <div class="card-row">
               <span class="card-label">Rol:</span>
-              <span class="card-value">${getRoleText(empleado.rol)}</span>
+              <span class="card-value">${escapeHtml(getRoleText(empleado.rol))}</span>
             </div>
             <div class="card-row">
               <span class="card-label">Email:</span>
-              <span class="card-value">${empleado.email}</span>
+              <span class="card-value">${escapeHtml(empleado.email)}</span>
             </div>
             <div class="card-row">
               <span class="card-label">Telefono:</span>
-              <span class="card-value">${empleado.telefono}</span>
+              <span class="card-value">${escapeHtml(empleado.telefono)}</span>
             </div>
           </div>
         </article>

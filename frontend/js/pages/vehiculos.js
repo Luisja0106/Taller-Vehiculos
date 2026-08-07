@@ -7,21 +7,21 @@ function renderVehiculoCard(vehiculo) {
 	return `
         <article class="card" onclick="window.location.href='./individual-pages/vehiculo.html?placa=${vehiculo.placa}'">
           <div class="card-header" style="background: ${getBrandColor(vehiculo.marca)}">
-            <span class="order-id">VHC-${vehiculo.placa}</span>
+            <span class="order-id">VHC-${escapeHtml(vehiculo.placa)}</span>
           </div>
           <div class="card-body">
-            <h3>${getMarcaText(vehiculo.marca)} ${vehiculo.modelo} ${vehiculo.anio}</h3>
+            <h3>${getMarcaText(escapeHtml(vehiculo.marca))} ${escapeHtml(vehiculo.modelo)} ${escapeHtml(vehiculo.anio)}</h3>
             <div class="card-row">
               <span class="card-label">Placa:</span>
-              <span class="card-value">${vehiculo.placa}</span>
+              <span class="card-value">${escapeHtml(vehiculo.placa)}</span>
             </div>
             <div class="card-row">
               <span class="card-label">Marca:</span>
-              <span class="card-value">${getMarcaText(vehiculo.marca)}</span>
+              <span class="card-value">${getMarcaText(escapeHtml(vehiculo.marca))}</span>
             </div>
             <div class="card-row">
               <span class="card-label">Año:</span>
-              <span class="card-value">${vehiculo.anio}</span>
+              <span class="card-value">${escapeHtml(vehiculo.anio)}</span>
             </div>
           </div>
         </article>

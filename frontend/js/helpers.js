@@ -197,3 +197,11 @@ function openSelectModalVehiculo(label, options, onConfirm) {
 	};
 	document.getElementById("modal-select-cancelar").onclick = cerrarSelect;
 }
+
+function escapeHtml(value) {
+	return String(value).replace(/[&<>"']/g, (c) => {
+		({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[
+			c
+		];
+	});
+}

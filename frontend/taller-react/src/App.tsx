@@ -1,11 +1,11 @@
-import { DashboardLayout } from "@layouts/Dashboard";
+import { DashboardLayout as Dashboard } from "@layouts/Dashboard.tsx";
 
 // import { useState } from "react";
 
 function App() {
 	return (
 		<div>
-			<DashboardLayout />
+			<Dashboard />
 		</div>
 	);
 }

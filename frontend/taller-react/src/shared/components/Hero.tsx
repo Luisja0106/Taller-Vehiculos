@@ -10,21 +10,21 @@ export function Hero({
 	reportsRoute,
 }: HeroProps) {
 	return (
-		<header>
+		<>
 			<button type="button">AutoService</button>
 			<nav>
-				<a href={dashboardRoute === undefined ? "*" : dashboardRoute}>
+				<a href={dashboardRoute === undefined ? "#" : dashboardRoute}>
 					Dashboard
 				</a>
-				<a href={inventoryRoute === undefined ? "*" : inventoryRoute}>
+				<a href={inventoryRoute === undefined ? "#" : inventoryRoute}>
 					Inventario
 				</a>
-				<a href={reportsRoute === undefined ? "*" : reportsRoute}>Reportes</a>
+				<a href={reportsRoute === undefined ? "#" : reportsRoute}>Reportes</a>
 			</nav>
 			<div>
 				<span>Icon</span>
 				<span>User Name</span>
 			</div>
-		</header>
+		</>
 	);
 }

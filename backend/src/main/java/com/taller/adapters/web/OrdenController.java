@@ -2,7 +2,6 @@ package com.taller.adapters.web;
 
 import java.util.Map;
 
-import com.taller.adapters.persistence.jpa.implementations.OrdenRepositoryImpl;
 import com.taller.adapters.web.dto.OrdenDTO;
 import com.taller.usecases.AgregarServicio;
 import com.taller.usecases.AvanzarEstadoDeOrden;
@@ -10,6 +9,7 @@ import com.taller.usecases.BuscarOrdenPorId;
 import com.taller.usecases.CrearOrden;
 import com.taller.usecases.EliminarServicioDeOrden;
 import com.taller.usecases.ListarOrdenes;
+import com.taller.usecases.ListarOrdenesActivas;
 import com.taller.usecases.ObtenerOrdenesPorServicioId;
 import com.taller.usecases.ReasignarEmpleadoAOrden;
 import com.taller.usecases.RegistrarPago;
@@ -19,6 +19,7 @@ import com.taller.usecases.dto.AvanzarEstadoDeOrdenCMD;
 import com.taller.usecases.dto.BuscarOrdenPorIdCMD;
 import com.taller.usecases.dto.CrearOrdenCMD;
 import com.taller.usecases.dto.EliminarServicioDeOrdenCMD;
+import com.taller.usecases.dto.ListarOrdenesActivasCMD;
 import com.taller.usecases.dto.ListarOrdenesCMD;
 import com.taller.usecases.dto.ReasignarEmpleadoAOrdenCMD;
 import com.taller.usecases.dto.RegistrarPagoCMD;
@@ -48,13 +49,13 @@ public class OrdenController {
   private final RemoveOrden removeOrden;
   private final ObtenerOrdenesPorServicioId obtenerOrdenesPorServicioId;
   private final EliminarServicioDeOrden eliminarServicioDeOrden;
-  private final OrdenRepositoryImpl ordenRepo;
+  private final ListarOrdenesActivas listarOrdenesActivas;
 
   public OrdenController(CrearOrden crearOrden, ListarOrdenes listarOrdenes,
       AvanzarEstadoDeOrden avanzarEstadoDeOrden, AgregarServicio agregarServicio,
       ReasignarEmpleadoAOrden reasignarEmpleadoAOrden, RegistrarPago registrarPago, BuscarOrdenPorId buscarOrdenPorId,
       RemoveOrden removeOrden, ObtenerOrdenesPorServicioId obtenerOrdenesPorServicioId,
-      EliminarServicioDeOrden eliminarServicioDeOrden, OrdenRepositoryImpl ordenRepo) {
+      EliminarServicioDeOrden eliminarServicioDeOrden, ListarOrdenesActivas listarOrdenesActivas) {
     this.crearOrden = crearOrden;
     this.listarOrdenes = listarOrdenes;
     this.avanzarEstadoDeOrden = avanzarEstadoDeOrden;
@@ -65,7 +66,7 @@ public class OrdenController {
     this.removeOrden = removeOrden;
     this.obtenerOrdenesPorServicioId = obtenerOrdenesPorServicioId;
     this.eliminarServicioDeOrden = eliminarServicioDeOrden;
-    this.ordenRepo = ordenRepo;
+    this.listarOrdenesActivas = listarOrdenesActivas;
   }
 
   @GetMapping
@@ -78,7 +79,7 @@ public class OrdenController {
     var resultado = listarOrdenes.ejecutar(input);
 
     if (!resultado.isSuccess) {
-      return ResponseEntity.internalServerError()
+      return ResponseEntity.status(404)
           .body(Map.of("error", resultado.getError().getMessage()));
     }
 
@@ -95,7 +96,7 @@ public class OrdenController {
     var resultado = buscarOrdenPorId.ejecutar(input);
 
     if (!resultado.isSuccess) {
-      return ResponseEntity.internalServerError()
+      return ResponseEntity.status(404)
           .body(Map.of("error", resultado.getError().getMessage()));
     }
     return ResponseEntity.ok(OrdenDTO.from(resultado.getValue()));
@@ -106,7 +107,7 @@ public class OrdenController {
     var resultado = obtenerOrdenesPorServicioId.ejecutar(servicioId);
 
     if (!resultado.isSuccess) {
-      return ResponseEntity.internalServerError()
+      return ResponseEntity.status(404)
           .body(Map.of("error", resultado.getError().getMessage()));
     }
     var dtos = resultado.getValue().stream()
@@ -117,14 +118,21 @@ public class OrdenController {
   }
 
   @GetMapping("/activas")
-  public ResponseEntity<?> listarOrdenesActivas(
-      @RequestParam(required = false) String placaVehiculo,
-      @RequestParam(required = false) String empleadoId) {
-    var ordenes = ordenRepo.listarOrdenesActivas(empleadoId, placaVehiculo);
+  public ResponseEntity<?> listarOrdenesActivas(@RequestParam(required = false) String empleadoId,
+      @RequestParam(required = false) String placaVehiculo) {
+    var input = new ListarOrdenesActivasCMD(placaVehiculo, empleadoId);
 
-    return ResponseEntity.ok(ordenes.stream()
+    var resultado = listarOrdenesActivas.ejecutar(input);
+
+    if (!resultado.isSuccess) {
+      return ResponseEntity.status(404)
+          .body(Map.of("error", resultado.getError().getMessage()));
+    }
+    var dtos = resultado.getValue().stream()
         .map(OrdenDTO::from)
-        .toList());
+        .toList();
+
+    return ResponseEntity.ok(dtos);
   }
 
   @PostMapping

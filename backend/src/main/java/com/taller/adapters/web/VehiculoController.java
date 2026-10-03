@@ -49,7 +49,7 @@ public class VehiculoController {
     var resultado = listarVehiculos.ejecutar(input);
 
     if (!resultado.isSuccess) {
-      return ResponseEntity.internalServerError()
+      return ResponseEntity.status(404)
           .body(Map.of("error", resultado.getError().getMessage()));
     }
     var dtos = resultado.getValue().stream()
@@ -64,7 +64,7 @@ public class VehiculoController {
     var resultado = buscarVehiculoPorPlaca.ejecutar(input);
 
     if (!resultado.isSuccess) {
-      return ResponseEntity.internalServerError()
+      return ResponseEntity.status(404)
           .body(Map.of("error", resultado.getError().getMessage()));
     }
 

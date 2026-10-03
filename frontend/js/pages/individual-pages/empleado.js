@@ -90,18 +90,12 @@ async function renderOrdenesList(ordenes) {
 			return { ...orden, vehiculoId: vehiculo.id };
 		}),
 	);
-	const estadosFormat = {
-		Pendiente: "PENDIENTE",
-		"En Proceso": "EN_PROCESO",
-		"En espera de pago": "EN_ESPERA_DE_PAGO",
-		Finalizado: "FINALIZADO",
-	};
 	ordenesConVehiculo.forEach((orden) => {
 		const ordenHtml = `
             <div class="servicios-box">
-              <a class="servicio-name order-id" href="orden.html?id=${orden.id}">${orden.id}</a>
-              <a class="servicio-name order-vehiculo" id="orden-vehiculo" href="vehiculo.html?placa=${orden.vehiculoPlaca}">${orden.vehiculoModelo}</a>
-              <span class="servicio-name order-estado badge-${estadosFormat[orden.estado]} info-estado" href="orden.html?id=${orden.id}">${getEstadoText(estadosFormat[orden.estado])}</span>
+              <a class="servicio-name order-id" href="orden.html?id=${orden.id}">${escapeHtml(orden.id)}</a>
+              <a class="servicio-name order-vehiculo" id="orden-vehiculo" href="vehiculo.html?placa=${escapeHtml(orden.vehiculoPlaca)}">${escapeHtml(orden.vehiculoModelo)}</a>
+              <span class="servicio-name order-estado ${getBadgeClass(escapeHtml(orden.estado))} info-estado" href="orden.html?id=${orden.id}">${escapeHtml(orden.estado)}</span>
             </div>`;
 		container.insertAdjacentHTML("beforeend", ordenHtml);
 	});

@@ -41,8 +41,8 @@ public class Cliente extends Persona {
       vehiculo.cambiarDueño(this);
   }
 
-  public void removeVehiculo(Vehiculo vehiculo) {
-    if (vehiculo == null || !vehiculos.contains(vehiculo))
+  void removeVehiculo(Vehiculo vehiculo) {
+    if (vehiculo == null || !vehiculos.contains(vehiculo) || !vehiculo.getDueño().equals(this))
       return;
     vehiculos.remove(vehiculo);
   }

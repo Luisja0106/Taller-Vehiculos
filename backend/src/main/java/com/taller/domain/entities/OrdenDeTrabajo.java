@@ -176,6 +176,10 @@ public class OrdenDeTrabajo {
     if ((this.estado == EstadoDelTrabajo.FINALIZADO) || (this.estado == EstadoDelTrabajo.EN_ESPERA_DE_PAGO)) {
       return Result.error(new VerificationError("No se pueden añadir servicios a un Trabajo terminado"));
     }
+
+    if (this.servicios.contains(servicio)) {
+      return Result.error(new VerificationError("El servicio ya se encuentra en la orden"));
+    }
     servicios.add(servicio);
     return Result.success(null);
   }
@@ -200,14 +204,14 @@ public class OrdenDeTrabajo {
       }
       case EN_PROCESO -> {
         this.estado = EstadoDelTrabajo.EN_ESPERA_DE_PAGO;
-        this.fechaDePago = LocalDateTime.now();
+        this.fechaDeFinalizacion = LocalDateTime.now();
         yield Result.success(null);
       }
       case EN_ESPERA_DE_PAGO -> {
         if (valorVenta == null)
           yield Result.error(new VerificationError("No se puede pasar a finalizado sin definir el pago"));
         this.estado = EstadoDelTrabajo.FINALIZADO;
-        this.fechaDeFinalizacion = LocalDateTime.now();
+        this.fechaDePago = LocalDateTime.now();
         yield Result.success(null);
       }
       case FINALIZADO -> Result.error(new VerificationError("La orden ya esta finalizada"));
@@ -217,6 +221,10 @@ public class OrdenDeTrabajo {
   public Result<Void, IErrorApp> removerServicio(Servicio servicio) {
     if (!servicios.remove(servicio)) {
       return Result.error(new VerificationError("Error el servicio no pertenece a la orden"));
+    }
+    if (this.estado == EstadoDelTrabajo.FINALIZADO || this.estado == EstadoDelTrabajo.EN_ESPERA_DE_PAGO) {
+      return Result
+          .error(new VerificationError("No se pueden remover servicios de una orden finalizada o en espera de pago"));
     }
     return Result.success(null);
   }

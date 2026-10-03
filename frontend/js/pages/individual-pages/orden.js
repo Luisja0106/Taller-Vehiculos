@@ -7,6 +7,7 @@ async function initPage() {
 	setUpEliminarOrden();
 	setUpUsesCases();
 	displayPagoInfo();
+	displayFinalizacionInfo();
 }
 
 function displayPagoInfo() {
@@ -24,11 +25,11 @@ function displayPagoInfo() {
 }
 
 function displayFinalizacionInfo() {
-	const finalizacionElement = document.querySelector(".hidden-info-final");
+	const finalizacionElement = document.querySelectorAll(".hidden-info-final");
 	const currentEstado = document.getElementById("orden-estado").textContent;
 	if (currentEstado !== "Finalizado") {
 		finalizacionElement.forEach((element) => {
-			element.classList.add("show");
+			element.classList.remove("show");
 		});
 		return;
 	}
@@ -52,12 +53,13 @@ async function initializeOrderView() {
 	}
 
 	const orderData = await getOrden(orderId);
-	const vehiculoData = await getVehiculoByPlaca(orderData.vehiculoPlaca);
 
 	if (!orderData) {
 		redirectToDashboard();
 		return;
 	}
+
+	const vehiculoData = await getVehiculoByPlaca(orderData.vehiculoPlaca);
 
 	updatePageMetadata(orderData.id);
 	renderOrdenHeader(orderData);
@@ -104,16 +106,10 @@ function renderOrdenDetails(order, vehiculo) {
 	);
 
 	// Estado y Fecha
-	const estadosFormat = {
-		Pendiente: "PENDIENTE",
-		"En Proceso": "EN_PROCESO",
-		"En espera de pago": "EN_ESPERA_DE_PAGO",
-		Finalizado: "FINALIZADO",
-	};
-	const estadoFormateado = estadosFormat[order.estado];
+	const estado = order.estado;
 	const statusElement = document.getElementById("orden-estado");
-	statusElement.textContent = getEstadoText(estadoFormateado);
-	statusElement.className = `info-estado ${getBadgeClass(estadoFormateado)}`;
+	statusElement.textContent = estado;
+	statusElement.className = `info-estado ${getBadgeClass(estado)}`;
 
 	document.getElementById("orden-fecha").textContent = order.fechaEntrada;
 
@@ -163,8 +159,8 @@ function cambiarEstadoSetUp() {
 	const avanzarEstadoBtn = document.getElementById("avanzar-estado-btn");
 
 	const nextEstado = {
-		Pendiente: "En proceso",
-		"En proceso": "En espera de pago",
+		Pendiente: "En Proceso",
+		"En Proceso": "En espera de pago",
 		"En espera de pago": "Finalizado",
 		Finalizado: "INVALIDO",
 	};
@@ -241,8 +237,8 @@ function renderServicesList(services) {
 	services.forEach((service) => {
 		const serviceHtml = `
             <div class="servicios-box">
-              <a class="servicio-name" href="servicio.html?id=${service.id}">${service.nombre}</a>
-              <button type="button" onclick="handleRemoveService('${service.id}')">Remover</button>
+              <a class="servicio-name" href="servicio.html?id=${service.id}">${escapeHtml(service.nombre)}</a>
+              <button type="button" onclick="handleRemoveService('${escapeHtml(service.id)}')">Remover</button>
             </div>`;
 		container.insertAdjacentHTML("beforeend", serviceHtml);
 	});

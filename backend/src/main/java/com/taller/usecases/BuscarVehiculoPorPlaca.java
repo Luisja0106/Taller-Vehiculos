@@ -20,7 +20,7 @@ public class BuscarVehiculoPorPlaca {
       return Result.error(new ActionError("Error no se puede realizar la busqueda con un input nulo"));
     }
 
-    if (input.vehiculoPlaca().isBlank()) {
+    if (input.vehiculoPlaca() == null || input.vehiculoPlaca().isBlank()) {
       return Result.error(new ActionError("Error el id es nulo"));
     }
 

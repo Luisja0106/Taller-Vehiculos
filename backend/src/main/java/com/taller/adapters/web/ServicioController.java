@@ -2,15 +2,16 @@ package com.taller.adapters.web;
 
 import java.util.Map;
 
-import com.taller.adapters.persistence.jpa.implementations.ServicioRepositoryImpl;
 import com.taller.adapters.web.dto.ServicioDTO;
 import com.taller.usecases.ActualizarServicio;
 import com.taller.usecases.BuscarServicioPorId;
+import com.taller.usecases.BuscarServicioPorNombre;
 import com.taller.usecases.CrearServicio;
 import com.taller.usecases.ListarServicios;
 import com.taller.usecases.RemoveServicio;
 import com.taller.usecases.dto.ActualizarServicioCMD;
 import com.taller.usecases.dto.BuscarServicioPorIdCMD;
+import com.taller.usecases.dto.BuscarServicioPorNombreCMD;
 import com.taller.usecases.dto.CrearServicioCMD;
 
 import org.springframework.http.ResponseEntity;
@@ -32,17 +33,17 @@ public class ServicioController {
   private final ListarServicios listarServicios;
   private final BuscarServicioPorId buscarServicioPorId;
   private final RemoveServicio removeServicio;
-  private final ServicioRepositoryImpl servicoRepositoryImpl;
+  private final BuscarServicioPorNombre buscarServicioPorNombre;
 
   public ServicioController(CrearServicio crearServicio, ActualizarServicio actualizarServicio,
       ListarServicios listarServicios, BuscarServicioPorId buscarServicioPorId, RemoveServicio removeServicio,
-      ServicioRepositoryImpl servicoRepositoryImpl) {
+      BuscarServicioPorNombre buscarServicioPorNombre) {
     this.crearServicio = crearServicio;
     this.actualizarServicio = actualizarServicio;
     this.listarServicios = listarServicios;
     this.buscarServicioPorId = buscarServicioPorId;
     this.removeServicio = removeServicio;
-    this.servicoRepositoryImpl = servicoRepositoryImpl;
+    this.buscarServicioPorNombre = buscarServicioPorNombre;
   }
 
   @GetMapping
@@ -50,7 +51,7 @@ public class ServicioController {
     var resultado = listarServicios.ejecutar();
 
     if (!resultado.isSuccess) {
-      return ResponseEntity.internalServerError()
+      return ResponseEntity.status(404)
           .body(Map.of("error", resultado.getError().getMessage()));
     }
 
@@ -67,7 +68,7 @@ public class ServicioController {
     var resultado = buscarServicioPorId.ejecutar(input);
 
     if (!resultado.isSuccess) {
-      return ResponseEntity.internalServerError()
+      return ResponseEntity.status(404)
           .body(Map.of("error", resultado.getError().getMessage()));
     }
 
@@ -76,14 +77,14 @@ public class ServicioController {
 
   @GetMapping("/nombre/{nombre}")
   public ResponseEntity<?> buscarPorNombre(@PathVariable String nombre) {
-    var resultado = servicoRepositoryImpl.buscarPorNombre(nombre);
+    var input = new BuscarServicioPorNombreCMD(nombre);
+    var resultado = buscarServicioPorNombre.ejecutar(input);
 
-    if (resultado.isEmpty()) {
-      return ResponseEntity.internalServerError()
-          .body(Map.of("error", "Servicio no encontrado con el nombre: " + nombre));
+    if (!resultado.isSuccess) {
+      return ResponseEntity.status(404)
+          .body(Map.of("error", resultado.getError().getMessage()));
     }
-
-    return ResponseEntity.ok(ServicioDTO.from(resultado.get()));
+    return ResponseEntity.ok(ServicioDTO.from(resultado.getValue()));
   }
 
   @PostMapping

@@ -10,13 +10,13 @@ function getRoleColor(rol) {
 
 function getBadgeClass(estado) {
 	const badges = {
-		PENDIENTE: "badge badge-PENDIENTE",
-		EN_PROCESO: "badge badge-EN_PROCESO",
-		EN_ESPERA_DE_PAGO: "badge badge-EN_ESPERA",
-		FINALIZADO: "badge badge-FINALIZADO",
+		Pendiente: "badge badge-PENDIENTE",
+		"En Proceso": "badge badge-EN_PROCESO",
+		"En espera de pago": "badge badge-EN_ESPERA",
+		Finalizado: "badge badge-FINALIZADO",
 	};
 
-	return badges[estado] || badges.PENDIENTE;
+	return badges[estado] || badges.Pendiente;
 }
 
 function formatDate(dateRaw) {
@@ -26,17 +26,6 @@ function formatDate(dateRaw) {
 	const [year, month, day] = dateRaw.split("-");
 
 	return `${day}/${month}/${year}`;
-}
-
-function getEstadoText(estadoRaw) {
-	const estados = {
-		PENDIENTE: "Pendiente",
-		EN_PROCESO: "En proceso",
-		EN_ESPERA_DE_PAGO: "En espera de pago",
-		FINALIZADO: "Finalizado",
-	};
-
-	return estados[estadoRaw] || estadoRaw;
 }
 
 function getRoleText(roleRaw) {
@@ -207,4 +196,12 @@ function openSelectModalVehiculo(label, options, onConfirm) {
 		}
 	};
 	document.getElementById("modal-select-cancelar").onclick = cerrarSelect;
+}
+
+function escapeHtml(value) {
+	return String(value).replace(/[&<>"']/g, (c) => {
+		({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[
+			c
+		];
+	});
 }

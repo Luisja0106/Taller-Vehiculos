@@ -12,4 +12,6 @@ public interface IServicio {
 
   public Result<BigDecimal, IErrorApp> calcularCosto();
 
+  public BigDecimal getPrecio();
+
 }

@@ -22,6 +22,10 @@ public class ActualizarCliente {
     if (input == null)
       return Result.error(new ActionError("Error los datos a actualizar no pueden ser nulos"));
 
+    if (input.idDelCliente() == null || input.idDelCliente().isBlank()) {
+      return Result.error(new VerificationError("Error el id ingresado es invalido"));
+    }
+
     var clienteOPT = clienteRepository.buscarPorId(input.idDelCliente());
 
     if (clienteOPT.isEmpty()) {

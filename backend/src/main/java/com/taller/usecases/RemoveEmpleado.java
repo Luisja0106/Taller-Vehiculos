@@ -1,6 +1,5 @@
 package com.taller.usecases;
 
-import com.taller.domain.enums.EstadoDelTrabajo;
 import com.taller.domain.errors.VerificationError;
 import com.taller.domain.interfaces.IErrorApp;
 import com.taller.domain.repositories.IEmpleadoRepository;
@@ -27,9 +26,8 @@ public class RemoveEmpleado {
       return Result.error(new VerificationError("Error no se encontro empleado con el id ingresado"));
     }
 
-    var haveOrdens = ordenRepo.listarConFiltros(null, empleadoId, null).stream()
-        .anyMatch(orden -> orden.getEstado() != EstadoDelTrabajo.FINALIZADO);
-    if (haveOrdens) {
+    var haveOrdens = ordenRepo.listarOrdenesActivas(empleadoId, null);
+    if (!haveOrdens.isEmpty()) {
       return Result.error(new VerificationError(
           "Error el empleado cuenta con ordenes activas, favor finalizar las ordenes o asignar un nuevo empleado a cargo en  ellas "));
     }

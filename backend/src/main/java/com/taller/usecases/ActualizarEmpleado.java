@@ -26,6 +26,9 @@ public class ActualizarEmpleado {
     if (input == null) {
       return Result.error(new ActionError("Error los datos no pueden ser nulos"));
     }
+    if (input.idDelEmpleado() == null || input.idDelEmpleado().isBlank()) {
+      return Result.error(new VerificationError("Error el id ingresado es invalido"));
+    }
     var empleadoOPT = empleadoRepository.buscarPorId(input.idDelEmpleado());
     if (empleadoOPT.isEmpty()) {
       return Result.error(new VerificationError("Error no se encontro el empleado a modificar"));
@@ -98,8 +101,8 @@ public class ActualizarEmpleado {
     if (rol.isEmpty()) {
       return Result.error(new VerificationError("Error el rol no es valido"));
     }
-    var hasOrdenes = ordenRepository.listarConFiltros(null, empleado.getId(), null).size() > 0;
-    if (hasOrdenes && rol.get() != Rol.MECANICO) {
+    var hasOrdenes = ordenRepository.listarOrdenesActivas(empleado.getId(), null);
+    if (!hasOrdenes.isEmpty() && rol.get() != Rol.MECANICO) {
       return Result
           .error(new VerificationError("Error no se puede cambiar el rol del empleado porque tiene ordenes asignadas"));
 

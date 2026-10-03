@@ -89,18 +89,11 @@ async function renderOrdenesQueUsa(ordenes) {
 	}
 
 	container.innerHTML = "";
-	const estadosFormat = {
-		Pendiente: "PENDIENTE",
-		"En Proceso": "EN_PROCESO",
-		"En espera de pago": "EN_ESPERA_DE_PAGO",
-		Finalizado: "FINALIZADO",
-	};
-
 	ordenes.forEach((orden) => {
 		const ordenHtml = `
             <div class="servicios-box">
-              <a class="servicio-name order-id" href="orden.html?id=${orden.id}">${orden.id}</a>
-              <span class="servicio-name order-estado badge-${estadosFormat[orden.estado]} info-estado" href="orden.html?id=${orden.id}">${getEstadoText(estadosFormat[orden.estado])}</span>
+              <a class="servicio-name order-id" href="orden.html?id=${orden.id}">${escapeHtml(orden.id)}</a>
+              <span class="servicio-name order-estado badge-${getBadgeClass(escapeHtml(orden.estado))} info-estado" href="orden.html?id=${orden.id}">${escapeHtml(orden.estado)}</span>
             </div>`;
 		container.insertAdjacentHTML("beforeend", ordenHtml);
 	});

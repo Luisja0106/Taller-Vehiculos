@@ -4,7 +4,7 @@ interface TopBarProps {
 	reportsRoute: string;
 }
 
-export function TopBar({
+export function Topbar({
 	dashboardRoute = "#",
 	inventoryRoute = "#",
 	reportsRoute = "#",
@@ -34,7 +34,7 @@ export function TopBar({
 				))}
 			</nav>
 			<div className="flex cursor-pointer items-center gap-2">
-				<span className="flex aspect-square w-8 items-center justify-center rounded-full bg-blue-600 font-medium text-white text-xs">
+				<span className="flex size-8 items-center justify-center rounded-full bg-blue-600 font-medium text-white text-xs">
 					Icon
 				</span>
 				<span>User Name</span>

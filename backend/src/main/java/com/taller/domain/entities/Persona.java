@@ -60,8 +60,13 @@ public abstract class Persona {
     this.nombre = nombre;
   }
 
-  public boolean equals(Persona persona) {
-    return id.equals(persona.id);
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (!(obj instanceof Persona))
+      return false;
+    return this.id.equals(((Persona) obj).id);
   }
 
 }

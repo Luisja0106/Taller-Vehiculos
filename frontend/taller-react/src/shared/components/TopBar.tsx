@@ -1,14 +1,14 @@
-interface HeroProps {
+interface TopBarProps {
 	dashboardRoute: string;
 	inventoryRoute: string;
 	reportsRoute: string;
 }
 
-export function Hero({
+export function TopBar({
 	dashboardRoute = "#",
 	inventoryRoute = "#",
 	reportsRoute = "#",
-}: HeroProps) {
+}: TopBarProps) {
 	const navLinks = [
 		{ label: "Dashboard", href: dashboardRoute },
 		{ label: "Inventario", href: inventoryRoute },

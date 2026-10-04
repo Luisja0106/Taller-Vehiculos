@@ -1,5 +1,5 @@
 import { Hero } from "@components/Hero.tsx";
-import { Sidebar } from "@components/Sidebar";
+import { Sidebar } from "@components/Sidebar.tsx";
 import { Topbar } from "@components/Topbar.tsx";
 import type { PropsWithChildren } from "react";
 

@@ -1,4 +1,5 @@
 import { Hero } from "@components/Hero.tsx";
+import { Sidebar } from "@components/Sidebar";
 import { Topbar } from "@components/Topbar.tsx";
 import type { PropsWithChildren } from "react";
 
@@ -9,10 +10,12 @@ export function Dashboard({ children }: PropsWithChildren) {
 				<Topbar dashboardRoute="#" inventoryRoute="#" reportsRoute="#" />
 			</header>
 			<main>
+				{/* <Sidebar /> */}
 				<Hero
 					gradientClasses="bg-linear-to-r from-cyan-400 from-20% via-sky-400 to-blue-500"
 					buttonColor="bg-blue-500 text-white hover:bg-white hover:text-blue-500 hover:border-blue-500"
 				/>
+
 				{children}
 			</main>
 		</>

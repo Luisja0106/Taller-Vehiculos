@@ -3,7 +3,7 @@ interface HeroProps {
 	buttonColor: string;
 }
 
-export function Hero({ gradientClasses, buttonColor }: HeroProps) {
+export function Hero({ gradientClasses = "", buttonColor = "" }: HeroProps) {
 	return (
 		<section
 			className={`flex h-45 w-full flex-col items-center justify-center gap-4 ${gradientClasses}`}

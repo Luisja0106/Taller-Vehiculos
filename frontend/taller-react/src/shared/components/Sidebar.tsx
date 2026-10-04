@@ -1,4 +1,5 @@
 import { Overlay } from "@components/Overlay.tsx";
+import type { MouseEvent } from "react";
 
 const mockOptions = [
 	{ label: "Empleados", href: "#" },
@@ -7,10 +8,20 @@ const mockOptions = [
 	{ label: "Servicios", href: "#" },
 ];
 
-export function Sidebar() {
+interface SideBarProps {
+	onToggleSideBar?: (newStatus: boolean) => void;
+	style: string;
+}
+
+export function Sidebar({ style, onToggleSideBar }: SideBarProps) {
+	const handleCloseSideBar = (event: MouseEvent<HTMLButtonElement>) => {
+		event.preventDefault();
+		onToggleSideBar?.(false);
+	};
+
 	return (
 		<>
-			<aside className="fixed top-0 left-0 z-100 flex h-lvh w-2xs flex-col gap-8 bg-white p-6 shadow-2xl">
+			<aside className={style}>
 				<div className="flex items-center justify-between">
 					<span className="text-nowrap font-bold text-black text-xl">
 						AutoService
@@ -18,6 +29,7 @@ export function Sidebar() {
 					<button
 						type="button"
 						className="cursor-pointer text-nowrap border-transparent bg-transparent text-xl"
+						onClick={handleCloseSideBar}
 					>
 						X
 					</button>
@@ -35,7 +47,6 @@ export function Sidebar() {
 					))}
 				</ul>
 			</aside>
-			<Overlay />
 		</>
 	);
 }

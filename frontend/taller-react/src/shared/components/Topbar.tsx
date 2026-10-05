@@ -1,3 +1,5 @@
+import { Link } from "@components/utils/link.tsx";
+
 interface TopBarProps {
 	dashboardRoute: string;
 	inventoryRoute: string;
@@ -27,13 +29,13 @@ export function Topbar({
 			</button>
 			<nav className="flex flex-1 items-center justify-center gap-2">
 				{navLinks.map((link) => (
-					<a
+					<Link
 						key={link.label}
 						href={link.href}
 						className="rounded-md px-2 py-1 font-medium text-gray-500 text-sm transition-(--transition) hover:bg-gray-500/10 hover:text-black"
 					>
 						{link.label}
-					</a>
+					</Link>
 				))}
 			</nav>
 			<div className="flex cursor-pointer items-center gap-2">

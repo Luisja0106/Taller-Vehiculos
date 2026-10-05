@@ -1,3 +1,5 @@
+import { Link } from "@components/utils/link.tsx";
+
 export interface sidebarOptions {
 	label: string;
 	href: string;
@@ -31,12 +33,12 @@ export function Sidebar({ isOpen, onClose, items }: SideBarProps) {
 			<ul className="ml-2 flex flex-col gap-8">
 				{items.map((option) => (
 					<li key={option.label}>
-						<a
+						<Link
 							href={option.href}
 							className="block rounded-md p-2 font-medium text-base text-gray-400 transition-(--transition) hover:bg-gray-400/10 hover:text-black"
 						>
 							{option.label}
-						</a>
+						</Link>
 					</li>
 				))}
 			</ul>

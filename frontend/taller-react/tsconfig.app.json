@@ -27,7 +27,8 @@
 			"@components/*": ["./src/shared/components/*"],
 			"@layouts/*": ["./src/shared/layouts/*"],
 			"@pages/*": ["./src/pages/*"],
-			"@hooks/*": ["./src/hooks/*"]
+			"@hooks/*": ["./src/shared/hooks/*"],
+			"@utils/*": ["./src/shared/utils/*"]
 		}
 	},
 	"include": ["src"]

@@ -6,7 +6,7 @@ import { type ReactNode, useState } from "react";
 
 interface DashboardProps {
 	children: ReactNode;
-	gradientClass: string;
+	gradientClass: string; //TODO: Fix this mechanism for the styles
 	gradientButton: string;
 	searchbarPlaceholder?: string;
 	items: sidebarOptions[];
@@ -33,7 +33,7 @@ export function Dashboard({
 				onMenuClick={openSidebar}
 			/>
 			<Sidebar isOpen={isSideBarOpen} onClose={closeSidebar} items={items} />
-			{isSideBarOpen && <Overlay onClick={closeSidebar} />}
+			<Overlay isVisible={isSideBarOpen} onClick={closeSidebar} />
 			<main>
 				<Hero
 					gradientClasses={gradientClass}

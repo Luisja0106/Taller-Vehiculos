@@ -7,8 +7,8 @@ interface HeroProps {
 }
 
 export function Hero({
-	gradientClasses = "",
-	buttonColor = "",
+	gradientClasses,
+	buttonColor,
 	searchPlaceHolder,
 }: HeroProps) {
 	return (

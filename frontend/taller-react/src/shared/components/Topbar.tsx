@@ -1,4 +1,6 @@
-import { Link } from "@components/utils/link.tsx";
+import { AutoService } from "@components/Sidebar";
+import { z_index } from "@utils/GlobalVar";
+import { Link } from "@utils/Link.tsx";
 
 interface TopBarProps {
 	dashboardRoute: string;
@@ -19,13 +21,15 @@ export function Topbar({
 		{ label: "Reportes", href: reportsRoute },
 	];
 	return (
-		<header className="sticky top-0 z-98 flex h-16 w-full items-center gap-8 bg-white p-6 shadow-sm">
+		<header
+			className={`sticky top-0 ${z_index.Topbar} flex h-16 w-full items-center gap-8 bg-white p-6 shadow-sm`}
+		>
 			<button
 				type="button"
 				className="cursor-pointer font-bold text-black text-xl"
 				onClick={onMenuClick}
 			>
-				AutoService
+				{AutoService}
 			</button>
 			<nav className="flex flex-1 items-center justify-center gap-2">
 				{navLinks.map((link) => (

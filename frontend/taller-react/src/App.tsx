@@ -1,10 +1,10 @@
-import { useRouter } from "@hooks/useRouter.tsx";
+import { useReader } from "@hooks/useReader.tsx";
 import { NotFoundPage } from "@pages/404.tsx";
 import { EmpleadosDashboard } from "@pages/EmpleadosDashboard.tsx";
 import { MainDashboard } from "@pages/MainDashboard.tsx";
 
 function App() {
-	const { currentPath } = useRouter();
+	const { currentPath } = useReader();
 
 	let page = <NotFoundPage />;
 

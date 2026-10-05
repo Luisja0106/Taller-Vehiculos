@@ -25,7 +25,8 @@
 		/* Path mapping */
 		"paths": {
 			"@components/*": ["./src/shared/components/*"],
-			"@layouts/*": ["./src/shared/layouts/*"]
+			"@layouts/*": ["./src/shared/layouts/*"],
+			"@pages/*": ["./src/pages/*"]
 		}
 	},
 	"include": ["src"]

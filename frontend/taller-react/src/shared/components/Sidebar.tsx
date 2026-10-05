@@ -1,16 +1,14 @@
-const mockOptions = [
-	{ label: "Empleados", href: "#" },
-	{ label: "Vehiculos", href: "#" },
-	{ label: "Clientes", href: "#" },
-	{ label: "Servicios", href: "#" },
-];
-
+export interface sidebarOptions {
+	label: string;
+	href: string;
+}
 interface SideBarProps {
 	isOpen: boolean;
 	onClose: () => void;
+	items: sidebarOptions[];
 }
 
-export function Sidebar({ isOpen, onClose }: SideBarProps) {
+export function Sidebar({ isOpen, onClose, items }: SideBarProps) {
 	const positionClasses = isOpen ? "translate-x-0" : "-translate-x-full";
 
 	return (
@@ -31,7 +29,7 @@ export function Sidebar({ isOpen, onClose }: SideBarProps) {
 				</button>
 			</div>
 			<ul className="ml-2 flex flex-col gap-8">
-				{mockOptions.map((option) => (
+				{items.map((option) => (
 					<li key={option.label}>
 						<a
 							href={option.href}

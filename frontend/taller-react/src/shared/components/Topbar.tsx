@@ -1,34 +1,27 @@
-import type { MouseEvent } from "react";
-
 interface TopBarProps {
 	dashboardRoute: string;
 	inventoryRoute: string;
 	reportsRoute: string;
-	onToggleSideBar?: (newStatus: boolean) => void;
+	onMenuClick: () => void;
 }
 
 export function Topbar({
 	dashboardRoute,
 	inventoryRoute,
 	reportsRoute,
-	onToggleSideBar,
+	onMenuClick,
 }: TopBarProps) {
 	const navLinks = [
 		{ label: "Dashboard", href: dashboardRoute },
 		{ label: "Inventario", href: inventoryRoute },
 		{ label: "Reportes", href: reportsRoute },
 	];
-
-	const handleOpenSideBar = (event: MouseEvent<HTMLButtonElement>) => {
-		event.preventDefault();
-		onToggleSideBar?.(true);
-	};
 	return (
 		<>
 			<button
 				type="button"
 				className="cursor-pointer font-bold text-black text-xl"
-				onClick={handleOpenSideBar}
+				onClick={onMenuClick}
 			>
 				AutoService
 			</button>

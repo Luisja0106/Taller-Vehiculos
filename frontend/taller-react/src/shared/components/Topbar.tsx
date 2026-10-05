@@ -17,7 +17,7 @@ export function Topbar({
 		{ label: "Reportes", href: reportsRoute },
 	];
 	return (
-		<>
+		<header className="sticky top-0 z-98 flex h-16 w-full items-center gap-8 bg-white p-6 shadow-sm">
 			<button
 				type="button"
 				className="cursor-pointer font-bold text-black text-xl"
@@ -42,6 +42,6 @@ export function Topbar({
 				</span>
 				<span>User Name</span>
 			</div>
-		</>
+		</header>
 	);
 }

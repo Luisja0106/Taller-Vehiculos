@@ -1,13 +1,9 @@
-import { Dashboard } from "@layouts/Dashboard.tsx";
+import { EmpleadosDashboard } from "@pages/EmpleadosDashboard";
 
-// import { useState } from "react";
+// import { MainDashboard } from "@pages/MainDashboard";
 
 function App() {
-	return (
-		<Dashboard>
-			<h1>Hola</h1>
-		</Dashboard>
-	);
+	return <EmpleadosDashboard />;
 }
 
 export default App;

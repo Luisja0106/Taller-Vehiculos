@@ -1,7 +1,7 @@
 import { Dashboard } from "@layouts/Dashboard";
 
 const sidebarItems = [
-	{ label: "Empleados", href: "#" },
+	{ label: "Empleados", href: "/empleados" },
 	{ label: "Vehiculos", href: "#" },
 	{ label: "Clientes", href: "#" },
 	{ label: "Servicios", href: "#" },

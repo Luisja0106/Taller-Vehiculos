@@ -27,7 +27,7 @@ export function Dashboard({
 	return (
 		<>
 			<Topbar
-				dashboardRoute="#"
+				dashboardRoute="/"
 				inventoryRoute="#"
 				reportsRoute="#"
 				onMenuClick={openSidebar}

@@ -1,10 +1,11 @@
-import { NotFoundPage } from "@pages/404";
-import { EmpleadosDashboard } from "@pages/EmpleadosDashboard";
-import { MainDashboard } from "@pages/MainDashboard";
-import { useEffect, useState } from "react";
+import { useRouter } from "@hooks/useRouter.tsx";
+import { NotFoundPage } from "@pages/404.tsx";
+import { EmpleadosDashboard } from "@pages/EmpleadosDashboard.tsx";
+import { MainDashboard } from "@pages/MainDashboard.tsx";
 
 function App() {
-	const [currentPath, setCurrentPath] = useState(window.location.pathname);
+	const { currentPath } = useRouter();
+
 	let page = <NotFoundPage />;
 
 	if (currentPath === "/") {
@@ -12,18 +13,6 @@ function App() {
 	} else if (currentPath === "/empleados") {
 		page = <EmpleadosDashboard />;
 	}
-
-	useEffect(() => {
-		const handleLocationChange = () => {
-			setCurrentPath(window.location.pathname);
-		};
-
-		window.addEventListener("popstate", handleLocationChange);
-
-		return () => {
-			window.removeEventListener("popstate", handleLocationChange);
-		};
-	}, []);
 
 	return page;
 }

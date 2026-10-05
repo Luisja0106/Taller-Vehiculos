@@ -26,7 +26,8 @@
 		"paths": {
 			"@components/*": ["./src/shared/components/*"],
 			"@layouts/*": ["./src/shared/layouts/*"],
-			"@pages/*": ["./src/pages/*"]
+			"@pages/*": ["./src/pages/*"],
+			"@hooks/*": ["./src/hooks/*"]
 		}
 	},
 	"include": ["src"]

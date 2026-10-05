@@ -1,3 +1,4 @@
+import { useRouter } from "@hooks/useRouter.tsx";
 import type { ComponentProps, MouseEvent, ReactNode } from "react";
 
 interface linkProps extends ComponentProps<"a"> {
@@ -6,11 +7,11 @@ interface linkProps extends ComponentProps<"a"> {
 }
 
 export function Link({ href, children, ...restOfProps }: linkProps) {
+	const { navigateTo } = useRouter();
+
 	const handleClick = (event: MouseEvent<HTMLAnchorElement>) => {
 		event.preventDefault();
-
-		window.history.pushState({}, "", href);
-		window.dispatchEvent(new PopStateEvent("popstate"));
+		navigateTo(href);
 	};
 	return (
 		<a href={href} {...restOfProps} onClick={handleClick}>

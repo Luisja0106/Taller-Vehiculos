@@ -8,6 +8,12 @@ interface linkProps extends ComponentProps<"a"> {
 
 export function Link({ href, children, ...restOfProps }: linkProps) {
 	const handleClick = (event: MouseEvent<HTMLAnchorElement>) => {
+		const hasModefierKey =
+			event.ctrlKey || event.altKey || event.metaKey || event.shiftKey;
+
+		if (hasModefierKey) {
+			return;
+		}
 		event.preventDefault();
 		NavigateTo(href);
 	};

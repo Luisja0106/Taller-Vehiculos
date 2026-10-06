@@ -1,4 +1,4 @@
-import { AutoService } from "@components/Sidebar";
+import { Brand } from "@components/Brand";
 import { z_index } from "@utils/GlobalVar";
 import { Link } from "@utils/Link.tsx";
 
@@ -24,12 +24,8 @@ export function Topbar({
 		<header
 			className={`sticky top-0 ${z_index.Topbar} flex h-16 w-full items-center gap-8 bg-white p-6 shadow-sm`}
 		>
-			<button
-				type="button"
-				className="cursor-pointer font-bold text-black text-xl"
-				onClick={onMenuClick}
-			>
-				{AutoService}
+			<button type="button" className="cursor-pointer" onClick={onMenuClick}>
+				<Brand />
 			</button>
 			<nav className="flex flex-1 items-center justify-center gap-2">
 				{navLinks.map((link) => (

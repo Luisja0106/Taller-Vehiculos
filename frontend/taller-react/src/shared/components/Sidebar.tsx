@@ -1,3 +1,4 @@
+import { Brand } from "@components/Brand";
 import { z_index } from "@utils/GlobalVar.ts";
 import { Link } from "@utils/Link.tsx";
 
@@ -11,8 +12,6 @@ interface SideBarProps {
 	items: sidebarOptions[];
 }
 
-export const AutoService = "AutoService";
-
 export function Sidebar({ isOpen, onClose, items }: SideBarProps) {
 	const positionClasses = isOpen ? "translate-x-0" : "-translate-x-full";
 
@@ -22,9 +21,7 @@ export function Sidebar({ isOpen, onClose, items }: SideBarProps) {
 			inert={!isOpen}
 		>
 			<div className="flex items-center justify-between">
-				<span className="text-nowrap font-bold text-black text-xl">
-					{AutoService}
-				</span>
+				<Brand />
 				<button
 					type="button"
 					className="cursor-pointer text-nowrap border-transparent bg-transparent text-xl"

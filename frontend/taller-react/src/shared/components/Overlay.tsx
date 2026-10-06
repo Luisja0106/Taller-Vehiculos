@@ -1,4 +1,4 @@
-import { z_index } from "@utils/GlobalVar";
+import { zIndex } from "@utils/GlobalVar";
 
 interface OverlayProps {
 	isVisible: boolean;
@@ -13,7 +13,7 @@ export function Overlay({ isVisible, onClick }: OverlayProps) {
 			type="button"
 			aria-label="close sidebar"
 			onClick={onClick}
-			className={`fixed inset-0 ${z_index.Overlay} block bg-black/60 transition delay-75 ease-in-out ${display}`}
+			className={`fixed inset-0 ${zIndex.Overlay} block bg-black/60 transition delay-75 ease-in-out ${display}`}
 			inert={!isVisible}
 		></button>
 	);

@@ -1,6 +1,6 @@
 import { Brand } from "@components/Brand";
-import { z_index } from "@utils/GlobalVar";
-import { Link } from "@utils/Link.tsx";
+import { Link } from "@components/Link";
+import { zIndex } from "@utils/GlobalVar";
 
 interface TopBarProps {
 	dashboardRoute: string;
@@ -22,7 +22,7 @@ export function Topbar({
 	];
 	return (
 		<header
-			className={`sticky top-0 ${z_index.Topbar} flex h-16 w-full items-center gap-8 bg-white p-6 shadow-sm`}
+			className={`sticky top-0 ${zIndex.Topbar} flex h-16 w-full items-center gap-8 bg-white p-6 shadow-sm`}
 		>
 			<button type="button" className="cursor-pointer" onClick={onMenuClick}>
 				<Brand />

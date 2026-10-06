@@ -1,10 +1,10 @@
-import { useReader } from "@hooks/useReader.tsx";
+import { useCurrentPath } from "@hooks/useCurrentPath";
 import { NotFoundPage } from "@pages/404.tsx";
 import { EmpleadosDashboard } from "@pages/EmpleadosDashboard.tsx";
 import { MainDashboard } from "@pages/MainDashboard.tsx";
 
 function App() {
-	const { currentPath } = useReader();
+	const { currentPath } = useCurrentPath();
 
 	let page = <NotFoundPage />;
 

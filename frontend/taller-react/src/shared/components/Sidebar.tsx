@@ -1,6 +1,6 @@
 import { Brand } from "@components/Brand";
-import { z_index } from "@utils/GlobalVar.ts";
-import { Link } from "@utils/Link.tsx";
+import { Link } from "@components/Link";
+import { zIndex } from "@utils/GlobalVar.ts";
 
 export interface sidebarOptions {
 	label: string;
@@ -17,7 +17,7 @@ export function Sidebar({ isOpen, onClose, items }: SideBarProps) {
 
 	return (
 		<aside
-			className={`fixed top-0 left-0 ${z_index.Sidebar} flex h-lvh w-2xs flex-col gap-8 bg-white p-6 shadow-2xl transition-transform duration-300 ease-in-out ${positionClasses}`}
+			className={`fixed top-0 left-0 ${zIndex.Sidebar} flex h-lvh w-2xs flex-col gap-8 bg-white p-6 shadow-2xl transition-transform duration-300 ease-in-out ${positionClasses}`}
 			inert={!isOpen}
 		>
 			<div className="flex items-center justify-between">

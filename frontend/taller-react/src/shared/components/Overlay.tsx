@@ -6,14 +6,14 @@ interface OverlayProps {
 }
 
 export function Overlay({ isVisible, onClick }: OverlayProps) {
-	const display = isVisible ? "" : "hidden";
+	const opacity = isVisible ? "bg-black/60" : "bg-black/0";
 
 	return (
 		<button
 			type="button"
 			aria-label="close sidebar"
 			onClick={onClick}
-			className={`fixed inset-0 ${zIndex.Overlay} block bg-black/60 transition delay-75 ease-in-out ${display}`}
+			className={`fixed inset-0 ${zIndex.Overlay} block ${opacity} transition delay-100`}
 			inert={!isVisible}
 		></button>
 	);

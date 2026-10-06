@@ -6,12 +6,13 @@ interface linkProps extends ComponentProps<"a"> {
 	children: ReactNode;
 }
 
-export function Link({ href, children, ...restOfProps }: linkProps) {
+export function Link({ href, children, onClick, ...restOfProps }: linkProps) {
 	const handleClick = (event: MouseEvent<HTMLAnchorElement>) => {
+		onClick?.(event);
 		const hasModefierKey =
 			event.ctrlKey || event.altKey || event.metaKey || event.shiftKey;
 
-		if (hasModefierKey) {
+		if (event.defaultPrevented || hasModefierKey) {
 			return;
 		}
 		event.preventDefault();

@@ -1,3 +1,4 @@
+import { Filters } from "@components/Filters";
 import { Dashboard } from "@layouts/Dashboard";
 
 const sidebarItems = [
@@ -14,6 +15,7 @@ export function MainDashboard() {
 			gradientClass="bg-linear-to-r from-cyan-400 from-20% via-sky-400 to-blue-500"
 			items={sidebarItems}
 		>
+			<Filters />
 			<h1>Hola</h1>
 		</Dashboard>
 	);

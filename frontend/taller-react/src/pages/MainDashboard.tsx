@@ -15,7 +15,9 @@ export function MainDashboard() {
 			gradientClass="bg-linear-to-r from-cyan-400 from-20% via-sky-400 to-blue-500"
 			items={sidebarItems}
 		>
-			<Filters />
+			<div className="flex flex-col gap-6 p-6">
+				<Filters />
+			</div>
 			<h1>Hola</h1>
 		</Dashboard>
 	);

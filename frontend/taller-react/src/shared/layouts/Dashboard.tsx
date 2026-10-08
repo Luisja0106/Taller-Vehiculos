@@ -2,7 +2,8 @@ import { Hero } from "@components/Hero.tsx";
 import { Overlay } from "@components/Overlay.tsx";
 import { Sidebar, type sidebarOptions } from "@components/Sidebar.tsx";
 import { Topbar } from "@components/Topbar.tsx";
-import { type ReactNode, useState } from "react";
+import { useDisclosure } from "@hooks/useDisclosure";
+import type { ReactNode } from "react";
 
 interface DashboardProps {
 	children: ReactNode;
@@ -19,10 +20,7 @@ export function Dashboard({
 	items,
 	searchbarPlaceholder = "Buscar por ID, Vehiculo, Empleado",
 }: DashboardProps) {
-	const [isSideBarOpen, setSideBarStatus] = useState(false);
-
-	const openSidebar = () => setSideBarStatus(true);
-	const closeSidebar = () => setSideBarStatus(false);
+	const { isOpen, open, close } = useDisclosure();
 
 	return (
 		<>
@@ -30,10 +28,10 @@ export function Dashboard({
 				dashboardRoute="/"
 				inventoryRoute="#"
 				reportsRoute="#"
-				onMenuClick={openSidebar}
+				onMenuClick={open}
 			/>
-			<Sidebar isOpen={isSideBarOpen} onClose={closeSidebar} items={items} />
-			<Overlay isVisible={isSideBarOpen} onClick={closeSidebar} />
+			<Sidebar isOpen={isOpen} onClose={close} items={items} />
+			<Overlay isVisible={isOpen} onClick={close} />
 			<main>
 				<Hero
 					gradientClasses={gradientClass}

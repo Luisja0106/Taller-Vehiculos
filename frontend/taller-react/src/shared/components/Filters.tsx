@@ -1,18 +1,16 @@
 import { FilterSelect } from "@components/FilterSelect.tsx";
+import { useDisclosure } from "@hooks/useDisclosure";
 import { serviceStates } from "@utils/GlobalVar.ts";
-import { useState } from "react";
 
 export function Filters() {
-	const [isOpen, setIsOpen] = useState(false);
-	const toggleOpen = () => setIsOpen(!isOpen);
-
+	const { isOpen, toggle } = useDisclosure();
 	const arrowDirection = isOpen ? "rotate-180" : "";
 	const panelRows = isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]";
 	return (
 		<section className="overflow-hidden rounded-xl border border-slate-300/50 bg-white">
 			<button
 				type="button"
-				onClick={toggleOpen}
+				onClick={toggle}
 				aria-expanded={isOpen}
 				aria-controls="filters-panel"
 				className="flex w-full cursor-pointer select-none items-center justify-between px-6 py-4 font-medium"

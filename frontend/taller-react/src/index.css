@@ -4,6 +4,20 @@
 	color-scheme: light;
 	--transition: 0.3s, ease;
 	--color-bg: #f3f4f6;
+
+	[data-theme="blue"] {
+		--accent: var(--color-blue-500);
+		--hero-from: var(--color-cyan-400);
+		--hero-via: var(--color-sky-400);
+		--hero-to: var(--color-blue-500);
+	}
+
+	[data-theme="rose"] {
+		--accent: var(--color-rose-600);
+		--hero-from: var(--color-rose-300);
+		--hero-via: var(--color-rose-400);
+		--hero-to: var(--color-rose-600);
+	}
 }
 
 html,

@@ -1,9 +1,8 @@
 interface SearchbarProps {
-	buttonColor: string;
 	placeholder: string;
 }
 
-export function Searchbar({ buttonColor, placeholder }: SearchbarProps) {
+export function Searchbar({ placeholder }: SearchbarProps) {
 	return (
 		<form className="flex w-4/5 max-w-3xl rounded-full border-0 bg-white p-2 shadow-sm">
 			<input
@@ -14,7 +13,7 @@ export function Searchbar({ buttonColor, placeholder }: SearchbarProps) {
 			/>
 			<button
 				type="submit"
-				className={`cursor-pointer rounded-full border-2 px-6 py-0 font-bold transition-(--transition) ${buttonColor}`}
+				className="cursor-pointer rounded-full border-2 bg-(--accent) px-6 py-0 font-bold text-white transition-(--transition) hover:border-(--accent) hover:bg-white hover:text-(--accent)"
 			>
 				Buscar
 			</button>

@@ -1,21 +1,13 @@
-import { Searchbar } from "@components/Searchbar";
+import type { ReactNode } from "react";
 
 interface HeroProps {
-	gradientClasses: string;
-	buttonColor: string;
-	searchPlaceHolder: string;
+	children: ReactNode;
 }
 
-export function Hero({
-	gradientClasses,
-	buttonColor,
-	searchPlaceHolder,
-}: HeroProps) {
+export function Hero({ children }: HeroProps) {
 	return (
-		<section
-			className={`flex h-45 w-full flex-col items-center justify-center gap-4 ${gradientClasses}`}
-		>
-			{<Searchbar buttonColor={buttonColor} placeholder={searchPlaceHolder} />}
+		<section className="flex h-45 w-full flex-col items-center justify-center gap-4 bg-linear-to-r from-(--hero-from) from-20% via-(--hero-via) to-(--hero-to)">
+			{children}
 		</section>
 	);
 }

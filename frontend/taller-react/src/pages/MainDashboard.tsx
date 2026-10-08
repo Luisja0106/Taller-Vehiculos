@@ -1,4 +1,6 @@
 import { Filters } from "@components/Filters";
+import { Hero } from "@components/Hero";
+import { Searchbar } from "@components/Searchbar";
 import { Dashboard } from "@layouts/Dashboard";
 
 const sidebarItems = [
@@ -10,11 +12,13 @@ const sidebarItems = [
 
 export function MainDashboard() {
 	return (
-		<Dashboard
-			gradientButton="bg-blue-500 text-white hover:bg-white hover:text-blue-500 hover:border-blue-500"
-			gradientClass="bg-linear-to-r from-cyan-400 from-20% via-sky-400 to-blue-500"
-			items={sidebarItems}
-		>
+		<Dashboard items={sidebarItems}>
+			<Hero gradientClasses="bg-blue-500">
+				<Searchbar
+					buttonColor="bg-blue-500"
+					placeholder="Buscar por ID: Vehiculo, Empleado, Etc..."
+				/>
+			</Hero>
 			<div className="flex flex-col gap-6 p-6">
 				<Filters />
 			</div>

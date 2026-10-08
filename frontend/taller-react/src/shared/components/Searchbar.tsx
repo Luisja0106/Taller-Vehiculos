@@ -1,12 +1,19 @@
+import type { ChangeEvent } from "react";
+
 interface SearchbarProps {
 	placeholder: string;
+	onSubmit: (event: ChangeEvent<HTMLFormElement>) => void;
 }
 
-export function Searchbar({ placeholder }: SearchbarProps) {
+export function Searchbar({ onSubmit, placeholder }: SearchbarProps) {
 	return (
-		<form className="flex w-4/5 max-w-3xl rounded-full border-0 bg-white p-2 shadow-sm">
+		<form
+			onSubmit={onSubmit}
+			className="flex w-4/5 max-w-3xl rounded-full border-0 bg-white p-2 shadow-sm"
+		>
 			<input
 				type="search"
+				name="search"
 				placeholder={placeholder}
 				aria-label="Buscador"
 				className="grow border-transparent bg-transparent px-6 py-2 text-base outline-none"

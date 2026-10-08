@@ -2,6 +2,8 @@ import { Filters } from "@components/Filters";
 import { Hero } from "@components/Hero";
 import { Searchbar } from "@components/Searchbar";
 import { Dashboard } from "@layouts/Dashboard";
+import { NavigateTo } from "@utils/NavigateTo";
+import type { ChangeEvent } from "react";
 
 const sidebarItems = [
 	{ label: "Empleados", href: "/empleados" },
@@ -11,11 +13,22 @@ const sidebarItems = [
 ];
 
 export function MainDashboard() {
+	const handleSearch = (event: ChangeEvent<HTMLFormElement>) => {
+		event.preventDefault();
+		const formData = new FormData(event.currentTarget);
+		const searchTerm = (formData.get("search") as string).trim();
+
+		const url = searchTerm
+			? `/search?q=${encodeURIComponent(searchTerm)}`
+			: "/search";
+
+		NavigateTo(url);
+	};
 	return (
-		<Dashboard items={sidebarItems}>
-			<Hero gradientClasses="bg-blue-500">
+		<Dashboard theme="blue" items={sidebarItems}>
+			<Hero>
 				<Searchbar
-					buttonColor="bg-blue-500"
+					onSubmit={handleSearch}
 					placeholder="Buscar por ID: Vehiculo, Empleado, Etc..."
 				/>
 			</Hero>

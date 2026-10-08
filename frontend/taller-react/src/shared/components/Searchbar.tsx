@@ -3,9 +3,10 @@ import type { ChangeEvent } from "react";
 interface SearchbarProps {
 	placeholder: string;
 	onSubmit: (event: ChangeEvent<HTMLFormElement>) => void;
+	name: string;
 }
 
-export function Searchbar({ onSubmit, placeholder }: SearchbarProps) {
+export function Searchbar({ onSubmit, placeholder, name }: SearchbarProps) {
 	return (
 		<form
 			onSubmit={onSubmit}
@@ -13,7 +14,7 @@ export function Searchbar({ onSubmit, placeholder }: SearchbarProps) {
 		>
 			<input
 				type="search"
-				name="search"
+				name={name}
 				placeholder={placeholder}
 				aria-label="Buscador"
 				className="grow border-transparent bg-transparent px-6 py-2 text-base outline-none"

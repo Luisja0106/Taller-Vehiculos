@@ -12,6 +12,7 @@ interface FilterSelectProps {
 	value?: string | number;
 	onChange?: (e: ChangeEvent<HTMLSelectElement>) => void;
 	placeHolder?: string;
+	name: string;
 }
 
 export function FilterSelect({
@@ -21,6 +22,7 @@ export function FilterSelect({
 	value,
 	onChange,
 	placeHolder,
+	name,
 }: FilterSelectProps) {
 	return (
 		<div className="flex flex-col gap-1">
@@ -29,6 +31,7 @@ export function FilterSelect({
 			</label>
 			<select
 				id={id}
+				name={name}
 				value={value}
 				onChange={onChange}
 				className="cursor-pointer rounded-md border border-slate-300/50 border-solid bg-white px-4 py-2 text-sm outline-none focus:border-blue-500"

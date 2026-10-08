@@ -18,6 +18,18 @@
 		--hero-via: var(--color-rose-400);
 		--hero-to: var(--color-rose-600);
 	}
+	/* Brand gradients */
+	--brand-toyota: linear-gradient(90deg, #cc0000 20%, #ff4444 100%);
+	--brand-chevrolet: linear-gradient(135deg, #b8860b 0%, #ffd700 100%);
+	--brand-honda: linear-gradient(135deg, #003087 0%, #0066cc 100%);
+	--brand-mazda: linear-gradient(135deg, #8b0000 0%, #cc2200 100%);
+	--brand-ford: linear-gradient(135deg, #00274c 0%, #003f8a 100%);
+	--brand-renault: linear-gradient(135deg, #ffcc00 0%, #ff9900 100%);
+	--brand-default: linear-gradient(135deg, #374151 0%, #6b7280 100%);
+
+	/* Rol gradients*/
+	--rol-mecanico: linear-gradient(135deg, #f97316 0%, #c2410c 100%);
+	--rol-administrador: linear-gradient(135deg, #475569 0%, #1e293b 100%);
 }
 
 html,

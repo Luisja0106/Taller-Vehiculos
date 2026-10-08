@@ -1,3 +1,4 @@
+import { CardsGrid } from "@components/CardsGrid";
 import { CreatebuttonEntity } from "@components/CreateButtonEntity";
 import { Filters } from "@components/Filters";
 import { Hero } from "@components/Hero";
@@ -49,7 +50,7 @@ export function MainDashboard() {
 			<div className="px-6 py-0">
 				<CreatebuttonEntity value="Nueva Orden" onClick={handleCreateEntity} />
 			</div>
-			<h1>Hola</h1>
+			<CardsGrid maxItems={2} />
 		</Dashboard>
 	);
 }

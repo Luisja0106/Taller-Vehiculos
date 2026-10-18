@@ -1,3 +1,5 @@
+import { Link } from "./Link";
+
 interface itemAttribute {
 	atributeLabel: string;
 	atributeValue: string;
@@ -17,11 +19,12 @@ export function CardItem({
 	itemAtributes,
 }: CardItemProps) {
 	return (
-		<a
+		<Link
 			href={href}
 			className="cursor-pointer overflow-hidden rounded-xl bg-white shadow-md transition-transform duration-300 ease-in-out"
 		>
 			<article>
+				{/* TODO: sync the bg with the colors of the others  */}
 				<div className="flex h-45 items-start bg-yellow-300 p-4">
 					<span className="rounded-md bg-white p-2 font-bold text-sm shadow-md">
 						{itemId}
@@ -30,7 +33,7 @@ export function CardItem({
 				<div className="flex flex-col gap-4 p-4">
 					<h3 className="font-bold text-xl">{itemName}</h3>
 					{itemAtributes?.map((atribute) => (
-						<div className="flex justify-between" key={atribute.atributeValue}>
+						<div className="flex justify-between" key={atribute.atributeLabel}>
 							<span className="font-medium text-gray-400">
 								{atribute.atributeLabel}
 							</span>
@@ -41,6 +44,6 @@ export function CardItem({
 					))}
 				</div>
 			</article>
-		</a>
+		</Link>
 	);
 }

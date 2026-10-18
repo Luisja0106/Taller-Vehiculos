@@ -2,10 +2,11 @@ import { CardsGrid } from "@components/CardsGrid";
 import { CreatebuttonEntity } from "@components/CreateButtonEntity";
 import { Filters } from "@components/Filters";
 import { Hero } from "@components/Hero";
+import { Pagination } from "@components/Pagination";
 import { Searchbar } from "@components/Searchbar";
 import { Dashboard } from "@layouts/Dashboard";
 import { NavigateTo } from "@utils/NavigateTo";
-import { type ChangeEvent, useId } from "react";
+import { type ChangeEvent, useId, useState } from "react";
 
 const sidebarItems = [
 	{ label: "Empleados", href: "/empleados" },
@@ -19,7 +20,13 @@ export function MainDashboard() {
 	const idEstado = useId();
 	const idMecanico = useId();
 	const idVehiculo = useId();
-	const handleCreateEntity = () => console.log("hello world");
+
+	const [currentPage, setCurrentPage] = useState(1);
+
+	const handleCreateEntity = () => console.log("hello world"); //TODO:
+	const handleChangePage = (page: number) => {
+		setCurrentPage(page);
+	};
 	const handleSearch = (event: ChangeEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		const formData = new FormData(event.currentTarget);
@@ -51,6 +58,11 @@ export function MainDashboard() {
 				<CreatebuttonEntity value="Nueva Orden" onClick={handleCreateEntity} />
 			</div>
 			<CardsGrid maxItems={2} />
+			<Pagination
+				currentPage={currentPage}
+				totalPages={10}
+				onPageChange={handleChangePage}
+			/>
 		</Dashboard>
 	);
 }
